@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'org.foodust'
+group = 'septagram'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -43,5 +43,13 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
+    }
+}
+
+jar{
+    archiveFileName = 'Theomachy.jar'
+    destinationDirectory = file("C:\\Users\\Admin\\Desktop\\게임\\server1.20.2\\plugins")
+    manifest {
+        attributes 'Main-Class': 'septagram.Theomachy.Theomachy'
     }
 }
