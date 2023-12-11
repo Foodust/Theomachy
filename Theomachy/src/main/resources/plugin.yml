@@ -1,0 +1,4 @@
+name: Theomachy
+version: '${version}'
+main: org.septagram.Theomachy
+api-version: '1.20'

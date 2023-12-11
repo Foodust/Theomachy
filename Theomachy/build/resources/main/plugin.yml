@@ -1,0 +1,4 @@
+name: Theomachy
+version: '1.0-SNAPSHOT'
+main: org.foodust.plugins.Theomachy
+api-version: '1.20'
