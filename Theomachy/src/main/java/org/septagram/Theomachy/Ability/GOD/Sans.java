@@ -83,6 +83,14 @@ public class Sans extends Ability {
                 Location particleLocation = startLocation.clone().add(direction);
                 // 레이저 파티클 생성
                 world.spawnParticle(Particle.WHITE_ASH, particleLocation, 10);
+
+                for(Entity entity : world.getNearbyEntities(particleLocation,particleLocation.x(),particleLocation.y(),particleLocation.z())){
+                    if (entity instanceof Player && !entity.equals(player)){
+                        Player targetPlayer = (Player)entity;
+                        targetPlayer.damage(10);
+                        Bukkit.broadcastMessage(targetPlayer.getName() + "를 맞췄습니다!");
+                    }
+                }
             }
         }
     }
