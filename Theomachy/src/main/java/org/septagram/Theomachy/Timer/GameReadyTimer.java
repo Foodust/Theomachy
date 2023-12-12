@@ -168,7 +168,8 @@ public class GameReadyTimer extends TimerTask
 				}
 
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{for (Player player : playerList)
+				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{
+					for (Player player : playerList)
 				{
 					player.setFoodLevel(20);
 					player.setSaturation(10f);
@@ -195,14 +196,13 @@ public class GameReadyTimer extends TimerTask
 						player.teleport(spawnLocation);
 					}
 				}});
-
 				break;
 			case 41:
 				world.setPVP(true);
 				world.setAutoSave(Theomachy.AUTO_SAVE);
 				world.setSpawnFlags(Theomachy.MONSTER, Theomachy.ANIMAL);
 				world.setDifficulty(this.difficulty);
-				world.setTime(6000);
+				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{ world.setTime(6000);});
 				Collection<Ability> playerAbilityList = GameData.PlayerAbility.values();
 				for (Ability e : playerAbilityList)
 				{
