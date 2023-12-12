@@ -82,7 +82,7 @@ public class Sans extends Ability {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 // 레이저 파티클 생성
-                world.spawnParticle(Particle.CRIT, particleLocation, 1);
+                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 10);
             }
         }
     }
