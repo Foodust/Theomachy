@@ -108,8 +108,7 @@ public class EventManager implements Listener
 		{
 			if (GameHandler.Start)
 			{
-				if ( event.getEntity() instanceof Player && event.getDamager() instanceof Player
-						&& event.getEntity() instanceof LivingEntity)
+				if ( event.getDamager() instanceof Player && event.getEntity() instanceof Player)
 				{
 					String key1 = ((Player)event.getEntity()).getName();
 					String key2 = ((Player)event.getDamager()).getName();
@@ -120,8 +119,7 @@ public class EventManager implements Listener
 					if (ability2 != null)
 						ability2.T_Passive(event);
 				}		
-				else if (event.getDamager() instanceof Arrow &&
-						 event.getEntity() instanceof Player)
+				else if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player)
 				{
 					Arrow arrow = (Arrow) event.getDamager();
 					if (arrow.getShooter() instanceof Player)
@@ -129,16 +127,17 @@ public class EventManager implements Listener
 						Player player = (Player) arrow.getShooter();
 						String key = player.getName();
 						Ability ability = GameData.PlayerAbility.get(key);
-						if (ability != null && ability.abilityCode == 7 ||
-											   ability.abilityCode == 101)
+
+						if (ability != null && ability.abilityCode == 7 || ability.abilityCode == 101)
 							ability.T_Passive(event);
 					}
-				}else if(event.getDamager() instanceof Snowball
-						  &&event.getEntity() instanceof Player){
+				}else if(event.getDamager() instanceof Snowball &&event.getEntity() instanceof Player){
 					Snowball snow=(Snowball)event.getDamager();
 					if(snow.getShooter() instanceof Player){
+
 						Player player=(Player)snow.getShooter();
 						Ability ability=GameData.PlayerAbility.get(player.getName());
+
 						if(ability != null && ability.abilityCode==125)
 							ability.T_PassiveSnow(event);
 					}
