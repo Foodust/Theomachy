@@ -171,8 +171,7 @@ public class GameReadyTimer extends TimerTask
 						spawnLocation.setY(spawnLocation.getY()+1);
 				}
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				Bukkit.getScheduler().runTask(this.plugin, ()->{
-					for (Player e : playerList)
+				for (Player e : playerList)
 				{
 					e.setFoodLevel(20);
 					e.setSaturation(10f);
@@ -197,7 +196,8 @@ public class GameReadyTimer extends TimerTask
 					{
 						e.sendMessage(ChatColor.RED+"팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
 						e.teleport(spawnLocation);
-					}}});
+					}
+				}
 				break;
 			case 41:
 				world.setPVP(true);
