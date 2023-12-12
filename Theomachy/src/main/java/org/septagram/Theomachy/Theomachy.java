@@ -107,7 +107,7 @@ public class Theomachy extends JavaPlugin
 		log.info("[신들의 전쟁] 난이도 : "+String.valueOf(DIFFICULTY));
 		log.info("[신들의 전쟁] ========================================");
 	
-		Bukkit.getConsoleSender().sendMessage("원작자: "+ChatColor.WHITE+"칠각별(septagram) "+ChatColor.GRAY+"재수정자: "+ChatColor.AQUA+"플로리아(humint2003)"+ChatColor.YELLOW+"또수정자"+ChatColor.GREEN+"프덧(foodust)");
+		Bukkit.getConsoleSender().sendMessage("원작자: "+ChatColor.WHITE+"칠각별(septagram) "+ChatColor.GRAY+"재수정자: "+ChatColor.AQUA+"플로리아(humint2003)"+ChatColor.YELLOW+"최근 수정자: "+ChatColor.GREEN+"프덧(foodust)");
 	
 		try {
 			for(Player p:Bukkit.getOnlinePlayers()) {
