@@ -48,7 +48,7 @@ public class Sans extends Ability {
     }
     public void T_Passive(EntityDamageByEntityEvent event)
     {
-        if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity victim) {
+        if (event.getEntity() instanceof LivingEntity victim) {
             int durationInSeconds = 10; // 독 효과 지속 시간 (초 단위)
             int amplifier = 1; // 독 효과 강도
             PotionEffect poisonEffect = new PotionEffect(PotionEffectType.POISON, durationInSeconds, amplifier);

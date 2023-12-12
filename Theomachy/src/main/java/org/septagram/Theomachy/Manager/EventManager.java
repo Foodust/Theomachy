@@ -114,7 +114,6 @@ public class EventManager implements Listener
 					String key2 = (event.getDamager()).getName();
 					Ability ability1 = GameData.PlayerAbility.get(key1);
 					Ability ability2 = GameData.PlayerAbility.get(key2);
-					Bukkit.broadcastMessage(ability2.abilityName);
 					if (ability1 != null)
 						ability1.T_Passive(event);
 					if (ability2 != null)
