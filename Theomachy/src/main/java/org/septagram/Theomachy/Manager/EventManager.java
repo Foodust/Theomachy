@@ -29,6 +29,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.AttackTag;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.GambManager;
@@ -41,12 +42,9 @@ public class EventManager implements Listener
 {
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event) {
-		if (event.getEntity() instanceof Snowball) {
-			Snowball snowball = (Snowball) event.getEntity();
-			if (snowball.getScoreboardTags().contains("boneAttack")) {
-				Location hitLocation = snowball.getLocation();
-				if (event.getHitEntity() instanceof LivingEntity) {
-					LivingEntity target = (LivingEntity) event.getHitEntity();
+		if (event.getEntity() instanceof Snowball snowball) {
+			if (snowball.getScoreboardTags().contains(AttackTag.BONEATTACK.getTag())) {
+				if (event.getHitEntity() instanceof LivingEntity target) {
 					target.damage(2);
 				}
 			}

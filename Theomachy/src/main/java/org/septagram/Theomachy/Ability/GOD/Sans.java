@@ -1,19 +1,16 @@
 package org.septagram.Theomachy.Ability.GOD;
 
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.AttackTag;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.*;
-
-import java.util.Random;
 
 public class Sans extends Ability {
     private final static String[] des= {
@@ -59,12 +56,9 @@ public class Sans extends Ability {
     {
         if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
         {
-            // 플레이어가 뼈(여기서는 Snowball)를 생성하여 던집니다.
             Snowball snowball = player.launchProjectile(Snowball.class);
-            // 던져진 뼈의 속도와 방향을 설정합니다. 예시로 30 블록 앞으로 던지도록 설정했습니다.
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
-            // 뼈가 맞은 대상에게 피해를 입히는 이벤트 처리
-            snowball.addScoreboardTag("boneAttack"); // 뼈 공격을 식별하기 위한 태그 추가
+            snowball.addScoreboardTag(AttackTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
         }
     }
     private void rightAction(Player player)
