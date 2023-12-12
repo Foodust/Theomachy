@@ -78,11 +78,11 @@ public class Sans extends Ability {
             Location startLocation = player.getEyeLocation();
             World world = player.getWorld();
             Particle.DustOptions dustOptions = new Particle.DustOptions(Color.WHITE, 1);
-//            for (int i = 0; i < 50; i++) {
-//                Vector direction = startLocation.getDirection().multiply(i * 0.1);
-//                Location particleLocation = startLocation.clone().add(direction);
-//                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
-//                // 레이저 파티클 위치 주변의 플레이어를 확인하고 데미지를 입히는 로직
+            for (int i = 0; i < 50; i++) {
+                Vector direction = startLocation.getDirection().multiply(i * 0.1);
+                Location particleLocation = startLocation.clone().add(direction);
+                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
+                // 레이저 파티클 위치 주변의 플레이어를 확인하고 데미지를 입히는 로직
 //                for (Player target : Bukkit.getOnlinePlayers()) {
 //                    if (target.equals(player)) continue; // 레이저를 발사한 플레이어는 데미지를 받지 않도록 제외
 //                    Location targetLocation = target.getLocation();
@@ -91,7 +91,7 @@ public class Sans extends Ability {
 //                        target.damage(10.0); // 원하는 데미지 값 설정
 //                    }
 //                }
-//            }
+            }
         }
     }
 }
