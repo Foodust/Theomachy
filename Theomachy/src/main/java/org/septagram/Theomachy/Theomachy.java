@@ -44,7 +44,7 @@ public class Theomachy extends JavaPlugin
 	
 	public void onEnable()
 	{
-		UpdateChecker.check("4.3");
+		UpdateChecker.check("4.2");
 
 		log.info("[신들의 전쟁] 플러그인이 활성화되었습니다.   "+ PluginData.buildnumber+"  "+PluginData.version);
 		log.info("[신들의 전쟁] 플러그인의 기본 설정을 적용 중입니다.");
