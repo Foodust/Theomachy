@@ -54,6 +54,7 @@ public class PlayerInventory
 			inventory.addItem(new ItemStack(Material.ICE, 2));
 			inventory.addItem(new ItemStack(Material.OAK_PLANKS, 3));
 			inventory.addItem(new ItemStack(Material.WHEAT, 9));
+			inventory.addItem(new ItemStack(Material.BONE_MEAL, 3));
 		}
 	}
 }
