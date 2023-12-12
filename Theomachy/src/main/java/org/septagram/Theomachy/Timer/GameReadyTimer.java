@@ -23,10 +23,6 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 
 public class GameReadyTimer extends TimerTask
 {
-	private JavaPlugin plugin;
-	public GameReadyTimer(JavaPlugin plugin) {
-		this.plugin = plugin;
-	}
 	private int count=1;
 	private List<Player> playerList;
 	private String[] setting = new String[8];
@@ -171,31 +167,31 @@ public class GameReadyTimer extends TimerTask
 						spawnLocation.setY(spawnLocation.getY()+1);
 				}
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				for (Player e : playerList)
+				for (Player player : playerList)
 				{
-					e.setFoodLevel(20);
-					e.setSaturation(10f);
-					e.setLevel(0);
-					e.setExhaustion(0.0F);
-					e.setExp(0.0F);
-					e.setHealth(20);
-					PlayerInventory.skyBlockBasicItemAdd(e);
-					String teamName = GameData.PlayerTeam.get(e.getName());
+					player.setFoodLevel(20);
+					player.setSaturation(10f);
+					player.setLevel(0);
+					player.setExhaustion(0.0F);
+					player.setExp(0.0F);
+					player.setHealth(20);
+					PlayerInventory.skyBlockBasicItemAdd(player);
+					String teamName = GameData.PlayerTeam.get(player.getName());
 					if (teamName !=null)
 					{
 						Location location = GameData.SpawnArea.get(teamName);
 						if (location != null)
-							e.teleport(location);
+							player.teleport(location);
 						else
 						{
-							e.sendMessage(ChatColor.RED+"팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
-							e.teleport(spawnLocation);
+							player.sendMessage(ChatColor.RED+"팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
+							player.teleport(spawnLocation);
 						}
 					}
 					else
 					{
-						e.sendMessage(ChatColor.RED+"팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
-						e.teleport(spawnLocation);
+						player.sendMessage(ChatColor.RED+"팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
+						player.teleport(spawnLocation);
 					}
 				}
 				break;
