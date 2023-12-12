@@ -173,6 +173,8 @@ public class AbilitySet
 			GameData.PlayerAbility.put(playerName, new Akasha(playerName));
 		else if (abilityCode == 18)
 			GameData.PlayerAbility.put(playerName, new Horeundal(playerName));
+		else if (abilityCode == 19)
+			GameData.PlayerAbility.put(playerName, new Sans(playerName));
 		
 		else if (abilityCode == 101)
 			GameData.PlayerAbility.put(playerName, new Archer(playerName));

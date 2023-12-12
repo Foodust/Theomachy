@@ -16,14 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -45,6 +39,19 @@ import org.septagram.Theomachy.Handler.CommandModule.GameHandler;
 
 public class EventManager implements Listener
 {
+	@EventHandler
+	public void onProjectileHit(ProjectileHitEvent event) {
+		if (event.getEntity() instanceof Snowball) {
+			Snowball snowball = (Snowball) event.getEntity();
+			if (snowball.getScoreboardTags().contains("boneAttack")) {
+				Location hitLocation = snowball.getLocation();
+				if (event.getHitEntity() instanceof LivingEntity) {
+					LivingEntity target = (LivingEntity) event.getHitEntity();
+					target.damage(2);
+				}
+			}
+		}
+	}
 	@EventHandler
 	public static void onProjectileLaunch(ProjectileLaunchEvent event)
 	{
