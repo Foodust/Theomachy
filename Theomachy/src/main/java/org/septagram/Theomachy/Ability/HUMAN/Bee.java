@@ -2,6 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -13,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
+import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -56,28 +58,26 @@ public class Bee extends Ability {
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
 		{
 			if(abilitytarget!=null){
 				if(player.getName().equals(abilitytarget)){
 					player.sendMessage(ChatColor.RED+"목표는 본인이 아니어야 합니다.");
 				}
-				
 				else{
 					Player target = GameData.OnlinePlayer.get(abilitytarget);
 					Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
-					
+
 					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
 					target.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"에 유혹당했습니다!");
-					
-					target.teleport(player);
+
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(player);});
 				}
-				
 			}
 			else{
 				player.sendMessage("목표를 설정해주십시오. (목표 설정법: /x <목표>)");
 			}
-		}
+		}});
 	}
 	
 	public void targetSet(CommandSender sender, String targetName)

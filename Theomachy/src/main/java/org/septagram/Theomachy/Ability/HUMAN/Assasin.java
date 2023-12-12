@@ -128,7 +128,7 @@ public class Assasin extends Ability
 							location.add(-0.7,0,-0.7);
 							break;
 						}
-						player.teleport(location);
+						Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(location);});
 						world.dropItem(fakeLocation.add(0,1,0), new ItemStack(Material.POPPY, 1));
 						for (Player each : playerlist)
 							each.showPlayer(player);

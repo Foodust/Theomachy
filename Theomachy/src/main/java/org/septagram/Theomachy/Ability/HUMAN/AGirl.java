@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.GetPlayerList;
@@ -47,9 +49,10 @@ public class AGirl extends Ability{
 		if(CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1)) {
 			
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
-			
+
+
 			for(Player e:GetPlayerList.getNearByNotTeamMembers(player, 5, 0, 5)) {
-				e.teleport(player);
+				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{e.teleport(player);});
 				e.setFoodLevel(0);
 				e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2, 200));
 				e.sendMessage(ChatColor.GREEN+"안락소녀"+ChatColor.WHITE+"에게 이끌려 갑니다!");

@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,6 +72,7 @@ public class Teleporter extends Ability
 				location1.setY(location1.getY()+2);
 				Block block0 = location0.getBlock();
 				Block block1 = location1.getBlock();
+
 				if ((block0.getType()==Material.AIR || block1.getType() == Material.SNOW)&&block1.getType()==Material.AIR)
 				{
 					Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
@@ -81,7 +83,7 @@ public class Teleporter extends Ability
 					tlocation.setY(tlocation.getY()+1);
 					tlocation.setX(tlocation.getX()+0.5);
 					tlocation.setZ(tlocation.getZ()+0.5);
-					player.teleport(tlocation);
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(tlocation);});
 				}
 				else
 					player.sendMessage("텔레포트 할 수 있는 공간이 없어 텔레포트에 실패 했습니다.");
@@ -103,8 +105,8 @@ public class Teleporter extends Ability
 					Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
 					Location tloc = target.getLocation();
 					Location ploc = player.getLocation();
-					target.teleport(ploc);
-					player.teleport(tloc);
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(ploc);});
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(tloc);});
 					target.sendMessage("텔레포터의 능력에 의해 위치가 텔레포터의 위치로 변경되었습니다.");
 				}
 				else

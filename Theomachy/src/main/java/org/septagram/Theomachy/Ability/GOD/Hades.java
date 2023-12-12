@@ -3,6 +3,7 @@ package org.septagram.Theomachy.Ability.GOD;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -74,14 +75,15 @@ public class Hades extends Ability
 			List<Entity> entitylist = entity.getNearbyEntities(2, 2, 2);
 			for (Entity e : entitylist)
 			{
+
 				if (e instanceof LivingEntity)
 				{
-					e.teleport(location);
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{e.teleport(location);});
 					if (e.getType() == EntityType.PLAYER)
 						((Player)e).sendMessage("죽음의 신의 능력에 의해 나락으로 떨어집니다.");
 				}
 			}
-			player.teleport(location);
+			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(location);});
 		}
 	}
 	
@@ -98,7 +100,7 @@ public class Hades extends Ability
 			{
 				if (e instanceof LivingEntity)
 				{
-					e.teleport(location);
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{e.teleport(location);});
 					if (e.getType() == EntityType.PLAYER)
 						((Player)e).sendMessage(ChatColor.RED+"죽음의 신의 능력에 의해 나락으로 떨어집니다.");
 				}

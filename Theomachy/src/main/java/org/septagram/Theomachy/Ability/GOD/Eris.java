@@ -2,12 +2,14 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Theomachy;
 
 public class Eris extends Ability{
 
@@ -35,7 +37,7 @@ public class Eris extends Ability{
 				Location daloc = psloc;
 				daloc.setX(psloc.getX()+5);
 				daloc.setZ(psloc.getZ()+5);
-				damager.teleport(daloc);
+				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{damager.teleport(daloc);});
 				eris.sendMessage(ChatColor.RED+"상대를 밀쳤습니다!");
 				damager.sendMessage(ChatColor.RED+"에리스에 의해 밀쳐졌습니다.");
 			}

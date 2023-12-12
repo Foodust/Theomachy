@@ -168,8 +168,8 @@ public class GameReadyTimer extends TimerTask
 				}
 
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{
-					for (Player player : playerList)
+
+				for (Player player : playerList)
 				{
 					player.setFoodLevel(20);
 					player.setSaturation(10f);
@@ -183,19 +183,19 @@ public class GameReadyTimer extends TimerTask
 					{
 						Location location = GameData.SpawnArea.get(teamName);
 						if (location != null)
-							player.teleport(location);
+							Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{player.teleport(location);});
 						else
 						{
 							player.sendMessage(ChatColor.RED+"팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
-							player.teleport(spawnLocation);
+							Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{player.teleport(spawnLocation);});
 						}
 					}
 					else
 					{
 						player.sendMessage(ChatColor.RED+"팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
-						player.teleport(spawnLocation);
+						Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{player.teleport(spawnLocation);});
 					}
-				}});
+				}
 				break;
 			case 41:
 				world.setPVP(true);

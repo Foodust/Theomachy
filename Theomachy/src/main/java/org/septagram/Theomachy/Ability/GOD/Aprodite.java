@@ -2,6 +2,7 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -54,9 +55,10 @@ public class Aprodite extends Ability{
 				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 				try {
 					List<Player> list=GetPlayerList.getNearByNotTeamMembers(player, 20, 20, 20);
-				
+
+
 					for(Player e:list) {
-						e.teleport(player);
+						Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{e.teleport(player);});
 						e.sendMessage(ChatColor.YELLOW+"미의 여신에게 이끌려갑니다!");
 					}
 				}catch(Exception e) {}
