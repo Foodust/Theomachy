@@ -31,7 +31,7 @@ public class Sans extends Ability {
     public Sans(String playerName){
         super(playerName, "샌즈", 19, true, true, true, des);
         Theomachy.log.info(playerName+abilityName);
-        this.cool1=10;
+        this.cool1=50;
         this.cool2=120;
         this.sta1=3;
         this.sta2=30;
