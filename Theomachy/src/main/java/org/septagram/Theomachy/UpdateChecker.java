@@ -19,7 +19,8 @@ public class UpdateChecker {
 
 			while((Line=br.readLine())!=null){
 				if(Line.startsWith("Theomachy:")){
-					Bukkit.getServer().getConsoleSender().sendMessage("[신들의 전쟁] "+ChatColor.AQUA+"최신 버전은 "+Line.replace("Theomachy:", "")+"입니다.");
+					Bukkit.getServer().getConsoleSender().sendMessage(
+							"[신들의 전쟁] "+ChatColor.AQUA+"최신 버전은 "+Line.replace("Theomachy:", "")+"입니다.");
 					if(Line.replace("Theomachy:", "").equals(thisVersion)){
 						Bukkit.getServer().getConsoleSender().sendMessage("[신들의 전쟁] "+ChatColor.AQUA+"최신 버전입니다!");
 					}else{
