@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -52,7 +53,8 @@ public class Theomachy extends JavaPlugin
 		saveResource("blacklist.yml", true);
 
         CommandManager cm = new CommandManager(this);
-		ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.BLAZE_ROD)).shape(new String[]{"|","|","|"}).setIngredient('|', Material.STICK);
+		NamespacedKey key = new NamespacedKey(this, "custom_blaze_rod_recipe");
+		ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|',Material.STICK);
 		getServer().addRecipe(recipe);
 		getServer().getPluginManager().registerEvents(new EventManager(), this);
 		FileInputStream fis;
@@ -66,7 +68,7 @@ public class Theomachy extends JavaPlugin
 			while((line=br.readLine())!=null){
 				Blacklist.Blacklist.add(Integer.parseInt(line));
 			}
-		}catch(FileNotFoundException e) {log.info(e.toString());} catch (IOException e) {log.info(e.toString());}
+		} catch (IOException e) {log.info(e.toString());}
 
 		for(int i = 1; i<= AbilityData.GOD_ABILITY_NUMBER; i++) {
 			if(!Blacklist.Blacklist.contains(i)) Blacklist.GodCanlist.add(i);
