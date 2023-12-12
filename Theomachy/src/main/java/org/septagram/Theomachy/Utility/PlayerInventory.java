@@ -49,6 +49,10 @@ public class PlayerInventory
 		}
 		if (Theomachy.GIVE_ITEM)
 		{
+			inventory.addItem(new ItemStack(Material.BLAZE_ROD, 1));
+			inventory.addItem(new ItemStack(Material.COBBLESTONE, 100));
+
+			//
 			inventory.addItem(new ItemStack(Material.CHEST, 1));
 			inventory.addItem(new ItemStack(Material.STICK, 1));
 			inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
