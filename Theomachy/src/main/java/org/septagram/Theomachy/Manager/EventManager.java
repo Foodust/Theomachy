@@ -28,6 +28,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.AttackTag;
 import org.septagram.Theomachy.DB.GameData;
@@ -42,14 +44,14 @@ public class EventManager implements Listener
 {
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event) {
-		Bukkit.broadcastMessage("흠..");
 		if (event.getEntity() instanceof Snowball snowball) {
-			Bukkit.broadcastMessage("아님 여기?");
 			if (snowball.getScoreboardTags().contains(AttackTag.BONEATTACK.getTag())) {
-				Bukkit.broadcastMessage("여까지?");
 				if (event.getHitEntity() instanceof LivingEntity target) {
 					target.damage(2);
-					Bukkit.broadcastMessage("들어감?");
+					int durationInSeconds = 3 * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)
+					int amplifier = 1; // 위더 효과 강도
+					PotionEffect poisonEffect = new PotionEffect(PotionEffectType.WITHER, durationInSeconds, amplifier);
+					target.addPotionEffect(poisonEffect);
 				}
 			}
 		}

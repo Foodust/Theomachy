@@ -25,7 +25,7 @@ public class Sans extends Ability {
     public Sans(String playerName){
         super(playerName, "샌즈", 19, true, true, true, des);
         Theomachy.log.info(playerName+abilityName);
-        this.cool1=5;
+        this.cool1=1;
         this.cool2=120;
         this.sta1=3;
         this.sta2=30;
@@ -54,11 +54,12 @@ public class Sans extends Ability {
     }
     private void leftAction(Player player)
     {
-        if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+        if ( CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
         {
             Snowball snowball = player.launchProjectile(Snowball.class);
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
             snowball.addScoreboardTag(AttackTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
+            Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
         }
     }
     private void rightAction(Player player)
@@ -68,7 +69,6 @@ public class Sans extends Ability {
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
             for (double distance = 0; distance < 160; distance += 0.5) {
-                // 플레이어가 바라보는 방향으로 레이저 생성
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 50);
@@ -78,6 +78,7 @@ public class Sans extends Ability {
                     }
                 }
             }
+            Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
         }
     }
 }
