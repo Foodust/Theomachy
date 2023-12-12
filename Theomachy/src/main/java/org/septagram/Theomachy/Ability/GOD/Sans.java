@@ -1,9 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
@@ -11,6 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.*;
 
@@ -80,20 +78,21 @@ public class Sans extends Ability {
     {
         if (CoolTimeChecker.Check(player, 2)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
         {
-            Block block = player.getTargetBlock(null, 30);
-            if (BlockFilter.AirToFar(player, block))
-            {
-                Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
-                World world = player.getWorld();
-                Location location = block.getLocation();
-                Random random = new Random();
-                for (int i=0; i<5; i++)
-                {
-                    int X = random.nextInt(11)-5;
-                    int Z = random.nextInt(11)-5;
-                    location.add(X, 0, Z);
-                    world.strikeLightning(location);
-                    location.add(-X, 0, -Z);
+            Location startLocation = player.getEyeLocation();
+            World world = player.getWorld();
+            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.WHITE, 1);
+            for (int i = 0; i < 50; i++) {
+                Vector direction = startLocation.getDirection().multiply(i * 0.1);
+                Location particleLocation = startLocation.clone().add(direction);
+                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
+                // 레이저 파티클 위치 주변의 플레이어를 확인하고 데미지를 입히는 로직
+                for (Player target : Bukkit.getOnlinePlayers()) {
+                    if (target.equals(player)) continue; // 레이저를 발사한 플레이어는 데미지를 받지 않도록 제외
+                    Location targetLocation = target.getLocation();
+                    double distance = particleLocation.distance(targetLocation);
+                    if (distance < 1.0) { // 파티클과 플레이어의 거리가 1 블록 이내라면 데미지 입히기
+                        target.damage(10.0); // 원하는 데미지 값 설정
+                    }
                 }
             }
         }

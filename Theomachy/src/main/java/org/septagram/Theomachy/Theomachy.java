@@ -127,7 +127,7 @@ public class Theomachy extends JavaPlugin
 			}
 			
 			bw.close();
-		}catch(FileNotFoundException e) {  } catch (IOException e) {  }
+		} catch (IOException e) {  }
 		
 		
 		log.info("[신들의 전쟁] 블랙리스트가 파일로 저장되었습니다. 절대로 플러그인 폴더 내에 blacklist.yml을 건들지 마십시오.");
