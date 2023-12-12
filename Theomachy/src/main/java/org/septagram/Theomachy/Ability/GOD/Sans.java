@@ -78,8 +78,7 @@ public class Sans extends Ability {
                 // 플레이어가 바라보는 방향으로 레이저 생성
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
-                // 레이저 파티클 생성
-                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 10);
+                world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 15);
                 for(Entity entity : world.getNearbyEntities(particleLocation,5,5,5)){
                     if (entity instanceof Player targetPlayer && entity instanceof LivingEntity  && !entity.equals(player)){
                         ((LivingEntity)entity).damage(10);
