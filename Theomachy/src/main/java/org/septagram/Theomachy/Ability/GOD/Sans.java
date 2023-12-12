@@ -79,7 +79,7 @@ public class Sans extends Ability {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 75);
-                for(Entity entity : world.getNearbyEntities(particleLocation,5,5,5)){
+                for(Entity entity : world.getNearbyEntities(particleLocation,30,30,30)){
                     if (entity instanceof LivingEntity  && !entity.equals(player)){
                         ((LivingEntity)entity).damage(10, player);
                         Bukkit.broadcastMessage(entity.getName() + "를 맞췄습니다!");
