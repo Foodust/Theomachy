@@ -51,8 +51,8 @@ public class Sans extends Ability {
         Bukkit.broadcastMessage("하이?");
         if (event.getEntity() instanceof LivingEntity victim) {
             Bukkit.broadcastMessage("바이?");
-            int durationInSeconds = 10; // 독 효과 지속 시간 (초 단위)
-            int amplifier = 1; // 독 효과 강도
+            int durationInSeconds = 99; // 독 효과 지속 시간 (초 단위)
+            int amplifier = 3; // 독 효과 강도
             PotionEffect poisonEffect = new PotionEffect(PotionEffectType.POISON, durationInSeconds, amplifier);
             victim.addPotionEffect(poisonEffect);
         }
@@ -75,14 +75,14 @@ public class Sans extends Ability {
         {
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
-            for (double distance = 0; distance < 75; distance += 0.1) {
+            for (double distance = 0; distance < 160; distance += 0.5) {
                 // 플레이어가 바라보는 방향으로 레이저 생성
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 50);
                 for(Entity entity : world.getNearbyEntities(particleLocation,10,10,10)){
                     if (entity instanceof LivingEntity  && !entity.equals(player)){
-                        ((LivingEntity)entity).damage(3, player);
+                        ((LivingEntity)entity).damage(5, player);
                     }
                 }
             }
