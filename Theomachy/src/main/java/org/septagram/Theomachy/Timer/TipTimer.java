@@ -16,7 +16,7 @@ public class TipTimer extends TimerTask
 	{
 		if (!GameHandler.Ready)
 			this.cancel();
-		if (count%75 == 0)
+		if (count%1200 == 0)
 		{
 			if (Theomachy.AUTO_SAVE)
 			{
@@ -25,7 +25,7 @@ public class TipTimer extends TimerTask
 			}
 			
 		}
-		if (count%180 == 0)
+		if (count%720 == 0)
 		{
 			long max = (int) (Runtime.getRuntime().maxMemory() / 1048576);
 			long free = (int) (Runtime.getRuntime().freeMemory() / 1048576);

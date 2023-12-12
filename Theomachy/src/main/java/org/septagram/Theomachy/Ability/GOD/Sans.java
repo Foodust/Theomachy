@@ -46,7 +46,7 @@ public class Sans extends Ability {
             switch (EventFilter.PlayerInteract(event)) {
                 case 0, 1 -> leftAction(player);
                 case 2, 3 -> {
-                    event.setCancelled(true);
+//                    event.setCancelled(true);
                     rightAction(player);
                 }
             }
