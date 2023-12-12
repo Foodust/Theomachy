@@ -19,7 +19,7 @@ public class Sans extends Ability {
     private final static String[] des= {
             "와 샌즈",
             ChatColor.YELLOW+"【패시브】 "+ChatColor.GREEN+"독 속성",
-            "패시브 능력으로 대상 공격시 5초간 독에 중독 시킵니다.",
+            "패시브 능력으로 대상 공격시 3초간 위더에 중독 시킵니다.",
             ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"뼈 Ⅰ",
             "뼈를 던져 피해를 입힙니다.",
             ChatColor.RED+"【고급】 "+ChatColor.AQUA+"가스트 블래스터 Ⅱ",
@@ -48,12 +48,10 @@ public class Sans extends Ability {
     }
     public void T_Passive(EntityDamageByEntityEvent event)
     {
-        Bukkit.broadcastMessage("하이?");
         if (event.getEntity() instanceof LivingEntity victim) {
-            Bukkit.broadcastMessage("바이?");
-            int durationInSeconds = 150; // 독 효과 지속 시간 (초 단위가 아닌거 같음)
-            int amplifier = 1; // 독 효과 강도
-            PotionEffect poisonEffect = new PotionEffect(PotionEffectType.POISON, durationInSeconds, amplifier);
+            int durationInSeconds = 3 * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)
+            int amplifier = 1; // 위더 효과 강도
+            PotionEffect poisonEffect = new PotionEffect(PotionEffectType.WITHER, durationInSeconds, amplifier);
             victim.addPotionEffect(poisonEffect);
         }
     }
