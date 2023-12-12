@@ -2,10 +2,7 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
@@ -84,8 +81,8 @@ public class Sans extends Ability {
                 // 레이저 파티클 생성
                 world.spawnParticle(Particle.WHITE_ASH, particleLocation, 10);
                 for(Entity entity : world.getNearbyEntities(particleLocation,5,5,5)){
-                    if (entity instanceof Player targetPlayer && !entity.equals(player)){
-                        targetPlayer.damage(10);
+                    if (entity instanceof Player targetPlayer && entity instanceof LivingEntity  && !entity.equals(player)){
+                        ((LivingEntity)entity).damage(10);
                         Bukkit.broadcastMessage(targetPlayer.getName() + "를 맞췄습니다!");
                     }
                 }
