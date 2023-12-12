@@ -87,7 +87,7 @@ public class EventManager implements Listener
 	{
 		if (GameHandler.Start)
 		{
-			if (event.getEntity() instanceof Player)
+			if (event.getEntity() instanceof Player || event.getEntity() instanceof LivingEntity)
 			{
 				String playerName = ((Player)event.getEntity()).getName();
 				if (GameData.PlayerAbility.containsKey(playerName))
@@ -108,8 +108,8 @@ public class EventManager implements Listener
 		{
 			if (GameHandler.Start)
 			{
-				if (event.getEntity() instanceof Player &&
-						event.getDamager() instanceof Player)
+				if ( event.getEntity() instanceof Player && event.getDamager() instanceof Player
+						&& event.getEntity() instanceof LivingEntity)
 				{
 					String key1 = ((Player)event.getEntity()).getName();
 					String key2 = ((Player)event.getDamager()).getName();
