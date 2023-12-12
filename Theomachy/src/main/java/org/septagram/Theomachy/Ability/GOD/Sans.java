@@ -75,22 +75,14 @@ public class Sans extends Ability {
     {
         if (CoolTimeChecker.Check(player, 2)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
         {
-            Location startLocation = player.getEyeLocation();
+            Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
-            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.WHITE, 1);
-            for (int i = 0; i < 50; i++) {
-                Vector direction = startLocation.getDirection().multiply(i * 0.1);
+            for (double distance = 0; distance < 50; distance += 0.5) {
+                // 플레이어가 바라보는 방향으로 레이저 생성
+                Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
-                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
-                // 레이저 파티클 위치 주변의 플레이어를 확인하고 데미지를 입히는 로직
-//                for (Player target : Bukkit.getOnlinePlayers()) {
-//                    if (target.equals(player)) continue; // 레이저를 발사한 플레이어는 데미지를 받지 않도록 제외
-//                    Location targetLocation = target.getLocation();
-//                    double distance = particleLocation.distance(targetLocation);
-//                    if (distance < 1.0) { // 파티클과 플레이어의 거리가 1 블록 이내라면 데미지 입히기
-//                        target.damage(10.0); // 원하는 데미지 값 설정
-//                    }
-//                }
+                // 레이저 파티클 생성
+                world.spawnParticle(Particle.CRIT, particleLocation, 1);
             }
         }
     }
