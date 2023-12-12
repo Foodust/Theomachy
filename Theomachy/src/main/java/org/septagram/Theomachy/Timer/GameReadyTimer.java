@@ -12,6 +12,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
+import org.bukkit.plugin.Plugin;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.DB.GameData;
@@ -166,7 +167,8 @@ public class GameReadyTimer extends TimerTask
 						spawnLocation.setY(spawnLocation.getY()+1);
 				}
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				for (Player e : playerList)
+				Bukkit.getScheduler().runTask((Plugin) this, ()->{
+					for (Player e : playerList)
 				{
 					e.setFoodLevel(20);
 					e.setSaturation(10f);
@@ -174,7 +176,7 @@ public class GameReadyTimer extends TimerTask
 					e.setExhaustion(0.0F);
 					e.setExp(0.0F);
 					e.setHealth(20);
-					PlayerInventory.skyBlockBasicItemAdd(e);					
+					PlayerInventory.skyBlockBasicItemAdd(e);
 					String teamName = GameData.PlayerTeam.get(e.getName());
 					if (teamName !=null)
 					{
@@ -191,8 +193,7 @@ public class GameReadyTimer extends TimerTask
 					{
 						e.sendMessage(ChatColor.RED+"팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
 						e.teleport(spawnLocation);
-					}
-				}
+					}}});
 				break;
 			case 41:
 				world.setPVP(true);
@@ -208,7 +209,6 @@ public class GameReadyTimer extends TimerTask
 				}
 				GameHandler.Start=true;
 				Bukkit.broadcastMessage(ChatColor.GOLD+"게임 시작!");
-				
 				Bukkit.broadcastMessage(ChatColor.GREEN+"빠른 시작이 설정되었습니다. 관리자는 콘솔로 내용을 확인해주세요.");
 				
 			}
