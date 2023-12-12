@@ -13,6 +13,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.DB.GameData;
@@ -22,7 +23,10 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 
 public class GameReadyTimer extends TimerTask
 {
-	
+	private JavaPlugin plugin;
+	public GameReadyTimer(JavaPlugin plugin) {
+		this.plugin = plugin;
+	}
 	private int count=1;
 	private List<Player> playerList;
 	private String[] setting = new String[8];
@@ -167,7 +171,7 @@ public class GameReadyTimer extends TimerTask
 						spawnLocation.setY(spawnLocation.getY()+1);
 				}
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				Bukkit.getScheduler().runTask((Plugin) this, ()->{
+				Bukkit.getScheduler().runTask(this.plugin, ()->{
 					for (Player e : playerList)
 				{
 					e.setFoodLevel(20);
