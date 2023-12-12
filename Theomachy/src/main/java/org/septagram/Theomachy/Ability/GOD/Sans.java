@@ -78,22 +78,22 @@ public class Sans extends Ability {
     {
         if (CoolTimeChecker.Check(player, 2)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
         {
-            Location startLocation = player.getEyeLocation();
-            World world = player.getWorld();
-            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.WHITE, 1);
-            for (int i = 0; i < 50; i++) {
-                Vector direction = startLocation.getDirection().multiply(i * 0.1);
-                Location particleLocation = startLocation.clone().add(direction);
-                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
-            }
-            // 2초 뒤에 생성된 레이저 파티클 모두 제거
-            Bukkit.getScheduler().runTaskLater((Plugin) this, () -> {
-                for (int i = 0; i < 50; i++) {
-                    Vector direction = startLocation.getDirection().multiply(i * 0.1);
-                    Location particleLocation = startLocation.clone().add(direction);
-                    world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
-                }
-            }, 40L); // 40 틱 (2초)
+//            Location startLocation = player.getEyeLocation();
+//            World world = player.getWorld();
+//            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.WHITE, 1);
+//            for (int i = 0; i < 50; i++) {
+//                Vector direction = startLocation.getDirection().multiply(i * 0.1);
+//                Location particleLocation = startLocation.clone().add(direction);
+//                world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
+//            }
+//            // 2초 뒤에 생성된 레이저 파티클 모두 제거
+//            Bukkit.getScheduler().runTaskLater((Plugin) this, () -> {
+//                for (int i = 0; i < 50; i++) {
+//                    Vector direction = startLocation.getDirection().multiply(i * 0.1);
+//                    Location particleLocation = startLocation.clone().add(direction);
+//                    world.spawnParticle(Particle.WHITE_ASH, particleLocation, 1, dustOptions);
+//                }
+//            }, 40L); // 40 틱 (2초)
 //            Location startLocation = player.getEyeLocation();
 //            World world = player.getWorld();
 //            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.WHITE, 1);
