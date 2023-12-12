@@ -166,8 +166,9 @@ public class GameReadyTimer extends TimerTask
 					else
 						spawnLocation.setY(spawnLocation.getY()+1);
 				}
+
 				Bukkit.broadcastMessage(ChatColor.AQUA+"스폰 지역으로 텔레포트 합니다");
-				new Thread(() ->{for (Player player : playerList)
+				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),() ->{for (Player player : playerList)
 				{
 					player.setFoodLevel(20);
 					player.setSaturation(10f);
@@ -193,7 +194,7 @@ public class GameReadyTimer extends TimerTask
 						player.sendMessage(ChatColor.RED+"팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
 						player.teleport(spawnLocation);
 					}
-				}}).start();
+				}});
 
 				break;
 			case 41:

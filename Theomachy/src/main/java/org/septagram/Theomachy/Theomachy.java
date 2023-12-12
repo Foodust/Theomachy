@@ -17,6 +17,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.septagram.Theomachy.DB.AbilityData;
@@ -28,6 +29,7 @@ import org.septagram.Theomachy.Manager.EventManager;
 
 public class Theomachy extends JavaPlugin
 {
+	private static Plugin plugin;
 	public static boolean INVENTORY_CLEAR = true;
 	public static boolean GIVE_ITEM = true;
 	public static boolean IGNORE_BED = true;
@@ -42,9 +44,13 @@ public class Theomachy extends JavaPlugin
     public static Logger log=Bukkit.getLogger();
 	
 	public File file=new File(getDataFolder(), "blacklist.yml");
-	
+
+	public static Plugin getPlugin(){
+		return plugin;
+	}
 	public void onEnable()
 	{
+		plugin = this;
 		UpdateChecker.check("4.2");
 
 		log.info("[신들의 전쟁] 플러그인이 활성화되었습니다.   "+ PluginData.buildnumber+"  "+PluginData.version);
