@@ -111,11 +111,11 @@ public class EventManager implements Listener
 				if ( event.getDamager() instanceof Player && (event.getEntity() instanceof Player || event.getEntity() instanceof LivingEntity))
 				{
 					String key1 = (event.getEntity()).getName();
-					Bukkit.broadcastMessage(key1);
 					String key2 = (event.getDamager()).getName();
-					Bukkit.broadcastMessage(key2);
 					Ability ability1 = GameData.PlayerAbility.get(key1);
+					Bukkit.broadcastMessage(ability1.abilityName);
 					Ability ability2 = GameData.PlayerAbility.get(key2);
+					Bukkit.broadcastMessage(ability2.abilityName);
 					if (ability1 != null)
 						ability1.T_Passive(event);
 					if (ability2 != null)
