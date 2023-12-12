@@ -42,10 +42,14 @@ public class EventManager implements Listener
 {
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event) {
+		Bukkit.broadcastMessage("흠..");
 		if (event.getEntity() instanceof Snowball snowball) {
+			Bukkit.broadcastMessage("아님 여기?");
 			if (snowball.getScoreboardTags().contains(AttackTag.BONEATTACK.getTag())) {
+				Bukkit.broadcastMessage("여까지?");
 				if (event.getHitEntity() instanceof LivingEntity target) {
 					target.damage(2);
+					Bukkit.broadcastMessage("들어감?");
 				}
 			}
 		}
