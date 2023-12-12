@@ -74,15 +74,15 @@ public class Sans extends Ability {
         {
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
-            for (double distance = 0; distance < 100; distance += 0.5) {
+            for (double distance = 0; distance < 100; distance += 0.3) {
                 // 플레이어가 바라보는 방향으로 레이저 생성
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 75);
                 for(Entity entity : world.getNearbyEntities(particleLocation,5,5,5)){
-                    if (entity instanceof Player targetPlayer && entity instanceof LivingEntity  && !entity.equals(player)){
-                        ((LivingEntity)entity).damage(10);
-                        Bukkit.broadcastMessage(targetPlayer.getName() + "를 맞췄습니다!");
+                    if (entity instanceof LivingEntity  && !entity.equals(player)){
+                        ((LivingEntity)entity).damage(10, player);
+                        Bukkit.broadcastMessage(entity.getName() + "를 맞췄습니다!");
                     }
                 }
             }
