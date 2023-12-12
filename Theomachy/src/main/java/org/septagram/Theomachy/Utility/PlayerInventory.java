@@ -51,11 +51,11 @@ public class PlayerInventory
 		{
 			inventory.addItem(new ItemStack(Material.CHEST, 1));
 			inventory.addItem(new ItemStack(Material.STICK, 1));
-			inventory.addItem(new ItemStack(Material.STICK, 1));
+			inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
 			inventory.addItem(new ItemStack(Material.ICE, 2));
 			inventory.addItem(new ItemStack(Material.OAK_PLANKS, 1));
 			inventory.addItem(new ItemStack(Material.WHEAT, 8));
-			inventory.addItem(new ItemStack(Material.INK_SAC, 1, (short)15));
+//			inventory.addItem(new ItemStack(Material.INK_SAC, 1, (short)15));
 		}
 	}
 }

@@ -8,13 +8,15 @@ import org.bukkit.command.CommandSender;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Handler.CommandHandler;
 
+import java.util.Objects;
+
 
 public class CommandManager implements CommandExecutor
 {
 	public CommandManager(Theomachy t)
 	{
-		t.getCommand("t").setExecutor(this);
-		t.getCommand("x").setExecutor(this);
+		Objects.requireNonNull(t.getCommand("t")).setExecutor(this);
+		Objects.requireNonNull(t.getCommand("x")).setExecutor(this);
 	}
 
 	@Override

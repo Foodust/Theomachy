@@ -24,6 +24,7 @@ public class ReturnAbilityName {
 		case 16: e="아이올로스"; break;
 		case 17: e="아카샤"; break;
 		case 18: e="호른달"; break;
+		case 19: e="샌즈"; break;
 		
 		case 101: e="아처"; break;
 		case 102: e="광부";break;

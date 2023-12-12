@@ -13,18 +13,11 @@ public class Skill
 	{
 		player.getInventory().removeItem(new ItemStack(material, stack));
 		if (coolTime>0)
-		switch(abilityCase)
-		{
-		case 0:
-			CoolTime.COOL0.put(player.getName(), coolTime);
-			break;
-		case 1:
-			CoolTime.COOL1.put(player.getName(), coolTime);
-			break;
-		case 2:
-			CoolTime.COOL2.put(player.getName(), coolTime);
-			break;
-		}
+            switch (abilityCase) {
+                case 0 -> CoolTime.COOL0.put(player.getName(), coolTime);
+                case 1 -> CoolTime.COOL1.put(player.getName(), coolTime);
+                case 2 -> CoolTime.COOL2.put(player.getName(), coolTime);
+            }
 		T_Message.Skill_Used(player, abilityCase);
 	}
 }
