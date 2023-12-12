@@ -51,8 +51,8 @@ public class Sans extends Ability {
         Bukkit.broadcastMessage("하이?");
         if (event.getEntity() instanceof LivingEntity victim) {
             Bukkit.broadcastMessage("바이?");
-            int durationInSeconds = 99; // 독 효과 지속 시간 (초 단위)
-            int amplifier = 3; // 독 효과 강도
+            int durationInSeconds = 150; // 독 효과 지속 시간 ()
+            int amplifier = 1; // 독 효과 강도
             PotionEffect poisonEffect = new PotionEffect(PotionEffectType.POISON, durationInSeconds, amplifier);
             victim.addPotionEffect(poisonEffect);
         }
