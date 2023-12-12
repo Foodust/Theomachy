@@ -48,7 +48,7 @@ public class Sans extends Ability {
     }
     public void T_Passive(EntityDamageByEntityEvent event)
     {
-        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player victim) {
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity victim) {
             int durationInSeconds = 10; // 독 효과 지속 시간 (초 단위)
             int amplifier = 1; // 독 효과 강도
             PotionEffect poisonEffect = new PotionEffect(PotionEffectType.POISON, durationInSeconds, amplifier);
@@ -82,7 +82,6 @@ public class Sans extends Ability {
                 for(Entity entity : world.getNearbyEntities(particleLocation,10,10,10)){
                     if (entity instanceof LivingEntity  && !entity.equals(player)){
                         ((LivingEntity)entity).damage(3, player);
-                        Bukkit.broadcastMessage(entity.getName() + "를 맞췄습니다!");
                     }
                 }
             }
