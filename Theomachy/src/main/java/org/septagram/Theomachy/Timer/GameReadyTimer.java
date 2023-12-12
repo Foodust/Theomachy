@@ -125,6 +125,7 @@ public class GameReadyTimer extends TimerTask
 				Bukkit.broadcastMessage("원작자 블로그 : http://blog.naver.com/septagram/");
 				Bukkit.broadcastMessage("버그 신고 사항은 "+ChatColor.DARK_GREEN+"septagram@naver.com "+ChatColor.WHITE+"으로 로그를 보내주세요");
 				Bukkit.broadcastMessage("추가된 기능에 대한 신고 사항은 "+ChatColor.DARK_GREEN+"humint2003@naver.com"+ChatColor.WHITE+"으로 로그를 보내주세요.");
+				Bukkit.broadcastMessage("능력 추가를 원하시면 "+ChatColor.DARK_GREEN+"seunhoo@naver.com"+ChatColor.WHITE+"으로 아이디어를 보내주세요.(가장 최신 수정자)");
 				break;
 			case 34:
 				Bukkit.broadcastMessage(ChatColor.AQUA+"잠시 후 능력이 활성화 되며 팀 스폰지역으로 텔레포트 됩니다");
