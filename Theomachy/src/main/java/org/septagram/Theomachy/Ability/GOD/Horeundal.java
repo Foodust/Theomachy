@@ -57,8 +57,7 @@ public class Horeundal extends Ability{
 
 			AtomicInteger count = new AtomicInteger(3);
 			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
-				new HoreunTimer(player,loc, count.getAndDecrement());
-				Bukkit.broadcastMessage(count.toString());
+				new HoreunTimer(player,loc, count.getAndDecrement()).run();
 			},7 * 20,1 * 20);
 		}
 		
