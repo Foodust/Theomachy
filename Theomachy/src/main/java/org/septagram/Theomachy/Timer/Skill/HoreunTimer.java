@@ -27,8 +27,10 @@ public class HoreunTimer extends TimerTask{
 		if (count == 0)
 		{
 			player.sendMessage("10초 전의 위치로 되돌아갑니다!");
-			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(loc);});
-			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*2, 0));
+			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+				player.teleport(loc);
+			});
+//			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*2, 0));
 			this.cancel();
 		}
 		else {
