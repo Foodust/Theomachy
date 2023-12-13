@@ -55,10 +55,10 @@ public class Meteor extends Ability
 		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
 		{
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
-			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
-				Location location = player.getLocation();
-				Timer t = new Timer();
-//				t.schedule(new MeteorTimer(player, location, 30), 0,200);
+
+			Location location = player.getLocation();
+			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()-> {
+				new MeteorTimer(player, location, 30).run();
 			});
 		}
 	}
