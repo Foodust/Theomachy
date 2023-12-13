@@ -24,7 +24,6 @@ public class HoreunTimer extends TimerTask{
 	
 	public void run()
 	{
-
 		if (count == 0)
 		{
 			player.sendMessage("10초 전의 위치로 되돌아갑니다!");

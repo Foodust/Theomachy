@@ -28,17 +28,17 @@ public class Hephaestus extends Ability
 			  ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"화염 속성",
 			  "불에 관한 데미지를 일절 받지 않으나, 물에 들어가면 데미지를 입습니다.",
 			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"용암",
-			   "블럭을 클릭하면 용암을 놓습니다. 놓은 용암은 2초 뒤 사라집니다.",};
+			   "블럭을 클릭하면 용암을 놓습니다. 놓은 용암은 사라지지 않습니다.",};
 	
 	public Hephaestus(String playerName)
 	{
 		super(playerName,"헤파이토스", 9, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=10;
-		this.sta1=1;
+		this.cool1=30;
+		this.sta1=15;
 		
-		this.rank=2;
+		this.rank=3;
 	}
 	
 	public void T_Active(PlayerInteractEvent event)
@@ -64,8 +64,6 @@ public class Hephaestus extends Ability
 			{
 				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 				block.setBlockData(Bukkit.createBlockData(Material.LAVA));
-				//Timer t = new Timer();
-				//t.schedule(new LavaTimer(block),2000);
 				Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
 					new LavaTimer(block);
 				},2 * 20,0);
@@ -109,12 +107,10 @@ public class Hephaestus extends Ability
 	class LavaTimer extends TimerTask
 	{
 		Block block;
-		
 		LavaTimer(Block block)
 		{
 			this.block=block;
 		}
-		
 		public void run()
 		{
 			block.setBlockData(Bukkit.createBlockData(Material.AIR));

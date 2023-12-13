@@ -198,7 +198,7 @@ public class GameReadyTimer extends TimerTask
 					}
 				}
 				break;
-			case 41:
+			case 1:
 				world.setPVP(true);
 				world.setAutoSave(Theomachy.AUTO_SAVE);
 				world.setSpawnFlags(Theomachy.MONSTER, Theomachy.ANIMAL);
@@ -213,7 +213,6 @@ public class GameReadyTimer extends TimerTask
 				GameHandler.Start=true;
 				Bukkit.broadcastMessage(ChatColor.GOLD+"게임 시작!");
 				Bukkit.broadcastMessage(ChatColor.GREEN+"빠른 시작이 설정되었습니다. 관리자는 콘솔로 내용을 확인해주세요.");
-				
 			}
 		}
 		else
