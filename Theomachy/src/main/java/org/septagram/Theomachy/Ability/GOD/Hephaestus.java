@@ -60,7 +60,7 @@ public class Hephaestus extends Ability
 		Location location = player.getTargetBlock(null, 5).getLocation();
 		location.setY(location.getY()+1);
 		Block block = location.getBlock();
-		if (block.getType() == Material.AIR)
+		if (block.getType() != Material.AIR)
 		{
 			if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
 			{

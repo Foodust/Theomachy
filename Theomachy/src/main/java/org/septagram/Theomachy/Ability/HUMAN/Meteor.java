@@ -55,7 +55,7 @@ public class Meteor extends Ability
 			Location location = player.getLocation();
 			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()-> {
 				new MeteorTimer(player, location, 30).run();
-			},0,200);
+			},0,1 * 20);
 		}
 	}
 }
