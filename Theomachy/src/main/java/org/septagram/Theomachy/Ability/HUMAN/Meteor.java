@@ -67,7 +67,7 @@ public class Meteor extends Ability
 						fireball.setVelocity(speed);
 						location.add(-X, 0, -Z);
 					}
-				},2 * 10);}
+				},2 * 10);//}
 //			,0);
 		}
 	}
