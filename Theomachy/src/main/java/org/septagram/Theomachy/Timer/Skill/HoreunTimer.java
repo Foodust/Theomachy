@@ -31,7 +31,7 @@ public class HoreunTimer extends TimerTask{
 			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
 				player.teleport(loc);
 			});
-			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*2, 0));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5 * 20, 1));
 			this.cancel();
 		}
 		else {
