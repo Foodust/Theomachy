@@ -49,12 +49,17 @@ public class PlayerInventory
 		}
 		if (Theomachy.GIVE_ITEM)
 		{
-			inventory.addItem(new ItemStack(Material.CHEST, 1));
-			inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
-			inventory.addItem(new ItemStack(Material.ICE, 2));
-			inventory.addItem(new ItemStack(Material.OAK_PLANKS, 3));
-			inventory.addItem(new ItemStack(Material.WHEAT, 9));
-			inventory.addItem(new ItemStack(Material.BONE_MEAL, 3));
+			// 테스트용
+			inventory.addItem(new ItemStack(Material.BLAZE_ROD, 1));
+			inventory.addItem(new ItemStack(Material.COBBLESTONE, 320));
+
+			// 원본
+//			inventory.addItem(new ItemStack(Material.CHEST, 1));
+//			inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
+//			inventory.addItem(new ItemStack(Material.ICE, 2));
+//			inventory.addItem(new ItemStack(Material.OAK_PLANKS, 3));
+//			inventory.addItem(new ItemStack(Material.WHEAT, 9));
+//			inventory.addItem(new ItemStack(Material.BONE_MEAL, 3));
 		}
 	}
 }

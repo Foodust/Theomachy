@@ -59,17 +59,19 @@ public class EventManager implements Listener
 	@EventHandler
 	public static void onProjectileLaunch(ProjectileLaunchEvent event)
 	{
-		if (event.getEntity() instanceof Arrow)
-		{
-			Arrow arrow = (Arrow) event.getEntity();
-			if (arrow.getShooter() instanceof Player)
+		Bukkit.getScheduler().runTask(Theomachy.getPlugin(), ()->{
+			if (event.getEntity() instanceof Arrow)
 			{
-				Player player = (Player) arrow.getShooter();
-				Ability ability = GameData.PlayerAbility.get(player.getName());
-				if (ability != null && ability.abilityCode ==118)
-					ability.T_Passive(event, player);
+				Arrow arrow = (Arrow) event.getEntity();
+				if (arrow.getShooter() instanceof Player)
+				{
+					Player player = (Player) arrow.getShooter();
+					Ability ability = GameData.PlayerAbility.get(player.getName());
+					if (ability != null && ability.abilityCode ==118)
+						ability.T_Passive(event, player);
+				}
 			}
-		}
+		});
 	}
 	
 	@EventHandler
