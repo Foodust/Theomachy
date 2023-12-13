@@ -13,13 +13,14 @@ import org.septagram.Theomachy.Theomachy;
 public class HoreunTimer extends TimerTask{
 	
 	final Player player;
-	private int count = 3;
+	private int count;
 	private Location loc;
 	
-	public HoreunTimer(Player player, Location loc)
+	public HoreunTimer(Player player, Location loc, int count)
 	{
 		this.player=player;
 		this.loc=loc;
+		this.count = count;
 	}
 	
 	public void run()
@@ -30,13 +31,12 @@ public class HoreunTimer extends TimerTask{
 			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
 				player.teleport(loc);
 			});
-//			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*2, 0));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*2, 0));
 			this.cancel();
 		}
 		else {
 			player.sendMessage(ChatColor.AQUA + String.valueOf(count) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
 		}
-		count--;
 	}
 
 }
