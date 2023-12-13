@@ -56,7 +56,7 @@ public class Horeundal extends Ability{
 //			t.schedule(new HoreunTimer(player, player.getLocation()), 7000, 1000);
 			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
 				new HoreunTimer(player, player.getLocation());
-			},10 * 20,1000);
+			},10 / 20,1000);
 		}
 		
 	}
