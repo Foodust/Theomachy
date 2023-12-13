@@ -52,11 +52,11 @@ public class Horeundal extends Ability{
 			
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 			player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
-//			Timer t=new Timer();
-//			t.schedule(new HoreunTimer(player, player.getLocation()), 7000, 1000);
+			//Timer t=new Timer();
+			//t.schedule(new HoreunTimer(player, player.getLocation()), 7000, 1000);
 			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
-				new HoreunTimer(player, player.getLocation());
-			},7 * 20,1000);
+				new HoreunTimer(player, player.getLocation()).run();
+			},7 * 20,1000 * 20);
 		}
 		
 	}
