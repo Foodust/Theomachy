@@ -48,9 +48,7 @@ public class Hephaestus extends Ability
 		{
 			switch(EventFilter.PlayerInteract(event))
 			{
-			case 1:
-				leftAction(player);
-				break;
+			case 1 -> leftAction(player);
 			}
 		}
 	}
@@ -93,21 +91,21 @@ public class Hephaestus extends Ability
 	public void conditionSet()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
-		player.setMaximumAir(0);
-		player.setRemainingAir(0);
+		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+			player.setMaximumAir(0);
+			player.setRemainingAir(0);
+		});
+
 	}
-	
-	
 	public void conditionReSet()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
-		player.setMaximumAir(300);
-		player.setRemainingAir(300);
+		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()-> {
+			player.setMaximumAir(300);
+			player.setRemainingAir(300);
+		});
 	}
-	
-	
-	
-	
+
 	class LavaTimer extends TimerTask
 	{
 		Block block;
