@@ -11,12 +11,13 @@ public class SnipingDuration extends TimerTask {
 
 	final Sniper sniper;
 	final Player player;
-	int count = 4;
+	int count;
 	
-	public SnipingDuration(Player player, Sniper sniper)
+	public SnipingDuration(Player player, Sniper sniper, int count)
 	{
 		this.sniper=sniper;
 		this.player = player;
+		this.count = count;
 	}
 	
 	@Override

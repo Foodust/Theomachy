@@ -3,6 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,6 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
+import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.PlayerInventory;
 import org.septagram.Theomachy.Utility.Skill;
@@ -98,8 +100,9 @@ public class Voodoo extends Ability
 			this.postSign=event.getBlock();
 			player.sendMessage(ChatColor.RED+targetName+ChatColor.WHITE+" 를(을) 팻말과 연결시켰습니다.");
 			target.sendMessage(ChatColor.RED+"부두술사가 당신을 위협합니다.");
-			Timer t = new Timer();
-			t.schedule(new Duration(), 7000);
+//			Timer t = new Timer();
+//			t.schedule(new Duration(), 7000);
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),new Duration(),7 * 20 );
 		}
 		else
 			player.sendMessage(ChatColor.RED+targetName+ChatColor.WHITE+" 그런 플레이어는 없는데요...");

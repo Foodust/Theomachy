@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -61,8 +62,9 @@ public class Clocking extends Ability
 			targetList = player.getWorld().getPlayers();
 			for (Player e : targetList)
 				e.hidePlayer(player);			
-			Timer timer = new Timer();
-			timer.schedule(new ClockingTimer(targetList, player),7000);
+//			Timer timer = new Timer();
+//			timer.schedule(new ClockingTimer(targetList, player),7000);
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), new ClockingTimer(targetList,player),7 * 20);
 			super.flag = true;
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -36,13 +37,11 @@ public class Aeolus extends Ability{
 	{
 		super(playerName,"아이올로스", 16, true, false, false ,des);
 		Theomachy.log.info(playerName+abilityName);
-		
-		
 		this.cool1=60;
 		this.sta1=10;
 		this.cool2=180;
 		this.sta2=32;
-		this.rank=4;
+		this.rank=3;
 	}
 	
 	public void T_Active(PlayerInteractEvent event)
@@ -50,15 +49,10 @@ public class Aeolus extends Ability{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+                case 0, 1 -> leftAction(player);
+                case 2, 3 -> rightAction(player);
+            }
 		}
 	}
 
@@ -86,13 +80,12 @@ public class Aeolus extends Ability{
 			
 			List<Player> entityList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
-			for (Entity e : entityList)
-				if (e instanceof Player)
-					targetList.add((Player) e);
+			for (Player e : entityList)
+				if (e != null)
+					targetList.add(e);
 			if (!targetList.isEmpty())
 			{
 				Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
-				Timer t = new Timer();
 				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
@@ -130,7 +123,9 @@ public class Aeolus extends Ability{
 					v.add(new Vector(vertical,0,vertical));
 					break;
 				}
-				t.schedule(new WizardWindTimer(targetList, v), 200);
+//				Timer t = new Timer();
+//				t.schedule(new WizardWindTimer(targetList, v), 200);
+				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),new WizardWindTimer(targetList,v),2 * 2);
 			}
 			else
 				player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");

@@ -79,6 +79,11 @@ public class Apollon extends Ability
 			world.setStorm(false);
 			Timer t = new Timer();
 			t.schedule(new ApollonPlayerScorching(player, 15), 5000,2000);
+
+			for(int i = 15 ; i > 0; i--)
+			{
+				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),new ApollonPlayerScorching(player,15),5 * 20);
 			}
+		}
 	}
 }

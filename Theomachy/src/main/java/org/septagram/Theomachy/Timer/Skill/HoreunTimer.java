@@ -37,6 +37,7 @@ public class HoreunTimer extends TimerTask{
 		else {
 			player.sendMessage(ChatColor.AQUA + String.valueOf(count) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
 		}
+		count--;
 	}
 
 }

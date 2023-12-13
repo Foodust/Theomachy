@@ -2,6 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Timer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -13,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
+import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Timer.Skill.SnipingDuration;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -48,12 +50,9 @@ public class Sniper extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BOW))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+                case 0, 1 -> leftAction(player);
+            }
 		}
 	}
 
@@ -62,8 +61,11 @@ public class Sniper extends Ability
 		if (player.isSneaking() && !ready)
 		{
 			ready=true;
-			Timer t = new Timer();
-			t.schedule(new SnipingDuration(player, this),0,1000);
+//			Timer t = new Timer();
+//			t.schedule(new SnipingDuration(player, this),0,1000);
+			for (int i = 4 ; i>0; i--){
+				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), new SnipingDuration(player,this, i), 1 * 20);
+			}
 		}
 	}
 	
