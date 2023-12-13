@@ -1,16 +1,18 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import java.util.Timer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
-import org.septagram.Theomachy.Timer.Skill.HoreunTimer;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -49,14 +51,19 @@ public class Horeundal extends Ability{
 	private void leftAction(Player player) {
 		
 		if(CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1)){
-			
+
+			Location loc = player.getLocation();
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 			player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
-			//Timer t=new Timer();
-			//t.schedule(new HoreunTimer(player, player.getLocation()), 7000, 1000);
-			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
-				new HoreunTimer(player, player.getLocation()).run();
-			},7 * 20,1 * 20);
+			AtomicInteger count = new AtomicInteger(3);
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				player.sendMessage(ChatColor.AQUA + String.valueOf(count.getAndDecrement()) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
+			},1 * 20);
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				player.sendMessage("10초 전의 위치로 되돌아갑니다!");
+				player.teleport(loc);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*2, 0));
+			},7 * 20);
 		}
 		
 	}
