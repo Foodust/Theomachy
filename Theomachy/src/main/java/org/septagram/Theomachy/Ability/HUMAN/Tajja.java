@@ -31,11 +31,11 @@ public class Tajja extends Ability {
 		super(playerName, "타짜", 126, true, false, false, des);
 		
 		this.rank=4;
-		this.cool1=coolTime0;
-		this.sta1=10;
+		this.firstSkillCoolTime =coolTime0;
+		this.firstSkillStack =10;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -86,7 +86,7 @@ public class Tajja extends Ability {
 	}
 	
 	
-	public void T_Passive(EntityDamageByEntityEvent event) {
+	public void passiveSkill(EntityDamageByEntityEvent event) {
 		Player p=(Player) event.getDamager();
 			if(p.getName().equals(this.playerName)) {
 				if(p.getItemInHand().getType().equals(Material.AIR)) {

@@ -26,7 +26,7 @@ public class Stance extends Ability
 		this.rank=3;
 	}
 	
-	public void T_Passive(EntityDamageEvent event)
+	public void passiveSkill(EntityDamageEvent event)
 	{
 		if (event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE)
 		{

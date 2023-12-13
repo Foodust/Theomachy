@@ -12,8 +12,6 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.DB.GameData;
@@ -24,7 +22,7 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 public class GameReadyTimer extends TimerTask
 {
 	private int count=1;
-	private List<Player> playerList;
+	private final List<Player> playerList;
 	private String[] setting = new String[8];
 	private Difficulty difficulty;
 	private World world;
@@ -208,7 +206,7 @@ public class GameReadyTimer extends TimerTask
 				Collection<Ability> playerAbilityList = GameData.PlayerAbility.values();
 				for (Ability e : playerAbilityList)
 				{
-					e.conditionSet();
+					e.initialize();
 					e.buff();
 				}
 				GameHandler.Start=true;

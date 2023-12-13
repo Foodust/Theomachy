@@ -33,13 +33,13 @@ public class Blinder extends Ability
 		super(playerName,"블라인더", 110, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=30;
-		this.sta1=10;
+		this.firstSkillCoolTime =30;
+		this.firstSkillStack =10;
 		
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -55,12 +55,12 @@ public class Blinder extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 5, 5, 5);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 				player.sendMessage("주변의 적의 시야를 가립니다.");
 				for (Player e : targetList)
 				{
@@ -73,7 +73,7 @@ public class Blinder extends Ability
 		}
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event)
+	public void passiveSkill(EntityDamageByEntityEvent event)
 	{
 		Player player = (Player) event.getEntity();
 		if (player.getName().equals(this.playerName))

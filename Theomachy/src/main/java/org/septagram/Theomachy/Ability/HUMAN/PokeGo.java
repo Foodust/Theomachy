@@ -26,7 +26,7 @@ public class PokeGo extends Ability{
 
 	private int coolWalk=0;
 	
-	public void T_Passive(PlayerMoveEvent event) {
+	public void passiveSkill(PlayerMoveEvent event) {
 		
 		if(coolWalk==10000) {
 			
@@ -56,7 +56,7 @@ public class PokeGo extends Ability{
 		
 	}
 	
-	public void conditionSet(){
+	public void initialize(){
 		this.coolWalk=0;
 	}
 	

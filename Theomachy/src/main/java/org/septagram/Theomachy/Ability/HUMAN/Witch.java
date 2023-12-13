@@ -21,9 +21,7 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Witch extends Ability
 {
-	private final int coolTime0=60;
 	private final Material material=Material.COBBLESTONE;
-	private final int stack0=1;
 	private final static String[] des= {
 			   "마녀는 디버프를 사용하는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"저주 Ⅰ",
@@ -36,13 +34,13 @@ public class Witch extends Ability
 		super(playerName,"마녀", 116, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=60;
-		this.sta1=15;
+		this.firstSkillCoolTime =60;
+		this.firstSkillStack =15;
 		
 		this.rank=2;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -58,12 +56,12 @@ public class Witch extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, material, stack0))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
 			if (targetList != null)
 			{
-				Skill.Use(player, material, stack0, 0, coolTime0);
+				Skill.Use(player, material, firstSkillStack, 0, firstSkillCoolTime);
 				for (Player e : targetList)
 				{
 					
@@ -80,7 +78,7 @@ public class Witch extends Ability
 		}
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event)
+	public void passiveSkill(EntityDamageByEntityEvent event)
 	{
 		Player player = (Player)event.getEntity();
 		if (player.getName().equals(playerName))

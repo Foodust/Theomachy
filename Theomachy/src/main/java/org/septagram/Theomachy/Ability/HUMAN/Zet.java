@@ -28,7 +28,7 @@ public class Zet extends Ability {
 
 	}
 	
-	public void T_Passive(EntityDamageEvent event){
+	public void passiveSkill(EntityDamageEvent event){
 		Player p=(Player)event.getEntity();
 		boolean has=false;
 		

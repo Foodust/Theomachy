@@ -28,11 +28,11 @@ public class AGirl extends Ability{
 		super(playerName, "안락소녀", 127, true, false, false, des);
 		
 		this.rank= 3;
-		this.cool1=60;
-		this.sta1=15;
+		this.firstSkillCoolTime =60;
+		this.firstSkillStack =15;
 	}
 	
-	public void T_Active(PlayerInteractEvent event){
+	public void activeSkill(PlayerInteractEvent event){
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
@@ -46,9 +46,9 @@ public class AGirl extends Ability{
 	}
 
 	private void leftAction(Player player) {
-		if(CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1)) {
+		if(CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
 			
-			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 
 
 			for(Player e:GetPlayerList.getNearByNotTeamMembers(player, 5, 0, 5)) {

@@ -1,7 +1,5 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import java.util.Timer;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -39,13 +37,13 @@ public class Sniper extends Ability
 	public Sniper(String playerName)
 	{
 		super(playerName, "저격수", 118, true, false, false, des);
-		this.cool1=50;
-		this.sta1=5;
+		this.firstSkillCoolTime =50;
+		this.firstSkillStack =5;
 		
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BOW))
@@ -70,7 +68,7 @@ public class Sniper extends Ability
 	}
 	
 	@Override
-	public void T_Passive(ProjectileLaunchEvent event, Player player)
+	public void passiveSkill(ProjectileLaunchEvent event, Player player)
 	{
 		if (this.sniping && (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, material, stack0)))
 		{
@@ -87,7 +85,7 @@ public class Sniper extends Ability
 	}
 	
 	@Override
-	public void conditionSet()
+	public void initialize()
 	{
 		Player player = GameData.OnlinePlayer.get(this.playerName);
 		player.getInventory().addItem(new ItemStack(Material.BOW, 1));

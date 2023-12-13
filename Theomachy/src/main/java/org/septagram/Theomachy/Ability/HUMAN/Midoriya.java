@@ -30,13 +30,13 @@ public class Midoriya extends Ability {
 		
 		this.rank=4;
 		
-		this.cool1=350;
-		this.sta1=64;
+		this.firstSkillCoolTime =350;
+		this.firstSkillStack =64;
 	}
 	
 	private boolean Ready=false;
 	
-	public void T_Active(PlayerInteractEvent event){
+	public void activeSkill(PlayerInteractEvent event){
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
@@ -56,7 +56,7 @@ public class Midoriya extends Ability {
 		}
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event){
+	public void passiveSkill(EntityDamageByEntityEvent event){
 		Player player=(Player)event.getDamager();
 		Player d=(Player)event.getEntity();
 		

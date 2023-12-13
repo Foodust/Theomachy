@@ -30,13 +30,13 @@ public class Bomber extends Ability
 		super(playerName,"봄버", 105, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=30;
-		this.sta1=25;
+		this.firstSkillCoolTime =30;
+		this.firstSkillStack =25;
 		
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -67,11 +67,11 @@ public class Bomber extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			if (tntLocation != null)
 			{
-				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 				World world = player.getWorld();
 				world.createExplosion(tntLocation, 2.0f, true);
 				tntLocation = null;

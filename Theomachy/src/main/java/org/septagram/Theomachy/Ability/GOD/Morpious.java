@@ -30,11 +30,11 @@ public class Morpious extends Ability{
 		
 		this.rank=3;
 		
-		this.cool1=180;
-		this.sta1=32;
+		this.firstSkillCoolTime =180;
+		this.firstSkillStack =32;
 	}
 	
-	public void T_Active(PlayerInteractEvent event){
+	public void activeSkill(PlayerInteractEvent event){
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
@@ -48,7 +48,7 @@ public class Morpious extends Ability{
 	}
 
 	private void leftAction(Player player){
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, cool1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillCoolTime))
 		{
 			String[] team = new String[2];
 			team[0]=GameData.PlayerTeam.get(player.getName());
@@ -62,7 +62,7 @@ public class Morpious extends Ability{
 				
 				else{
 					Player target = GameData.OnlinePlayer.get(abilitytarget);
-					Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+					Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 					player.sendMessage(ChatColor.GRAY+"목표를 잠재웠습니다!");
 					target.sendMessage(ChatColor.GRAY+"착한 어른이는 일찍 자고 일찍 일어나야 해요~");
 					target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1200,0), true);

@@ -29,15 +29,15 @@ public class Asclepius extends Ability
 		super(playerName,"아스클리피어스", 10, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=60;
-		this.cool2=120;
-		this.sta1=1;
-		this.sta2=5;
+		this.firstSkillCoolTime =60;
+		this.secondSkillCoolTime =120;
+		this.firstSkillStack =1;
+		this.secondSkillStack =5;
 		
 		this.rank=2;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -56,21 +56,21 @@ public class Asclepius extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, cool1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillCoolTime))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			player.setHealth(20);
 		}
 	}
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByTeamMembers(player, 5, 5, 5);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
+				Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
 				player.sendMessage("자신을 제외한 모든 팀원의 체력을 회복합니다.");
 				player.sendMessage(ChatColor.GREEN+"체력을 회복한 플레이어 목록");
 				for (Player e : targetList)

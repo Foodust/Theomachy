@@ -1,7 +1,5 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import java.util.Timer;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,13 +28,13 @@ public class Meteor extends Ability
 		super(playerName,"메테오", 117, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=110;
-		this.sta1=20;
+		this.firstSkillCoolTime =110;
+		this.firstSkillStack =20;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -49,9 +47,9 @@ public class Meteor extends Ability
 
 	private void leftAction(Player player)
 	{	
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 			Location location = player.getLocation();
 			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
                     new MeteorTimer(player, location, 30)

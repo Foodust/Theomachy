@@ -1,6 +1,5 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
@@ -35,13 +34,13 @@ public class Hephaestus extends Ability
 		super(playerName,"헤파이토스", 9, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=30;
-		this.sta1=15;
+		this.firstSkillCoolTime =30;
+		this.firstSkillStack =15;
 		
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -60,9 +59,9 @@ public class Hephaestus extends Ability
 		Block block = location.getBlock();
 		if (block.getType() == Material.AIR)
 		{
-			if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+			if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 			{
-				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 				block.setBlockData(Bukkit.createBlockData(Material.LAVA));
 				Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
 					new LavaTimer(block);
@@ -71,7 +70,7 @@ public class Hephaestus extends Ability
 		}
 	}
 	
-	public void T_Passive(EntityDamageEvent event)
+	public void passiveSkill(EntityDamageEvent event)
 	{
 		Player player = (Player) event.getEntity();
 		DamageCause dc = event.getCause();
@@ -86,7 +85,7 @@ public class Hephaestus extends Ability
 			event.setDamage(event.getDamage() / 2);
 	}
 	
-	public void conditionSet()
+	public void initialize()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
 		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
@@ -95,7 +94,7 @@ public class Hephaestus extends Ability
 		});
 
 	}
-	public void conditionReSet()
+	public void initializeReset()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
 		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()-> {

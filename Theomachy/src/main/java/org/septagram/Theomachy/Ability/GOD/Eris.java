@@ -26,7 +26,7 @@ public class Eris extends Ability{
 		
 	}
 
-	public void T_Passive(EntityDamageByEntityEvent event) {
+	public void passiveSkill(EntityDamageByEntityEvent event) {
 		Player eris = (Player)event.getEntity();
 		Player damager = (Player) event.getDamager();
 		Random random = new Random();

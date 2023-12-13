@@ -1,6 +1,5 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
@@ -22,9 +21,7 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Voodoo extends Ability
 {
-	private final int coolTime0=180;
 	private final Material material=Material.COBBLESTONE;
-	private final int stack0=5;
 	private String targetName=null;
 	private Block postSign=null;
 	private final static String[] des= {
@@ -40,25 +37,25 @@ public class Voodoo extends Ability
 	public Voodoo(String playerName)
 	{
 		super(playerName, "부두술사", 119, true, true, false, des);
-		this.cool1=180;
-		this.sta1=20;
+		this.firstSkillCoolTime =180;
+		this.firstSkillStack =20;
 		
 		this.rank=3;
 	}
 
-	public void T_Passive(BlockPlaceEvent event)
+	public void passiveSkill(BlockPlaceEvent event)
 	{
 		Material material1 = event.getBlock().getType();
 		if (material1 == Material.OAK_SIGN || material1 == Material.OAK_HANGING_SIGN || material1 == Material.OAK_WALL_HANGING_SIGN || material1 == Material.OAK_WALL_SIGN)
 		{
 			Player player = event.getPlayer();
 
-			if (!(CoolTimeChecker.Check(player, 0)&& PlayerInventory.ItemCheck(player, material, stack0)))
+			if (!(CoolTimeChecker.Check(player, 0)&& PlayerInventory.ItemCheck(player, material, firstSkillStack)))
 				event.setCancelled(true);
 		}
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		if (this.postSign != null)
 		{
@@ -82,42 +79,32 @@ public class Voodoo extends Ability
 			if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK)
 			{
 				Player player = event.getPlayer();
-				if (CoolTimeChecker.Check(player, 0) && PlayerInventory.ItemCheck(player, material, stack0))
+				if (CoolTimeChecker.Check(player, 0) && PlayerInventory.ItemCheck(player, material, firstSkillStack))
 					player.sendMessage("스킬을 사용 할 수 있습니다.");
 			}
 		}
 	}
 	
-	public void T_Passive(SignChangeEvent event)
+	public void passiveSkill(SignChangeEvent event)
 	{
 		Player player = event.getPlayer();
 		String targetName = event.getLine(0);
 		Player target = GameData.OnlinePlayer.get(targetName);
 		if (target != null)
 		{
-			Skill.Use(player, material, stack0, 0, coolTime0);
+			Skill.Use(player, material, firstSkillStack, 0, firstSkillCoolTime);
 			this.targetName=targetName;
 			this.postSign=event.getBlock();
 			player.sendMessage(ChatColor.RED+targetName+ChatColor.WHITE+" 를(을) 팻말과 연결시켰습니다.");
 			target.sendMessage(ChatColor.RED+"부두술사가 당신을 위협합니다.");
-//			Timer t = new Timer();
-//			t.schedule(new Duration(), 7000);
-			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),new Duration(),7 * 20 );
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				this.targetName=null;
+				postSign.breakNaturally();
+				postSign=null;
+			},7 * 20 );
 		}
 		else
-			player.sendMessage(ChatColor.RED+targetName+ChatColor.WHITE+" 그런 플레이어는 없는데요...");
+			player.sendMessage(ChatColor.RED+targetName+ChatColor.WHITE+"플레이어가 존재 하지 않습니다");
 	}
 
-	
-	private class Duration extends TimerTask
-	{
-		@Override
-		public void run()
-		{
-			targetName=null;
-			postSign.breakNaturally();
-			postSign=null;
-		}
-		
-	}
 }

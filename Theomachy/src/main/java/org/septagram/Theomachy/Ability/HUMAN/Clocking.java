@@ -2,7 +2,6 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,9 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
-import org.septagram.Theomachy.Timer.Skill.ClockingTimer;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -25,7 +24,7 @@ public class Clocking extends Ability
 	private final static String[] des= {
 			   "클로킹은 일정 시간 자신의 몸을 숨길 수 있는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"감추기",
-			   "자신의 모습을 잠시 감출 수 있습니다.", 
+			   "자신의 모습을 7초간 감출 수 있습니다.",
 			   "감춘 상태에서 상대방을 공격할 시 다시 모습이 나타나게 되며,",
 			   "공격 당한 상대는 20% 확률로 사망합니다."};
 	
@@ -34,42 +33,52 @@ public class Clocking extends Ability
 		super(playerName,"클로킹", 112, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=60;
-		this.sta1=25;
+		this.firstSkillCoolTime =60;
+		this.firstSkillStack =25;
 		
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 2:case 3:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+                case 2, 3 -> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 			targetList = player.getWorld().getPlayers();
-			for (Player e : targetList)
-				e.hidePlayer(player);			
-//			Timer timer = new Timer();
-//			timer.schedule(new ClockingTimer(targetList, player),7000);
-			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), new ClockingTimer(targetList,player),7 * 20);
+			for (Player enemy : targetList)
+				enemy.hidePlayer(player);
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{
+				try{
+					if (GameData.PlayerAbility.get(player.getName()).flag)
+					{
+						player.sendMessage("은신 시간이 종료되었습니다.");
+						GameData.PlayerAbility.get(player.getName()).flag = false;
+					}
+					for (Player enemy : targetList)
+						enemy.showPlayer(player);
+				}
+				catch (Exception e)
+				{
+					Bukkit.broadcastMessage(e.getLocalizedMessage());
+				}
+			},7 * 20);
+
 			super.flag = true;
 		}
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event)
+	public void passiveSkill(EntityDamageByEntityEvent event)
 	{
 		if (flag)
 		{
@@ -77,8 +86,8 @@ public class Clocking extends Ability
 			if (player.getName().equals(this.playerName))
 			{
 				targetList = player.getWorld().getPlayers();
-				for (Player e : targetList)
-					e.showPlayer(player);
+				for (Player enemy : targetList)
+					enemy.showPlayer(player);
 				Random random = new Random();
 				if (random.nextInt(5)==0)
 				{

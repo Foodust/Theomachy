@@ -24,13 +24,13 @@ public class Megumin extends Ability {
 		
 		this.rank=4;
 		
-		this.sta1=32;
-		this.cool1=0;
+		this.firstSkillStack =32;
+		this.firstSkillCoolTime =0;
 	}
 
 	public static boolean cancel=false;
 	
-	public void T_Active(PlayerInteractEvent event){
+	public void activeSkill(PlayerInteractEvent event){
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
@@ -44,7 +44,7 @@ public class Megumin extends Ability {
 	}
 
 	private void leftAction(Player player) {
-		if(PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1)) {
+		if(PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
 			if(!cancel) {
 				Block block=player.getTargetBlock(null, 25);
 				if (BlockFilter.AirToFar(player, block))
@@ -58,7 +58,7 @@ public class Megumin extends Ability {
 		}
 	}
 	
-	public void conditionSet(){
+	public void initialize(){
 		cancel=false;
 	}
 	

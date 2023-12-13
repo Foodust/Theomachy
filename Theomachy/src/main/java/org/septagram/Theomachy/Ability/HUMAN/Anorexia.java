@@ -21,11 +21,11 @@ public class Anorexia extends Ability{
 
 	}
 	
-	public void conditionSet(){
+	public void initialize(){
 		GameData.OnlinePlayer.get(playerName).setFoodLevel(10);
 	}
 	
-	public void T_Passive(FoodLevelChangeEvent event) {
+	public void passiveSkill(FoodLevelChangeEvent event) {
 		event.setFoodLevel(10);
 	}
 	

@@ -29,15 +29,15 @@ public class Archer extends Ability
 	{
 		super(playerName,"아처", 101, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		this.cool1=20;
-		this.cool2=60;
-		this.sta1=7;
-		this.sta2=15;
+		this.firstSkillCoolTime =20;
+		this.secondSkillCoolTime =60;
+		this.firstSkillStack =7;
+		this.secondSkillStack =15;
 		
 		this.rank=2;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -56,9 +56,9 @@ public class Archer extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			world.dropItem(location, new ItemStack(Material.ARROW, 1));
@@ -67,16 +67,16 @@ public class Archer extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
+			Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			world.dropItem(location, new ItemStack(Material.BOW, 1));
 		}
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event)
+	public void passiveSkill(EntityDamageByEntityEvent event)
 	{
 		int damage = (int)(event.getDamage());
 		event.setDamage((int) (damage*1.4));

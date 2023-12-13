@@ -41,13 +41,13 @@ public class Poseidon extends Ability
 		super(playerName,"포세이돈", 2, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=240;
-		this.sta1=5;
+		this.firstSkillCoolTime =240;
+		this.firstSkillStack =5;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -63,11 +63,11 @@ public class Poseidon extends Ability
 	
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			if (flag)
 			{
-				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 				Location location = player.getLocation();
 				Vector v = player.getEyeLocation().getDirection();
 				v.setX(Math.round(v.getX()));
@@ -154,7 +154,7 @@ public class Poseidon extends Ability
 	}
 
 
-	public void T_Passive(EntityDamageEvent event)
+	public void passiveSkill(EntityDamageEvent event)
 	{
 		Player player = (Player) event.getEntity();
 		if (event.getCause() == DamageCause.DROWNING)
@@ -173,14 +173,14 @@ public class Poseidon extends Ability
 			}
 		}
 	}
-	public void conditionSet()
+	public void initialize()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
 		player.setMaximumAir(0);
 		player.setRemainingAir(0);
 	}
 	
-	public void conditionReSet()
+	public void initializeReset()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
 		player.setMaximumAir(300);

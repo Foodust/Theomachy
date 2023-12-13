@@ -31,14 +31,14 @@ public class Invincibility extends Ability
 		super(playerName,"무적", 111, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=50;
-		this.cool2=120;
-		this.sta1=30;
-		this.sta2=50;
+		this.firstSkillCoolTime =50;
+		this.secondSkillCoolTime =120;
+		this.firstSkillStack =30;
+		this.secondSkillStack =50;
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -57,9 +57,9 @@ public class Invincibility extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			{
 				CoolTime.COOL0.put(playerName+"1", 7);
 			}
@@ -68,14 +68,14 @@ public class Invincibility extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 2) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 2, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 2, firstSkillCoolTime);
 			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 500, 0), true);
 		}
 	}
 	
-	public void T_Passive(EntityDamageEvent event)
+	public void passiveSkill(EntityDamageEvent event)
 	{
 		if (CoolTime.COOL0.containsKey(playerName+"1"))
 		{

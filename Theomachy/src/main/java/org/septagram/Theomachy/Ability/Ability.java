@@ -27,10 +27,10 @@ public class Ability
 	public boolean flag = false;
 	public final String[] description;
 	public int rank;
-	public int cool1=-1;
-	public int cool2=-1;
-	public int sta1=-1;
-	public int sta2=-1;
+	public int firstSkillCoolTime =-1;
+	public int secondSkillCoolTime =-1;
+	public int firstSkillStack =-1;
+	public int secondSkillStack =-1;
 	
 	public Ability(String playerName, String abilityName, int abilityCode, boolean activeType, boolean passiveType, boolean buffType, String[] des)
 	{
@@ -45,44 +45,44 @@ public class Ability
 	
 	public void description(){}
 	
-	public void T_Active(PlayerInteractEvent event){}
+	public void activeSkill(PlayerInteractEvent event){}
 	
-	public void T_Passive(BlockBreakEvent event){}
+	public void passiveSkill(BlockBreakEvent event){}
 	
-	public void T_Passive(PlayerDeathEvent event){}
+	public void passiveSkill(PlayerDeathEvent event){}
 	
-	public void T_Passive(FoodLevelChangeEvent event){}
+	public void passiveSkill(FoodLevelChangeEvent event){}
 	
-	public void T_Passive(EntityRegainHealthEvent event){}
+	public void passiveSkill(EntityRegainHealthEvent event){}
 	
-	public void T_Passive(EntityDamageByEntityEvent event){}
+	public void passiveSkill(EntityDamageByEntityEvent event){}
 	
-	public void T_Passive(EntityDamageEvent event) {}
+	public void passiveSkill(EntityDamageEvent event) {}
 	
-	public void T_Passive(SignChangeEvent event) {}
+	public void passiveSkill(SignChangeEvent event) {}
 	
-	public void T_Passive(BlockPlaceEvent event) {}
+	public void passiveSkill(BlockPlaceEvent event) {}
 	
-	public void T_Passive(PlayerRespawnEvent event) {}
+	public void passiveSkill(PlayerRespawnEvent event) {}
 	
-	public void conditionSet(){}
+	public void initialize(){}
 	
-	public void conditionReSet(){}
+	public void initializeReset(){}
 	
 	public void buff(){}
 	
-	public void T_Passive(PlayerMoveEvent event){}
+	public void passiveSkill(PlayerMoveEvent event){}
 	
 	public void targetSet(CommandSender sender, String targetName)
 	{
 		sender.sendMessage("타겟을 사용하는 능력이 아닙니다.");
 	}
 	
-	public void T_Passive(ProjectileLaunchEvent event, Player player){}
+	public void passiveSkill(ProjectileLaunchEvent event, Player player){}
 
-	public void T_Passive(EntityExplodeEvent event) {}
+	public void passiveSkill(EntityExplodeEvent event) {}
 
-	public void T_PassiveSnow(EntityDamageByEntityEvent event) {}
+	public void passiveSkillSnow(EntityDamageByEntityEvent event) {}
 
 	
 	

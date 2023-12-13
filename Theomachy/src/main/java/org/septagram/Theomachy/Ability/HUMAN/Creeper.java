@@ -33,13 +33,13 @@ public class Creeper extends Ability
 		super(playerName,"크리퍼", 106, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=60;
-		this.sta1=20;
+		this.firstSkillCoolTime =60;
+		this.firstSkillStack =20;
 		
 		this.rank=3;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -55,9 +55,9 @@ public class Creeper extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			float power = plasma ? 3.0f : 6.0f;
@@ -66,7 +66,7 @@ public class Creeper extends Ability
 		}
 	}
 	
-	public void T_Passive(EntityDamageEvent event)
+	public void passiveSkill(EntityDamageEvent event)
 	{
 		if (event.getCause() == DamageCause.LIGHTNING)
 		{
@@ -75,7 +75,7 @@ public class Creeper extends Ability
 		}
 	}
 	
-	public void T_Passive(PlayerDeathEvent event)
+	public void passiveSkill(PlayerDeathEvent event)
 	{
 		this.plasma=false;
 	}

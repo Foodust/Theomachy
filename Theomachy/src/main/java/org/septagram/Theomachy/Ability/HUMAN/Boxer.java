@@ -24,7 +24,7 @@ public class Boxer extends Ability
 		this.rank=4;
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event)
+	public void passiveSkill(EntityDamageByEntityEvent event)
 	{
 		Player player = (Player) event.getDamager();
 		if (player.getItemInHand().getType()== Material.AIR && player.getName().equals(this.playerName))

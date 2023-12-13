@@ -34,15 +34,15 @@ public class Athena extends Ability
 		super(playerName,"아테나", 5, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=10;
-		this.cool2=3;
-		this.sta1=5;
-		this.sta2=64;
+		this.firstSkillCoolTime =10;
+		this.secondSkillCoolTime =3;
+		this.firstSkillStack =5;
+		this.secondSkillStack =64;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -61,9 +61,9 @@ public class Athena extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			player.getInventory().addItem(new ItemStack(Material.BOOK,3));
 		}
 	}
@@ -72,17 +72,17 @@ public class Athena extends Ability
 	{
 		if (abilityLimitCounter>0)
 		{
-			if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+			if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 			{
 				if (abilityLimitCounter>1)
 				{
-					Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
+					Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
 					player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE,1));
 					player.sendMessage("남은 교환 횟수 : "+--abilityLimitCounter);
 				}
 				else
 				{
-					Skill.Use(player, Material.COBBLESTONE, sta2, 2, 0);
+					Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, 0);
 					player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE,1));
 					player.sendMessage("남은 교환 횟수 : "+--abilityLimitCounter);
 				}
@@ -92,7 +92,7 @@ public class Athena extends Ability
 			player.sendMessage("이 능력은 더이상 사용할 수 없습니다.");
 	}
 	
-	public void T_Passive(PlayerDeathEvent event)
+	public void passiveSkill(PlayerDeathEvent event)
 	{
 		if (event.getEntity().getLastDamageCause().getCause() != DamageCause.SUICIDE)
 		{
@@ -101,11 +101,11 @@ public class Athena extends Ability
 		}
 	}
 	
-	public void conditionSet()
+	public void initialize()
 	{
 		EventManager.PlayerDeathEventList.add(this);//나중에 콘디셧셋으로 바꾸기
 	}
-	public void conditionReSet()
+	public void initializeReset()
 	{
 		EventManager.PlayerDeathEventList.remove(this);//나중에 콘디션 리셋으로 바꾸기
 	}

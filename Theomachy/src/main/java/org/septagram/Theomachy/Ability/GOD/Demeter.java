@@ -30,13 +30,13 @@ public class Demeter extends Ability
 		super(playerName,"데메테르", 4, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=30;
-		this.sta1=10;
+		this.firstSkillCoolTime =30;
+		this.firstSkillStack =10;
 		
 		this.rank=2;
 	}
 
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -52,21 +52,21 @@ public class Demeter extends Ability
 
 	private void Action(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 0,cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 			Inventory inventory = player.getInventory();
-			inventory.addItem(new ItemStack(Material.BREAD,sta1));
+			inventory.addItem(new ItemStack(Material.BREAD, firstSkillStack));
 		}
 	}
 	
-	public void T_Passive(FoodLevelChangeEvent event)
+	public void passiveSkill(FoodLevelChangeEvent event)
 	{
 		((Player)event.getEntity()).setFoodLevel(20);
 		event.setCancelled(true);
 	}
 	
-	public void T_Passive(EntityRegainHealthEvent event)
+	public void passiveSkill(EntityRegainHealthEvent event)
 	{
 		event.setAmount(event.getAmount() / 2);
 	}

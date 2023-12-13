@@ -34,15 +34,15 @@ public class Teleporter extends Ability
 		super(playerName,"텔레포터", 104, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=25;
-		this.cool2=30;
-		this.sta1=15;
-		this.sta2=25;
+		this.firstSkillCoolTime =25;
+		this.secondSkillCoolTime =30;
+		this.firstSkillStack =15;
+		this.secondSkillStack =25;
 		
 		this.rank=2;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -61,7 +61,7 @@ public class Teleporter extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			Block block = player.getTargetBlock(null, 25);
 			if (BlockFilter.AirToFar(player, block))
@@ -75,7 +75,7 @@ public class Teleporter extends Ability
 
 				if ((block0.getType()==Material.AIR || block1.getType() == Material.SNOW)&&block1.getType()==Material.AIR)
 				{
-					Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+					Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 					Location plocation = player.getLocation();
 					Location tlocation = block.getLocation();
 					tlocation.setPitch(plocation.getPitch());
@@ -93,7 +93,7 @@ public class Teleporter extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			if (abilitytarget != null)
 			{
@@ -102,7 +102,7 @@ public class Teleporter extends Ability
 				{
 					Location location = player.getLocation();
 					location.setY(location.getY()-1);
-					Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
+					Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
 					Location tloc = target.getLocation();
 					Location ploc = player.getLocation();
 					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(ploc);});

@@ -25,14 +25,14 @@ public class Sans extends Ability {
     public Sans(String playerName){
         super(playerName, "샌즈", 19, true, true, true, des);
         Theomachy.log.info(playerName+abilityName);
-        this.cool1=1;
-        this.cool2=120;
-        this.sta1=3;
-        this.sta2=30;
+        this.firstSkillCoolTime =1;
+        this.secondSkillCoolTime =120;
+        this.firstSkillStack =3;
+        this.secondSkillStack =30;
 
         this.rank=4;
     }
-    public void T_Active(PlayerInteractEvent event)
+    public void activeSkill(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -43,7 +43,7 @@ public class Sans extends Ability {
             }
         }
     }
-    public void T_Passive(EntityDamageByEntityEvent event)
+    public void passiveSkill(EntityDamageByEntityEvent event)
     {
         if (event.getEntity() instanceof LivingEntity victim) {
             int durationInSeconds = 3 * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)
@@ -54,17 +54,17 @@ public class Sans extends Ability {
     }
     private void leftAction(Player player)
     {
-        if ( CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+        if ( CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
         {
             Snowball snowball = player.launchProjectile(Snowball.class);
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
             snowball.addScoreboardTag(AttackTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
-            Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+            Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
         }
     }
     private void rightAction(Player player)
     {
-        if (CoolTimeChecker.Check(player, 2)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+        if (CoolTimeChecker.Check(player, 2)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
         {
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
@@ -78,7 +78,7 @@ public class Sans extends Ability {
                     }
                 }
             }
-            Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
+            Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
         }
     }
 }

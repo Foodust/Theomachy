@@ -87,14 +87,14 @@ public class Help {
 			i.setItem(8, rank);
 			
 			if(ability.activeType) {
-				if(ability.cool2!=-1) {
+				if(ability.secondSkillCoolTime !=-1) {
 					abcool1=new ItemStack(Material.CLOCK);
 					abcool2=new ItemStack(Material.CLOCK);
 					
 					List<String> clore=new ArrayList<String>();
 					c.setDisplayName(ChatColor.GREEN+"~ 일반 능력 ~");
-					clore.add( ChatColor.WHITE+"쿨타임: "+ability.cool1+" 초 소요");
-					clore.add(ChatColor.WHITE+"조약돌: "+ability.sta1+"개 소모");
+					clore.add( ChatColor.WHITE+"쿨타임: "+ability.firstSkillCoolTime +" 초 소요");
+					clore.add(ChatColor.WHITE+"조약돌: "+ability.firstSkillStack +"개 소모");
 					
 					c.setLore(clore);
 					abcool1.setItemMeta(c);
@@ -102,8 +102,8 @@ public class Help {
 					List<String> dlore=new ArrayList<String>();
 					d.setLore(null);
 					d.setDisplayName(ChatColor.YELLOW+"~ 고급 능력 ~");
-					dlore.add(ChatColor.WHITE+"쿨타임: "+ability.cool2+" 초 소요");
-					dlore.add(ChatColor.WHITE+"조약돌: "+ability.sta2+"개 소모");
+					dlore.add(ChatColor.WHITE+"쿨타임: "+ability.secondSkillCoolTime +" 초 소요");
+					dlore.add(ChatColor.WHITE+"조약돌: "+ability.secondSkillStack +"개 소모");
 					
 					d.setLore(dlore);
 					abcool2.setItemMeta(d);
@@ -116,8 +116,8 @@ public class Help {
 					
 					List<String> clore=new ArrayList<String>();
 					c.setDisplayName(ChatColor.GREEN+"~ 일반 능력 ~");
-					clore.add(ChatColor.WHITE+"쿨타임: "+ability.cool1+" 초 소요");
-					clore.add(ChatColor.WHITE+"조약돌: "+ability.sta1+"개 소모");
+					clore.add(ChatColor.WHITE+"쿨타임: "+ability.firstSkillCoolTime +" 초 소요");
+					clore.add(ChatColor.WHITE+"조약돌: "+ability.firstSkillStack +"개 소모");
 					c.setLore(clore);
 					
 					abcool1.setItemMeta(c);

@@ -38,11 +38,11 @@ public class Bee extends Ability {
 		
 		this.rank=3;
 		
-		this.cool1=180;
-		this.sta1=32;
+		this.firstSkillCoolTime =180;
+		this.firstSkillStack =32;
 	}
 
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -58,7 +58,7 @@ public class Bee extends Ability {
 
 	private void leftAction(Player player)
 	{
-		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			if(abilitytarget!=null){
 				if(player.getName().equals(abilitytarget)){
@@ -66,7 +66,7 @@ public class Bee extends Ability {
 				}
 				else{
 					Player target = GameData.OnlinePlayer.get(abilitytarget);
-					Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+					Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 
 					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
 					target.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"에 유혹당했습니다!");
@@ -91,7 +91,7 @@ public class Bee extends Ability {
 				sender.sendMessage("자기 자신을 목표로 등록 할 수 없습니다.");
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event) {
+	public void passiveSkill(EntityDamageByEntityEvent event) {
 		Player p=(Player) event.getEntity();
 		Player e=(Player) event.getDamager();
 		

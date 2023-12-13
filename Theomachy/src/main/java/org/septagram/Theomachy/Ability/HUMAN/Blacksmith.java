@@ -28,15 +28,15 @@ public class Blacksmith extends Ability
 		super(playerName,"대장장이", 5, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=300;
-		this.cool2=600;
-		this.sta1=70;
-		this.sta2=20;
+		this.firstSkillCoolTime =300;
+		this.secondSkillCoolTime =600;
+		this.firstSkillStack =70;
+		this.secondSkillStack =20;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -55,9 +55,9 @@ public class Blacksmith extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			World world = player.getWorld();
 			world.dropItem(player.getLocation().add(0,2,0), new ItemStack(Material.IRON_INGOT, 10));
 		}
@@ -65,9 +65,9 @@ public class Blacksmith extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.IRON_INGOT, sta2))
+		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.IRON_INGOT, secondSkillStack))
 		{
-			Skill.Use(player, Material.IRON_INGOT, sta2, 2, cool2);
+			Skill.Use(player, Material.IRON_INGOT, secondSkillStack, 2, secondSkillCoolTime);
 			World world = player.getWorld();
 			world.dropItem(player.getLocation().add(0,2,0), new ItemStack(Material.DIAMOND, 5));
 		}

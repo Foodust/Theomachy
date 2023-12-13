@@ -68,7 +68,7 @@ public class EventManager implements Listener
 					Player player = (Player) arrow.getShooter();
 					Ability ability = GameData.PlayerAbility.get(player.getName());
 					if (ability != null && ability.abilityCode ==118)
-						ability.T_Passive(event, player);
+						ability.passiveSkill(event, player);
 				}
 			}
 		});
@@ -83,7 +83,7 @@ public class EventManager implements Listener
 			Ability ability= GameData.PlayerAbility.get(playerName);
 			if (ability != null && ability.activeType)
 			{
-				ability.T_Active(event);
+				ability.activeSkill(event);
 			}
 		}
 	}
@@ -97,7 +97,7 @@ public class EventManager implements Listener
 			{
 				String playerName = ((Player)event.getEntity()).getName();
 				if (GameData.PlayerAbility.containsKey(playerName))
-					GameData.PlayerAbility.get(playerName).T_Passive(event);
+					GameData.PlayerAbility.get(playerName).passiveSkill(event);
 			}
 			if (event.getCause() == DamageCause.LIGHTNING && event.getEntity() instanceof LivingEntity)
 			{
@@ -121,9 +121,9 @@ public class EventManager implements Listener
 					Ability ability1 = GameData.PlayerAbility.get(key1);
 					Ability ability2 = GameData.PlayerAbility.get(key2);
 					if (ability1 != null)
-						ability1.T_Passive(event);
+						ability1.passiveSkill(event);
 					if (ability2 != null)
-						ability2.T_Passive(event);
+						ability2.passiveSkill(event);
 				}		
 				else if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player)
 				{
@@ -135,7 +135,7 @@ public class EventManager implements Listener
 						Ability ability = GameData.PlayerAbility.get(key);
 
 						if (ability != null && ability.abilityCode == 7 || ability.abilityCode == 101)
-							ability.T_Passive(event);
+							ability.passiveSkill(event);
 					}
 				}else if(event.getDamager() instanceof Snowball &&event.getEntity() instanceof Player){
 					Snowball snow=(Snowball)event.getDamager();
@@ -145,7 +145,7 @@ public class EventManager implements Listener
 						Ability ability=GameData.PlayerAbility.get(player.getName());
 
 						if(ability != null && ability.abilityCode==125)
-							ability.T_PassiveSnow(event);
+							ability.passiveSkillSnow(event);
 					}
 				}
 			}
@@ -162,12 +162,12 @@ public class EventManager implements Listener
 		if (GameHandler.Start)
 		{
 			for (Ability e : PlayerDeathEventList)
-				e.T_Passive(event);
+				e.passiveSkill(event);
 			Player player = event.getEntity();
 			Ability ability = GameData.PlayerAbility.get(player.getName());
 			if (ability != null)
 				if (ability.abilityCode == 106 || ability.abilityCode == 3 || ability.abilityCode == 125)
-					ability.T_Passive(event);
+					ability.passiveSkill(event);
 					
 			
 		}
@@ -181,7 +181,7 @@ public class EventManager implements Listener
 		{
 			String playerName = ((Player)event.getEntity()).getName();
 			if (GameData.PlayerAbility.containsKey(playerName))
-				GameData.PlayerAbility.get(playerName).T_Passive(event);
+				GameData.PlayerAbility.get(playerName).passiveSkill(event);
 		}
 		}
 	}	
@@ -194,7 +194,7 @@ public class EventManager implements Listener
 		{
 			String playerName = ((Player)event.getEntity()).getName();
 			if (GameData.PlayerAbility.containsKey(playerName))
-				GameData.PlayerAbility.get(playerName).T_Passive(event);
+				GameData.PlayerAbility.get(playerName).passiveSkill(event);
 		}
 		}
 	}
@@ -206,7 +206,7 @@ public class EventManager implements Listener
 		String playerName = event.getPlayer().getName();
 		Ability ability = GameData.PlayerAbility.get(playerName);
 		if (ability != null)
-			ability.T_Passive(event);
+			ability.passiveSkill(event);
 		}
 	}	
 	@EventHandler
@@ -241,7 +241,7 @@ public class EventManager implements Listener
 				if (ability.buffType)
 					ability.buff();
 				if (ability.abilityCode == 3 || ability.abilityCode == 123)
-					ability.T_Passive(event);
+					ability.passiveSkill(event);
 			}
 			
 			/*if (!Theomachy.IGNORE_BED )
@@ -280,7 +280,7 @@ public class EventManager implements Listener
 		{
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
 			if (ability != null && ability.abilityCode==119)
-				ability.T_Passive(event);
+				ability.passiveSkill(event);
 		}
 	}
 	
@@ -291,7 +291,7 @@ public class EventManager implements Listener
 		{
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
 			if (ability != null && ability.abilityCode == 119)
-				ability.T_Passive(event);
+				ability.passiveSkill(event);
 		}
 	}
 	@EventHandler
@@ -303,7 +303,7 @@ public class EventManager implements Listener
 		{
 			Ability ability = GameData.PlayerAbility.get(player.getName());
 			if (ability != null && (ability.abilityCode == 2 || ability.abilityCode == 9))
-					ability.conditionSet();
+					ability.initialize();
 		}
 	}
 
@@ -331,7 +331,7 @@ public class EventManager implements Listener
 			for(Player p:Bukkit.getOnlinePlayers()){
 				Ability ability=GameData.PlayerAbility.get(p.getName());
 				if(ability!=null&&ability.abilityCode==121){
-					ability.T_Passive(event);
+					ability.passiveSkill(event);
 				}
 			}
 		}
@@ -344,7 +344,7 @@ public class EventManager implements Listener
 		if(GameHandler.Start) {
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
 			if (ability != null && ability.abilityCode == 129)
-				ability.T_Passive(event);
+				ability.passiveSkill(event);
 		}
 		
 	}

@@ -33,15 +33,15 @@ public class Assasin extends Ability
 	{
 		super(playerName,"암살자", 108, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		this.cool1=1;
-		this.cool2=15;
-		this.sta1=0;
-		this.sta2=15;
+		this.firstSkillCoolTime =1;
+		this.secondSkillCoolTime =15;
+		this.firstSkillStack =0;
+		this.secondSkillStack =15;
 		
 		this.rank=2;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -64,10 +64,10 @@ public class Assasin extends Ability
 		Block b = temp.add(0,-1,0).getBlock();
 		if ((b.getType()== Material.AIR) || (b.getType()==Material.SNOW) || (b.getType()==Material.STONE_SLAB))
 		{	
-			if ((!CoolTime.COOL0.containsKey(playerName+"0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))))
+			if ((!CoolTime.COOL0.containsKey(playerName+"0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))))
 			{
-			CoolTime.COOL0.put(playerName+"0", cool1);
-			PlayerInventory.ItemRemove(player, Material.COBBLESTONE, sta1);
+			CoolTime.COOL0.put(playerName+"0", firstSkillCoolTime);
+			PlayerInventory.ItemRemove(player, Material.COBBLESTONE, firstSkillStack);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			Vector v = player.getEyeLocation().getDirection();
@@ -80,7 +80,7 @@ public class Assasin extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			boolean flag = true;
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
@@ -94,7 +94,7 @@ public class Assasin extends Ability
 					String playerTeamName = GameData.PlayerTeam.get(player.getName());
 					if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName)))
 					{
-						Skill.Use(player, Material.COBBLESTONE, sta2, 2, cool2);
+						Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
 						Location fakeLocation = player.getLocation();
 						Location location = target.getLocation();
 						World world = player.getWorld();

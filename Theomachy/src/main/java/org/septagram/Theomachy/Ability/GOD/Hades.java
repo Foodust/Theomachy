@@ -39,15 +39,15 @@ public class Hades extends Ability
 		super(playerName,"하데스", 3, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=100;
-		this.cool2=300;
-		this.sta1=20;
-		this.sta2=35;
+		this.firstSkillCoolTime =100;
+		this.secondSkillCoolTime =300;
+		this.firstSkillStack =20;
+		this.secondSkillStack =35;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -66,9 +66,9 @@ public class Hades extends Ability
 	
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			Entity entity=player;
 			Location location = player.getLocation();
 			location.setY(-2.0d);
@@ -89,9 +89,9 @@ public class Hades extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2))
+		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta2, 2,cool2);
+			Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
 			Entity entity=player;
 			Location location = player.getLocation();
 			location.setY(-2.0d);
@@ -110,7 +110,7 @@ public class Hades extends Ability
 	
 	private ItemStack[] inventory;
 	private ItemStack[] armor;
-	public void T_Passive(PlayerDeathEvent event)
+	public void passiveSkill(PlayerDeathEvent event)
 	{
 		Random r=new Random();
 		if (r.nextInt(10) <=6)
@@ -122,7 +122,7 @@ public class Hades extends Ability
 		else
 			event.getEntity().sendMessage("아이템을 모두 잃었습니다.");
 	}
-	public void T_Passive(PlayerRespawnEvent event)
+	public void passiveSkill(PlayerRespawnEvent event)
 	{
 		Player player = event.getPlayer();
 		if (inventory !=null)

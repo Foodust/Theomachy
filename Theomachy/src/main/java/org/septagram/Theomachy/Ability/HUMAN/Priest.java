@@ -37,16 +37,16 @@ public class Priest extends Ability
 		super(playerName,"사제", 115, true, false,false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=35;
-		this.cool2=90;
-		this.sta1=30;
-		this.sta2=45;
+		this.firstSkillCoolTime =35;
+		this.secondSkillCoolTime =90;
+		this.firstSkillStack =30;
+		this.secondSkillStack =45;
 		
 		this.rank=2;
 		
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))

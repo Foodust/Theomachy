@@ -20,7 +20,7 @@ public class Bulter extends Ability {
 		this.rank=4;
 	}
 	
-	public void T_Passive(EntityExplodeEvent event){
+	public void passiveSkill(EntityExplodeEvent event){
 		event.setCancelled(true);
 		if(!event.getEntity().getType().equals(EntityType.FIREBALL))
 			Bukkit.broadcastMessage(ChatColor.GREEN+"집사에 의해 폭발이 진정되었습니다.");

@@ -27,7 +27,7 @@ public class Darkness extends Ability {
 		
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event){
+	public void passiveSkill(EntityDamageByEntityEvent event){
 		
 		Player dark=(Player)event.getEntity();
 		Player ness=(Player)event.getDamager();

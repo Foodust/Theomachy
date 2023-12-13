@@ -1,8 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,7 +11,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
-import org.septagram.Theomachy.Timer.Skill.HermesFlying;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -34,60 +31,51 @@ public class Hermes extends Ability
 		super(playerName,"헤르메스", 11, true, true, true, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.cool1=60;
-		this.sta1=10;
+		this.firstSkillCoolTime =60;
+		this.firstSkillStack =10;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+                case 0, 1 -> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
+		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 			player.setAllowFlight(true);
 			player.setFlying(true);
-			Timer t = new Timer();
-			t.schedule(new HermesFlying(player),2000,1000);
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				for(int count=3; count >0 ; count--){
+					int finalCount = count;
+                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                        player.sendMessage("비행시간이 " + ChatColor.AQUA + finalCount + ChatColor.WHITE + "초 남았습니다.");
+                    }, 1 * 20);
+                }
+				player.sendMessage(ChatColor.RED+"비행시간이 종료되었습니다.");
+				player.setAllowFlight(false);
+				player.setFallDistance(0);
+			},2 * 20);
 		}
 	}
-	
 	public void buff()
 	{
 		Player player = GameData.OnlinePlayer.get(playerName);
 		if (player != null)
 		{
-			Timer t = new Timer();
-			t.schedule(new buff(player), 1000);
-		}
-	}
-	
-	private class buff extends TimerTask
-	{
-		final Player player;
-		
-		buff(Player player)
-		{
-			this.player = player;	
-		}
-		// def
-		public void run()
-		{
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 0),true);
+			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000,0));
+			},1 * 20, 6 * 20);
 		}
 	}
 }

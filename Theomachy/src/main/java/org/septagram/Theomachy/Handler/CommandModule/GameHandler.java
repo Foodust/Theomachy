@@ -52,7 +52,7 @@ public class GameHandler
 			{
 				Collection<Ability> playerAbilityList = GameData.PlayerAbility.values();
 				for (Ability e : playerAbilityList)
-					e.conditionReSet();
+					e.initializeReset();
 				Ready=false;
 				Start=false;
 				CoolTime.ini=true;

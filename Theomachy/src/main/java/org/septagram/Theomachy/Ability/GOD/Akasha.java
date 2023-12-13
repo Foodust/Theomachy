@@ -30,16 +30,14 @@ public class Akasha extends Ability{
 	{
 		super(playerName,"아카샤", 17, true, false, false ,des);
 		Theomachy.log.info(playerName+abilityName);
-		
-		
-		this.cool1=60;
-		this.sta1=10;
-		this.cool2=120;
-		this.sta2=20;
+		this.firstSkillCoolTime =60;
+		this.firstSkillStack =10;
+		this.secondSkillCoolTime =120;
+		this.secondSkillStack =20;
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -58,9 +56,9 @@ public class Akasha extends Ability{
 
 	private void leftAction(Player player) {
 		
-		if(CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1)){
+		if(CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)){
 			
-			Skill.Use(player, Material.COBBLESTONE, sta1, 1, cool1);
+			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
 			
 			List<Player> nearp=GetPlayerList.getNearByTeamMembers(player, 20, 20, 20);
 			
@@ -75,7 +73,7 @@ public class Akasha extends Ability{
 	
 	private void rightAction(Player player) {
 		
-		if(CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta2)){
+		if(CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack)){
 			
 			List<Player> entityList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
 			

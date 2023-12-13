@@ -34,13 +34,13 @@ public class Snow extends Ability {
 		
 		this.rank=3;
 		
-		this.cool1=0;
-		this.sta1=0;
+		this.firstSkillCoolTime =0;
+		this.firstSkillStack =0;
 	}
 	
 	private int attack=0;
 	
-	public void T_Active(PlayerInteractEvent event){
+	public void activeSkill(PlayerInteractEvent event){
 		Player player=event.getPlayer();
 		if(PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)){
 			switch(EventFilter.PlayerInteract(event)){
@@ -51,27 +51,27 @@ public class Snow extends Ability {
 		}
 	}
 	
-	public void T_Passive(PlayerDeathEvent event) {
+	public void passiveSkill(PlayerDeathEvent event) {
 		if(attack<8){
 			event.getEntity().sendMessage(ChatColor.RED+"공격 지수가 증가하고 있습니다!");
 			attack++;
 		}
 	}
 	
-	public void T_PassiveSnow(EntityDamageByEntityEvent event){
+	public void passiveSkillSnow(EntityDamageByEntityEvent event){
 		Player p=(Player)event.getEntity();		
 		event.setCancelled(true);
 		p.damage(attack);
 	}
 	
-	public void T_Passive(EntityDamageEvent event){
+	public void passiveSkill(EntityDamageEvent event){
 		DamageCause dc=event.getCause();
 		if(dc.equals(DamageCause.FIRE_TICK)||dc.equals(DamageCause.LAVA)||dc.equals(DamageCause.FIRE)){
 			event.setDamage(event.getDamage()*2);
 		}
 	}
 	
-	public void conditionSet(){
+	public void initialize(){
 		GameData.OnlinePlayer.get(playerName).getInventory().addItem(new ItemStack(Material.SNOWBALL, 8));
 	}
 	

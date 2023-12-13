@@ -28,7 +28,7 @@ public class Ares extends Ability
 		
 	}
 	
-	public void T_Passive(EntityDamageByEntityEvent event)
+	public void passiveSkill(EntityDamageByEntityEvent event)
 	{		
 		Player player = (Player) event.getEntity();
 		if (!player.getName().equals(playerName)) //공격

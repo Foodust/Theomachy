@@ -29,13 +29,13 @@ public class Aprodite extends Ability{
 		super(playerName, "아프로디테", 13, true, false, false, des);
 		Theomachy.log.info(playerName+"아프로디테");
 		
-		this.cool1=500;
-		this.sta1=64;
+		this.firstSkillCoolTime =500;
+		this.firstSkillStack =64;
 		
 		this.rank=4;
 	}
 	
-	public void T_Active(PlayerInteractEvent event)
+	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
@@ -50,9 +50,9 @@ public class Aprodite extends Ability{
 	}
 
 	private void leftAction(Player player) {
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1)) {
+		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
 			if(!player.isSneaking() && !player.getLocation().add(0, -1, 0).getBlock().getType().equals(Material.AIR)) {
-				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
+				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 				try {
 					List<Player> list=GetPlayerList.getNearByNotTeamMembers(player, 20, 20, 20);
 

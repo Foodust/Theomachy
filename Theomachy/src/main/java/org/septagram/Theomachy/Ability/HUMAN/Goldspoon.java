@@ -21,7 +21,7 @@ public class Goldspoon extends Ability{
 		this.rank=2;
 	}
 	
-	public void T_Passive(PlayerRespawnEvent event){
+	public void passiveSkill(PlayerRespawnEvent event){
 		Player p=event.getPlayer();
 		p.getInventory().addItem(new ItemStack(Material.GOLDEN_LEGGINGS));
 	}
