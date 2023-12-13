@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
@@ -58,9 +60,20 @@ public class Horeundal extends Ability{
 
 			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
 				for (int count = 3; count >= 0; count--) {
-					Bukkit.getScheduler().runTaskLater(
-							Theomachy.getPlugin(), new HoreunTimer(player, loc, count),
-							(7 + (3 - count)) * 20L);
+					int finalCount = count;
+					Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+						if (finalCount == 0)
+						{
+							player.sendMessage("10초 전의 위치로 되돌아갑니다!");
+//							Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+								player.teleport(loc);
+//							});
+							player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5 * 20, 1));
+						}
+						else {
+							player.sendMessage(ChatColor.AQUA + String.valueOf(finalCount) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
+						}
+					}, (7 + (3 - count)) * 20L);
 				}
 			}, 7 * 20);
 		}
