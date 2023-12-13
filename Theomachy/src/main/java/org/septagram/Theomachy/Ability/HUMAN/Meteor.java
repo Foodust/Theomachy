@@ -2,6 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Timer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,8 +56,10 @@ public class Meteor extends Ability
 		{
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 			Location location = player.getLocation();
-			Timer t = new Timer();
-			t.schedule(new MeteorTimer(player, location, 30), 0,200);
+			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+				Timer t = new Timer();
+				t.schedule(new MeteorTimer(player, location, 30), 0,200);
+			});
 		}
 	}
 }
