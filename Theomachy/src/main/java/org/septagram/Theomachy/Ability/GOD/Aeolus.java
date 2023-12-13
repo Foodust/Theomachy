@@ -26,9 +26,9 @@ public class Aeolus extends Ability {
     private final static String[] des = {
             "아이올로스는 폭풍과 바람의 신입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "자연 바람",
-            "주변에 있는 아군에게 상쾌한 바람으로 빠르고 건강하게 합니다.",
+            "주변에 있는 아군에게 15초간 상쾌한 바람으로 빠르고 건강하게 합니다.",
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "폭풍",
-            "주변에 있는 적을 강한 바람으로 밀어내고 느리고 약하게 합니다."};
+            "주변에 있는 적을 강한 바람으로 밀어내고 5초간 느리고 약하게 합니다."};
 
     public Aeolus(String playerName) {
         super(playerName, "아이올로스", 16, true, false, false, des);
@@ -52,11 +52,11 @@ public class Aeolus extends Ability {
     private void leftAction(Player player) {
         if (CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
             Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
-            List<Player> nearp = GetPlayerList.getNearByTeamMembers(player, 20, 20, 20);
-            for (Player p : nearp) {
-                p.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 15, 0));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 15, 0));
+            List<Player> nearPlayers = GetPlayerList.getNearByTeamMembers(player, 20, 20, 20);
+            for (Player nearPlayer : nearPlayers) {
+                nearPlayer.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
+                nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 15, 0));
+                nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 15, 0));
             }
         }
     }

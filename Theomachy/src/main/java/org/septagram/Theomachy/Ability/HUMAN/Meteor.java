@@ -1,12 +1,11 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Timer.Skill.MeteorTimer;
@@ -14,6 +13,8 @@ import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
 import org.septagram.Theomachy.Utility.Skill;
+
+import java.util.Random;
 
 public class Meteor extends Ability
 {
@@ -51,9 +52,23 @@ public class Meteor extends Ability
 		{
 			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 			Location location = player.getLocation();
-			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
-                    new MeteorTimer(player, location, 30)
-			,0,0);
+//			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+					World world = player.getWorld();
+					Vector v = new Vector(0d,-20d,0d);
+					Vector speed = new Vector(0d,-3d, 0d);
+					for(int count = 30 ; count > 0; count--){
+						Random random = new Random();
+						int X = random.nextInt(11) - 5;
+						int Z = random.nextInt(11)-5;
+						Fireball fireball = world.spawn(location.add(X, 0, Z), Fireball.class);
+						fireball.setShooter(player);
+						fireball.setDirection(v);
+						fireball.setVelocity(speed);
+						location.add(-X, 0, -Z);
+					}
+				},2 * 10);}
+//			,0);
 		}
 	}
 }
