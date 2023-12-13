@@ -41,12 +41,9 @@ public class Meteor extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+                case 0, 1 -> leftAction(player);
+            }
 		}
 	}
 
@@ -55,11 +52,10 @@ public class Meteor extends Ability
 		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, sta1))
 		{
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
-
 			Location location = player.getLocation();
-			Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()-> {
+			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()-> {
 				new MeteorTimer(player, location, 30).run();
-			});
+			},0,200);
 		}
 	}
 }
