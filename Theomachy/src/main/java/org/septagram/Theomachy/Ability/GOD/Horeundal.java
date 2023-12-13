@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.bukkit.scheduler.BukkitTask;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Timer.Skill.HoreunTimer;
@@ -56,9 +57,11 @@ public class Horeundal extends Ability{
 			player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
 
 			AtomicInteger count = new AtomicInteger(3);
-			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
-				new HoreunTimer(player,loc, count.getAndDecrement()).run();
-			},7 * 20,1 * 20);
+			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
+				if(count.get() == 0)
+					return;
+				new HoreunTimer(player, loc, count.getAndDecrement()).run();
+			}, 7 * 20, 1 * 20);
 		}
 		
 	}
