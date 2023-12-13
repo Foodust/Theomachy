@@ -57,11 +57,11 @@ public class Horeundal extends Ability{
 			player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
 
 			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-				for (int count = 3; count > 0; count--) {
+				for (int count = 3; count >= 0; count--) {
 					int finalCount = count;
 					Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
 						new HoreunTimer(player, loc, finalCount).run();
-					}, 1 * 20);
+					},(7 + (3 - count)) * 20L);
 				}
 			}, 7 * 20);
 		}
