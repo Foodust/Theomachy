@@ -66,8 +66,11 @@ public class Hephaestus extends Ability
 			{
 				Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 				block.setBlockData(Bukkit.createBlockData(Material.LAVA));
-				Timer t = new Timer();
-				t.schedule(new LavaTimer(block), 2000);
+				//Timer t = new Timer();
+				//t.schedule(new LavaTimer(block),2000);
+				Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
+					new LavaTimer(block);
+				},2 * 20,0);
 			}
 		}
 	}

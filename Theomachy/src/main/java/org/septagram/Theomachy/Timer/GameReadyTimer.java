@@ -78,7 +78,8 @@ public class GameReadyTimer extends TimerTask
 				break;
 			case 8:
 				Bukkit.broadcastMessage(ChatColor.AQUA+"플러그인이 배포 중인 곳");
-				Bukkit.broadcastMessage(ChatColor.GREEN+"http://cafe.naver.com/craftproducer");
+				Bukkit.broadcastMessage(ChatColor.RED + "NONE");
+				//Bukkit.broadcastMessage(ChatColor.GREEN+"http://cafe.naver.com/craftproducer");
 				break;
 			case 12:
 				Bukkit.broadcastMessage(ChatColor.GREEN+"****** 서버 세팅상태 ******");
