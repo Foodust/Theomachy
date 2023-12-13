@@ -9,18 +9,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 
 public class Eris extends Ability{
 
 	private final static String[] des= {
-			"에리스는 불화의 여신입니다.",
+			AbilitySet.Eris.getName() + "는 불화의 여신입니다.",
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"시기",
 			"자신을 공격한 플레이어를 20% 확률로 밀쳐냅니다."};
 	
 	public Eris(String playerName) {
 		
-		super(playerName, "에리스", 14, false, true, false, des);
+		super(playerName, AbilitySet.Eris, false, true, false, des);
 		
 		this.rank=3;
 		

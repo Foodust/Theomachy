@@ -144,7 +144,7 @@ public class EventManager implements Listener
 						Player player=(Player)snow.getShooter();
 						Ability ability=GameData.PlayerAbility.get(player.getName());
 
-						if(ability != null && ability.abilityCode==125)
+						if(ability != null && ability.abilityCode ==125)
 							ability.passiveSkillSnow(event);
 					}
 				}
@@ -279,7 +279,7 @@ public class EventManager implements Listener
 		if (GameHandler.Start)
 		{
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
-			if (ability != null && ability.abilityCode==119)
+			if (ability != null && ability.abilityCode ==119)
 				ability.passiveSkill(event);
 		}
 	}
@@ -330,7 +330,7 @@ public class EventManager implements Listener
 		if(GameHandler.Start){
 			for(Player p:Bukkit.getOnlinePlayers()){
 				Ability ability=GameData.PlayerAbility.get(p.getName());
-				if(ability!=null&&ability.abilityCode==121){
+				if(ability!=null&&ability.abilityCode ==121){
 					ability.passiveSkill(event);
 				}
 			}

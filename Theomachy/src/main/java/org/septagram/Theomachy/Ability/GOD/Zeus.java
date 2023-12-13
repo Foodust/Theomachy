@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.BlockFilter;
@@ -23,7 +25,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Zeus extends Ability
 {
 	private final static String[] des= {
-			   "제우스는 신들의 왕이자, 번개의 신입니다.",
+			AbilitySet.Zeus.getName() + "는 신들의 왕이자, 번개의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"전기 속성",
 			   "패시브 능력으로 번개와 폭발 데미지를 받지 않습니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"번개 Ⅰ",
@@ -33,7 +35,7 @@ public class Zeus extends Ability
 	
 	public Zeus(String playerName)
 	{
-		super(playerName,"제우스", 1, true, true, false, des);
+		super(playerName, AbilitySet.Zeus, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =90;
@@ -49,26 +51,21 @@ public class Zeus extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			Block block = player.getTargetBlock(null, 50);
 			if (BlockFilter.AirToFar(player, block))
 			{
-				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 				World world = player.getWorld();
 				Location location = block.getLocation();
 				world.strikeLightning(location);
@@ -78,12 +75,12 @@ public class Zeus extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			Block block = player.getTargetBlock(null, 30);
 			if (BlockFilter.AirToFar(player, block))
 			{
-				Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
 				World world = player.getWorld();
 				Location location = block.getLocation();
 				Random random = new Random();

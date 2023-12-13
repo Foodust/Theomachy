@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -23,7 +25,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hephaestus extends Ability
 {
 	private final static String[] des= {
-			  "헤파이토스는 불의 신입니다.",
+			AbilitySet.Hephastus.getName() + "는 불의 신입니다.",
 			  ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"화염 속성",
 			  "불에 관한 데미지를 일절 받지 않으나, 물에 들어가면 데미지를 입습니다.",
 			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"용암",
@@ -31,7 +33,7 @@ public class Hephaestus extends Ability
 	
 	public Hephaestus(String playerName)
 	{
-		super(playerName,"헤파이토스", 9, true, true, false, des);
+		super(playerName, AbilitySet.Hephastus, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =30;
@@ -47,7 +49,7 @@ public class Hephaestus extends Ability
 		{
 			switch(EventFilter.PlayerInteract(event))
 			{
-			case 1 -> leftAction(player);
+				case LEFT_CLICK_BLOCK -> leftAction(player);
 			}
 		}
 	}
@@ -59,9 +61,9 @@ public class Hephaestus extends Ability
 		Block block = location.getBlock();
 		if (block.getType() == Material.AIR)
 		{
-			if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 			{
-				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 				block.setBlockData(Bukkit.createBlockData(Material.LAVA));
 				Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
 					new LavaTimer(block);

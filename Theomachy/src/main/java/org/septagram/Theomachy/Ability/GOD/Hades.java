@@ -16,6 +16,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -26,7 +28,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hades extends Ability
 {	
 	private final static String[] des= {
-			   "하데스는 죽음의 신입니다.",
+			AbilitySet.Hades.getName() + "는 죽음의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"사망 지배",
 			   "사망 시 60% 확률로 아이템을 잃지 않습니다." ,
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"나락 Ⅰ",
@@ -36,7 +38,7 @@ public class Hades extends Ability
 	
 	public Hades(String playerName)
 	{
-		super(playerName,"하데스", 3, true, true, false, des);
+		super(playerName, AbilitySet.Hades, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =100;
@@ -52,23 +54,18 @@ public class Hades extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightAction(player);
+            }
 		}
 	}
 	
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 			Entity entity=player;
 			Location location = player.getLocation();
 			location.setY(-2.0d);
@@ -89,9 +86,9 @@ public class Hades extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
 			Entity entity=player;
 			Location location = player.getLocation();
 			location.setY(-2.0d);

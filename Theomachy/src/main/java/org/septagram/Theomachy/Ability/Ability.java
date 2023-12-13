@@ -16,13 +16,13 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.septagram.Theomachy.Ability.ENUM.AbilityCode;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 
 public class Ability
 {
 	public final String playerName;
 	public final String abilityName;
-	public final AbilityCode abilityCode;
+	public final int abilityCode;
 	public final boolean activeType;
 	public final boolean passiveType;
 	public final boolean buffType;
@@ -36,11 +36,11 @@ public class Ability
 
 	public Material material = Material.COBBLESTONE;
 	
-	public Ability(String playerName, String abilityName, int abilityCode, boolean activeType, boolean passiveType, boolean buffType, String[] des)
+	public Ability(String playerName, AbilitySet abilityCode, boolean activeType, boolean passiveType, boolean buffType, String[] des)
 	{
 		this.playerName=playerName;
-		this.abilityName=abilityName;
-		this.abilityCode=abilityCode;
+		this.abilityName= abilityCode.getName();
+		this.abilityCode = abilityCode.getIndex();
 		this.activeType=activeType;
 		this.passiveType=passiveType;
 		this.buffType=buffType;

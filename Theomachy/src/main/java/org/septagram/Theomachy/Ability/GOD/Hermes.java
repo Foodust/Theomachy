@@ -8,6 +8,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -19,7 +21,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hermes extends Ability
 {
 	private final static String[] des= {
-			   "헤르메스는 여행자의 신입니다.",
+			AbilitySet.Hermes.getName() + "는 여행자의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"민첩함",
 			   "이동 속도가 빠릅니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"비행",
@@ -28,7 +30,7 @@ public class Hermes extends Ability
 	
 	public Hermes(String playerName)
 	{
-		super(playerName,"헤르메스", 11, true, true, true, des);
+		super(playerName, AbilitySet.Hermes, true, true, true, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =60;
@@ -43,16 +45,16 @@ public class Hermes extends Ability
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (EventFilter.PlayerInteract(event)) {
-                case 0, 1 -> leftAction(player);
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
             }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 			player.setAllowFlight(true);
 			player.setFlying(true);
 			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{

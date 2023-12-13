@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import org.septagram.Theomachy.Ability.Ability;
-import org.septagram.Theomachy.Ability.ENUM.AbilityCode;
 import org.septagram.Theomachy.Ability.GOD.*;
 import org.septagram.Theomachy.Ability.HUMAN.*;
 import org.septagram.Theomachy.DB.GameData;
@@ -134,110 +133,110 @@ public class AbilitySet
 		}
 	}
 	
-	public static void abilityAssignment(AbilityCode abilityCode, String playerName, CommandSender p)
+	public static void abilityAssignment(org.septagram.Theomachy.Ability.ENUM.AbilitySet abilitySet, String playerName, CommandSender p)
 	{
-		if (abilityCode == 1)
+		if (abilitySet == 1)
 			GameData.PlayerAbility.put(playerName, new Zeus(playerName));
-		else if (abilityCode == 2)
+		else if (abilitySet == 2)
 			GameData.PlayerAbility.put(playerName, new Poseidon(playerName));
-		else if (abilityCode == 3)
+		else if (abilitySet == 3)
 			GameData.PlayerAbility.put(playerName, new Hades(playerName));
-		else if (abilityCode == 4)
+		else if (abilitySet == 4)
 			GameData.PlayerAbility.put(playerName, new Demeter(playerName));
-		else if (abilityCode == 5)
+		else if (abilitySet == 5)
 			GameData.PlayerAbility.put(playerName, new Athena(playerName));
-		else if (abilityCode == 6)
+		else if (abilitySet == 6)
 			GameData.PlayerAbility.put(playerName, new Apollon(playerName));
-		else if (abilityCode == 7)
+		else if (abilitySet == 7)
 			GameData.PlayerAbility.put(playerName, new Artemis(playerName));
-		else if (abilityCode == 8)
+		else if (abilitySet == 8)
 			GameData.PlayerAbility.put(playerName, new Ares(playerName));
-		else if (abilityCode == 9)
+		else if (abilitySet == 9)
 			GameData.PlayerAbility.put(playerName, new Hephaestus(playerName));
-		else if (abilityCode == 10)
+		else if (abilitySet == 10)
 			GameData.PlayerAbility.put(playerName, new Asclepius(playerName));
-		else if (abilityCode == 11)
+		else if (abilitySet == 11)
 			GameData.PlayerAbility.put(playerName, new Hermes(playerName));
-		else if (abilityCode == 12)
+		else if (abilitySet == 12)
 			GameData.PlayerAbility.put(playerName, new Dionysus(playerName));
-		else if (abilityCode == 13)
+		else if (abilitySet == 13)
 			GameData.PlayerAbility.put(playerName, new Aprodite(playerName));
-		else if (abilityCode == 14)
+		else if (abilitySet == 14)
 			GameData.PlayerAbility.put(playerName, new Eris(playerName));
-		else if (abilityCode == 15)
+		else if (abilitySet == 15)
 			GameData.PlayerAbility.put(playerName, new Morpious(playerName));
-		else if (abilityCode == 16)
+		else if (abilitySet == 16)
 			GameData.PlayerAbility.put(playerName, new Aeolus(playerName));
-		else if (abilityCode == 17)
+		else if (abilitySet == 17)
 			GameData.PlayerAbility.put(playerName, new Akasha(playerName));
-		else if (abilityCode == 18)
+		else if (abilitySet == 18)
 			GameData.PlayerAbility.put(playerName, new Horeundal(playerName));
-		else if (abilityCode == 19)
+		else if (abilitySet == 19)
 			GameData.PlayerAbility.put(playerName, new Sans(playerName));
 		
-		else if (abilityCode == 101)
+		else if (abilitySet == 101)
 			GameData.PlayerAbility.put(playerName, new Archer(playerName));
-		else if (abilityCode == 102)
+		else if (abilitySet == 102)
 			GameData.PlayerAbility.put(playerName, new Miner(playerName));
-		else if (abilityCode == 103)
+		else if (abilitySet == 103)
 			GameData.PlayerAbility.put(playerName, new Stance(playerName));
-		else if (abilityCode == 104)
+		else if (abilitySet == 104)
 			GameData.PlayerAbility.put(playerName, new Teleporter(playerName));
-		else if (abilityCode == 105)
+		else if (abilitySet == 105)
 			GameData.PlayerAbility.put(playerName, new Bomber(playerName));
-		else if (abilityCode == 106)
+		else if (abilitySet == 106)
 			GameData.PlayerAbility.put(playerName, new Creeper(playerName));
-		else if (abilityCode == 107)
+		else if (abilitySet == 107)
 			GameData.PlayerAbility.put(playerName, new Wizard(playerName));
-		else if (abilityCode == 108)
+		else if (abilitySet == 108)
 			GameData.PlayerAbility.put(playerName, new Assasin(playerName));
-		else if (abilityCode == 109)
+		else if (abilitySet == 109)
 			GameData.PlayerAbility.put(playerName, new Reflection(playerName));
-		else if (abilityCode == 110)
+		else if (abilitySet == 110)
 			GameData.PlayerAbility.put(playerName, new Blinder(playerName));
-		else if (abilityCode == 111)
+		else if (abilitySet == 111)
 			GameData.PlayerAbility.put(playerName, new Invincibility(playerName));
-		else if (abilityCode == 112)
+		else if (abilitySet == 112)
 			GameData.PlayerAbility.put(playerName, new Clocking(playerName));
-		else if (abilityCode == 113)
+		else if (abilitySet == 113)
 			GameData.PlayerAbility.put(playerName, new Blacksmith(playerName));
-		else if (abilityCode == 114)
+		else if (abilitySet == 114)
 			GameData.PlayerAbility.put(playerName, new Boxer(playerName));
-		else if (abilityCode == 115)
+		else if (abilitySet == 115)
 			GameData.PlayerAbility.put(playerName, new Priest(playerName));
-		else if (abilityCode == 116)
+		else if (abilitySet == 116)
 			GameData.PlayerAbility.put(playerName, new Witch(playerName));
-		else if (abilityCode == 117)
+		else if (abilitySet == 117)
 			GameData.PlayerAbility.put(playerName, new Meteor(playerName));
-		else if (abilityCode == 118)
+		else if (abilitySet == 118)
 			GameData.PlayerAbility.put(playerName, new Sniper(playerName));
-		else if (abilityCode == 119)
+		else if (abilitySet == 119)
 			GameData.PlayerAbility.put(playerName, new Voodoo(playerName));
-		else if (abilityCode == 120)
+		else if (abilitySet == 120)
 			GameData.PlayerAbility.put(playerName, new Anorexia(playerName));
-		else if (abilityCode == 121)
+		else if (abilitySet == 121)
 			GameData.PlayerAbility.put(playerName, new Bulter(playerName));
-		else if (abilityCode == 122)
+		else if (abilitySet == 122)
 			GameData.PlayerAbility.put(playerName, new Midoriya(playerName));
-		else if (abilityCode == 123)
+		else if (abilitySet == 123)
 			GameData.PlayerAbility.put(playerName, new Goldspoon(playerName));
-		else if (abilityCode == 124)
+		else if (abilitySet == 124)
 			GameData.PlayerAbility.put(playerName, new Bee(playerName));
-		else if (abilityCode == 125)
+		else if (abilitySet == 125)
 			GameData.PlayerAbility.put(playerName, new Snow(playerName));
-		else if (abilityCode == 126)
+		else if (abilitySet == 126)
 			GameData.PlayerAbility.put(playerName, new Tajja(playerName));
-		else if (abilityCode == 127)
+		else if (abilitySet == 127)
 			GameData.PlayerAbility.put(playerName, new AGirl(playerName));
-		else if (abilityCode == 128)
+		else if (abilitySet == 128)
 			GameData.PlayerAbility.put(playerName, new Megumin(playerName));
-		else if (abilityCode == 129)
+		else if (abilitySet == 129)
 			GameData.PlayerAbility.put(playerName, new PokeGo(playerName));
-		else if (abilityCode == 130)
+		else if (abilitySet == 130)
 			GameData.PlayerAbility.put(playerName, new Darkness(playerName));
-		else if (abilityCode == 131)
+		else if (abilitySet == 131)
 			GameData.PlayerAbility.put(playerName, new Gasolin(playerName));
-		else if (abilityCode == 132)
+		else if (abilitySet == 132)
 			GameData.PlayerAbility.put(playerName, new Zet(playerName));
 		
 		else

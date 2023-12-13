@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -18,7 +20,7 @@ import org.septagram.Theomachy.Utility.GetPlayerList;
 public class Asclepius extends Ability
 {
 	private final static String[] des= {
-			   "아스킬리피어스는 의술의 신입니다.",
+			AbilitySet.Asclepius.getName() + "는 의술의 신입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"치료 Ⅰ",
 			   "자신의 체력을 완전히 회복합니다.",
 				ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치료 Ⅱ",
@@ -26,7 +28,7 @@ public class Asclepius extends Ability
 	
 	public Asclepius(String playerName)
 	{
-		super(playerName,"아스클리피어스", 10, true, false, false, des);
+		super(playerName, AbilitySet.Asclepius, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =60;
@@ -42,35 +44,30 @@ public class Asclepius extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR ,LEFT_CLICK_BLOCK -> leftAction(player);
+				case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillCoolTime))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillCoolTime))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 			player.setHealth(20);
 		}
 	}
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByTeamMembers(player, 5, 5, 5);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
 				player.sendMessage("자신을 제외한 모든 팀원의 체력을 회복합니다.");
 				player.sendMessage(ChatColor.GREEN+"체력을 회복한 플레이어 목록");
 				for (Player e : targetList)

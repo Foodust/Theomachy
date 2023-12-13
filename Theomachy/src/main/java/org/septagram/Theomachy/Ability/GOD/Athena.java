@@ -8,6 +8,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -21,7 +23,7 @@ public class Athena extends Ability
 {
 	private int abilityLimitCounter=2;
 	private final static String[] des= {
-			   "아테나는 지혜의 신입니다.",
+			AbilitySet.Athena.getName() + "는 지혜의 신입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"지식",
 			   "책을 얻습니다.",
 			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"강화",
@@ -31,7 +33,7 @@ public class Athena extends Ability
 	
 	public Athena(String playerName)
 	{
-		super(playerName,"아테나", 5, true, true, false, des);
+		super(playerName, AbilitySet.Athena, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =10;
@@ -47,23 +49,18 @@ public class Athena extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+				case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 			player.getInventory().addItem(new ItemStack(Material.BOOK,3));
 		}
 	}
@@ -72,17 +69,17 @@ public class Athena extends Ability
 	{
 		if (abilityLimitCounter>0)
 		{
-			if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+			if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 			{
 				if (abilityLimitCounter>1)
 				{
-					Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
 					player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE,1));
 					player.sendMessage("남은 교환 횟수 : "+--abilityLimitCounter);
 				}
 				else
 				{
-					Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, 0);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, 0);
 					player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE,1));
 					player.sendMessage("남은 교환 횟수 : "+--abilityLimitCounter);
 				}

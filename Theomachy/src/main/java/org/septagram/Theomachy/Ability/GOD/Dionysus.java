@@ -8,19 +8,20 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 
 public class Dionysus extends Ability
 {	
 	private final static String[] des= {
-			   "디오니소스는 술의 신입니다.",
+			AbilitySet.Dionysus.getName() +"는 술의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"알코올 중독",
 			   "10% 확률로 자신을 공격한 10초간 상대의 시야를 어지럽히는 동시에",
 			   "상대의 이동 속도, 공격력을 낮춥니다."};
 	public Dionysus(String playerName)
 	{
-		super(playerName,"디오니소스", 12, false, true, false, des);
+		super(playerName, AbilitySet.Dionysus, false, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.rank=3;

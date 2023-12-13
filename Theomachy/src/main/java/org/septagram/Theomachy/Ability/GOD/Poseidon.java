@@ -11,6 +11,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -28,7 +30,7 @@ public class Poseidon extends Ability
 {
 	private boolean flag = true;
 	private final static String[] des= {
-			   "포세이돈은 물의 신입니다.",
+			AbilitySet.Poseidon.getName() + "은 물의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"물 속성",
 			   "물 속에 있을 때 일정확률로 모든 피격을 33% 확률로 회피합니다.",
 			   "물 속에서 나온 직후 7초 동안 효과가 지속됩니다.",
@@ -38,7 +40,7 @@ public class Poseidon extends Ability
 	
 	public Poseidon(String playerName)
 	{
-		super(playerName,"포세이돈", 2, true, true, false, des);
+		super(playerName, AbilitySet.Poseidon, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =240;
@@ -52,22 +54,19 @@ public class Poseidon extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+            }
 		}
 	}
 	
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			if (flag)
 			{
-				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL ,firstSkillStack, firstSkillCoolTime);
 				Location location = player.getLocation();
 				Vector v = player.getEyeLocation().getDirection();
 				v.setX(Math.round(v.getX()));

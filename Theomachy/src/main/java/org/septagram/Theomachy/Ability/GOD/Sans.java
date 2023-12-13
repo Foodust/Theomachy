@@ -9,12 +9,14 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.AttackTag;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.*;
 
 public class Sans extends Ability {
     private final static String[] des= {
-            "와 샌즈",
+            "와 "+ AbilitySet.Sans.getName(),
             ChatColor.YELLOW+"【패시브】 "+ChatColor.GREEN+"독 속성",
             "패시브 능력으로 대상 공격시 3초간 위더에 중독 시킵니다.",
             ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"뼈 Ⅰ",
@@ -23,7 +25,7 @@ public class Sans extends Ability {
             "가스트 블래스터를 발사합니다"};
 
     public Sans(String playerName){
-        super(playerName, "샌즈", 19, true, true, true, des);
+        super(playerName, AbilitySet.Sans, true, true, true, des);
         Theomachy.log.info(playerName+abilityName);
         this.firstSkillCoolTime =1;
         this.secondSkillCoolTime =120;
@@ -38,8 +40,8 @@ public class Sans extends Ability {
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
         {
             switch (EventFilter.PlayerInteract(event)) {
-                case 0, 1 -> leftAction(player);
-                case 2, 3 -> rightAction(player);
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+                case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightAction(player);
             }
         }
     }
@@ -54,18 +56,19 @@ public class Sans extends Ability {
     }
     private void leftAction(Player player)
     {
-        if ( CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+        if ( CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
         {
+            Skill.Use(player, Material.COBBLESTONE,AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
             Snowball snowball = player.launchProjectile(Snowball.class);
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
             snowball.addScoreboardTag(AttackTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
-            Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
         }
     }
     private void rightAction(Player player)
     {
-        if (CoolTimeChecker.Check(player, 2)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+        if (CoolTimeChecker.Check(player, AbilityCase.RARE)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
         {
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
             for (double distance = 0; distance < 800; distance += 0.5) {
@@ -78,7 +81,6 @@ public class Sans extends Ability {
                     }
                 }
             }
-            Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
         }
     }
 }

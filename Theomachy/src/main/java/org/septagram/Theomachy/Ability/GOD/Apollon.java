@@ -9,6 +9,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
@@ -20,7 +22,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Apollon extends Ability {
 
     private final static String[] description = {
-            "아폴론은 태양의 신입니다.",
+            AbilitySet.Apollon.getName() + "은 태양의 신입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "햇볕",
             "밤을 낮으로 바꿉니다.",
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "자외선",
@@ -28,7 +30,7 @@ public class Apollon extends Ability {
             "화염속성의 능력자, 그늘, 물속에 있는 플레이어는 피해를 입지 않습니다."};
 
     public Apollon(String playerName) {
-        super(playerName, "아폴론", 6, true, false, false, description);
+        super(playerName, AbilitySet.Apollon, true, false, false, description);
         Theomachy.log.info(playerName + abilityName);
 
         this.firstSkillCoolTime = 90;
@@ -50,8 +52,8 @@ public class Apollon extends Ability {
     }
 
     private void leftClickAction(Player player) {
-        if (CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
+            Skill.Use(player, Material.COBBLESTONE,AbilityCase.NORMAL,  firstSkillStack, firstSkillCoolTime);
             World world = player.getWorld();
             world.setTime(6000);
             Bukkit.broadcastMessage(ChatColor.YELLOW + "태양의 신이 해를 띄웠습니다.");
@@ -59,8 +61,8 @@ public class Apollon extends Ability {
     }
 
     private void rightClickAction(Player player) {
-        if (CoolTimeChecker.Check(player, 2) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack)) {
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
             World world = player.getWorld();
             world.setTime(6000);
             world.setStorm(false);

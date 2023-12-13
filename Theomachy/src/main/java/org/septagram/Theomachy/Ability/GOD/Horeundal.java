@@ -9,6 +9,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -19,12 +21,12 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Horeundal extends Ability {
 
     private final static String[] des = {
-            "호른달은 시간과 공간의 신입니다.",
+            AbilitySet.Horeundal.getName() + "은 시간과 공간의 신입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "시공 초월",
             "위치 기억 후 10초 뒤 되돌아옵니다. 되돌아 온 뒤에 5초간 투명해집니다."};
 
     public Horeundal(String playerName) {
-        super(playerName, "호른달", 18, true, false, false, des);
+        super(playerName, AbilitySet.Horeundal, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
         this.firstSkillCoolTime = 120;
         this.firstSkillStack = 32;
@@ -35,18 +37,15 @@ public class Horeundal extends Ability {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (EventFilter.PlayerInteract(event)) {
-                case 0:
-                case 1:
-                    leftAction(player);
-                    break;
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, 0) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
+        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
             Location loc = player.getLocation();
-            Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
             player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
 
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {

@@ -9,6 +9,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -19,7 +21,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Demeter extends Ability
 {
 	private final static String[] des= {
-			  "데메테르는 곡식의 신입니다.",
+			AbilitySet.Demeter.getName() + "는 곡식의 신입니다.",
 			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"수확",
 			   "빵을 얻을 수 있습니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"풍요",
@@ -27,7 +29,7 @@ public class Demeter extends Ability
 	
 	public Demeter(String playerName)
 	{
-		super(playerName,"데메테르", 4, true, true, false, des);
+		super(playerName, AbilitySet.Demeter, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =30;
@@ -41,20 +43,17 @@ public class Demeter extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:case 2:case 3:
-				Action(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK,RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> Action(player);
+            }
 		}
 	}
 
 	private void Action(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 			Inventory inventory = player.getInventory();
 			inventory.addItem(new ItemStack(Material.BREAD, firstSkillStack));
 		}
