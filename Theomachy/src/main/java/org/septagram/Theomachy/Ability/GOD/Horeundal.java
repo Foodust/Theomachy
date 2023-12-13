@@ -58,10 +58,9 @@ public class Horeundal extends Ability{
 
 			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
 				for (int count = 3; count >= 0; count--) {
-					int finalCount = count;
-					Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-						new HoreunTimer(player, loc, finalCount).run();
-					},(7 + (3 - count)) * 20L);
+					Bukkit.getScheduler().runTaskLater(
+							Theomachy.getPlugin(), new HoreunTimer(player, loc, count),
+							(7 + (3 - count)) * 20L);
 				}
 			}, 7 * 20);
 		}

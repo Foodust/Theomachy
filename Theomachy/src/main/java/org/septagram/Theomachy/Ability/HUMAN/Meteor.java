@@ -53,9 +53,9 @@ public class Meteor extends Ability
 		{
 			Skill.Use(player, Material.COBBLESTONE, sta1, 0, cool1);
 			Location location = player.getLocation();
-			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()-> {
-				new MeteorTimer(player, location, 30).run();
-			},0,0);
+			Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
+                    new MeteorTimer(player, location, 30)
+			,0,0);
 		}
 	}
 }
