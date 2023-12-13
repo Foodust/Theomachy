@@ -1,18 +1,18 @@
 package org.septagram.Theomachy.Utility;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Timer.CoolTime;
 import org.septagram.Theomachy.Message.T_Message;
 
 public class CoolTimeChecker
 {
-	public static boolean Check(Player player, int abilityCase)
+	public static boolean Check(Player player, AbilityCase abilityCase)
 	{
 		String key=player.getName();
 		
-		if (abilityCase == 0)
+		if (abilityCase == AbilityCase.COMMON)
 		{
 			if (CoolTime.COOL0.containsKey(key))
 			{
@@ -23,7 +23,7 @@ public class CoolTimeChecker
 			else
 				return true;
 		}
-		else if (abilityCase == 1)
+		else if (abilityCase == AbilityCase.NORMAL)
 		{
 			if (CoolTime.COOL1.containsKey(key))
 			{
@@ -34,7 +34,7 @@ public class CoolTimeChecker
 			else
 				return true;
 		}
-		else if (abilityCase == 2)
+		else if (abilityCase == AbilityCase.RARE)
 		{
 			if (CoolTime.COOL2.containsKey(key))
 			{

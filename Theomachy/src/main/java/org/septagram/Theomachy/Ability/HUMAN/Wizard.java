@@ -19,7 +19,6 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Wizard extends Ability
 {
-	private final Material material=Material.COBBLESTONE;
 	private final static String[] des= {
 			   "마법사는 신의 능력을 빌려 쓰는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"날려버리기",

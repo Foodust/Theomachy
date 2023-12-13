@@ -7,14 +7,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCode;
 import org.septagram.Theomachy.Ability.GOD.*;
 import org.septagram.Theomachy.Ability.HUMAN.*;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.CodeHelper;
 import org.septagram.Theomachy.Utility.PermissionChecker;
 import org.septagram.Theomachy.Utility.RandomNumberConstuctor;
-import org.septagram.Theomachy.Ability.GOD.*;
-import org.septagram.Theomachy.Ability.HUMAN.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +99,7 @@ public class AbilitySet
 		for (Player player: playerlist)
 		{
 			String playerName = player.getName();
-			abiltiyAssignment(rn[i++],playerName,p);
+			abilityAssignment(rn[i++],playerName,p);
 		}
 		
 		Bukkit.broadcastMessage("모두에게 능력이 적용되었습니다.");
@@ -122,7 +121,7 @@ public class AbilitySet
 		{
 			try{
 				int abilityCode = Integer.parseInt(abilityName);
-				abiltiyAssignment(abilityCode, playerName, p);
+				abilityAssignment(abilityCode, playerName, p);
 				Player player = GameData.OnlinePlayer.get(playerName);
 				Bukkit.broadcastMessage("관리자가 "+ChatColor.RED+playerName+ChatColor.WHITE+" 에게 능력을 할당하였습니다.");
 				player.sendMessage("능력이 할당되었습니다. /t help로 능력을 확인해보세요.");
@@ -135,7 +134,7 @@ public class AbilitySet
 		}
 	}
 	
-	public static void abiltiyAssignment(int abilityCode, String playerName, CommandSender p)
+	public static void abilityAssignment(AbilityCode abilityCode, String playerName, CommandSender p)
 	{
 		if (abilityCode == 1)
 			GameData.PlayerAbility.put(playerName, new Zeus(playerName));

@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Ability;
 
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -15,12 +16,13 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCode;
 
 public class Ability
 {
 	public final String playerName;
 	public final String abilityName;
-	public final int abilityCode;
+	public final AbilityCode abilityCode;
 	public final boolean activeType;
 	public final boolean passiveType;
 	public final boolean buffType;
@@ -31,6 +33,8 @@ public class Ability
 	public int secondSkillCoolTime =-1;
 	public int firstSkillStack =-1;
 	public int secondSkillStack =-1;
+
+	public Material material = Material.COBBLESTONE;
 	
 	public Ability(String playerName, String abilityName, int abilityCode, boolean activeType, boolean passiveType, boolean buffType, String[] des)
 	{

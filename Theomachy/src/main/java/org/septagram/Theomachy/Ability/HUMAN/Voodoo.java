@@ -21,7 +21,6 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Voodoo extends Ability
 {
-	private final Material material=Material.COBBLESTONE;
 	private String targetName=null;
 	private Block postSign=null;
 	private final static String[] des= {

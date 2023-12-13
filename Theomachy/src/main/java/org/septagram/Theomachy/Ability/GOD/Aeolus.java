@@ -44,14 +44,14 @@ public class Aeolus extends Ability {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (EventFilter.PlayerInteract(event)) {
-                case 0, 1 -> leftAction(player);
-                case 2, 3 -> rightAction(player);
+                case LEFT_CLICK_AIR ,LEFT_CLICK_BLOCK -> leftAction(player);
+                case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
         }
     }
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+        if (CoolTimeChecker.Check(player, 1) && PlayerInventory.ItemCheck(player, material, firstSkillStack)) {
+            Skill.Use(player, material, firstSkillStack, 1, firstSkillCoolTime);
             List<Player> nearPlayers = GetPlayerList.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
                 nearPlayer.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
@@ -61,14 +61,14 @@ public class Aeolus extends Ability {
         }
     }
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, 2) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack)) {
+        if (CoolTimeChecker.Check(player, 2) && PlayerInventory.ItemCheck(player, material, secondSkillStack)) {
             List<Player> entityList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
             ArrayList<Player> targetList = new ArrayList<Player>();
             for (Player e : entityList)
                 if (e != null)
                     targetList.add(e);
             if (!targetList.isEmpty()) {
-                Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+                Skill.Use(player, material, secondSkillStack, 2, secondSkillCoolTime);
                 Vector v = new Vector(0, 0.5, 0);
                 double vertical = 2.4d;
                 double diagonal = vertical * 1.4d;

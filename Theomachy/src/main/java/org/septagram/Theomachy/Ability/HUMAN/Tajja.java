@@ -13,6 +13,8 @@ import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
 import org.septagram.Theomachy.Utility.Skill;
 
+import java.util.Objects;
+
 public class Tajja extends Ability {
 
 	private final static String[] des= {
@@ -23,15 +25,13 @@ public class Tajja extends Ability {
 			"데미지를 줄 수 있습니다.",
 			"단, 10번 쓰면 검을 쓸 수 없습니다."
 	};
-	
-	private final int coolTime0=60;
-	private final int stack0=10;
-	
+
+
 	public Tajja(String playerName) {
 		super(playerName, "타짜", 126, true, false, false, des);
 		
 		this.rank=4;
-		this.firstSkillCoolTime =coolTime0;
+		this.firstSkillCoolTime =60;
 		this.firstSkillStack =10;
 	}
 	
@@ -53,11 +53,11 @@ public class Tajja extends Ability {
 	private int time=-1;
 	
 	private void leftAction(Player player) {
-		if(CoolTimeChecker.Check(player, 0) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, stack0)) {
+		if(CoolTimeChecker.Check(player, 0) && PlayerInventory.ItemCheck(player,material, firstSkillStack)) {
 			if(sword==0) {
 				for(ItemStack i:player.getInventory().getContents()) {
 					try {
-                        switch (i.getType()) {
+                        switch (Objects.requireNonNull(i).getType()) {
                             case WOODEN_SWORD -> {
                                 sword = 4;
                                 player.getInventory().remove(i);
@@ -79,7 +79,7 @@ public class Tajja extends Ability {
                         }
 					}catch(NullPointerException e) {}
 				}player.sendMessage("손은 눈보다 빠르다.");
-				Skill.Use(player, Material.COBBLESTONE, stack0, 0, coolTime0);
+				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
 				time=10;
 			}
 		}

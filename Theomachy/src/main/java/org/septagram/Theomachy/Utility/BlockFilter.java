@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import org.septagram.Theomachy.Ability.ENUM.TargetType;
 import org.septagram.Theomachy.Message.T_Message;
 
 
@@ -15,7 +16,7 @@ public class BlockFilter
 			return true;
 		else
 		{
-			T_Message.TooFarError(player,1);
+			T_Message.TooFarError(player, TargetType.TARGET_TOO_FAR);
 			return false;
 		}
 	}

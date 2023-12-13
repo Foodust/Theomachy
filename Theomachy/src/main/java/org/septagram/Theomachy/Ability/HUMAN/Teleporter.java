@@ -20,9 +20,9 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Teleporter extends Ability
 {
-	private String abilitytarget;
+	private String abilityTarget;
 	private final static String[] des= {
-		   	  "텔레포터는 순간이동을 돕는 마법사입니다.",
+			"텔레포터는 순간이동을 돕는 마법사입니다.",
 		   	ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"텔레포팅",
 			"25칸 이내의 목표 지점으로 텔레포트합니다." ,
 			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치환",
@@ -47,15 +47,10 @@ public class Teleporter extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+                case 0, 1 -> leftAction(player);
+                case 2, 3 -> rightAction(player);
+            }
 		}
 	}
 
@@ -95,9 +90,9 @@ public class Teleporter extends Ability
 	{
 		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
-			if (abilitytarget != null)
+			if (abilityTarget != null)
 			{
-				Player target = GameData.OnlinePlayer.get(abilitytarget);
+				Player target = GameData.OnlinePlayer.get(abilityTarget);
 				if (target != null)
 				{
 					Location location = player.getLocation();
@@ -121,13 +116,11 @@ public class Teleporter extends Ability
 	{
 		String playerTeamName = GameData.PlayerTeam.get(playerName);
 		String targetTeamName = GameData.PlayerTeam.get(targetName);
-		if (playerTeamName != null &&
-			targetTeamName != null &&
-			playerTeamName.equals(targetTeamName))
+		if (playerTeamName != null && playerTeamName.equals(targetTeamName))
 		{
 			if (!playerName.equals(targetName))
 			{
-				this.abilitytarget = targetName;
+				this.abilityTarget = targetName;
 				sender.sendMessage("타겟을 등록했습니다.   "+ChatColor.GREEN+targetName);
 			}
 			else

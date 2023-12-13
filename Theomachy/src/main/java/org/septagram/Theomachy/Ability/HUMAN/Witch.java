@@ -21,7 +21,6 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Witch extends Ability
 {
-	private final Material material=Material.COBBLESTONE;
 	private final static String[] des= {
 			   "마녀는 디버프를 사용하는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"저주 Ⅰ",
@@ -33,10 +32,8 @@ public class Witch extends Ability
 	{
 		super(playerName,"마녀", 116, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		
 		this.firstSkillCoolTime =60;
 		this.firstSkillStack =15;
-		
 		this.rank=2;
 	}
 	
@@ -64,12 +61,11 @@ public class Witch extends Ability
 				Skill.Use(player, material, firstSkillStack, 0, firstSkillCoolTime);
 				for (Player e : targetList)
 				{
-					
-					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 200,0),true);
-					e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200,0),true);
-					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200,0),true);
-					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 200,0),true);
-					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 200,0),true);
+					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 10 * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 10 * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10 * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 10 * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 10 * 20,0));
 					e.sendMessage("마녀에 의해 저주에 걸렸습니다.");
 				}
 			}
@@ -88,11 +84,11 @@ public class Witch extends Ability
 			if (rn == 0)
 			{
 				Player target = (Player) event.getDamager();
-				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 100,0),true);//*20	
-				target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100,0),true);
-				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100,0),true);
-				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 100,0),true);
-				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100,0),true);
+				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 5 * 20,0));//*20
+				target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 5 * 20 ,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5 * 20,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 5 * 20,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 5 * 20,0));
 				target.sendMessage("마녀에 의해 저주가 걸렸습니다.");
 			}
 		}

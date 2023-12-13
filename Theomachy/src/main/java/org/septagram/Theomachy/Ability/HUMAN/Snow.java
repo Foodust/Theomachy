@@ -3,6 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -43,11 +44,9 @@ public class Snow extends Ability {
 	public void activeSkill(PlayerInteractEvent event){
 		Player player=event.getPlayer();
 		if(PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)){
-			switch(EventFilter.PlayerInteract(event)){
-			case 0:case 1:
-				player.sendMessage("공격 지수 : "+attack);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> player.sendMessage("공격 지수 : " + attack);
+            }
 		}
 	}
 	

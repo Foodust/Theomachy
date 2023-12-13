@@ -22,8 +22,7 @@ public class Stance extends Ability
 	{
 		super(playerName,"스탠스", 103, false, true, false ,des);
 		Theomachy.log.info(playerName+abilityName);
-		
-		this.rank=3;
+		this.rank=2;
 	}
 	
 	public void passiveSkill(EntityDamageEvent event)

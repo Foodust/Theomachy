@@ -43,8 +43,8 @@ public class Apollon extends Ability {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (EventFilter.PlayerInteract(event)) {
-                case 0, 1 -> leftClickAction(player);
-                case 2, 3 -> rightClickAction(player);
+                case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftClickAction(player);
+                case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightClickAction(player);
             }
         }
     }
