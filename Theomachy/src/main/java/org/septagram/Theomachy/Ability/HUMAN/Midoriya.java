@@ -9,6 +9,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -17,16 +19,13 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Midoriya extends Ability {
 
 	public final static String[] des= {
-			"미도리야는 UA에 재학 중입니다.",
+			AbilityInfo.Midoriya.getName() +  "는 UA에 재학 중입니다.",
 			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"원 포 올",
 			"능력 사용 후 상대를 가격하면 원 포 올을 쓸 수 있습니다.",
 			"원 포 올을 쓰고 난 뒤에는 각종 디버프에 시달립니다."};
-	
-	private int coolTime0=350;
-	private int stack0=64;
-	
+
 	public Midoriya(String playerName) {
-		super(playerName, "미도리야", 122, true, false, false, des);
+		super(playerName, AbilityInfo.Midoriya, true, false, false, des);
 		
 		this.rank=4;
 		
@@ -40,17 +39,14 @@ public class Midoriya extends Ability {
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR , LEFT_CLICK_BLOCK-> leftAction(player);
+            }
 		}
 	}
 	
 	private void leftAction(Player player) {
-		if(CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, stack0)&&!Ready){
+		if(CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)&&!Ready){
 			Ready=true;
 			player.sendMessage(ChatColor.YELLOW+"원"+ChatColor.GREEN+" 포 "+ChatColor.AQUA+"올"+ChatColor.WHITE+"이 준비되었습니다아!!!!!!!!!");
 		}
@@ -61,7 +57,7 @@ public class Midoriya extends Ability {
 		Player d=(Player)event.getEntity();
 		
 		if(player.getItemInHand().getType()==Material.AIR && player.getName().equals(this.playerName)){
-			if(CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, stack0)) {
+			if(CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
 				if(Ready) {					
 					player.sendMessage(ChatColor.YELLOW+"원"+ChatColor.GREEN+" 포 "+ChatColor.AQUA+"올"+ChatColor.WHITE+"이 가동되었습니다아!!!!!!!!!");
 					d.damage(200);
@@ -72,7 +68,7 @@ public class Midoriya extends Ability {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200, 0));
 					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
 					
-					Skill.Use(player, Material.COBBLESTONE, stack0, 0, coolTime0);
+					Skill.Use(player, Material.COBBLESTONE,AbilityCase.NORMAL, firstSkillStack,  firstSkillCoolTime);
 					
 					
 					Ready=false;

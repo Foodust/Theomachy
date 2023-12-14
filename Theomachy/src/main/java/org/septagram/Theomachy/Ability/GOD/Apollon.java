@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
@@ -22,17 +22,21 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Apollon extends Ability {
 
     private final static String[] description = {
-            AbilitySet.Apollon.getName() + "은 태양의 신입니다.",
+            AbilityInfo.Apollon.getName() + "은 태양의 신입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "햇볕",
             "밤을 낮으로 바꿉니다.",
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "자외선",
             "밤을 낮으로 바꾸고 3초 뒤 온갖 물을 증발시키며, 다른 사람을 태웁니다.",
             "화염속성의 능력자, 그늘, 물속에 있는 플레이어는 피해를 입지 않습니다."};
 
+    int sunTime;
+    int delay;
     public Apollon(String playerName) {
-        super(playerName, AbilitySet.Apollon, true, false, false, description);
+        super(playerName, AbilityInfo.Apollon, true, false, false, description);
         Theomachy.log.info(playerName + abilityName);
 
+        this.sunTime = 15;
+        this.delay = 3;
         this.firstSkillCoolTime = 90;
         this.secondSkillCoolTime = 180;
         this.firstSkillStack = 1;
@@ -45,15 +49,15 @@ public class Apollon extends Ability {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (EventFilter.PlayerInteract(event)) {
-                case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftClickAction(player);
-                case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightClickAction(player);
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftClickAction(player);
+                case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightClickAction(player);
             }
         }
     }
 
     private void leftClickAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE,AbilityCase.NORMAL,  firstSkillStack, firstSkillCoolTime);
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
             World world = player.getWorld();
             world.setTime(6000);
             Bukkit.broadcastMessage(ChatColor.YELLOW + "태양의 신이 해를 띄웠습니다.");
@@ -62,24 +66,28 @@ public class Apollon extends Ability {
 
     private void rightClickAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, secondSkillStack, secondSkillCoolTime);
             World world = player.getWorld();
             world.setTime(6000);
             world.setStorm(false);
             Bukkit.broadcastMessage(ChatColor.RED + "태양이 매우 뜨거워집니다.");
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                for (int count = 15; count > 0; count--) {
+                for (int count = sunTime; count >= 0; count--) {
                     List<Player> playerList = GameData.OnlinePlayer.get(playerName).getWorld().getPlayers();
-                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+                    int finalCount = count;
+                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                         for (Player players : playerList) {
                             if (!players.getName().equals(playerName) && players.getLocation().getBlock().getLightLevel() == 15)
                                 players.setFireTicks(100);
                         }
-                    },1 * 20);
+                        player.sendMessage(ChatColor.WHITE + "지속시간이 " + finalCount + "초 남았습니다");
+                    }, (sunTime - count) * 20L);
                 }
-            }, 3 * 20);
-            Bukkit.broadcastMessage("태양이 힘을 잃었습니다.");
-            world.setTime(18000);
+            }, delay * 20L);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                Bukkit.broadcastMessage("태양이 힘을 잃었습니다.");
+                world.setTime(18000);
+            }, (sunTime + delay + 1) * 20L);
         }
     }
 }

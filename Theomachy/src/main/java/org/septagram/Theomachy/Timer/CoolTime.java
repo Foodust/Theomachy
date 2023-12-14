@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.TimerTask;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Handler.CommandModule.GameHandler;
@@ -15,9 +16,9 @@ import org.septagram.Theomachy.Message.T_Message;
 public class CoolTime extends TimerTask
 {
 	public static boolean ini=false;
-	public static HashMap<String, Integer> COOL0 = new HashMap<String,Integer>();
-	public static HashMap<String, Integer> COOL1 = new HashMap<String,Integer>();
-	public static HashMap<String, Integer> COOL2 = new HashMap<String,Integer>();
+	public static HashMap<String, Integer> commonSkillCoolTime = new HashMap<String,Integer>();
+	public static HashMap<String, Integer> normalSkillCoolTime = new HashMap<String,Integer>();
+	public static HashMap<String, Integer> rareSkillCoolTime = new HashMap<String,Integer>();
 	private int count=1;
 	public void run()
 	{
@@ -25,9 +26,9 @@ public class CoolTime extends TimerTask
 			this.cancel();
 		
 		try{
-		if (!COOL0.isEmpty())
+		if (!commonSkillCoolTime.isEmpty())
 		{
-			Iterator<Entry<String, Integer>> iter = COOL0.entrySet().iterator();
+			Iterator<Entry<String, Integer>> iter = commonSkillCoolTime.entrySet().iterator();
 			while(iter.hasNext())
 			{
 				Entry<String, Integer> entry = iter.next();
@@ -35,21 +36,21 @@ public class CoolTime extends TimerTask
 				int value = entry.getValue()-1;
 				if (value <= 0)
 				{
-					COOL0.remove(playerName);
-					T_Message.AbilityReset(0, playerName);
+					commonSkillCoolTime.remove(playerName);
+					T_Message.AbilityReset(AbilityCase.COMMON, playerName);
 				}
 				else
 				{
-					COOL0.put(playerName, value);
+					commonSkillCoolTime.put(playerName, value);
 					if (value <=3)
-						T_Message.CoolTimeCountTeller(0, playerName, value);
+						T_Message.CoolTimeCountTeller(AbilityCase.COMMON, playerName, value);
 				}
 			}
 		}
 		
-		if (!COOL1.isEmpty())
+		if (!normalSkillCoolTime.isEmpty())
 		{
-			Iterator<Entry<String, Integer>> iter = COOL1.entrySet().iterator();
+			Iterator<Entry<String, Integer>> iter = normalSkillCoolTime.entrySet().iterator();
 			while(iter.hasNext())
 			{
 				Entry<String, Integer> entry = iter.next();
@@ -57,20 +58,20 @@ public class CoolTime extends TimerTask
 				int value = entry.getValue()-1;
 				if (value <= 0)
 				{
-					COOL1.remove(playerName);
-					T_Message.AbilityReset(1, playerName);
+					normalSkillCoolTime.remove(playerName);
+					T_Message.AbilityReset(AbilityCase.NORMAL, playerName);
 				}
 				else
 				{
-					COOL1.put(playerName, value);
+					normalSkillCoolTime.put(playerName, value);
 					if (value <=3)
-						T_Message.CoolTimeCountTeller(1, playerName, value);
+						T_Message.CoolTimeCountTeller(AbilityCase.NORMAL, playerName, value);
 				}
 			}
 		}
-		if (!COOL2.isEmpty())
+		if (!rareSkillCoolTime.isEmpty())
 		{
-			Iterator<Entry<String, Integer>> iter = COOL2.entrySet().iterator();
+			Iterator<Entry<String, Integer>> iter = rareSkillCoolTime.entrySet().iterator();
 			while(iter.hasNext())
 			{
 				Entry<String, Integer> entry = iter.next();
@@ -78,22 +79,22 @@ public class CoolTime extends TimerTask
 				int value = entry.getValue()-1;
 				if (value <= 0)
 				{
-					COOL2.remove(playerName);
-					T_Message.AbilityReset(2, playerName);
+					rareSkillCoolTime.remove(playerName);
+					T_Message.AbilityReset(AbilityCase.RARE, playerName);
 				}
 				else
 				{
-					COOL2.put(playerName, value);
+					rareSkillCoolTime.put(playerName, value);
 					if (value <=3)
-						T_Message.CoolTimeCountTeller(2, playerName, value);
+						T_Message.CoolTimeCountTeller(AbilityCase.RARE, playerName, value);
 				}
 			}
 		}
 		if (ini)
 		{
-			COOL0.clear();
-			COOL1.clear();
-			COOL2.clear();
+			commonSkillCoolTime.clear();
+			normalSkillCoolTime.clear();
+			rareSkillCoolTime.clear();
 			ini=false;
 		}
 		if (count%150 == 0)

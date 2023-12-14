@@ -12,6 +12,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -22,7 +24,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Blinder extends Ability
 {
 	private final static String[] des= {
-			   "블라인더는 상대방의 시야를 가리는 능력입니다.",
+			AbilityInfo.Blinder.getName() + "는 상대방의 시야를 가리는 능력입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"블라인딩 Ⅰ",
 			   "자신을 공격한 상대는 일정 확률로 시야가 가려집니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"블라인딩 Ⅱ",
@@ -30,7 +32,7 @@ public class Blinder extends Ability
 	
 	public Blinder(String playerName)
 	{
-		super(playerName,"블라인더", 110, true, true, false, des);
+		super(playerName, AbilityInfo.Blinder, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =30;
@@ -44,23 +46,20 @@ public class Blinder extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK-> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 5, 5, 5);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
 				player.sendMessage("주변의 적의 시야를 가립니다.");
 				for (Player e : targetList)
 				{

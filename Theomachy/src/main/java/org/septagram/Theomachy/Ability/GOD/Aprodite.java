@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -21,14 +21,14 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Aprodite extends Ability{
 	
 	private final static String[] des= {
-			AbilitySet.Aprodite.getName() +"는 미의 신입니다.",
+			AbilityInfo.Aprodite.getName() +"는 미의 신입니다.",
 			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"매혹",
 			   "20블록 이내에 있는 사람들을 끌어올 수 있습니다.",
 			   "자신이 블록 위에 서 있고 웅크리지 않아야 발동합니다."};
 	
 	public Aprodite(String playerName)
 	{
-		super(playerName, AbilitySet.Aprodite, true, false, false, des);
+		super(playerName, AbilityInfo.Aprodite, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =500;

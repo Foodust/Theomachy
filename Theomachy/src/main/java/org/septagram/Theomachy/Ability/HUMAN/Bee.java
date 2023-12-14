@@ -13,6 +13,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -23,7 +25,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Bee extends Ability {
 
 	public final static String[] des= {
-			"여왕벌은 벌들의 제왕입니다.",
+			AbilityInfo.Bee.getName()+ "은 벌들의 제왕입니다.",
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"공격",
 			"자신을 공격해 온 적에게 75%의 확률로 중독되게 합니다.",
 			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"페로몬",
@@ -34,7 +36,7 @@ public class Bee extends Ability {
 	private String abilitytarget;
 	
 	public Bee(String playerName) {
-		super(playerName, "여왕벌", 124, true, true, false, des);
+		super(playerName, AbilityInfo.Bee, true, true, false, des);
 		
 		this.rank=3;
 		
@@ -47,18 +49,16 @@ public class Bee extends Ability {
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			if(abilitytarget!=null){
 				if(player.getName().equals(abilitytarget)){
@@ -66,7 +66,7 @@ public class Bee extends Ability {
 				}
 				else{
 					Player target = GameData.OnlinePlayer.get(abilitytarget);
-					Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 
 					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
 					target.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"에 유혹당했습니다!");

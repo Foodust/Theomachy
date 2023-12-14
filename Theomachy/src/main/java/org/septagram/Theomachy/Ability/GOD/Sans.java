@@ -10,13 +10,13 @@ import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.AttackTag;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.*;
 
 public class Sans extends Ability {
     private final static String[] des= {
-            "와 "+ AbilitySet.Sans.getName(),
+            "와 "+ AbilityInfo.Sans.getName(),
             ChatColor.YELLOW+"【패시브】 "+ChatColor.GREEN+"독 속성",
             "패시브 능력으로 대상 공격시 3초간 위더에 중독 시킵니다.",
             ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"뼈 Ⅰ",
@@ -25,7 +25,7 @@ public class Sans extends Ability {
             "가스트 블래스터를 발사합니다"};
 
     public Sans(String playerName){
-        super(playerName, AbilitySet.Sans, true, true, true, des);
+        super(playerName, AbilityInfo.Sans, true, true, true, des);
         Theomachy.log.info(playerName+abilityName);
         this.firstSkillCoolTime =1;
         this.secondSkillCoolTime =120;

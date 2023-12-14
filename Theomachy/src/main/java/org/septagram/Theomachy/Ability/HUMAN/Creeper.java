@@ -10,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -21,7 +23,7 @@ public class Creeper extends Ability
 {
 	private boolean plasma = false;
 	private final static String[] des= {
-			   "크리퍼는 몬스터형 능력입니다.",
+			AbilityInfo.Creeper.getName() + "는 몬스터형 능력입니다.",
 			   "블레이즈 로드를 통해 능력을 사용하면" ,
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"펑!",
 			   "크리퍼와 같은 폭발력의 폭발을 일으킵니다." ,
@@ -30,7 +32,7 @@ public class Creeper extends Ability
 	
 	public Creeper(String playerName)
 	{
-		super(playerName,"크리퍼", 106, true, false, false, des);
+		super(playerName, AbilityInfo.Creeper, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =60;
@@ -44,20 +46,17 @@ public class Creeper extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			float power = plasma ? 3.0f : 6.0f;

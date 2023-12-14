@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -30,7 +30,7 @@ public class Poseidon extends Ability
 {
 	private boolean flag = true;
 	private final static String[] des= {
-			AbilitySet.Poseidon.getName() + "은 물의 신입니다.",
+			AbilityInfo.Poseidon.getName() + "은 물의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"물 속성",
 			   "물 속에 있을 때 일정확률로 모든 피격을 33% 확률로 회피합니다.",
 			   "물 속에서 나온 직후 7초 동안 효과가 지속됩니다.",
@@ -40,7 +40,7 @@ public class Poseidon extends Ability
 	
 	public Poseidon(String playerName)
 	{
-		super(playerName, AbilitySet.Poseidon, true, true, false, des);
+		super(playerName, AbilityInfo.Poseidon, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =240;
@@ -159,10 +159,10 @@ public class Poseidon extends Ability
 		if (event.getCause() == DamageCause.DROWNING)
 		{
 			event.setCancelled(true);
-			CoolTime.COOL0.put(playerName+"0", 7);
+			CoolTime.commonSkillCoolTime.put(playerName+"0", 7);
 			T_Message.PassiveEnable(player, 0);
 		}
-		else if (CoolTime.COOL0.containsKey(player.getName()+"0"))
+		else if (CoolTime.commonSkillCoolTime.containsKey(player.getName()+"0"))
 		{
 			int rn = (int) (Math.random()*3);
 			if (rn == 0)

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Timer.CoolTime;
@@ -25,15 +25,17 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Artemis extends Ability
 {	
 	private final static String[] des= {
-			AbilitySet.Artemis.getName() + "는 사냥과 달의 신입니다.",
-			   ChatColor.AQUA+"【일반/고급】 "+ChatColor.WHITE+"화살/활 생성",
-			   "일반능력으로 화살을, 고급 능력으로 활을 만듭니다.",
+			AbilityInfo.Artemis.getName() + "는 사냥과 달의 신입니다.",
+			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"화살 생성",
+			   "화살 만듭니다.",
+			   ChatColor.BLUE+"【고급】 " + ChatColor.WHITE +"활 생성",
+			   "활을 만듭니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"사냥 기술",
 			   "화살로 공격당한 플레이어는 15%의 확률로 즉사합니다."};
 	
 	public Artemis(String playerName)
 	{
-		super(playerName, AbilitySet.Artemis, true, true, false, des);
+		super(playerName, AbilityInfo.Artemis, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =20;
@@ -84,7 +86,7 @@ public class Artemis extends Ability
 		Arrow arrow = (Arrow) event.getDamager();
 		Player player = (Player) arrow.getShooter();
 		Player target = (Player) event.getEntity();
-		if (!CoolTime.COOL0.containsKey(target.getName()+"1"))
+		if (!CoolTime.commonSkillCoolTime.containsKey(target.getName()+"1"))
 		{
 			Random random = new Random();
 			if (random.nextInt(20) <= 2)

@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.BlockFilter;
@@ -25,7 +25,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Zeus extends Ability
 {
 	private final static String[] des= {
-			AbilitySet.Zeus.getName() + "는 신들의 왕이자, 번개의 신입니다.",
+			AbilityInfo.Zeus.getName() + "는 신들의 왕이자, 번개의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"전기 속성",
 			   "패시브 능력으로 번개와 폭발 데미지를 받지 않습니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"번개 Ⅰ",
@@ -35,7 +35,7 @@ public class Zeus extends Ability
 	
 	public Zeus(String playerName)
 	{
-		super(playerName, AbilitySet.Zeus, true, true, false, des);
+		super(playerName, AbilityInfo.Zeus, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =90;
@@ -84,7 +84,7 @@ public class Zeus extends Ability
 				World world = player.getWorld();
 				Location location = block.getLocation();
 				Random random = new Random();
-				for (int i=0; i<5; i++)
+				for (int i=0; i<10; i++)
 				{
 					int X = random.nextInt(11)-5;
 					int Z = random.nextInt(11)-5;

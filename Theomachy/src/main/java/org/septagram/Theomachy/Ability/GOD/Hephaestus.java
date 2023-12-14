@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -25,7 +25,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hephaestus extends Ability
 {
 	private final static String[] des= {
-			AbilitySet.Hephastus.getName() + "는 불의 신입니다.",
+			AbilityInfo.Hephastus.getName() + "는 불의 신입니다.",
 			  ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"화염 속성",
 			  "불에 관한 데미지를 일절 받지 않으나, 물에 들어가면 데미지를 입습니다.",
 			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"용암",
@@ -33,7 +33,7 @@ public class Hephaestus extends Ability
 	
 	public Hephaestus(String playerName)
 	{
-		super(playerName, AbilitySet.Hephastus, true, true, false, des);
+		super(playerName, AbilityInfo.Hephastus, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =30;

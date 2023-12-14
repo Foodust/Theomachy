@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -28,7 +28,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hades extends Ability
 {	
 	private final static String[] des= {
-			AbilitySet.Hades.getName() + "는 죽음의 신입니다.",
+			AbilityInfo.Hades.getName() + "는 죽음의 신입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"사망 지배",
 			   "사망 시 60% 확률로 아이템을 잃지 않습니다." ,
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"나락 Ⅰ",
@@ -38,7 +38,7 @@ public class Hades extends Ability
 	
 	public Hades(String playerName)
 	{
-		super(playerName, AbilitySet.Hades, true, true, false, des);
+		super(playerName, AbilityInfo.Hades, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =100;

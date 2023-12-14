@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -20,7 +20,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Morpious extends Ability{
 
 	private final static String[] des= {
-			AbilitySet.Morpious.getName() + "는 잠의 신입니다.",
+			AbilityInfo.Morpious.getName() + "는 잠의 신입니다.",
 			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"수면",
 			"목표로 지정한 적을 1분간 잠들게 합니다.",
 			"목표 지정: /x <대상>"};
@@ -28,7 +28,7 @@ public class Morpious extends Ability{
 	private String abilitytarget;
 	
 	public Morpious(String playerName) {
-		super(playerName, AbilitySet.Morpious, true, false, false, des);
+		super(playerName, AbilityInfo.Morpious, true, false, false, des);
 		
 		this.rank=3;
 		

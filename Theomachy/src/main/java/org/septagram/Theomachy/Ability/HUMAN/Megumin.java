@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Utility.BlockFilter;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -14,13 +15,13 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 public class Megumin extends Ability {
 
 	private final static String[] des= {
-			"이 능력은 메구밍!",
+			"이 능력은 " + AbilityInfo.Megumin.getName() + "!",
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"폭렬 ♪",
 			"게임 중 한 번만 영창 후 전방의 블럭에 폭렬 마법을 날립니다.",
 			"사용 후 즉시 쓰러집니다."};
 	
 	public Megumin(String playerName) {
-		super(playerName, "메구밍", 128, true, false, false, des);
+		super(playerName, AbilityInfo.Megumin, true, false, false, des);
 		
 		this.rank=4;
 		
@@ -34,17 +35,14 @@ public class Megumin extends Ability {
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player) {
-		if(PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
+		if(PlayerInventory.ItemCheck(player, material , firstSkillStack)) {
 			if(!cancel) {
 				Block block=player.getTargetBlock(null, 25);
 				if (BlockFilter.AirToFar(player, block))

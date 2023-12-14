@@ -13,20 +13,21 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 
 public class Miner extends Ability
 {
 	
 	private final static String[] des= {
-			   "광부는 곡괭이를 능숙하게 다룰 수 있습니다.",
+			AbilityInfo.Miner.getName() + "는 곡괭이를 능숙하게 다룰 수 있습니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"효율적 광업",
 			   "코블스톤을 캘 때 일정 3% 확률로 한 번에 10개를 얻을 수 있습니다.",
 			   "금곡괭이를 제외한 곡괭이들의 데미지가 4로 고정됩니다."};
 	
 	public Miner(String playerName)
 	{
-		super(playerName,"광부", 102, false, true, false, des);
+		super(playerName, AbilityInfo.Miner, false, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.rank=3;

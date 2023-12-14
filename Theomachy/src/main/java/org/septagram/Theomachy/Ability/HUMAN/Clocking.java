@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
@@ -22,7 +24,7 @@ public class Clocking extends Ability
 {
 	private List<Player> targetList;
 	private final static String[] des= {
-			   "클로킹은 일정 시간 자신의 몸을 숨길 수 있는 능력입니다.",
+			AbilityInfo.Clocking.getName() + " 일정 시간 자신의 몸을 숨길 수 있는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"감추기",
 			   "자신의 모습을 7초간 감출 수 있습니다.",
 			   "감춘 상태에서 상대방을 공격할 시 다시 모습이 나타나게 되며,",
@@ -30,7 +32,7 @@ public class Clocking extends Ability
 	
 	public Clocking(String playerName)
 	{
-		super(playerName,"클로킹", 112, true, true, false, des);
+		super(playerName, AbilityInfo.Clocking, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =60;
@@ -45,16 +47,16 @@ public class Clocking extends Ability
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (EventFilter.PlayerInteract(event)) {
-                case 2, 3 -> leftAction(player);
+				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK-> leftAction(player);
             }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 			targetList = player.getWorld().getPlayers();
 			for (Player enemy : targetList)
 				enemy.hidePlayer(player);

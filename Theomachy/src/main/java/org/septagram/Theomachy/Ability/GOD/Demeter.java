@@ -10,7 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -21,7 +21,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Demeter extends Ability
 {
 	private final static String[] des= {
-			AbilitySet.Demeter.getName() + "는 곡식의 신입니다.",
+			AbilityInfo.Demeter.getName() + "는 곡식의 신입니다.",
 			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"수확",
 			   "빵을 얻을 수 있습니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"풍요",
@@ -29,7 +29,7 @@ public class Demeter extends Ability
 	
 	public Demeter(String playerName)
 	{
-		super(playerName, AbilitySet.Demeter, true, true, false, des);
+		super(playerName, AbilityInfo.Demeter, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =30;

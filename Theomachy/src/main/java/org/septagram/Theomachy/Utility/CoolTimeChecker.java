@@ -14,9 +14,9 @@ public class CoolTimeChecker
 		
 		if (abilityCase == AbilityCase.COMMON)
 		{
-			if (CoolTime.COOL0.containsKey(key))
+			if (CoolTime.commonSkillCoolTime.containsKey(key))
 			{
-				int cool = CoolTime.COOL0.get(key);
+				int cool = CoolTime.commonSkillCoolTime.get(key);
 				T_Message.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
@@ -25,9 +25,9 @@ public class CoolTimeChecker
 		}
 		else if (abilityCase == AbilityCase.NORMAL)
 		{
-			if (CoolTime.COOL1.containsKey(key))
+			if (CoolTime.normalSkillCoolTime.containsKey(key))
 			{
-				int cool = CoolTime.COOL1.get(key);
+				int cool = CoolTime.normalSkillCoolTime.get(key);
 				T_Message.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
@@ -36,9 +36,9 @@ public class CoolTimeChecker
 		}
 		else if (abilityCase == AbilityCase.RARE)
 		{
-			if (CoolTime.COOL2.containsKey(key))
+			if (CoolTime.rareSkillCoolTime.containsKey(key))
 			{
-				int cool = CoolTime.COOL2.get(key);
+				int cool = CoolTime.rareSkillCoolTime.get(key);
 				T_Message.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}

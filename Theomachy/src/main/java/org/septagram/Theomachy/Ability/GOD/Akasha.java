@@ -2,7 +2,6 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,7 +10,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -22,14 +21,14 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Akasha extends Ability{
 	private final static String[] des= {
-			AbilitySet.Akasha.getName() + "는 고통과 향락의 여신입니다.",
+			AbilityInfo.Akasha.getName() + "는 고통과 향락의 여신입니다.",
 			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"향락",
 			"주변에 있는 아군에게 기쁨을 주어 15초간 빠르고(SPEED) 건강(REGENERATION)하게 합니다.",
 			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"고통",
 			"주변에 있는 적군에게 고통을 주어 6초간 혼란하게 합니다."};
 	public Akasha(String playerName)
 	{
-		super(playerName, AbilitySet.Akasha, true, false, false ,des);
+		super(playerName, AbilityInfo.Akasha, true, false, false ,des);
 		Theomachy.log.info(playerName+abilityName);
 		this.firstSkillCoolTime =60;
 		this.firstSkillStack =10;

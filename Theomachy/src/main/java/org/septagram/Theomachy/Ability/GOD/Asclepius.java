@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -20,7 +20,7 @@ import org.septagram.Theomachy.Utility.GetPlayerList;
 public class Asclepius extends Ability
 {
 	private final static String[] des= {
-			AbilitySet.Asclepius.getName() + "는 의술의 신입니다.",
+			AbilityInfo.Asclepius.getName() + "는 의술의 신입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"치료 Ⅰ",
 			   "자신의 체력을 완전히 회복합니다.",
 				ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치료 Ⅱ",
@@ -28,7 +28,7 @@ public class Asclepius extends Ability
 	
 	public Asclepius(String playerName)
 	{
-		super(playerName, AbilitySet.Asclepius, true, false, false, des);
+		super(playerName, AbilityInfo.Asclepius, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =60;

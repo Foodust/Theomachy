@@ -6,16 +6,17 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 
 public class Bulter extends Ability {
 
 	private final static String[] des= {
-			"집사는 굉장히 젠틀한 능력입니다.",
+			AbilityInfo.Bulter.getName() + "는 굉장히 젠틀한 능력입니다.",
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"진정",
 			"모든 폭발을 억제합니다."};
 	
 	public Bulter(String playerName) {
-		super(playerName, "집사", 121, false, true, false, des);
+		super(playerName, AbilityInfo.Bulter, false, true, false, des);
 		
 		this.rank=4;
 	}

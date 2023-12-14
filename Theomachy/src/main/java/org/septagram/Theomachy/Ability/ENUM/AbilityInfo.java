@@ -1,5 +1,5 @@
 package org.septagram.Theomachy.Ability.ENUM;
-public enum AbilitySet {
+public enum AbilityInfo {
     Zeus(1, "제우스"),
     Poseidon(2, "포세이돈"),
     Hades(3, "하데스"),
@@ -58,7 +58,7 @@ public enum AbilitySet {
 
     private final int index;
     private final String name;
-    AbilitySet(int index, String name) {
+    AbilityInfo(int index, String name) {
         this.index = index;
         this.name = name;
     }

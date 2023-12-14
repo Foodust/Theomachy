@@ -12,6 +12,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -19,7 +20,7 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 public class Snow extends Ability {
 
 	private final static String[] des= {
-			"말 그대로 미친 눈사람입니다.",
+			AbilityInfo.Snow + "는 눈을 이용합니다.",
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"폭설",
 			"눈을 맞추면 70%의 확률로 공격 지수만큼의 데미지를 줍니다.",
 			"공격 지수가 죽을 때마다 최대 7까지 상승합니다.",
@@ -31,10 +32,8 @@ public class Snow extends Ability {
 	
 	
 	public Snow(String playerName) {
-		super(playerName, "사이코스노우", 125, true, true, false, des);
-		
+		super(playerName, AbilityInfo.Snow, true, true, false, des);
 		this.rank=3;
-		
 		this.firstSkillCoolTime =0;
 		this.firstSkillStack =0;
 	}
@@ -69,7 +68,8 @@ public class Snow extends Ability {
 			event.setDamage(event.getDamage()*2);
 		}
 	}
-	
+
+	@Override
 	public void initialize(){
 		GameData.OnlinePlayer.get(playerName).getInventory().addItem(new ItemStack(Material.SNOWBALL, 8));
 	}

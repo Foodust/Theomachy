@@ -69,16 +69,16 @@ public class GameReadyTimer extends TimerTask
 		{
 			switch(count)
 			{
-//			case 4:
+//			case 1:
 //				Bukkit.broadcastMessage(ChatColor.RED+"신들의 전쟁 플러그인은 스카이블럭 전용이며 야생,하드코어로는 부적합합니다");
 //				Bukkit.broadcastMessage(ChatColor.RED+"이 점을 숙지 하시고 게임을 즐기시길 바랍니다.");
 //				break;
-//			case 8:
+//			case 3:
 //				Bukkit.broadcastMessage(ChatColor.AQUA+"플러그인이 배포 중인 곳");
 //				Bukkit.broadcastMessage(ChatColor.RED + "NONE");
 //				//Bukkit.broadcastMessage(ChatColor.GREEN+"http://cafe.naver.com/craftproducer");
 //				break;
-//			case 12:
+//			case 8:
 //				Bukkit.broadcastMessage(ChatColor.GREEN+"****** 서버 세팅상태 ******");
 //				Bukkit.broadcastMessage(ChatColor.WHITE+"게임 시작 시 인벤토리 클리어 : "+setting[0]);
 //				Bukkit.broadcastMessage(ChatColor.WHITE+"게임 시작 시 기본 아이템 지급 : "+setting[1]);
@@ -90,14 +90,14 @@ public class GameReadyTimer extends TimerTask
 //				Bukkit.broadcastMessage(ChatColor.WHITE+"서버 난이도 : "+setting[6]);
 //				Bukkit.broadcastMessage(ChatColor.GREEN+"***************************");
 //				break;
-//			case 16:
+//			case 14:
 //				Bukkit.broadcastMessage(ChatColor.DARK_GREEN+"현재 인식된 플레이어 목록");
 //				int i =1;
 //				for (Player player : playerList) {
 //					Bukkit.broadcastMessage(i++ + ".  " + ChatColor.GOLD + player.getName());
 //				}
 //				break;
-//			case 20:
+//			case 16:
 //				Bukkit.broadcastMessage(ChatColor.AQUA+"현재 능력이 적용되지 않은 플레이어 목록");
 //				int j =1;
 //				for (Player player : playerList)
@@ -108,7 +108,7 @@ public class GameReadyTimer extends TimerTask
 //					}
 //				}
 //				break;
-//			case 24:
+//			case 18:
 //				Bukkit.broadcastMessage(ChatColor.BLUE+"현재 팀이 적용되지 않은 플레이어 목록");
 //				int k =1;
 //				for (Player player : playerList)
@@ -119,33 +119,33 @@ public class GameReadyTimer extends TimerTask
 //					}
 //				}
 //				break;
-//			case 29:
+//			case 24:
 //				Bukkit.broadcastMessage("원작자 : "+ChatColor.AQUA+"Septagram(칠각별)");
 //				Bukkit.broadcastMessage("원작자 블로그 : http://blog.naver.com/septagram/");
 //				Bukkit.broadcastMessage("버그 신고 사항은 "+ChatColor.DARK_GREEN+"septagram@naver.com "+ChatColor.WHITE+"으로 로그를 보내주세요");
 //				Bukkit.broadcastMessage("추가된 기능에 대한 신고 사항은 "+ChatColor.DARK_GREEN+"humint2003@naver.com"+ChatColor.WHITE+"으로 로그를 보내주세요.");
 //				Bukkit.broadcastMessage("능력 추가를 원하시면 "+ChatColor.DARK_GREEN+"seunhoo@naver.com"+ChatColor.WHITE+"으로 아이디어를 보내주세요.(가장 최신 수정자)");
 //				break;
-//			case 34:
+//			case 26:
 //				Bukkit.broadcastMessage(ChatColor.AQUA+"잠시 후 능력이 활성화 되며 팀 스폰지역으로 텔레포트 됩니다");
 //				break;
-//			case 35:
+//			case 28:
 //				Bukkit.broadcastMessage(ChatColor.RED+"5초 전");
 //				break;
-//			case 36:
+//			case 29:
 //				Bukkit.broadcastMessage(ChatColor.RED+"4초 전");
 //				break;
-//			case 37:
+//			case 30:
 //				Bukkit.broadcastMessage(ChatColor.RED+"3초 전");
 //				break;
-//			case 38:
+//			case 31:
 //				Bukkit.broadcastMessage(ChatColor.RED+"2초 전");
 //				break;
-//			case 39:
+//			case 32:
 //				Bukkit.broadcastMessage(ChatColor.RED+"1초 전");
 //				break;
-			case 1:
-//			case 40:
+				case 1:
+//			case 35:
 				if (Theomachy.ENTITIES_REMOVE)
 				{
 					try{
@@ -196,8 +196,8 @@ public class GameReadyTimer extends TimerTask
 					}
 				}
 				break;
-			case 2:
-//			case 41:
+				case 2:
+//			case 36:
 				world.setPVP(true);
 				world.setAutoSave(Theomachy.AUTO_SAVE);
 				world.setSpawnFlags(Theomachy.MONSTER, Theomachy.ANIMAL);

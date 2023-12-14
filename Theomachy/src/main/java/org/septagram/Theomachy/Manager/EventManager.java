@@ -32,6 +32,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.AttackTag;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.GambManager;
@@ -279,7 +280,7 @@ public class EventManager implements Listener
 		if (GameHandler.Start)
 		{
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
-			if (ability != null && ability.abilityCode ==119)
+			if (ability != null && ability.abilityCode == AbilityInfo.Voodoo.getIndex())
 				ability.passiveSkill(event);
 		}
 	}
@@ -290,7 +291,7 @@ public class EventManager implements Listener
 		if (GameHandler.Start)
 		{
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
-			if (ability != null && ability.abilityCode == 119)
+			if (ability != null && ability.abilityCode ==  AbilityInfo.Voodoo.getIndex())
 				ability.passiveSkill(event);
 		}
 	}
@@ -302,7 +303,7 @@ public class EventManager implements Listener
 		if (GameHandler.Start)
 		{
 			Ability ability = GameData.PlayerAbility.get(player.getName());
-			if (ability != null && (ability.abilityCode == 2 || ability.abilityCode == 9))
+			if (ability != null && (ability.abilityCode == AbilityInfo.Poseidon.getIndex() || ability.abilityCode == AbilityInfo.Hephastus.getIndex()))
 					ability.initialize();
 		}
 	}
@@ -343,7 +344,7 @@ public class EventManager implements Listener
 		
 		if(GameHandler.Start) {
 			Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
-			if (ability != null && ability.abilityCode == 129)
+			if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
 				ability.passiveSkill(event);
 		}
 		

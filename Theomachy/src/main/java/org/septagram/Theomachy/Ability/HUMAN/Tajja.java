@@ -8,6 +8,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
@@ -18,7 +20,7 @@ import java.util.Objects;
 public class Tajja extends Ability {
 
 	private final static String[] des= {
-			"타짜는 손놀림이 빠른 능력입니다.",
+			AbilityInfo.Tajja.getName() +  "는 손놀림이 빠른 능력입니다.",
 			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"밑장빼기",
 			"능력 사용 시 인벤토리에 가장 먼저 있는 검이 소비됩니다.",
 			"능력 사용 후 맨손으로 가격 시 소비된 검의 데미지만큼",
@@ -28,7 +30,7 @@ public class Tajja extends Ability {
 
 
 	public Tajja(String playerName) {
-		super(playerName, "타짜", 126, true, false, false, des);
+		super(playerName, AbilityInfo.Tajja, true, false, false, des);
 		
 		this.rank=4;
 		this.firstSkillCoolTime =60;
@@ -40,12 +42,9 @@ public class Tajja extends Ability {
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+            }
 		}
 	}
 
@@ -53,7 +52,7 @@ public class Tajja extends Ability {
 	private int time=-1;
 	
 	private void leftAction(Player player) {
-		if(CoolTimeChecker.Check(player, 0) && PlayerInventory.ItemCheck(player,material, firstSkillStack)) {
+		if(CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player,material, firstSkillStack)) {
 			if(sword==0) {
 				for(ItemStack i:player.getInventory().getContents()) {
 					try {
@@ -79,7 +78,7 @@ public class Tajja extends Ability {
                         }
 					}catch(NullPointerException e) {}
 				}player.sendMessage("손은 눈보다 빠르다.");
-				Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 0, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 				time=10;
 			}
 		}

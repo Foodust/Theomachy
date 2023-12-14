@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -26,14 +26,14 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Aeolus extends Ability {
 
     private final static String[] des = {
-            AbilitySet.Aeolus.getName()+ "는 폭풍과 바람의 신입니다.",
+            AbilityInfo.Aeolus.getName()+ "는 폭풍과 바람의 신입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "자연 바람",
             "주변에 있는 아군에게 15초간 상쾌한 바람으로 빠르고 건강하게 합니다.",
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "폭풍",
             "주변에 있는 적을 강한 바람으로 밀어내고 5초간 느리고 약하게 합니다."};
 
     public Aeolus(String playerName) {
-        super(playerName, AbilitySet.Aeolus, true, false, false, des);
+        super(playerName, AbilityInfo.Aeolus, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
         this.firstSkillCoolTime = 60;
         this.firstSkillStack = 10;

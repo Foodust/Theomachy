@@ -10,6 +10,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.DirectionChecker;
@@ -20,7 +22,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Wizard extends Ability
 {
 	private final static String[] des= {
-			   "마법사는 신의 능력을 빌려 쓰는 능력입니다.",
+			AbilityInfo.Wizard.getName() + "는 신의 능력을 빌려 쓰는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"날려버리기",
 			   "일반능력은 주변 10칸 모든 플레이어를 자신이 보는 방향으로 모두 날려버립니다.",
 			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"신의 심판",
@@ -29,7 +31,7 @@ public class Wizard extends Ability
 
 	public Wizard(String playerName)
 	{
-		super(playerName,"마법사", 107, true, false, false, des);
+		super(playerName, AbilityInfo.Wizard, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime=180;
@@ -45,15 +47,15 @@ public class Wizard extends Ability
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (EventFilter.PlayerInteract(event)) {
-                case 0, 1 -> leftClickAction(player);
-                case 2, 3 -> rightClickAction(player);
+				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftClickAction(player);
+				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightClickAction(player);
             }
 		}
 	}
 
 	private void leftClickAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
 		{
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
@@ -62,7 +64,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, material, firstSkillStack, 1, firstSkillCoolTime);
+				Skill.Use(player, material, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
@@ -93,7 +95,7 @@ public class Wizard extends Ability
 	
 	private void rightClickAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, material, secondSkillStack)) {
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, secondSkillStack)) {
 			List<Entity> entityList = player.getNearbyEntities(5, 5, 5);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
 			for (Entity e : entityList)
@@ -101,7 +103,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, material, secondSkillStack, 2, secondSkillCoolTime);
+				Skill.Use(player, material, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
 				player.setHealth( player.getHealth() / 2 );
 				Vector v = new Vector(0,1.6,0);
 				for (Player e : targetList)

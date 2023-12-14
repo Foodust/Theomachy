@@ -9,6 +9,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Timer.CoolTime;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -20,15 +22,15 @@ public class Invincibility extends Ability
 {
 
 	private final static String[] des= {
-			   "무적은 일정시간 데미지를 받지 않을 수 있는 능력입니다.",
+			AbilityInfo.Invincibility.getName() +  "은 일정시간 데미지를 받지 않을 수 있는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"천하장사",
-			   "일정 시간 자신을 무적 상태로 만듭니다.",
+			   " 자신을 7초간 무적 상태로 만듭니다.",
 			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"숨 돌리기",
-			   "자신에게 체력 회복 버프를 시전합니다."};
+			   "자신에게 체력 회복 버프를 5초 동안 시전합니다."};
 	
 	public Invincibility(String playerName)
 	{
-		super(playerName,"무적", 111, true, false, false, des);
+		super(playerName, AbilityInfo.Invincibility, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =50;
@@ -43,41 +45,36 @@ public class Invincibility extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK-> leftAction(player);
+				case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
 			{
-				CoolTime.COOL0.put(playerName+"1", 7);
+				CoolTime.commonSkillCoolTime.put(playerName+"1", 7);
 			}
 		}
 	}
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 2, firstSkillCoolTime);
-			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 500, 0), true);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
+			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 10 * 20, 0));
 		}
 	}
 	
 	public void passiveSkill(EntityDamageEvent event)
 	{
-		if (CoolTime.COOL0.containsKey(playerName+"1"))
+		if (CoolTime.commonSkillCoolTime.containsKey(playerName+"1"))
 		{
 			event.setCancelled(true);
 			event.getEntity().setFireTicks(0);

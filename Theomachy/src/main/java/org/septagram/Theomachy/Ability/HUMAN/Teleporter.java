@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.BlockFilter;
@@ -22,7 +24,7 @@ public class Teleporter extends Ability
 {
 	private String abilityTarget;
 	private final static String[] des= {
-			"텔레포터는 순간이동을 돕는 마법사입니다.",
+			AbilityInfo.Teleporter.getName()+ "는 순간이동을 돕는 마법사입니다.",
 		   	ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"텔레포팅",
 			"25칸 이내의 목표 지점으로 텔레포트합니다." ,
 			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치환",
@@ -31,7 +33,7 @@ public class Teleporter extends Ability
 	
 	public Teleporter(String playerName)
 	{
-		super(playerName,"텔레포터", 104, true, false, false, des);
+		super(playerName, AbilityInfo.Teleporter, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =25;
@@ -48,15 +50,15 @@ public class Teleporter extends Ability
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (EventFilter.PlayerInteract(event)) {
-                case 0, 1 -> leftAction(player);
-                case 2, 3 -> rightAction(player);
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+				case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			Block block = player.getTargetBlock(null, 25);
 			if (BlockFilter.AirToFar(player, block))
@@ -70,7 +72,7 @@ public class Teleporter extends Ability
 
 				if ((block0.getType()==Material.AIR || block1.getType() == Material.SNOW)&&block1.getType()==Material.AIR)
 				{
-					Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
 					Location plocation = player.getLocation();
 					Location tlocation = block.getLocation();
 					tlocation.setPitch(plocation.getPitch());
@@ -88,7 +90,7 @@ public class Teleporter extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			if (abilityTarget != null)
 			{
@@ -97,7 +99,7 @@ public class Teleporter extends Ability
 				{
 					Location location = player.getLocation();
 					location.setY(location.getY()-1);
-					Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
 					Location tloc = target.getLocation();
 					Location ploc = player.getLocation();
 					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(ploc);});

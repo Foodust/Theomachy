@@ -6,13 +6,14 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 
 public class Stance extends Ability
 {
 	
 	private final static String[] des= {
-			   "스탠스는 강한 의지를 갖고 있는 능력입니다.",
+			AbilityInfo.Stance.getName() + "는 강한 의지를 갖고 있는 능력입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"지구력",
 			   "모든 데미지 증폭 효과를 무시하며,",
 			   "모든 공격에 100% 확률로 밀려나지 않습니다." ,
@@ -20,7 +21,7 @@ public class Stance extends Ability
 	
 	public Stance(String playerName)
 	{
-		super(playerName,"스탠스", 103, false, true, false ,des);
+		super(playerName, AbilityInfo.Stance, false, true, false ,des);
 		Theomachy.log.info(playerName+abilityName);
 		this.rank=2;
 	}

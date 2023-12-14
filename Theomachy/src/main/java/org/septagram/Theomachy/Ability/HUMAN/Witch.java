@@ -12,6 +12,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -22,7 +24,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Witch extends Ability
 {
 	private final static String[] des= {
-			   "마녀는 디버프를 사용하는 능력입니다.",
+			AbilityInfo.Witch.getName() + "는 디버프를 사용하는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"저주 Ⅰ",
 			   "주변의 적에게 각종 디버프를 10초 간 적용합니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"저주 Ⅱ",
@@ -30,7 +32,7 @@ public class Witch extends Ability
 	
 	public Witch(String playerName)
 	{
-		super(playerName,"마녀", 116, true, false, false, des);
+		super(playerName, AbilityInfo.Witch, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		this.firstSkillCoolTime =60;
 		this.firstSkillStack =15;
@@ -42,23 +44,20 @@ public class Witch extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 0)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
 			if (targetList != null)
 			{
-				Skill.Use(player, material, firstSkillStack, 0, firstSkillCoolTime);
+				Skill.Use(player, material, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
 				for (Player e : targetList)
 				{
 					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 10 * 20,0));

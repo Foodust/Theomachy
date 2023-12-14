@@ -6,7 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 
@@ -14,7 +14,7 @@ public class Ares extends Ability
 {
 	
 	private final static String[] des= {
-			AbilitySet.Ares.getName() + "는 전쟁의 신입니다.",
+			AbilityInfo.Ares.getName() + "는 전쟁의 신입니다.",
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"잔혹함",
 			"모든 공격 데미지가 1.5배 상승합니다." ,
 			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"예리함",
@@ -22,7 +22,7 @@ public class Ares extends Ability
 	
 	public Ares(String playerName)
 	{
-		super(playerName, AbilitySet.Ares, false, true, false, des);
+		super(playerName, AbilityInfo.Ares, false, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.rank=3;

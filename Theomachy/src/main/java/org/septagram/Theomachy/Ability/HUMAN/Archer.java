@@ -10,6 +10,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -19,7 +21,7 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Archer extends Ability
 {
 	private final static String[] des= {
-			   "궁수입니다.",
+			   AbilityInfo.Archer.getName() + "입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"정확함",
 			   "활 공격 데미지가 1.4배로 상승합니다.",
 			   ChatColor.AQUA+"【일반/고급】 "+ChatColor.WHITE+"화살/활 생성",
@@ -27,7 +29,7 @@ public class Archer extends Ability
 	
 	public Archer(String playerName)
 	{
-		super(playerName,"아처", 101, true, true, false, des);
+		super(playerName, AbilityInfo.Archer, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		this.firstSkillCoolTime =20;
 		this.secondSkillCoolTime =60;
@@ -42,23 +44,18 @@ public class Archer extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-			switch(EventFilter.PlayerInteract(event))
-			{
-			case 0:case 1:
-				leftAction(player);
-				break;
-			case 2:case 3:
-				rightAction(player);
-				break;
-			}
+            switch (EventFilter.PlayerInteract(event)) {
+				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightAction(player);
+            }
 		}
 	}
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 1)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, firstSkillStack, 1, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			world.dropItem(location, new ItemStack(Material.ARROW, 1));
@@ -67,9 +64,9 @@ public class Archer extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, 2)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, secondSkillStack, 2, secondSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			world.dropItem(location, new ItemStack(Material.BOW, 1));

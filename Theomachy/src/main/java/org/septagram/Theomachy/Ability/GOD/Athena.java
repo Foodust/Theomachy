@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
-import org.septagram.Theomachy.Ability.ENUM.AbilitySet;
+import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -23,7 +23,7 @@ public class Athena extends Ability
 {
 	private int abilityLimitCounter=2;
 	private final static String[] des= {
-			AbilitySet.Athena.getName() + "는 지혜의 신입니다.",
+			AbilityInfo.Athena.getName() + "는 지혜의 신입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"지식",
 			   "책을 얻습니다.",
 			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"강화",
@@ -33,7 +33,7 @@ public class Athena extends Ability
 	
 	public Athena(String playerName)
 	{
-		super(playerName, AbilitySet.Athena, true, true, false, des);
+		super(playerName, AbilityInfo.Athena, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.firstSkillCoolTime =10;

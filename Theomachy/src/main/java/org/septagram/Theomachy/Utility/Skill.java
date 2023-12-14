@@ -15,9 +15,9 @@ public class Skill
 		player.getInventory().removeItem(new ItemStack(material, stack));
 		if (coolTime>0)
             switch (abilityCase) {
-				case COMMON -> CoolTime.COOL0.put(player.getName(), coolTime);
-				case NORMAL -> CoolTime.COOL1.put(player.getName(), coolTime);
-				case RARE -> CoolTime.COOL2.put(player.getName(), coolTime);
+				case COMMON -> CoolTime.commonSkillCoolTime.put(player.getName(), coolTime);
+				case NORMAL -> CoolTime.normalSkillCoolTime.put(player.getName(), coolTime);
+				case RARE -> CoolTime.rareSkillCoolTime.put(player.getName(), coolTime);
             }
 		T_Message.Skill_Used(player, abilityCase);
 	}
