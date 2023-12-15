@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import org.jetbrains.annotations.NotNull;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Handler.CommandHandler;
 
@@ -20,7 +21,7 @@ public class CommandManager implements CommandExecutor
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label,String[] data) {
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] data) {
 
 		if (label.equals("t"))
 		{
