@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -23,9 +23,9 @@ public class Invincibility extends Ability
 {
 	private final static String[] des= {
 			AbilityInfo.Invincibility.getName() +  "은 일정시간 데미지를 받지 않을 수 있는 능력입니다.",
-			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"천하장사",
+			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"천하장사",
 			   " 자신을 7초간 무적 상태로 만듭니다.",
-			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"숨 돌리기",
+			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"숨 돌리기",
 			   "자신에게 체력 회복 버프를 5초 동안 시전합니다."};
 
 	private final int rareDuration;

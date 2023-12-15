@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -333,7 +333,7 @@ public class EventManager implements Listener {
 
                 if (wool.getDurability() == (short) 5) {
                     wool.setDurability((short) 14);
-                    String[] y = Objects.requireNonNull(meta.displayName()).toString().split(" ");
+                    String[] y = Objects.requireNonNull(meta.getDisplayName()).split(" ");
                     int num = Integer.parseInt(y[y.length - 1]);
                     Blacklist.Blacklist.add(num);
 
@@ -342,12 +342,12 @@ public class EventManager implements Listener {
                         josa = Hangul.getJosa(y[0].charAt(y[0].toCharArray().length - 1), '이', '가');
                     } catch (Exception ignored) {
                     }
-                    Bukkit.broadcast(Component.text(NamedTextColor.GREEN + "【 알림 】 " + NamedTextColor.WHITE + y[0] + josa + " " + NamedTextColor.RED + "블랙리스트" + NamedTextColor.WHITE + "에 등록되었습니다."));
+                    Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + y[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
                     return;
                 }
                 if (wool.getDurability() == (short) 14) {
                     wool.setDurability((short) 5);
-                    String[] y = Objects.requireNonNull(meta.displayName()).toString().split(" ");
+                    String[] y = Objects.requireNonNull(meta.getDisplayName()).split(" ");
                     Object o = Integer.parseInt(y[y.length - 1]);
                     Blacklist.Blacklist.remove(o);
 
@@ -356,7 +356,7 @@ public class EventManager implements Listener {
                         josa = Hangul.getJosa(y[0].charAt(y[0].toCharArray().length - 1), '이', '가');
                     } catch (Exception ignored) {
                     }
-                    Bukkit.broadcast(Component.text(NamedTextColor.GREEN + "【 알림 】 " + NamedTextColor.WHITE + y[0] + josa + " " + NamedTextColor.RED + "블랙리스트" + NamedTextColor.WHITE + "에서 벗어났습니다."));
+                    Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + y[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 벗어났습니다.");
                     return;
                 }
             }
@@ -365,7 +365,7 @@ public class EventManager implements Listener {
 
                 Player p = (Player) event.getWhoClicked();
 
-                switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().displayName()).toString())) {
+                switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().getDisplayName()))) {
                     case "가챠 ★ 가챠" -> {
                         Gambling.gambling(p);
                     }

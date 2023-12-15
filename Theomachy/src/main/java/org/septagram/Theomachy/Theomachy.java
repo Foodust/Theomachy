@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -119,9 +119,9 @@ public class Theomachy extends JavaPlugin {
         log.info("[신들의 전쟁] ========================================");
 
         Bukkit.getConsoleSender().sendMessage(
-                "\n====원작자: " + NamedTextColor.WHITE + "칠각별(septagram)====\n"
-                        + NamedTextColor.GRAY + "====2차수정자: " + NamedTextColor.AQUA + "플로리아(humint2003)====\n"
-                        + NamedTextColor.YELLOW + "====3차수정자: " + NamedTextColor.GREEN + "프덧(foodust)====\n");
+                "\n====원작자: " + ChatColor.WHITE + "칠각별(septagram)====\n"
+                        + ChatColor.GRAY + "====2차수정자: " + ChatColor.AQUA + "플로리아(humint2003)====\n"
+                        + ChatColor.YELLOW + "====3차수정자: " + ChatColor.GREEN + "프덧(foodust)====\n");
 
         try {
             for (Player p : Bukkit.getOnlinePlayers()) {

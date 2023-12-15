@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Random;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -21,7 +21,7 @@ public class Miner extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Miner.getName() + "는 곡괭이를 능숙하게 다룰 수 있습니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "효율적 광업",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "효율적 광업",
             "코블스톤을 캘 때 일정 3% 확률로 한 번에 10개를 얻을 수 있습니다.",
             "금곡괭이를 제외한 곡괭이들의 데미지가 4로 고정됩니다."};
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -33,7 +33,7 @@ public class Blacklist {
 
     //추가라벨
     private static Inventory blacklistGui() {
-        Inventory gui = Bukkit.createInventory(null, 54, Component.text(NamedTextColor.BLACK + ":: 블랙리스트 ::"));
+        Inventory gui = Bukkit.createInventory(null, 54, ChatColor.BLACK + ":: 블랙리스트 ::");
         int[] god = new int[AbilityData.GOD_ABILITY_NUMBER];
         for (int index = 0; index < AbilityData.GOD_ABILITY_NUMBER; index++)
             god[index] = index + 1;
@@ -49,7 +49,7 @@ public class Blacklist {
         for (int index = 1; index <= god.length; index++) {
             wool[index - 1] = new ItemStack(Material.WHITE_WOOL);
             meta[index] = wool[index - 1].getItemMeta();
-            meta[index].displayName(Component.text(NamedTextColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + String.valueOf(index)));
+            meta[index].setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + String.valueOf(index));
             if (!Blacklist.contains(index)) {
                 wool[index - 1].setDurability((short) 5);
             } else {
@@ -62,7 +62,7 @@ public class Blacklist {
         for (int index = god.length; index < (god.length + man.length); index++) {
             wool[index] = new ItemStack(Material.WHITE_WOOL);
             meta[index] = wool[index].getItemMeta();
-            meta[index].displayName(Component.text(NamedTextColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + b));
+            meta[index].setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + b);
             if (!Blacklist.contains(b)) {
                 wool[index].setDurability((short) 5);
             } else {

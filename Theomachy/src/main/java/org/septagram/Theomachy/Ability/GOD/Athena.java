@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -26,11 +26,11 @@ public class Athena extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Athena.getName() + "는 지혜의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "지식",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "지식",
             "책을 얻습니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "강화",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "강화",
             "게임 당 2번만 인챈트 테이블을 얻습니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "지혜",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "지혜",
             "다른 사람이 죽으면 경험치를 얻습니다. 자신이 죽으면 경험치가 사라집니다."};
     private int abilityLimitCounter;
     public Athena(String playerName) {

@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -20,9 +20,9 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Blacksmith extends Ability {
     private final static String[] des = {
             AbilityInfo.BlackSmith.getName() + "는 다양한 광물을 만들어 낼 수 있는 능력입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "철 연성",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "철 연성",
             "코블스톤을 소비하여 철괴 10개를 획득할 수 있습니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "금광석 연성",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "금광석 연성",
             "철괴를 소비하여 다이아 5개를 얻을 수 있습니다."};
 
 	private final int normalCount;

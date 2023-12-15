@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.GOD;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,9 +28,9 @@ public class Aeolus extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Aeolus.getName() + "는 폭풍과 바람의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "자연 바람",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "자연 바람",
             "주변에 있는 아군에게 15초간 상쾌한 바람으로 빠르고 건강하게 합니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "폭풍",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "폭풍",
             "주변에 있는 적을 강한 바람으로 밀어내고 5초간 느리고 약하게 합니다."};
 
     private final int normalDuration;
@@ -63,7 +63,7 @@ public class Aeolus extends Ability {
             Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             List<Player> nearPlayers = GetPlayerList.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
-                nearPlayer.sendMessage(NamedTextColor.AQUA + "상쾌한 바람" + NamedTextColor.WHITE + "이 당신을 감싸돕니다!");
+                nearPlayer.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, normalDuration * 20, 0));
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, normalDuration * 20, 0));
             }
@@ -84,7 +84,7 @@ public class Aeolus extends Ability {
                 double diagonal = vertical * 1.4d;
                 for (Player enemy : targetList) {
                     enemy.setVelocity(vector);
-                    enemy.sendMessage(NamedTextColor.DARK_AQUA + "강력한 바람 때문에 밀려납니다!");
+                    enemy.sendMessage(ChatColor.DARK_AQUA + "강력한 바람 때문에 밀려납니다!");
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, rareDuration * 20, 0));
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, rareDuration * 20, 0));
                 }

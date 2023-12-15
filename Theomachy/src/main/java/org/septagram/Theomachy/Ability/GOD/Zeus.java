@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.Random;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -26,11 +26,11 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Zeus extends Ability {
     private final static String[] des = {
             AbilityInfo.Zeus.getName() + "는 신들의 왕이자, 번개의 신입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "전기 속성",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "전기 속성",
             "패시브 능력으로 번개와 폭발 데미지를 받지 않습니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "번개 Ⅰ",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "번개 Ⅰ",
             "목표 지역에 번개를 떨어뜨립니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "태풍 Ⅱ",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "태풍 Ⅱ",
             "목표 지역에 대량의 번개를 떨어뜨립니다."};
 
     private final int normalDistance;

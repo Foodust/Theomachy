@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
@@ -12,7 +12,7 @@ public class Anorexia extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Anorexia.getName() + "은 신경성 식욕부진증이라고도 합니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "단식",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "단식",
             "배고픔이 절반으로 유지됩니다."
     };
 

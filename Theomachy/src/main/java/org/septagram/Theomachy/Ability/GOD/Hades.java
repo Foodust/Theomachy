@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -29,11 +29,11 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hades extends Ability {
     private final static String[] des = {
             AbilityInfo.Hades.getName() + "는 죽음의 신입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "사망 지배",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "사망 지배",
             "사망 시 60% 확률로 아이템을 잃지 않습니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "나락 Ⅰ",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "나락 Ⅰ",
             "자신과 주변의 모든 것이 나락으로 떨어집니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "나락 Ⅱ",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "나락 Ⅱ",
             "자신을 제외한 주변의 모든 것이 나락으로 떨어집니다."};
 
     public Hades(String playerName) {
@@ -92,7 +92,7 @@ public class Hades extends Ability {
                         e.teleport(location);
                     });
                     if (e.getType() == EntityType.PLAYER)
-                        ((Player) e).sendMessage(NamedTextColor.RED + "죽음의 신의 능력에 의해 나락으로 떨어집니다.");
+                        ((Player) e).sendMessage(ChatColor.RED + "죽음의 신의 능력에 의해 나락으로 떨어집니다.");
                 }
             }
         }

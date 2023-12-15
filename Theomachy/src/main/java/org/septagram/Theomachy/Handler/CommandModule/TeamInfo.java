@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Handler.CommandModule;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -18,7 +18,7 @@ public class TeamInfo
 			String teamName=data[1];
 			if (GameData.PlayerTeam.containsValue(teamName))
 			{
-				sender.sendMessage(NamedTextColor.GREEN+"======  "+NamedTextColor.DARK_AQUA+teamName+NamedTextColor.GREEN+"  ======");
+				sender.sendMessage(ChatColor.GREEN+"======  "+ChatColor.DARK_AQUA+teamName+ChatColor.GREEN+"  ======");
 				Iterator<Entry<String, String>> iterator = GameData.PlayerTeam.entrySet().iterator();
 				for (int i=1;iterator.hasNext();i++)
 				{
@@ -26,7 +26,7 @@ public class TeamInfo
 					if (entry.getValue().equals(teamName))
 					{
 						String playerName=(String)entry.getKey();
-						sender.sendMessage(i+".  "+NamedTextColor.GOLD+playerName);
+						sender.sendMessage(i+".  "+ChatColor.GOLD+playerName);
 					}
 				}
 			}
@@ -35,13 +35,13 @@ public class TeamInfo
 		}
 		else
 		{
-			sender.sendMessage(NamedTextColor.YELLOW+"자신의 팀을 확인합니다");
+			sender.sendMessage(ChatColor.YELLOW+"자신의 팀을 확인합니다");
 			String teamName = GameData.PlayerTeam.get(sender.getName());
 			if (teamName != null)
 			{
 				if (GameData.PlayerTeam.containsValue(teamName))
 				{
-					sender.sendMessage(NamedTextColor.GREEN+"======  "+NamedTextColor.DARK_AQUA+teamName+NamedTextColor.GREEN+"  ======");
+					sender.sendMessage(ChatColor.GREEN+"======  "+ChatColor.DARK_AQUA+teamName+ChatColor.GREEN+"  ======");
 					Iterator<Entry<String, String>> iterator = GameData.PlayerTeam.entrySet().iterator();
 					for (int i=1;iterator.hasNext();i++)
 					{
@@ -49,7 +49,7 @@ public class TeamInfo
 						if (entry.getValue().equals(teamName))
 						{
 							String playerName=(String)entry.getKey();
-							sender.sendMessage(i+".  "+NamedTextColor.GOLD+playerName);
+							sender.sendMessage(i+".  "+ChatColor.GOLD+playerName);
 						}
 					}
 				}

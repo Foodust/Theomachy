@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -26,9 +26,9 @@ public class Teleporter extends Ability
 
 	private final static String[] des= {
 			AbilityInfo.Teleporter.getName()+ "는 순간이동을 돕는 마법사입니다.",
-		   	NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"텔레포팅",
+		   	ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"텔레포팅",
 			"25칸 이내의 목표 지점으로 텔레포트합니다." ,
-			NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"치환",
+			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치환",
 			"타겟에 등록해 둔 자신의 팀원과 위치를 치환합니다.",
 			"목표 지정: /x <대상>"};
 
@@ -128,7 +128,7 @@ public class Teleporter extends Ability
 			if (!playerName.equals(targetName))
 			{
 				this.rareTarget = targetName;
-				sender.sendMessage("타겟을 등록했습니다.   "+NamedTextColor.GREEN+targetName);
+				sender.sendMessage("타겟을 등록했습니다.   "+ChatColor.GREEN+targetName);
 			}
 			else
 				sender.sendMessage("자기 자신을 타겟으로 등록 할 수 없습니다.");

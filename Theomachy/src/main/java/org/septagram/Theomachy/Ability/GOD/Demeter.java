@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
@@ -22,9 +22,9 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Demeter extends Ability {
     private final static String[] des = {
             AbilityInfo.Demeter.getName() + "는 곡식의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "수확",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "수확",
             "빵을 얻을 수 있습니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "풍요",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "풍요",
             "항상 배고프지 않고, 체력 회복이 빠릅니다."};
 
     public Demeter(String playerName) {

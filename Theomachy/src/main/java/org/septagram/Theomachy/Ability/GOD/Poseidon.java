@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.GOD;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -31,10 +31,10 @@ public class Poseidon extends Ability {
     private boolean flag = true;
     private final static String[] des = {
             AbilityInfo.Poseidon.getName() + "은 물의 신입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "물 속성",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "물 속성",
             "물 속에 있을 때 일정확률로 모든 피격을 33% 확률로 회피합니다.",
             "물 속에서 나온 직후 7초 동안 효과가 지속됩니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "워터 캐슬",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "워터 캐슬",
             "자신의 앞으로 물벽을 생성하며 이후 물벽에 접근하는 사람을 넉백시킵니다.",
             "물벽은 조약돌을 뚫을 수 있습니다."};
 
@@ -158,13 +158,18 @@ public class Poseidon extends Ability {
 
     public void initialize() {
         Player player = GameData.OnlinePlayer.get(playerName);
-        player.setMaximumAir(0);
-        player.setRemainingAir(0);
+
+        Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+            player.setMaximumAir(0);
+            player.setRemainingAir(0);
+        });
     }
 
     public void initializeReset() {
         Player player = GameData.OnlinePlayer.get(playerName);
-        player.setMaximumAir(300);
-        player.setRemainingAir(300);
+        Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()-> {
+            player.setMaximumAir(300);
+            player.setRemainingAir(300);
+        });
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,21 +22,21 @@ public class Convi {
 		if(Theomachy.GAMBLING) {
 			p.openInventory(gui());
 		}else {
-			p.sendMessage(NamedTextColor.RED+"이 기능은 잠겨있습니다!");
+			p.sendMessage(ChatColor.RED+"이 기능은 잠겨있습니다!");
 		}
 		
 	}
 	
 	private static Inventory gui() {
 		
-		Inventory con=Bukkit.createInventory(null, 9, NamedTextColor.BLACK+":::::::: 편의 기능 ::::::::");
+		Inventory con=Bukkit.createInventory(null, 9, ChatColor.BLACK+":::::::: 편의 기능 ::::::::");
 		
 		ItemStack gam=new ItemStack(Material.GOLD_INGOT);
 		ItemMeta met1=gam.getItemMeta();
-		met1.setDisplayName(NamedTextColor.YELLOW+"가챠"+NamedTextColor.AQUA+" ★ "+NamedTextColor.GREEN+"가챠");
+		met1.setDisplayName(ChatColor.YELLOW+"가챠"+ChatColor.AQUA+" ★ "+ChatColor.GREEN+"가챠");
 		List<String> lor1=new ArrayList<String>();
-		lor1.add(NamedTextColor.WHITE+"조약돌 32개를 소모해 다양한 아이템을");
-		lor1.add(NamedTextColor.WHITE+"뽑을 수 있습니다.");
+		lor1.add(ChatColor.WHITE+"조약돌 32개를 소모해 다양한 아이템을");
+		lor1.add(ChatColor.WHITE+"뽑을 수 있습니다.");
 		met1.setLore(lor1);
 		gam.setItemMeta(met1);
 		

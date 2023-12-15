@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.GOD;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,7 +23,7 @@ public class Horeundal extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Horeundal.getName() + "은 시간과 공간의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "시공 초월",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "시공 초월",
             "위치 기억 후 10초 뒤 되돌아옵니다. 되돌아 온 뒤에 5초간 투명해집니다."};
 
     public Horeundal(String playerName) {
@@ -57,7 +57,7 @@ public class Horeundal extends Ability {
                         player.teleport(loc);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5 * 20, 1));
                     } else {
-                        player.sendMessage(NamedTextColor.AQUA + String.valueOf(finalCount) + NamedTextColor.WHITE + "초 뒤 되돌아갑니다.");
+                        player.sendMessage(ChatColor.AQUA + String.valueOf(finalCount) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
                     }
                 }, (7 + (10 - count)) * 20L);
             }

@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.GOD;
 import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -26,9 +26,9 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Hephaestus extends Ability {
     private final static String[] des = {
             AbilityInfo.Hephastus.getName() + "는 불의 신입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "화염 속성",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "화염 속성",
             "불에 관한 데미지를 일절 받지 않으나, 물에 들어가면 데미지를 입습니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "용암",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "용암",
             "블럭을 클릭하면 용암을 놓습니다. 놓은 용암은 사라지지 않습니다.",};
 
     public Hephaestus(String playerName) {

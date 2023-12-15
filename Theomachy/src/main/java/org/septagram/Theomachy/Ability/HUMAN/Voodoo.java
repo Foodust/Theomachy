@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.Objects;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,7 +26,7 @@ public class Voodoo extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Voodoo.getName() + "는 팻말을 이용해서 상대를 타격할 수 있는 능력입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "부두술",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "부두술",
             "팻말에 타격할 상대의 이름을 적으면 ",
             "그 아이디를 가진 플레이어는 팻말과 연결되며",
             "팻말을 두들겨 팰시 대상 플레이어가 데미지를 입습니다.",
@@ -87,15 +87,15 @@ public class Voodoo extends Ability {
             Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             this.targetName = targetName;
             this.postSign = event.getBlock();
-            player.sendMessage(NamedTextColor.RED + targetName + NamedTextColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");
-            target.sendMessage(NamedTextColor.RED + "부두술사가 당신을 위협합니다.");
+            player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");
+            target.sendMessage(ChatColor.RED + "부두술사가 당신을 위협합니다.");
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 this.targetName = null;
                 postSign.breakNaturally();
                 postSign = null;
             }, normalDuration * 20L);
         } else
-            player.sendMessage(NamedTextColor.RED + targetName + NamedTextColor.WHITE + "플레이어가 존재 하지 않습니다");
+            player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + "플레이어가 존재 하지 않습니다");
     }
 
 }

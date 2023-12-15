@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.List;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -21,9 +21,9 @@ import org.septagram.Theomachy.Utility.GetPlayerList;
 public class Asclepius extends Ability {
     private final static String[] des = {
             AbilityInfo.Asclepius.getName() + "는 의술의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "치료 Ⅰ",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "치료 Ⅰ",
             "자신의 체력을 완전히 회복합니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "치료 Ⅱ",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "치료 Ⅱ",
             "주변에 있는 자신을 제외한 아군의 체력을 완전히 회복합니다."};
 
     public Asclepius(String playerName) {
@@ -61,11 +61,11 @@ public class Asclepius extends Ability {
             if (!targetList.isEmpty()) {
                 Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                 player.sendMessage("자신을 제외한 모든 팀원의 체력을 회복합니다.");
-                player.sendMessage(NamedTextColor.GREEN + "체력을 회복한 플레이어 목록");
+                player.sendMessage(ChatColor.GREEN + "체력을 회복한 플레이어 목록");
                 for (Player e : targetList) {
                     e.setHealth(20);
-                    e.sendMessage(NamedTextColor.YELLOW + "의술의 신의 능력으로 모든 체력을 회복합니다.");
-                    player.sendMessage(NamedTextColor.GOLD + e.getName());
+                    e.sendMessage(ChatColor.YELLOW + "의술의 신의 능력으로 모든 체력을 회복합니다.");
+                    player.sendMessage(ChatColor.GOLD + e.getName());
                 }
             } else
                 player.sendMessage("사용 가능한 대상이 없습니다.");

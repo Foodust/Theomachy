@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.List;
 import java.util.Random;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -25,9 +25,9 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Blinder extends Ability {
     private final static String[] des = {
             AbilityInfo.Blinder.getName() + "는 상대방의 시야를 가리는 능력입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "블라인딩 Ⅰ",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "블라인딩 Ⅰ",
             "자신을 공격한 상대는 일정 확률로 2초간 시야가 가려집니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "블라인딩 Ⅱ",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "블라인딩 Ⅱ",
             "주변의 적의 시야를 5초간 가립니다."};
 
     private final int passiveDuration;

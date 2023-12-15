@@ -3,9 +3,9 @@ package org.septagram.Theomachy.Ability.GOD;
 import java.util.List;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -26,9 +26,9 @@ public class Apollon extends Ability {
 
     private final static String[] description = {
             AbilityInfo.Apollon.getName() + "은 태양의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "햇볕",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "햇볕",
             "밤을 낮으로 바꿉니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "자외선",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "자외선",
             "밤을 낮으로 바꾸고 3초 뒤 온갖 물을 증발시키며, 다른 사람을 태웁니다.",
             "화염속성의 능력자, 그늘, 물속에 있는 플레이어는 피해를 입지 않습니다."};
 
@@ -63,7 +63,7 @@ public class Apollon extends Ability {
             Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             World world = player.getWorld();
             world.setTime(6000);
-            Bukkit.broadcast(Component.text( NamedTextColor.YELLOW + "태양의 신" + AbilityInfo.Apollon.getName() +"이 해를 띄웠습니다."));
+            Bukkit.broadcastMessage( ChatColor.YELLOW + "태양의 신" + AbilityInfo.Apollon.getName() +"이 해를 띄웠습니다.");
         }
     }
 
@@ -73,7 +73,7 @@ public class Apollon extends Ability {
             World world = player.getWorld();
             world.setTime(6000);
             world.setStorm(false);
-            Bukkit.broadcast(Component.text(NamedTextColor.RED + "태양이 매우 뜨거워집니다."));
+            Bukkit.broadcastMessage(ChatColor.RED + "태양이 매우 뜨거워집니다.");
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 for (int count = sunTime; count >= 0; count--) {
                     List<Player> playerList = GameData.OnlinePlayer.get(playerName).getWorld().getPlayers();
@@ -83,12 +83,12 @@ public class Apollon extends Ability {
                             if (!players.getName().equals(playerName) && players.getLocation().getBlock().getLightLevel() == 15)
                                 players.setFireTicks(100);
                         }
-                        player.sendMessage(NamedTextColor.WHITE + "지속시간이 " + finalCount + "초 남았습니다");
+                        player.sendMessage(ChatColor.WHITE + "지속시간이 " + finalCount + "초 남았습니다");
                     }, (sunTime - count) * 20L);
                 }
             }, delay * 20L);
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                Bukkit.broadcast(Component.text("태양이 힘을 잃었습니다."));
+                Bukkit.broadcastMessage("태양이 힘을 잃었습니다.");
                 world.setTime(18000);
             }, (sunTime + delay + 1) * 20L);
         }

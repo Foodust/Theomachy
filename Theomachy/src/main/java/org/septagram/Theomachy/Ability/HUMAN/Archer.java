@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -22,11 +22,11 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Archer extends Ability {
     private final static String[] des = {
             AbilityInfo.Archer.getName() + "입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "정확함",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "정확함",
             "활 공격 데미지가 1.4배로 상승합니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "화살 생성",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "화살 생성",
             "화살을 만듭니다.",
-            NamedTextColor.BLUE + "【고급】 " + NamedTextColor.WHITE + "활 생성",
+            ChatColor.BLUE + "【고급】 " + ChatColor.WHITE + "활 생성",
             "활을 만듭니다."};
 
 	private final double passiveDamage;

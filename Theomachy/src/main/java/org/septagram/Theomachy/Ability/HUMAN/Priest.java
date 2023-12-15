@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.List;
 import java.util.Random;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -25,9 +25,9 @@ public class Priest extends Ability {
     private final Material material = Material.COBBLESTONE;
     private final static String[] des = {
             AbilityInfo.Priest.getName() + "는 신의 가호를 받을 수 있는 능력입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "신의 은총 Ⅰ",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "신의 은총 Ⅰ",
             "자신에게 랜덤으로 버프 5초간 를 적용합니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "신의 은총 Ⅱ",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "신의 은총 Ⅱ",
 
             "자신의 팀원 모두에게 랜덤으로 버프를 5초간 적용합니다."};
     private final int normalDuration;
@@ -65,23 +65,23 @@ public class Priest extends Ability {
             Random random = new Random();
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, normalDuration * 20, 0));
-                player.sendMessage(NamedTextColor.LIGHT_PURPLE + "데미지 저항 효과가 적용되었습니다.");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "데미지 저항 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, normalDuration * 20, 0));
-                player.sendMessage(NamedTextColor.RED + "데미지 증가 효과가 적용되었습니다.");
+                player.sendMessage(ChatColor.RED + "데미지 증가 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, normalDuration * 20, 0));
-                player.sendMessage(NamedTextColor.GOLD + "체력회복속도 증가 효과가 적용되었습니다.");
+                player.sendMessage(ChatColor.GOLD + "체력회복속도 증가 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, normalDuration * 20, 0));
-                player.sendMessage(NamedTextColor.AQUA + "이동속도 증가 효과가 적용되었습니다.");
+                player.sendMessage(ChatColor.AQUA + "이동속도 증가 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, normalDuration * 20, 0));
-                player.sendMessage(NamedTextColor.GREEN + "빠른 채광 효과가 적용되었습니다.");
+                player.sendMessage(ChatColor.GREEN + "빠른 채광 효과가 적용되었습니다.");
             }
         }
     }
@@ -94,23 +94,23 @@ public class Priest extends Ability {
             for (Player team : targetList) {
                 if (random.nextInt(2) == 0) {
                     team.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, rareDuration * 20, 0));
-                    team.sendMessage(NamedTextColor.LIGHT_PURPLE + "데미지 저항 효과가 적용되었습니다.");
+                    team.sendMessage(ChatColor.LIGHT_PURPLE + "데미지 저항 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2) == 0) {
                     team.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, rareDuration * 20, 0));
-                    team.sendMessage(NamedTextColor.RED + "데미지 증가 효과가 적용되었습니다.");
+                    team.sendMessage(ChatColor.RED + "데미지 증가 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2) == 0) {
                     team.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, rareDuration * 20, 0));
-                    team.sendMessage(NamedTextColor.GOLD + "체력회복속도 증가 효과가 적용되었습니다.");
+                    team.sendMessage(ChatColor.GOLD + "체력회복속도 증가 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2) == 0) {
                     team.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, rareDuration * 20, 0));
-                    team.sendMessage(NamedTextColor.AQUA + "이동속도 증가 효과가 적용되었습니다.");
+                    team.sendMessage(ChatColor.AQUA + "이동속도 증가 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2) == 0) {
                     team.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, rareDuration * 20, 0));
-                    team.sendMessage(NamedTextColor.GREEN + "빠른 채광 효과가 적용되었습니다.");
+                    team.sendMessage(ChatColor.GREEN + "빠른 채광 효과가 적용되었습니다.");
                 }
             }
         }

@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Handler.CommandModule;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -31,7 +31,7 @@ public class GUISetting {
 
     private static Inventory gui() {
 
-        Inventory gui = Bukkit.createInventory(null, 18, Component.text(NamedTextColor.BLACK + ":::::: 설정 ::::::"));
+        Inventory gui = Bukkit.createInventory(null, 18, ChatColor.BLACK + ":::::: 설정 ::::::");
 
         final int n = 10;
 
@@ -54,15 +54,15 @@ public class GUISetting {
             meta[i] = wool[i].getItemMeta();
         }
         //def
-        meta[0].displayName(Component.text(NamedTextColor.WHITE + "게임 시작 시 인벤토리 클리어"));
-        meta[1].displayName(Component.text(NamedTextColor.WHITE + "게임 시작 시 스카이블럭 아이템 지급"));
-        meta[2].displayName(Component.text(NamedTextColor.WHITE + "게임 시작 시 엔티티 제거"));
-        meta[3].displayName(Component.text(NamedTextColor.WHITE + "침대 무시"));
-        meta[4].displayName(Component.text(NamedTextColor.WHITE + "빠른 시작"));
-        meta[5].displayName(Component.text(NamedTextColor.WHITE + "서버 자동 저장"));
-        meta[6].displayName(Component.text(NamedTextColor.WHITE + "동물 스폰"));
-        meta[7].displayName(Component.text(NamedTextColor.WHITE + "몬스터 스폰"));
-        meta[8].displayName(Component.text(NamedTextColor.WHITE + "도박 허용"));
+        meta[0].setDisplayName(ChatColor.WHITE + "게임 시작 시 인벤토리 클리어");
+        meta[1].setDisplayName(ChatColor.WHITE + "게임 시작 시 스카이블럭 아이템 지급");
+        meta[2].setDisplayName(ChatColor.WHITE + "게임 시작 시 엔티티 제거");
+        meta[3].setDisplayName(ChatColor.WHITE + "침대 무시");
+        meta[4].setDisplayName(ChatColor.WHITE + "빠른 시작");
+        meta[5].setDisplayName(ChatColor.WHITE + "서버 자동 저장");
+        meta[6].setDisplayName(ChatColor.WHITE + "동물 스폰");
+        meta[7].setDisplayName(ChatColor.WHITE + "몬스터 스폰");
+        meta[8].setDisplayName(ChatColor.WHITE + "도박 허용");
 
         for (int i = 0; i < n; i++) {
             wool[i].setDurability((short) dura[i]);
@@ -84,7 +84,7 @@ public class GUISetting {
 
     public static void guiListener(ItemStack wool) {
 
-        switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().displayName()).toString())) {
+        switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().getDisplayName()))) {
             case "게임 시작 시 인벤토리 클리어" -> {
                 if (wool.getDurability() == 5) {
                     Theomachy.INVENTORY_CLEAR = false;

@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Message;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -17,9 +17,9 @@ public class T_Message
             case COMMON ->
 					player.sendMessage("쿨타임이 " + cool + "초 남았습니다!");
             case NORMAL ->
-                    player.sendMessage(NamedTextColor.AQUA + "[일반]  " + NamedTextColor.WHITE + "능력의 쿨타임이 " + cool + "초 남았습니다!");
+                    player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.WHITE + "능력의 쿨타임이 " + cool + "초 남았습니다!");
             case RARE ->
-                    player.sendMessage(NamedTextColor.RED + "[고급]  " + NamedTextColor.WHITE + "능력의 쿨타임이 " + cool + "초 남았습니다!");
+                    player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.WHITE + "능력의 쿨타임이 " + cool + "초 남았습니다!");
         }
 	}
 
@@ -33,9 +33,9 @@ public class T_Message
 				case COMMON ->
 						player.sendMessage(cool + "초 전");
 				case NORMAL ->
-						player.sendMessage(NamedTextColor.AQUA + "[일반]  " + NamedTextColor.WHITE + cool + "초 전");
+						player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.WHITE + cool + "초 전");
 				case RARE ->
-						player.sendMessage(NamedTextColor.RED + "[고급]  " + NamedTextColor.WHITE + cool + "초 전");
+						player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.WHITE + cool + "초 전");
             }
 		}
 	}
@@ -47,11 +47,11 @@ public class T_Message
 		{
             switch (abilityCase) {
 				case COMMON ->
-						player.sendMessage(NamedTextColor.GOLD + "능력을 다시 사용할 수 있습니다.");
+						player.sendMessage(ChatColor.GOLD + "능력을 다시 사용할 수 있습니다.");
 				case NORMAL ->
-						player.sendMessage(NamedTextColor.AQUA + "[일반]  " + NamedTextColor.GOLD + "능력을 다시 사용할 수 있습니다.");
+						player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.GOLD + "능력을 다시 사용할 수 있습니다.");
 				case RARE ->
-						player.sendMessage(NamedTextColor.RED + "[고급]  " + NamedTextColor.GOLD + "능력을 다시 사용할 수 있습니다.");
+						player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.GOLD + "능력을 다시 사용할 수 있습니다.");
             }
 		}
 	}
@@ -60,11 +60,11 @@ public class T_Message
 	{
         switch (abilityCase) {
 			case COMMON ->
-					player.sendMessage(NamedTextColor.YELLOW + "능력을 사용했습니다!");
+					player.sendMessage(ChatColor.YELLOW + "능력을 사용했습니다!");
 			case NORMAL ->
-					player.sendMessage(NamedTextColor.AQUA + "[일반]  " + NamedTextColor.YELLOW + "능력을 사용했습니다!");
+					player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.YELLOW + "능력을 사용했습니다!");
 			case RARE ->
-					player.sendMessage(NamedTextColor.RED + "[고급]  " + NamedTextColor.YELLOW + "능력을 사용했습니다!");
+					player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.YELLOW + "능력을 사용했습니다!");
         }
 	}
 	
@@ -73,15 +73,15 @@ public class T_Message
         switch (material) {
             case COBBLESTONE -> {
                 player.sendMessage("조약돌이 부족합니다.");
-                player.sendMessage("필요한 개수 : " + NamedTextColor.RED + stack);
+                player.sendMessage("필요한 개수 : " + ChatColor.RED + stack);
             }
             case OAK_PLANKS -> {
                 player.sendMessage("가공된 나무가 부족합니다.");
-                player.sendMessage("필요한 개수 : " + NamedTextColor.RED + stack);
+                player.sendMessage("필요한 개수 : " + ChatColor.RED + stack);
             }
             case IRON_INGOT -> {
                 player.sendMessage("철괴가 부족합니다.");
-                player.sendMessage("필요한 개수 : " + NamedTextColor.RED + stack);
+                player.sendMessage("필요한 개수 : " + ChatColor.RED + stack);
             }
         }
 	}
@@ -89,8 +89,8 @@ public class T_Message
 	public static void TooFarError(Player player, TargetType targetType)
 	{
         switch (targetType) {
-			case ENTITY_TOO_FAR -> player.sendMessage(NamedTextColor.RED + "대상과의 거리가 너무 멉니다.");
-			case TARGET_TOO_FAR -> player.sendMessage(NamedTextColor.RED + "목표와의 거리가 너무 멉니다.");
+			case ENTITY_TOO_FAR -> player.sendMessage(ChatColor.RED + "대상과의 거리가 너무 멉니다.");
+			case TARGET_TOO_FAR -> player.sendMessage(ChatColor.RED + "목표와의 거리가 너무 멉니다.");
         }
 		
 	}
@@ -99,7 +99,7 @@ public class T_Message
 	public static void PassiveEnable(Player player, int passiveCase)
 	{
 		switch(passiveCase){
-			case 0-> player.sendMessage(NamedTextColor.YELLOW+"능력이 활성화 되었습니다.");
+			case 0-> player.sendMessage(ChatColor.YELLOW+"능력이 활성화 되었습니다.");
 		}
 	}
 }

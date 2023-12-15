@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.List;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -27,9 +27,9 @@ import org.septagram.Theomachy.Utility.Skill;
 public class Assasin extends Ability {
     private final static String[] des = {
             AbilityInfo.Assasin.getName() + "는 민첩한 몸놀림을 가지는 능력입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "더블 점프",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "더블 점프",
             "점프한 후 현재 보는 방향으로 점프를 한 번 더 할 수 있습니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.WHITE + "기습",
+            ChatColor.RED + "【고급】 " + ChatColor.WHITE + "기습",
             "주변에 있는 적의 등으로 순간이동 합니다."};
 
     public Assasin(String playerName) {

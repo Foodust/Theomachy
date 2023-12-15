@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -23,7 +23,7 @@ public class AGirl extends Ability {
 
     private final static String[] des = {
             AbilityInfo.AGirl.getName() + "는 귀여움으로 상대를 아사시킵니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "가짜 연약함",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "가짜 연약함",
             "주변의 적을 자신의 앞으로 끌어옵니다.",
             "끌려 온 플레이어들의 배고픔 지수는 0이 되고",
             "1초간 강력한 슬로우에 걸립니다."};
@@ -59,7 +59,7 @@ public class AGirl extends Ability {
                 });
                 e.setFoodLevel(0);
                 e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 200));
-                e.sendMessage(NamedTextColor.GREEN + AbilityInfo.AGirl.getName() + NamedTextColor.WHITE + "에게 이끌려 갑니다!");
+                e.sendMessage(ChatColor.GREEN + AbilityInfo.AGirl.getName() + ChatColor.WHITE + "에게 이끌려 갑니다!");
             }
         }
     }

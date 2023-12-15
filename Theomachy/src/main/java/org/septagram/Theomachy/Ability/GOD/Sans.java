@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -19,11 +19,11 @@ import org.septagram.Theomachy.Utility.*;
 public class Sans extends Ability {
     private final static String[] des = {
             "와 " + AbilityInfo.Sans.getName(),
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.GREEN + "독 속성",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.GREEN + "독 속성",
             "패시브 능력으로 대상 공격시 3초간 위더에 중독 시킵니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "뼈 Ⅰ",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "뼈 Ⅰ",
             "뼈를 던져 피해를 입힙니다.",
-            NamedTextColor.RED + "【고급】 " + NamedTextColor.AQUA + "가스트 블래스터 Ⅱ",
+            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "가스트 블래스터 Ⅱ",
             "가스트 블래스터를 발사합니다"};
 
     private final int passiveDuration;

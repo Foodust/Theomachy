@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,14 +23,14 @@ public class Snow extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Snow + "는 눈을 이용합니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "폭설",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "폭설",
             "죽을 때마다 공격 지수가 1씩 상승 하고 최대 7까지 상승합니다.",
             "눈덩이를 맞춰도 상대가 밀려나지 않습니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "얼음 속성",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "얼음 속성",
             "불에 의한 데미지를 2배로 받습니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "공격 지수",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "공격 지수",
             "현재 공격 지수를 확인 합니다.",
-            NamedTextColor.AQUA + "【고급】 " + NamedTextColor.WHITE + "눈덩이 변환",
+            ChatColor.AQUA + "【고급】 " + ChatColor.WHITE + "눈덩이 변환",
             "눈덩이를 1개 얻습니다.",};
 
     private int passiveDamage;
@@ -68,7 +68,7 @@ public class Snow extends Ability {
 
     public void passiveSkill(PlayerDeathEvent event) {
         if (passiveDamage < 8) {
-            event.getEntity().sendMessage(NamedTextColor.RED + "공격 지수가 증가하고 있습니다!");
+            event.getEntity().sendMessage(ChatColor.RED + "공격 지수가 증가하고 있습니다!");
             passiveDamage++;
         }
     }

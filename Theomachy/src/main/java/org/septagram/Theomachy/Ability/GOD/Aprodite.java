@@ -2,9 +2,9 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.List;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -24,7 +24,7 @@ public class Aprodite extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Aprodite.getName() + "는 미의 신입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "매혹",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "매혹",
             "20블록 이내에 있는 사람들을 끌어올 수 있습니다.",
             "자신이 블록 위에 서 있고 웅크리지 않아야 발동합니다."};
 
@@ -57,13 +57,13 @@ public class Aprodite extends Ability {
                         Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                             e.teleport(player);
                         });
-                        e.sendMessage(NamedTextColor.YELLOW + "미의 여신 " + AbilityInfo.Aprodite.getName() + "에게 이끌려갑니다!");
+                        e.sendMessage(ChatColor.YELLOW + "미의 여신 " + AbilityInfo.Aprodite.getName() + "에게 이끌려갑니다!");
                     }
                 } catch (Exception ignored) {
                 }
                 player.sendMessage("미(美)로 다른 사람들을 홀렸습니다.");
             } else {
-                player.sendMessage(NamedTextColor.RED + "웅크리고 있거나 발 밑의 블록이 없어 능력이 발동되지 않았습니다.");
+                player.sendMessage(ChatColor.RED + "웅크리고 있거나 발 밑의 블록이 없어 능력이 발동되지 않았습니다.");
             }
         }
 

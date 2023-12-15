@@ -15,7 +15,7 @@ public class CoolTimeHandler
 		if (PermissionChecker.Sender(sender))
 		{
 			CoolTime.init =true;
-			Bukkit.broadcast(Component.text("관리자가 모든 쿨타임을 초기화 하였습니다."));
+			Bukkit.broadcastMessage("관리자가 모든 쿨타임을 초기화 하였습니다.");
 		}
 	}
 }

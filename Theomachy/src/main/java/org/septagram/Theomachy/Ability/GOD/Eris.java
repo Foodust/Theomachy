@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.GOD;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -17,7 +17,7 @@ public class Eris extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Eris.getName() + "는 불화의 여신입니다.",
-            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "시기",
+            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "시기",
             "자신을 공격한 플레이어를 20% 확률로 밀쳐냅니다."};
 
     public Eris(String playerName) {
@@ -41,8 +41,8 @@ public class Eris extends Ability {
                 Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                     enemy.teleport(playerLocation);
                 });
-                player.sendMessage(NamedTextColor.RED + "상대를 밀쳤습니다!");
-                enemy.sendMessage(NamedTextColor.RED + AbilityInfo.Eris.getName() +"에 의해 밀쳐졌습니다.");
+                player.sendMessage(ChatColor.RED + "상대를 밀쳤습니다!");
+                enemy.sendMessage(ChatColor.RED + AbilityInfo.Eris.getName() +"에 의해 밀쳐졌습니다.");
             }
         }
     }

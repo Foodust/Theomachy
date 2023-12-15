@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -25,7 +25,7 @@ public class Clocking extends Ability {
     private List<Player> targetList;
     private final static String[] des = {
             AbilityInfo.Clocking.getName() + " 일정 시간 자신의 몸을 숨길 수 있는 능력입니다.",
-            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "감추기",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "감추기",
             "자신의 모습을 7초간 감출 수 있습니다.",
             "감춘 상태에서 상대방을 공격할 시 다시 모습이 나타나게 되며,",
             "공격 당한 상대는 20% 확률로 사망합니다."};
@@ -61,7 +61,7 @@ public class Clocking extends Ability {
                 int finalCount = count;
                 if (flag) {
                     Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                        player.sendMessage(NamedTextColor.WHITE + "은신 시간이" + String.valueOf(finalCount) + "초 남았습니다.");
+                        player.sendMessage(ChatColor.WHITE + "은신 시간이" + String.valueOf(finalCount) + "초 남았습니다.");
                     }, (normalDuration - count) * 20L);
                 }
             }
