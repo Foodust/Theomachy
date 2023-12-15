@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -26,9 +26,9 @@ public class Teleporter extends Ability
 
 	private final static String[] des= {
 			AbilityInfo.Teleporter.getName()+ "는 순간이동을 돕는 마법사입니다.",
-		   	ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"텔레포팅",
+		   	NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"텔레포팅",
 			"25칸 이내의 목표 지점으로 텔레포트합니다." ,
-			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치환",
+			NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"치환",
 			"타겟에 등록해 둔 자신의 팀원과 위치를 치환합니다.",
 			"목표 지정: /x <대상>"};
 
@@ -38,10 +38,10 @@ public class Teleporter extends Ability
 		super(playerName, AbilityInfo.Teleporter, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =25;
-		this.secondSkillCoolTime =30;
-		this.firstSkillStack =15;
-		this.secondSkillStack =25;
+		this.normalSkillCoolTime =25;
+		this.rareSkillCoolTime =30;
+		this.normalSkillStack =15;
+		this.rareSkillStack =25;
 		
 		this.rank= AbilityRank.B;
 	}
@@ -60,7 +60,7 @@ public class Teleporter extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			Block block = player.getTargetBlock(null, 25);
 			if (BlockFilter.AirToFar(player, block))
@@ -74,7 +74,7 @@ public class Teleporter extends Ability
 
 				if ((block0.getType()==Material.AIR || block1.getType() == Material.SNOW)&&block1.getType()==Material.AIR)
 				{
-					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 					Location plocation = player.getLocation();
 					Location tlocation = block.getLocation();
 					tlocation.setPitch(plocation.getPitch());
@@ -92,7 +92,7 @@ public class Teleporter extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
 			if (abilityTarget != null)
 			{
@@ -101,7 +101,7 @@ public class Teleporter extends Ability
 				{
 					Location location = player.getLocation();
 					location.setY(location.getY()-1);
-					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 					Location targetLocation = target.getLocation();
 					Location playerLocation = player.getLocation();
 					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(playerLocation);});
@@ -125,7 +125,7 @@ public class Teleporter extends Ability
 			if (!playerName.equals(targetName))
 			{
 				this.abilityTarget = targetName;
-				sender.sendMessage("타겟을 등록했습니다.   "+ChatColor.GREEN+targetName);
+				sender.sendMessage("타겟을 등록했습니다.   "+NamedTextColor.GREEN+targetName);
 			}
 			else
 				sender.sendMessage("자기 자신을 타겟으로 등록 할 수 없습니다.");

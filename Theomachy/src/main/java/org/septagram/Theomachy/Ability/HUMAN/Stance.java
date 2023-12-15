@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -15,7 +15,7 @@ public class Stance extends Ability
 	
 	private final static String[] des= {
 			AbilityInfo.Stance.getName() + "는 강한 의지를 갖고 있는 능력입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"지구력",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"지구력",
 			   "모든 데미지 증폭 효과를 무시하며,",
 			   "모든 공격에 100% 확률로 밀려나지 않습니다." ,
 			   "하지만, 모든 자신의 방어 효과는 무시됩니다."};

@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.Random;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
@@ -17,7 +17,7 @@ public class Dionysus extends Ability
 {	
 	private final static String[] des= {
 			AbilityInfo.Dionysus.getName() +"는 술의 신입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"알코올 중독",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"알코올 중독",
 			   "10% 확률로 자신을 공격한 10초간 상대의 시야를 어지럽히는 동시에",
 			   "상대의 이동 속도, 공격력을 낮춥니다."};
 	public Dionysus(String playerName)

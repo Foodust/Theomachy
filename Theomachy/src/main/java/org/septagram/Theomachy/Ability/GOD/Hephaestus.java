@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.GOD;
 import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -27,9 +27,9 @@ public class Hephaestus extends Ability
 {
 	private final static String[] des= {
 			AbilityInfo.Hephastus.getName() + "는 불의 신입니다.",
-			  ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"화염 속성",
+			  NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"화염 속성",
 			  "불에 관한 데미지를 일절 받지 않으나, 물에 들어가면 데미지를 입습니다.",
-			  ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"용암",
+			  NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"용암",
 			   "블럭을 클릭하면 용암을 놓습니다. 놓은 용암은 사라지지 않습니다.",};
 	
 	public Hephaestus(String playerName)
@@ -37,8 +37,8 @@ public class Hephaestus extends Ability
 		super(playerName, AbilityInfo.Hephastus, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =30;
-		this.firstSkillStack =15;
+		this.normalSkillCoolTime =30;
+		this.normalSkillStack =15;
 		
 		this.rank= AbilityRank.A;
 	}
@@ -62,9 +62,9 @@ public class Hephaestus extends Ability
 		Block block = location.getBlock();
 		if (block.getType() == Material.AIR)
 		{
-			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 			{
-				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				block.setBlockData(Bukkit.createBlockData(Material.LAVA));
 				Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),()->{
 					new LavaTimer(block);

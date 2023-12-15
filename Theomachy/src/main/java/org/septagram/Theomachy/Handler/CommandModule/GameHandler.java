@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Timer;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
@@ -30,7 +30,7 @@ public class GameHandler
 			if (!Ready)
 			{
 				Ready=true;
-				Bukkit.broadcastMessage(ChatColor.GOLD+"관리자("+sender.getName()+") 가 게임을 시작하였습니다.");
+				Bukkit.broadcastMessage(NamedTextColor.GOLD+"관리자("+sender.getName()+") 가 게임을 시작하였습니다.");
 				Timer t = new Timer();
 				if(!Theomachy.FAST_START)
 					t.schedule(new GameReadyTimer(), 0,1000);
@@ -64,7 +64,7 @@ public class GameHandler
 					world.setAutoSave(ServerSetting.AUTO_SAVE);
 					world.setDifficulty(ServerSetting.DIFFICULTY);
 				}
-				Bukkit.broadcastMessage(ChatColor.RED+"관리자("+sender.getName()+") 가 게임을 종료하였습니다.");
+				Bukkit.broadcastMessage(NamedTextColor.RED+"관리자("+sender.getName()+") 가 게임을 종료하였습니다.");
 			}
 			else
 				sender.sendMessage("게임이 시작되지 않았습니다.");

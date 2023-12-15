@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.GOD;
 
 import java.util.Random;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
@@ -16,9 +16,9 @@ public class Ares extends Ability
 	
 	private final static String[] des= {
 			AbilityInfo.Ares.getName() + "는 전쟁의 신입니다.",
-			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"잔혹함",
+			NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"잔혹함",
 			"모든 공격 데미지가 1.5배 상승합니다." ,
-			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"예리함",
+			NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"예리함",
 			"10% 확률로 공격을 회피합니다"};
 	
 	public Ares(String playerName)

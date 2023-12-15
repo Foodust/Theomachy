@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Handler.CommandModule;
 
 import java.util.Collection;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 
 import org.septagram.Theomachy.Ability.Ability;
@@ -19,7 +19,7 @@ public class AbilityInfo
 			{
 				Collection<Ability> ability = GameData.PlayerAbility.values();
 				for (Ability e : ability)
-					sender.sendMessage(ChatColor.WHITE+e.playerName+"  :  "+ChatColor.YELLOW+e.abilityName);
+					sender.sendMessage(NamedTextColor.WHITE+e.playerName+"  :  "+NamedTextColor.YELLOW+e.abilityName);
 			}
 			else
 			{

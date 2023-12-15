@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -24,7 +24,7 @@ public class Bomber extends Ability
 	private Location tntLocation;
 	private final static String[] des= {
 			AbilityInfo.Bomber.getName() + "는 폭발을 다루는 능력입니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"폭파",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"폭파",
 			   "좌클릭으로 해당 위치에 보이지 않는 TNT를 설치하며" ,
 			   "우클릭으로 어디서든 폭발시킬 수 있습니다."};
 	
@@ -33,8 +33,8 @@ public class Bomber extends Ability
 		super(playerName, AbilityInfo.Bomber, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =30;
-		this.firstSkillStack =25;
+		this.normalSkillCoolTime =30;
+		this.normalSkillStack =25;
 		
 		this.rank= AbilityRank.A;
 	}
@@ -65,11 +65,11 @@ public class Bomber extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			if (tntLocation != null)
 			{
-				Skill.Use(player, Material.COBBLESTONE,AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE,AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				World world = player.getWorld();
 				world.createExplosion(tntLocation, 2.0f, true);
 				tntLocation = null;

@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -25,7 +25,7 @@ public class Tajja extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Tajja.getName() + "는 손놀림이 빠른 능력입니다.",
-            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "밑장빼기",
+            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "밑장빼기",
             "맨손으로 공격시 인벤토리에 있는 검의 데미지를 줄 수 있습니다."
     };
 

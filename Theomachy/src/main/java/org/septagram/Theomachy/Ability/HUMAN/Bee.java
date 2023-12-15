@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,9 +27,9 @@ public class Bee extends Ability {
 
 	public final static String[] des= {
 			AbilityInfo.Bee.getName()+ "은 벌들의 제왕입니다.",
-			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"공격",
+			NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"공격",
 			"자신을 공격해 온 적에게 75%의 확률로 중독되게 합니다.",
-			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"페로몬",
+			NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"페로몬",
 			"목표로 지정해 둔 상대를 자신의 위치로 끌어옵니다.",
 			"목표 지정: /x <대상>"};
 
@@ -38,8 +38,8 @@ public class Bee extends Ability {
 	
 	public Bee(String playerName) {
 		super(playerName, AbilityInfo.Bee, true, true, false, des);
-		this.firstSkillCoolTime =180;
-		this.firstSkillStack =32;
+		this.normalSkillCoolTime =180;
+		this.normalSkillStack =32;
 		this.rank= AbilityRank.A;
 	}
 
@@ -57,18 +57,18 @@ public class Bee extends Ability {
 	private void leftAction(Player player)
 	{
 		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
-			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			if(abilitytarget!=null){
 				if(player.getName().equals(abilitytarget)){
-					player.sendMessage(ChatColor.RED+"목표는 본인이 아니어야 합니다.");
+					player.sendMessage(NamedTextColor.RED+"목표는 본인이 아니어야 합니다.");
 				}
 				else{
 					Player target = GameData.OnlinePlayer.get(abilitytarget);
-					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
-					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
-					target.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"에 유혹당했습니다!");
+					player.sendMessage(NamedTextColor.YELLOW+" 페로몬 "+NamedTextColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
+					target.sendMessage(NamedTextColor.YELLOW+" 페로몬 "+NamedTextColor.WHITE+"에 유혹당했습니다!");
 
 					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(player);});
 				}
@@ -84,7 +84,7 @@ public class Bee extends Ability {
 			if (!playerName.equals(targetName))
 			{
 				this.abilitytarget = targetName;
-				sender.sendMessage("타겟을 등록했습니다.   "+ChatColor.GREEN+targetName);
+				sender.sendMessage("타겟을 등록했습니다.   "+NamedTextColor.GREEN+targetName);
 			}
 			else
 				sender.sendMessage("자기 자신을 목표로 등록 할 수 없습니다.");
@@ -99,7 +99,7 @@ public class Bee extends Ability {
 			
 			if(r.nextInt(4)<=2) {
 				e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 0));
-				e.sendMessage(ChatColor.GOLD+"벌에게 쏘였습니다! 자나깨나 벌조심.");
+				e.sendMessage(NamedTextColor.GOLD+"벌에게 쏘였습니다! 자나깨나 벌조심.");
 			}
 			
 		}

@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -23,9 +23,9 @@ public class Invincibility extends Ability
 {
 	private final static String[] des= {
 			AbilityInfo.Invincibility.getName() +  "은 일정시간 데미지를 받지 않을 수 있는 능력입니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"천하장사",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"천하장사",
 			   " 자신을 7초간 무적 상태로 만듭니다.",
-			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"숨 돌리기",
+			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"숨 돌리기",
 			   "자신에게 체력 회복 버프를 5초 동안 시전합니다."};
 	
 	public Invincibility(String playerName)
@@ -33,10 +33,10 @@ public class Invincibility extends Ability
 		super(playerName, AbilityInfo.Invincibility, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =50;
-		this.secondSkillCoolTime =120;
-		this.firstSkillStack =30;
-		this.secondSkillStack =50;
+		this.normalSkillCoolTime =50;
+		this.rareSkillCoolTime =120;
+		this.normalSkillStack =30;
+		this.rareSkillStack =50;
 		this.rank= AbilityRank.A;
 	}
 	
@@ -54,9 +54,9 @@ public class Invincibility extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 			CoolTime.commonSkillCoolTime.put(playerName+"1", 7);
 		}
@@ -64,9 +64,9 @@ public class Invincibility extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 5 * 20, 0));
 		}
 	}

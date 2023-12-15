@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -25,11 +25,11 @@ public class Athena extends Ability
 	private int abilityLimitCounter=2;
 	private final static String[] des= {
 			AbilityInfo.Athena.getName() + "는 지혜의 신입니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"지식",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"지식",
 			   "책을 얻습니다.",
-			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"강화",
+			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"강화",
 			   "게임 당 2번만 인챈트 테이블을 얻습니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"지혜",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"지혜",
 			   "다른 사람이 죽으면 경험치를 얻습니다. 자신이 죽으면 경험치가 사라집니다."};
 	
 	public Athena(String playerName)
@@ -37,10 +37,10 @@ public class Athena extends Ability
 		super(playerName, AbilityInfo.Athena, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =10;
-		this.secondSkillCoolTime =3;
-		this.firstSkillStack =5;
-		this.secondSkillStack =64;
+		this.normalSkillCoolTime =10;
+		this.rareSkillCoolTime =3;
+		this.normalSkillStack =5;
+		this.rareSkillStack =64;
 		
 		this.rank= AbilityRank.S;
 	}
@@ -59,9 +59,9 @@ public class Athena extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 			player.getInventory().addItem(new ItemStack(Material.BOOK,3));
 		}
 	}
@@ -70,17 +70,17 @@ public class Athena extends Ability
 	{
 		if (abilityLimitCounter>0)
 		{
-			if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+			if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 			{
 				if (abilityLimitCounter>1)
 				{
-					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 					player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE,1));
 					player.sendMessage("남은 교환 횟수 : "+--abilityLimitCounter);
 				}
 				else
 				{
-					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, 0);
+					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, 0);
 					player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE,1));
 					player.sendMessage("남은 교환 횟수 : "+--abilityLimitCounter);
 				}

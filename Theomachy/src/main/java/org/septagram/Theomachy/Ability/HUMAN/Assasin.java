@@ -27,19 +27,19 @@ public class Assasin extends Ability
 {
 	private final static String[] des= {
 			AbilityInfo.Assasin.getName() +  "는 민첩한 몸놀림을 가지는 능력입니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"더블 점프",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"더블 점프",
 			   "점프한 후 현재 보는 방향으로 점프를 한 번 더 할 수 있습니다.",
-			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"기습",
+			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"기습",
 			   "주변에 있는 적의 등으로 순간이동 합니다."};
 	
 	public Assasin(String playerName)
 	{
 		super(playerName, AbilityInfo.Assasin, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		this.firstSkillCoolTime =1;
-		this.secondSkillCoolTime =15;
-		this.firstSkillStack =0;
-		this.secondSkillStack =15;
+		this.normalSkillCoolTime =1;
+		this.rareSkillCoolTime =15;
+		this.normalSkillStack =0;
+		this.rareSkillStack =15;
 		
 		this.rank= AbilityRank.B;
 	}
@@ -62,10 +62,10 @@ public class Assasin extends Ability
 		Block b = temp.add(0,-1,0).getBlock();
 		if ((b.getType()== Material.AIR) || (b.getType()==Material.SNOW) || (b.getType()==Material.STONE_SLAB))
 		{	
-			if ((!CoolTime.commonSkillCoolTime.containsKey(playerName+"0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))))
+			if ((!CoolTime.commonSkillCoolTime.containsKey(playerName+"0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))))
 			{
-			CoolTime.commonSkillCoolTime.put(playerName+"0", firstSkillCoolTime);
-			PlayerInventory.ItemRemove(player, Material.COBBLESTONE, firstSkillStack);
+			CoolTime.commonSkillCoolTime.put(playerName+"0", normalSkillCoolTime);
+			PlayerInventory.ItemRemove(player, Material.COBBLESTONE, normalSkillStack);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			Vector v = player.getEyeLocation().getDirection();
@@ -78,7 +78,7 @@ public class Assasin extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
 			boolean flag = true;
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
@@ -92,7 +92,7 @@ public class Assasin extends Ability
 					String playerTeamName = GameData.PlayerTeam.get(player.getName());
 					if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName)))
 					{
-						Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
+						Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 						Location fakeLocation = player.getLocation();
 						Location location = target.getLocation();
 						World world = player.getWorld();

@@ -24,9 +24,9 @@ public class Wizard extends Ability
 {
 	private final static String[] des= {
 			AbilityInfo.Wizard.getName() + "는 신의 능력을 빌려 쓰는 능력입니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"날려버리기",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"날려버리기",
 			   "일반능력은 주변 10칸 모든 플레이어를 자신이 보는 방향으로 모두 날려버립니다.",
-			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"신의 심판",
+			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"신의 심판",
 			   "주변의 사람들을 공중으로 띄운 후 번개를 떨어뜨립니다.",
 			   "고급능력 발동 시 패널티로 자신의 체력이 반으로 줄어듭니다."};
 
@@ -35,10 +35,10 @@ public class Wizard extends Ability
 		super(playerName, AbilityInfo.Wizard, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime=180;
-		this.secondSkillCoolTime=300;
-		this.firstSkillStack=25;
-		this.secondSkillStack=45;
+		this.normalSkillCoolTime =180;
+		this.rareSkillCoolTime =300;
+		this.normalSkillStack =25;
+		this.rareSkillStack =45;
 		this.rank= AbilityRank.S;
 	}
 	
@@ -56,7 +56,7 @@ public class Wizard extends Ability
 
 	private void leftClickAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, normalSkillStack))
 		{
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
@@ -65,7 +65,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, material, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
+				Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
@@ -96,7 +96,7 @@ public class Wizard extends Ability
 	
 	private void rightClickAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, secondSkillStack)) {
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
 			List<Entity> entityList = player.getNearbyEntities(5, 5, 5);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
 			for (Entity e : entityList)
@@ -104,13 +104,13 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, material, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
+				Skill.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 				player.setHealth( player.getHealth() / 2 );
 				Vector v = new Vector(0,1.6,0);
 				for (Player e : targetList)
 				{
 					e.setVelocity(v);
-					e.sendMessage(ChatColor.RED+"마법사의 고급능력에 당했습니다!");
+					e.sendMessage(NamedTextColor.RED+"마법사의 고급능력에 당했습니다!");
 				}
 				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
 					World world = player.getWorld();

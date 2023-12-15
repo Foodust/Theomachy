@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -26,9 +26,9 @@ public class Blinder extends Ability
 {
 	private final static String[] des= {
 			AbilityInfo.Blinder.getName() + "는 상대방의 시야를 가리는 능력입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"블라인딩 Ⅰ",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"블라인딩 Ⅰ",
 			   "자신을 공격한 상대는 일정 확률로 시야가 가려집니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"블라인딩 Ⅱ",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"블라인딩 Ⅱ",
 			   "주변의 적의 시야를 가립니다."};
 	
 	public Blinder(String playerName)
@@ -36,8 +36,8 @@ public class Blinder extends Ability
 		super(playerName, AbilityInfo.Blinder, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =30;
-		this.firstSkillStack =10;
+		this.normalSkillCoolTime =30;
+		this.normalSkillStack =10;
 		
 		this.rank= AbilityRank.A;
 	}
@@ -55,12 +55,12 @@ public class Blinder extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 5, 5, 5);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				player.sendMessage("주변의 적의 시야를 가립니다.");
 				for (Player e : targetList)
 				{

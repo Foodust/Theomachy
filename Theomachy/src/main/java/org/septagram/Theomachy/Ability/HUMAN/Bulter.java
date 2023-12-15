@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
@@ -13,7 +13,7 @@ public class Bulter extends Ability {
 
 	private final static String[] des= {
 			AbilityInfo.Bulter.getName() + "는 굉장히 젠틀한 능력입니다.",
-			ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"진정",
+			NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"진정",
 			"모든 폭발을 억제합니다."};
 	
 	public Bulter(String playerName) {
@@ -25,7 +25,7 @@ public class Bulter extends Ability {
 	public void passiveSkill(EntityExplodeEvent event){
 		event.setCancelled(true);
 		if(!event.getEntity().getType().equals(EntityType.FIREBALL))
-			Bukkit.broadcastMessage(ChatColor.GREEN+"집사에 의해 폭발이 진정되었습니다.");
+			Bukkit.broadcastMessage(NamedTextColor.GREEN+"집사에 의해 폭발이 진정되었습니다.");
 	}
 	
 }

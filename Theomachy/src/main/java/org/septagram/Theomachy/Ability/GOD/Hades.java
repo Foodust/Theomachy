@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -30,11 +30,11 @@ public class Hades extends Ability
 {	
 	private final static String[] des= {
 			AbilityInfo.Hades.getName() + "는 죽음의 신입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"사망 지배",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"사망 지배",
 			   "사망 시 60% 확률로 아이템을 잃지 않습니다." ,
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"나락 Ⅰ",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"나락 Ⅰ",
 			   "자신과 주변의 모든 것이 나락으로 떨어집니다.",
-			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"나락 Ⅱ",
+			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"나락 Ⅱ",
 			   "자신을 제외한 주변의 모든 것이 나락으로 떨어집니다."};
 	
 	public Hades(String playerName)
@@ -42,10 +42,10 @@ public class Hades extends Ability
 		super(playerName, AbilityInfo.Hades, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =100;
-		this.secondSkillCoolTime =300;
-		this.firstSkillStack =20;
-		this.secondSkillStack =35;
+		this.normalSkillCoolTime =100;
+		this.rareSkillCoolTime =300;
+		this.normalSkillStack =20;
+		this.rareSkillStack =35;
 		
 		this.rank= AbilityRank.S;
 	}
@@ -64,9 +64,9 @@ public class Hades extends Ability
 	
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 			Entity entity=player;
 			Location location = player.getLocation();
 			location.setY(-2.0d);
@@ -87,9 +87,9 @@ public class Hades extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 			Entity entity=player;
 			Location location = player.getLocation();
 			location.setY(-2.0d);
@@ -100,7 +100,7 @@ public class Hades extends Ability
 				{
 					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{e.teleport(location);});
 					if (e.getType() == EntityType.PLAYER)
-						((Player)e).sendMessage(ChatColor.RED+"죽음의 신의 능력에 의해 나락으로 떨어집니다.");
+						((Player)e).sendMessage(NamedTextColor.RED+"죽음의 신의 능력에 의해 나락으로 떨어집니다.");
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,21 +23,21 @@ public class Archer extends Ability
 {
 	private final static String[] des= {
 			   AbilityInfo.Archer.getName() + "입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"정확함",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"정확함",
 			   "활 공격 데미지가 1.4배로 상승합니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"화살 생성",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"화살 생성",
 			   "화살을 만듭니다.",
-			   ChatColor.BLUE+"【고급】 "+ChatColor.WHITE+"활 생성",
+			   NamedTextColor.BLUE+"【고급】 "+NamedTextColor.WHITE+"활 생성",
 			   "활을 만듭니다."};
 	
 	public Archer(String playerName)
 	{
 		super(playerName, AbilityInfo.Archer, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		this.firstSkillCoolTime =10;
-		this.secondSkillCoolTime =60;
-		this.firstSkillStack =5;
-		this.secondSkillStack =15;
+		this.normalSkillCoolTime =10;
+		this.rareSkillCoolTime =60;
+		this.normalSkillStack =5;
+		this.rareSkillStack =15;
 		this.rank= AbilityRank.B;
 	}
 	
@@ -55,9 +55,9 @@ public class Archer extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			world.dropItem(location, new ItemStack(Material.ARROW, 1));
@@ -66,9 +66,9 @@ public class Archer extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE,  AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			world.dropItem(location, new ItemStack(Material.BOW, 1));

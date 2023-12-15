@@ -21,7 +21,7 @@ import java.util.Random;
 public class Meteor extends Ability {
     private final static String[] des = {
             AbilityInfo.Meteor.getName() + "는 유성을 소환하는 능력입니다.",
-            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "유성 소환",
+            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "유성 소환",
             " 자신의 위치를 기준으로 2초 뒤 넓은 범위에 30개의 메테오를 떨어뜨립니다.",
             "블럭은 메테오의 폭발에 파괴되지 않습니다."};
 
@@ -29,8 +29,8 @@ public class Meteor extends Ability {
     public Meteor(String playerName) {
         super(playerName, AbilityInfo.Meteor, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
-        this.firstSkillCoolTime = 100;
-        this.firstSkillStack = 20;
+        this.normalSkillCoolTime = 100;
+        this.normalSkillStack = 20;
         this.meteorCount = 30;
         this.rank = AbilityRank.A;
     }
@@ -45,8 +45,8 @@ public class Meteor extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
+        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location location = player.getLocation();
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 World world = player.getWorld();

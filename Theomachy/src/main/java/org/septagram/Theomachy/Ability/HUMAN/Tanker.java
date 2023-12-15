@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Random;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Effect;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -18,7 +18,7 @@ public class Tanker extends Ability {
     int damageReduce;
     private final static String[] des = {
             AbilityInfo.Tanker.getName() + "는 덜 아픕니다",
-            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "M",
+            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "M",
             "가격 데미지를 1/5로 줄여 받습니다"};
 
     public Tanker(String playerName) {

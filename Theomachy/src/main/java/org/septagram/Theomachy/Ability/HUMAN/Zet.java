@@ -2,7 +2,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Random;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -17,7 +17,7 @@ public class Zet extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Zet.getName() + "은 내연 기관의 일종입니다.",
-            ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "시동",
+            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "시동",
             "불에 타면 10초간 빨라집니다.",
             "능력에 의한 가속은 다른 가속 효과와 중첩되지 않습니다.",
             "가솔린 기관보다 가속력이 좋습니다."

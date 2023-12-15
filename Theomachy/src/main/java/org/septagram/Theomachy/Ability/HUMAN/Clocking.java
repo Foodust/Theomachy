@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -26,7 +26,7 @@ public class Clocking extends Ability
 	private List<Player> targetList;
 	private final static String[] des= {
 			AbilityInfo.Clocking.getName() + " 일정 시간 자신의 몸을 숨길 수 있는 능력입니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"감추기",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"감추기",
 			   "자신의 모습을 7초간 감출 수 있습니다.",
 			   "감춘 상태에서 상대방을 공격할 시 다시 모습이 나타나게 되며,",
 			   "공격 당한 상대는 20% 확률로 사망합니다."};
@@ -36,8 +36,8 @@ public class Clocking extends Ability
 		super(playerName, AbilityInfo.Clocking, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =60;
-		this.firstSkillStack =25;
+		this.normalSkillCoolTime =60;
+		this.normalSkillStack =25;
 		
 		this.rank= AbilityRank.A;
 	}
@@ -55,9 +55,9 @@ public class Clocking extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&& PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 			targetList = player.getWorld().getPlayers();
 			for (Player enemy : targetList)
 				enemy.hidePlayer(Theomachy.getPlugin(),player);
@@ -66,7 +66,7 @@ public class Clocking extends Ability
 				int finalCount = count;
 				if(flag){
 					Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-						player.sendMessage(ChatColor.WHITE + "은신 시간이" + String.valueOf(finalCount) +"초 남았습니다.");
+						player.sendMessage(NamedTextColor.WHITE + "은신 시간이" + String.valueOf(finalCount) +"초 남았습니다.");
 					},(7 - count) * 20L);
 				}
 			}

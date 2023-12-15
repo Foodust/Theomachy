@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -15,7 +15,7 @@ public class Boxer extends Ability
 	
 	private final static String[] des= {
 			AbilityInfo.Boxer.getName() + "는 빠른 주먹을 사용하는 능력입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"속성 가격",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"속성 가격",
 			   "맨손 데미지의 딜레이가 사라집니다."};
 	
 	public Boxer(String playerName)

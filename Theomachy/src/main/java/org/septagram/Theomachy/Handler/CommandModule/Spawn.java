@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Handler.CommandModule;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -27,7 +27,17 @@ public class Spawn
 				world.setSpawnLocation(x, y, z);
 				player.sendMessage("현재 위치가 모든 플레이어의 스폰지역으로 설정되었습니다.");				
 			}
-			else
+			else if(data.length == 5){
+				Player player=(Player)sender;
+				String teamName=data[1];
+				Location location = null;
+				location.setX(Integer.parseInt(data[2]));
+				location.setY(Integer.parseInt(data[3]));
+				location.setZ(Integer.parseInt(data[4]));
+				GameData.SpawnArea.put(teamName, location);
+				player.sendMessage( NamedTextColor.WHITE + data[2]+" " + data[3]+ " " + data[4] + "가 팀 "+NamedTextColor.DARK_AQUA+teamName+NamedTextColor.WHITE+" 의 스폰지역으로 설정되었습니다.");
+			}
+			else if(data.length == 3)
 			{
 				Player player=(Player)sender;
 				String teamName=data[1];
@@ -36,7 +46,12 @@ public class Spawn
 				location.setZ(location.getZ()+0.5);
 				location.setYaw((int)player.getLocation().getYaw());
 				GameData.SpawnArea.put(teamName, location);
-				player.sendMessage("현재 위치가 팀 "+ChatColor.DARK_AQUA+teamName+ChatColor.WHITE+" 의 스폰지역으로 설정되었습니다.");	
+				player.sendMessage("현재 위치가 팀 "+NamedTextColor.DARK_AQUA+teamName+NamedTextColor.WHITE+" 의 스폰지역으로 설정되었습니다.");	
+			}
+			else{
+				sender.sendMessage(NamedTextColor.YELLOW + "/t  spawn(s)   " + NamedTextColor.AQUA + "<TeamName>  스폰지역으로 설정합니다.");
+				sender.sendMessage("좌표로도 등록할 수 있습니다.");
+				sender.sendMessage("ex) /t s  팀    X  Y  Z");
 			}
 		}
 	}

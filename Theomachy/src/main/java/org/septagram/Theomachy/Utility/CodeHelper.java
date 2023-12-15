@@ -1,6 +1,6 @@
 package org.septagram.Theomachy.Utility;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -21,13 +21,13 @@ public class CodeHelper {
     }
 
     private static void showCode(CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + " 【 신 】 ");
+        sender.sendMessage(NamedTextColor.GOLD + " 【 신 】 ");
         for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans)) {
-            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+            sender.sendMessage(NamedTextColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + NamedTextColor.WHITE + abilityInfo.getName());
         }
-        sender.sendMessage(ChatColor.AQUA + " 【 인간 】 ");
+        sender.sendMessage(NamedTextColor.AQUA + " 【 인간 】 ");
         for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet)) {
-            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+            sender.sendMessage(NamedTextColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + NamedTextColor.WHITE + abilityInfo.getName());
         }
     }
 }

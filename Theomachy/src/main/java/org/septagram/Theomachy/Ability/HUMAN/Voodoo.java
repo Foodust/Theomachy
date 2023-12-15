@@ -1,11 +1,9 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Objects;
-import java.util.TimerTask;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -28,7 +26,7 @@ public class Voodoo extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Voodoo.getName() + "는 팻말을 이용해서 상대를 타격할 수 있는 능력입니다.",
-            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "부두술",
+            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "부두술",
             "팻말에 타격할 상대의 이름을 적으면 ",
             "그 아이디를 가진 플레이어는 팻말과 연결되며",
             "팻말을 두들겨 팰시 대상 플레이어가 데미지를 입습니다.",
@@ -39,8 +37,8 @@ public class Voodoo extends Ability {
     private Block postSign;
     public Voodoo(String playerName) {
         super(playerName, AbilityInfo.Voodoo, true, true, false, des);
-        this.firstSkillCoolTime = 180;
-        this.firstSkillStack = 20;
+        this.normalSkillCoolTime = 180;
+        this.normalSkillStack = 20;
         this.targetName = null;
         this.postSign = null;
         this.rank = AbilityRank.A;
@@ -51,7 +49,7 @@ public class Voodoo extends Ability {
         if (material1 == Material.OAK_SIGN || material1 == Material.OAK_HANGING_SIGN || material1 == Material.OAK_WALL_HANGING_SIGN || material1 == Material.OAK_WALL_SIGN) {
             Player player = event.getPlayer();
 
-            if (!(CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, firstSkillStack)))
+            if (!(CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)))
                 event.setCancelled(true);
         }
     }
@@ -73,7 +71,7 @@ public class Voodoo extends Ability {
             Action action = event.getAction();
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                 Player player = event.getPlayer();
-                if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, firstSkillStack))
+                if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack))
                     player.sendMessage("스킬을 사용 할 수 있습니다.");
             }
         }
@@ -84,18 +82,18 @@ public class Voodoo extends Ability {
         String targetName = Objects.requireNonNull(event.line(0)).toString();
         Player target = GameData.OnlinePlayer.get(targetName);
         if (target != null) {
-            Skill.Use(player, material, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
+            Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             this.targetName = targetName;
             this.postSign = event.getBlock();
-            player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");
-            target.sendMessage(ChatColor.RED + "부두술사가 당신을 위협합니다.");
+            player.sendMessage(NamedTextColor.RED + targetName + NamedTextColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");
+            target.sendMessage(NamedTextColor.RED + "부두술사가 당신을 위협합니다.");
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 this.targetName = null;
                 postSign.breakNaturally();
                 postSign = null;
             }, 7 * 20);
         } else
-            player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + "플레이어가 존재 하지 않습니다");
+            player.sendMessage(NamedTextColor.RED + targetName + NamedTextColor.WHITE + "플레이어가 존재 하지 않습니다");
     }
 
 }

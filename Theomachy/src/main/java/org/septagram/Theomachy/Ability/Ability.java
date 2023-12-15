@@ -30,10 +30,10 @@ public class Ability
 	public boolean flag = false;
 	public final String[] description;
 	public AbilityRank rank;
-	public int firstSkillCoolTime =-1;
-	public int secondSkillCoolTime =-1;
-	public int firstSkillStack =-1;
-	public int secondSkillStack =-1;
+	public int normalSkillCoolTime =-1;
+	public int rareSkillCoolTime =-1;
+	public int normalSkillStack =-1;
+	public int rareSkillStack =-1;
 
 	public Material material = Material.COBBLESTONE;
 	

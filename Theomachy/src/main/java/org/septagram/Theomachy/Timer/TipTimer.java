@@ -3,7 +3,7 @@ package org.septagram.Theomachy.Timer;
 import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Handler.CommandModule.GameHandler;
@@ -30,7 +30,7 @@ public class TipTimer extends TimerTask
 			long max = (int) (Runtime.getRuntime().maxMemory() / 1048576);
 			long free = (int) (Runtime.getRuntime().freeMemory() / 1048576);
 			long use = max - free;
-			Bukkit.broadcastMessage(ChatColor.WHITE+"메모리(MB)   "+ChatColor.AQUA+String.valueOf(use)+ChatColor.WHITE+" / "+ChatColor.YELLOW+String.valueOf(max));
+			Bukkit.broadcastMessage(NamedTextColor.WHITE+"메모리(MB)   "+NamedTextColor.AQUA+String.valueOf(use)+NamedTextColor.WHITE+" / "+NamedTextColor.YELLOW+String.valueOf(max));
 			
 			if (free < 375)
 			{

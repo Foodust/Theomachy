@@ -1,7 +1,7 @@
 package org.septagram.Theomachy.Ability.GOD;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,10 +32,10 @@ public class Poseidon extends Ability
 	private boolean flag = true;
 	private final static String[] des= {
 			AbilityInfo.Poseidon.getName() + "은 물의 신입니다.",
-			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"물 속성",
+			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"물 속성",
 			   "물 속에 있을 때 일정확률로 모든 피격을 33% 확률로 회피합니다.",
 			   "물 속에서 나온 직후 7초 동안 효과가 지속됩니다.",
-			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"워터 캐슬",
+			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"워터 캐슬",
 			   "자신의 앞으로 물벽을 생성하며 이후 물벽에 접근하는 사람을 넉백시킵니다.",
 			   "물벽은 조약돌을 뚫을 수 있습니다."};
 	
@@ -44,8 +44,8 @@ public class Poseidon extends Ability
 		super(playerName, AbilityInfo.Poseidon, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =240;
-		this.firstSkillStack =5;
+		this.normalSkillCoolTime =240;
+		this.normalSkillStack =5;
 		
 		this.rank= AbilityRank.S;
 	}
@@ -63,11 +63,11 @@ public class Poseidon extends Ability
 	
 	private void leftAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
+		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			if (flag)
 			{
-				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL ,firstSkillStack, firstSkillCoolTime);
+				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL , normalSkillStack, normalSkillCoolTime);
 				Location location = player.getLocation();
 				Vector v = player.getEyeLocation().getDirection();
 				v.setX(Math.round(v.getX()));
