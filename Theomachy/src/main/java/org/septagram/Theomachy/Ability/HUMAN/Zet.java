@@ -1,7 +1,5 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
-import java.util.Random;
-
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -23,13 +21,13 @@ public class Zet extends Ability {
             "가솔린 기관보다 가속력이 좋습니다."
     };
 
-    private final int duration;
-    private final int amplifier;
+    private final int passiveDuration;
+    private final int passiveAmplifier;
 
     public Zet(String playerName) {
         super(playerName, AbilityInfo.Zet, false, true, false, des);
-        this.duration = 10;
-        this.amplifier = 3;
+        this.passiveDuration = 10;
+        this.passiveAmplifier = 3;
         this.rank = AbilityRank.B;
     }
 
@@ -46,7 +44,7 @@ public class Zet extends Ability {
         if (!has) {
             if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK) || event.getCause().equals(DamageCause.LAVA)) {
                 p.sendMessage("동력이 생겨 빨라집니다!");
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration * 20, amplifier));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, passiveDuration * 20, passiveAmplifier));
             }
         }
 

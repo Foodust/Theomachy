@@ -27,16 +27,19 @@ public class Invincibility extends Ability
 			   " 자신을 7초간 무적 상태로 만듭니다.",
 			   NamedTextColor.RED+"【고급】 "+NamedTextColor.WHITE+"숨 돌리기",
 			   "자신에게 체력 회복 버프를 5초 동안 시전합니다."};
-	
+
+	private final int rareDuration;
 	public Invincibility(String playerName)
 	{
 		super(playerName, AbilityInfo.Invincibility, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.normalSkillCoolTime =50;
-		this.rareSkillCoolTime =120;
 		this.normalSkillStack =30;
+
+		this.rareSkillCoolTime =120;
 		this.rareSkillStack =50;
+		this.rareDuration = 5;
 		this.rank= AbilityRank.A;
 	}
 	
@@ -67,7 +70,7 @@ public class Invincibility extends Ability
 		if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
 			Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 5 * 20, 0));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, rareDuration * 20, 0));
 		}
 	}
 	

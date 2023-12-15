@@ -49,20 +49,18 @@ public class Horeundal extends Ability {
             Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
 
-//            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                for (int count = 10; count >= 0; count--) {
-                    int finalCount = count;
-                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                        if (finalCount == 0) {
-                            player.sendMessage("10초 전의 위치로 되돌아갑니다!");
-                            player.teleport(loc);
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5 * 20, 1));
-                        } else {
-                            player.sendMessage(NamedTextColor.AQUA + String.valueOf(finalCount) + NamedTextColor.WHITE + "초 뒤 되돌아갑니다.");
-                        }
-                    }, (7 + (10 - count)) * 20L);
-                }
-//            }, 7 * 20);
+            for (int count = 10; count >= 0; count--) {
+                int finalCount = count;
+                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                    if (finalCount == 0) {
+                        player.sendMessage("10초 전의 위치로 되돌아갑니다!");
+                        player.teleport(loc);
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5 * 20, 1));
+                    } else {
+                        player.sendMessage(NamedTextColor.AQUA + String.valueOf(finalCount) + NamedTextColor.WHITE + "초 뒤 되돌아갑니다.");
+                    }
+                }, (7 + (10 - count)) * 20L);
+            }
         }
     }
 }

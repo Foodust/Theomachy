@@ -28,15 +28,17 @@ public class Hermes extends Ability {
             "5초간 비행할 수 있으며, 점프하면서 비행하면 바로 날 수 있습니다.",
             "비행 중에는 낙하 데미지를 받지 않습니다."};
 
-	int flyTime;
-    int delay;
+    private final int flyTime;
+    private final int delay;
+    private final int passiveDuration;
     public Hermes(String playerName) {
         super(playerName, AbilityInfo.Hermes, true, true, true, des);
         Theomachy.log.info(playerName + abilityName);
-		this.flyTime = 5;
+        this.flyTime = 5;
         this.delay = 6;
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 10;
+        this.passiveDuration = 7;
         this.rank = AbilityRank.S;
     }
 
@@ -60,11 +62,11 @@ public class Hermes extends Ability {
                     player.sendMessage("비행시간이 " + NamedTextColor.AQUA + finalCount + NamedTextColor.WHITE + "초 남았습니다.");
                 }, (flyTime - count) * 20L);
             }
-			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{
-				player.sendMessage(NamedTextColor.RED + "비행시간이 종료되었습니다.");
-				player.setAllowFlight(false);
-				player.setFallDistance(0);
-			},delay * 20L);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                player.sendMessage(NamedTextColor.RED + "비행시간이 종료되었습니다.");
+                player.setAllowFlight(false);
+                player.setFallDistance(0);
+            }, delay * 20L);
 
         }
     }
@@ -73,7 +75,7 @@ public class Hermes extends Ability {
         Player player = GameData.OnlinePlayer.get(playerName);
         if (player != null) {
             Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, passiveDuration * 20, 0));
             }, 1 * 20, 6 * 20);
         }
     }

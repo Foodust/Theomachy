@@ -22,69 +22,62 @@ import org.septagram.Theomachy.Utility.GetPlayerList;
 import org.septagram.Theomachy.Utility.PlayerInventory;
 import org.septagram.Theomachy.Utility.Skill;
 
-public class Blinder extends Ability
-{
-	private final static String[] des= {
-			AbilityInfo.Blinder.getName() + "는 상대방의 시야를 가리는 능력입니다.",
-			   NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"블라인딩 Ⅰ",
-			   "자신을 공격한 상대는 일정 확률로 시야가 가려집니다.",
-			   NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"블라인딩 Ⅱ",
-			   "주변의 적의 시야를 가립니다."};
-	
-	public Blinder(String playerName)
-	{
-		super(playerName, AbilityInfo.Blinder, true, true, false, des);
-		Theomachy.log.info(playerName+abilityName);
-		
-		this.normalSkillCoolTime =30;
-		this.normalSkillStack =10;
-		
-		this.rank= AbilityRank.A;
-	}
-	
-	public void activeSkill(PlayerInteractEvent event)
-	{
-		Player player = event.getPlayer();
-		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
-		{
-            switch (EventFilter.PlayerInteract(event)) {
-				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK-> leftAction(player);
-            }
-		}
-	}
+public class Blinder extends Ability {
+    private final static String[] des = {
+            AbilityInfo.Blinder.getName() + "는 상대방의 시야를 가리는 능력입니다.",
+            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "블라인딩 Ⅰ",
+            "자신을 공격한 상대는 일정 확률로 2초간 시야가 가려집니다.",
+            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "블라인딩 Ⅱ",
+            "주변의 적의 시야를 5초간 가립니다."};
 
-	private void leftAction(Player player)
-	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
-		{
-			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 5, 5, 5);
-			if (!targetList.isEmpty())
-			{
-				Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-				player.sendMessage("주변의 적의 시야를 가립니다.");
-				for (Player e : targetList)
-				{
-					e.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 160, 0), true);
-					e.sendMessage("블라인더에 의해 시야가 어두워집니다.");
-				}
-			}
-			else
-				player.sendMessage("사용 가능한 대상이 없습니다.");
-		}
-	}
-	
-	public void passiveSkill(EntityDamageByEntityEvent event)
-	{
-		Player player = (Player) event.getEntity();
-		if (player.getName().equals(this.playerName))
-		{
-			Random random = new Random();
-			if (random.nextInt(10) == 0)
-			{
-				Player target = (Player) event.getDamager();
-				target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 80, 0), true);
-				target.sendMessage("블라인더에 의해 시야가 어두워집니다.");
-			}
-		}
-	}
+    private final int passiveDuration;
+    private final int normalDuration;
+    public Blinder(String playerName) {
+        super(playerName, AbilityInfo.Blinder, true, true, false, des);
+        Theomachy.log.info(playerName + abilityName);
+
+        this.passiveDuration = 2;
+
+        this.normalSkillCoolTime = 30;
+        this.normalSkillStack = 10;
+        this.normalDuration = 5;
+
+        this.rank = AbilityRank.A;
+    }
+
+    public void activeSkill(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+            switch (EventFilter.PlayerInteract(event)) {
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+            }
+        }
+    }
+
+    private void leftAction(Player player) {
+        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 5, 5, 5);
+            if (!targetList.isEmpty()) {
+                Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                player.sendMessage("주변의 적의 시야를 가립니다.");
+                for (Player e : targetList) {
+                    e.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, normalDuration * 20, 0));
+                    e.sendMessage("블라인더에 의해 시야가 어두워집니다.");
+                }
+            } else
+                player.sendMessage("사용 가능한 대상이 없습니다.");
+        }
+    }
+
+    public void passiveSkill(EntityDamageByEntityEvent event) {
+        Player player = (Player) event.getEntity();
+        if (player.getName().equals(this.playerName)) {
+            Random random = new Random();
+            if (random.nextInt(10) == 0) {
+                Player target = (Player) event.getDamager();
+                target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, passiveDuration * 20, 0));
+                target.sendMessage("블라인더에 의해 시야가 어두워집니다.");
+            }
+        }
+    }
 }

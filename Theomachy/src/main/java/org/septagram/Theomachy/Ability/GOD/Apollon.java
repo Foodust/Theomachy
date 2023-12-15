@@ -63,7 +63,7 @@ public class Apollon extends Ability {
             Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             World world = player.getWorld();
             world.setTime(6000);
-            Bukkit.broadcast(Component.text( NamedTextColor.YELLOW + "태양의 신이 해를 띄웠습니다."));
+            Bukkit.broadcast(Component.text( NamedTextColor.YELLOW + "태양의 신" + AbilityInfo.Apollon.getName() +"이 해를 띄웠습니다."));
         }
     }
 

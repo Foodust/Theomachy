@@ -28,18 +28,19 @@ public class Bee extends Ability {
 	public final static String[] des= {
 			AbilityInfo.Bee.getName()+ "은 벌들의 제왕입니다.",
 			NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"공격",
-			"자신을 공격해 온 적에게 75%의 확률로 중독되게 합니다.",
+			"자신을 공격해 온 적에게 75%의 확률로 3초간 중독되게 합니다.",
 			NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"페로몬",
 			"목표로 지정해 둔 상대를 자신의 위치로 끌어옵니다.",
 			"목표 지정: /x <대상>"};
 
 
-	private String abilitytarget;
-	
+	private String abilityTarget;
+	private final int passiveDuration;
 	public Bee(String playerName) {
 		super(playerName, AbilityInfo.Bee, true, true, false, des);
 		this.normalSkillCoolTime =180;
 		this.normalSkillStack =32;
+		this.passiveDuration = 3;
 		this.rank= AbilityRank.A;
 	}
 
@@ -59,12 +60,12 @@ public class Bee extends Ability {
 		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
 			if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			if(abilitytarget!=null){
-				if(player.getName().equals(abilitytarget)){
+			if(abilityTarget !=null){
+				if(player.getName().equals(abilityTarget)){
 					player.sendMessage(NamedTextColor.RED+"목표는 본인이 아니어야 합니다.");
 				}
 				else{
-					Player target = GameData.OnlinePlayer.get(abilitytarget);
+					Player target = GameData.OnlinePlayer.get(abilityTarget);
 					Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 					player.sendMessage(NamedTextColor.YELLOW+" 페로몬 "+NamedTextColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
@@ -83,7 +84,7 @@ public class Bee extends Ability {
 	{
 			if (!playerName.equals(targetName))
 			{
-				this.abilitytarget = targetName;
+				this.abilityTarget = targetName;
 				sender.sendMessage("타겟을 등록했습니다.   "+NamedTextColor.GREEN+targetName);
 			}
 			else
@@ -98,7 +99,7 @@ public class Bee extends Ability {
 			Random r=new Random();
 			
 			if(r.nextInt(4)<=2) {
-				e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 0));
+				e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, passiveDuration * 20, 0));
 				e.sendMessage(NamedTextColor.GOLD+"벌에게 쏘였습니다! 자나깨나 벌조심.");
 			}
 			

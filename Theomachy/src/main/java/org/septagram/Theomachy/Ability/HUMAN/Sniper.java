@@ -66,10 +66,10 @@ public class Sniper extends Ability {
                         sniping = false;
                         player.sendMessage(NamedTextColor.RED + "[스나이핑 모드] " + NamedTextColor.RED + "OFF");
                     }
-                }, ( 4 - count) * 20L);
+                }, (4 - count) * 20L);
             }
-        }else{
-            CoolTimeChecker.Check(player,AbilityCase.NORMAL);
+        } else {
+            CoolTimeChecker.Check(player, AbilityCase.NORMAL);
         }
     }
 

@@ -32,15 +32,18 @@ public class Teleporter extends Ability
 			"타겟에 등록해 둔 자신의 팀원과 위치를 치환합니다.",
 			"목표 지정: /x <대상>"};
 
-	private String abilityTarget;
+	private String rareTarget;
+	private final int normalDistance;
 	public Teleporter(String playerName)
 	{
 		super(playerName, AbilityInfo.Teleporter, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.normalSkillCoolTime =25;
-		this.rareSkillCoolTime =30;
 		this.normalSkillStack =15;
+		this.normalDistance = 25;
+
+		this.rareSkillCoolTime =30;
 		this.rareSkillStack =25;
 		
 		this.rank= AbilityRank.B;
@@ -62,7 +65,7 @@ public class Teleporter extends Ability
 	{
 		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Block block = player.getTargetBlock(null, 25);
+			Block block = player.getTargetBlock(null, normalDistance);
 			if (BlockFilter.AirToFar(player, block))
 			{
 				Location location0 = block.getLocation();
@@ -94,9 +97,9 @@ public class Teleporter extends Ability
 	{
 		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
-			if (abilityTarget != null)
+			if (rareTarget != null)
 			{
-				Player target = GameData.OnlinePlayer.get(abilityTarget);
+				Player target = GameData.OnlinePlayer.get(rareTarget);
 				if (target != null)
 				{
 					Location location = player.getLocation();
@@ -124,7 +127,7 @@ public class Teleporter extends Ability
 		{
 			if (!playerName.equals(targetName))
 			{
-				this.abilityTarget = targetName;
+				this.rareTarget = targetName;
 				sender.sendMessage("타겟을 등록했습니다.   "+NamedTextColor.GREEN+targetName);
 			}
 			else

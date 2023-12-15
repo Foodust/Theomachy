@@ -33,6 +33,7 @@ public class Tajja extends Ability {
         super(playerName, AbilityInfo.Tajja, false, true, false, des);
         this.rank = AbilityRank.B;
     }
+
     public void passiveSkill(EntityDamageByEntityEvent event) {
         Player player = (Player) event.getDamager();
         if (player.getName().equals(this.playerName)) {
@@ -43,16 +44,17 @@ public class Tajja extends Ability {
             }
         }
     }
+
     public int getSwordDamage(Player player) {
         Inventory inventory = player.getInventory();
         for (ItemStack item : inventory.getContents()) {
             if (item != null &&
                     (item.getType() == Material.WOODEN_SWORD ||
-                    item.getType() == Material.STONE_SWORD ||
-                    item.getType() == Material.IRON_SWORD ||
-                    item.getType() == Material.GOLDEN_SWORD ||
-                    item.getType() == Material.DIAMOND_SWORD ||
-                    item.getType() == Material.NETHERITE_SWORD)) {
+                            item.getType() == Material.STONE_SWORD ||
+                            item.getType() == Material.IRON_SWORD ||
+                            item.getType() == Material.GOLDEN_SWORD ||
+                            item.getType() == Material.DIAMOND_SWORD ||
+                            item.getType() == Material.NETHERITE_SWORD)) {
                 ItemMeta meta = item.getItemMeta();
                 if (meta instanceof Damageable damage) {
                     return item.getType().getMaxDurability() - damage.getDamage();

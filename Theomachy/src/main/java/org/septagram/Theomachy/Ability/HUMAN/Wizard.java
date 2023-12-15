@@ -3,6 +3,7 @@ package org.septagram.Theomachy.Ability.HUMAN;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -30,15 +31,18 @@ public class Wizard extends Ability
 			   "주변의 사람들을 공중으로 띄운 후 번개를 떨어뜨립니다.",
 			   "고급능력 발동 시 패널티로 자신의 체력이 반으로 줄어듭니다."};
 
+	private final int rareDuration;
 	public Wizard(String playerName)
 	{
 		super(playerName, AbilityInfo.Wizard, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
 		this.normalSkillCoolTime =180;
-		this.rareSkillCoolTime =300;
 		this.normalSkillStack =25;
+
+		this.rareSkillCoolTime =300;
 		this.rareSkillStack =45;
+		this.rareDuration = 1;
 		this.rank= AbilityRank.S;
 	}
 	
@@ -97,7 +101,7 @@ public class Wizard extends Ability
 	private void rightClickAction(Player player)
 	{
 		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-			List<Entity> entityList = player.getNearbyEntities(5, 5, 5);
+			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
 			for (Entity e : entityList)
 				if (e instanceof Player)
@@ -120,7 +124,7 @@ public class Wizard extends Ability
 						world.strikeLightning(location);
 						e.setFireTicks(100);
 					}
-				},1 * 20);
+				},rareDuration * 20L);
 			}
 			player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");
 		}

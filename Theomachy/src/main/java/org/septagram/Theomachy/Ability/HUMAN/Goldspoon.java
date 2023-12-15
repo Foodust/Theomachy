@@ -10,20 +10,20 @@ import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
-public class Goldspoon extends Ability{
+public class Goldspoon extends Ability {
 
-	private final static String[] des= {
-			AbilityInfo.Goldspoon.getName() + "를 물고 태어난 능력입니다.",
-			NamedTextColor.YELLOW+"【패시브】 "+NamedTextColor.WHITE+"재산 상속",
-			"리스폰될 때마다 금레깅스를 받습니다. 물론, 상속세는 없습니다."};
-	
-	public Goldspoon(String playerName) {
-		super(playerName, AbilityInfo.Goldspoon, false, true, false, des);
-		this.rank= AbilityRank.C;
-	}
-	
-	public void passiveSkill(PlayerRespawnEvent event){
-		Player p=event.getPlayer();
-		p.getInventory().addItem(new ItemStack(Material.GOLDEN_LEGGINGS));
-	}
+    private final static String[] des = {
+            AbilityInfo.Goldspoon.getName() + "를 물고 태어난 능력입니다.",
+            NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "재산 상속",
+            "리스폰될 때마다 금레깅스를 받습니다. 물론, 상속세는 없습니다."};
+
+    public Goldspoon(String playerName) {
+        super(playerName, AbilityInfo.Goldspoon, false, true, false, des);
+        this.rank = AbilityRank.C;
+    }
+
+    public void passiveSkill(PlayerRespawnEvent event) {
+        Player p = event.getPlayer();
+        p.getInventory().addItem(new ItemStack(Material.GOLDEN_LEGGINGS));
+    }
 }

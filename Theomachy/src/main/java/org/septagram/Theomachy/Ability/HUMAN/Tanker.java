@@ -15,12 +15,12 @@ import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
 public class Tanker extends Ability {
 
-    int damageReduce;
+
     private final static String[] des = {
             AbilityInfo.Tanker.getName() + "는 덜 아픕니다",
             NamedTextColor.YELLOW + "【패시브】 " + NamedTextColor.WHITE + "M",
             "가격 데미지를 1/5로 줄여 받습니다"};
-
+    int damageReduce;
     public Tanker(String playerName) {
         super(playerName, AbilityInfo.Tanker, false, true, false, des);
         this.rank = AbilityRank.A;

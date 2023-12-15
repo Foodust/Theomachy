@@ -2,7 +2,6 @@ package org.septagram.Theomachy.Ability.HUMAN;
 
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,13 +9,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
-import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.AbilityData;
 import org.septagram.Theomachy.Handler.CommandModule.AbilitySet;
-import org.septagram.Theomachy.Theomachy;
-import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
 import org.septagram.Theomachy.Utility.PlayerInventory;
 
@@ -29,12 +25,12 @@ public class PokeGo extends Ability {
             "이는 블랙리스트를 무시합니다."};
 
     private int walking;
-    private int achive;
+    private final int goal;
 
     public PokeGo(String playerName) {
         super(playerName, AbilityInfo.PokeGo, false, true, false, des);
         this.walking = 0;
-        this.achive = 5000;
+        this.goal = 5000;
         this.rank = AbilityRank.A;
     }
 
@@ -42,13 +38,15 @@ public class PokeGo extends Ability {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (EventFilter.PlayerInteract(event)) {
-                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> player.sendMessage(NamedTextColor.WHITE + String.valueOf(walking) + NamedTextColor.YELLOW + " 걸음 걸었습니다.");
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK ->
+                        player.sendMessage(NamedTextColor.WHITE + String.valueOf(walking) + NamedTextColor.YELLOW + " 걸음 걸었습니다.");
             }
         }
     }
+
     public void passiveSkill(PlayerMoveEvent event) {
 
-        if (walking >= achive) {
+        if (walking >= goal) {
 
             Random random = new Random();
 
@@ -69,6 +67,7 @@ public class PokeGo extends Ability {
             walking++;
         }
     }
+
     public void initialize() {
         this.walking = 0;
     }

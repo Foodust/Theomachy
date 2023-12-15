@@ -19,46 +19,49 @@ import org.septagram.Theomachy.Utility.GetPlayerList;
 import org.septagram.Theomachy.Utility.PlayerInventory;
 import org.septagram.Theomachy.Utility.Skill;
 
-public class AGirl extends Ability{
+public class AGirl extends Ability {
 
-	private final static String[] des= {
-			AbilityInfo.AGirl.getName() + "는 귀여움으로 상대를 아사시킵니다.",
-			NamedTextColor.AQUA+"【일반】 "+NamedTextColor.WHITE+"가짜 연약함",
-			"주변의 적을 자신의 앞으로 끌어옵니다.",
-			"끌려 온 플레이어들의 배고픔 지수는 0이 됩니다."};
-	
-	public AGirl(String playerName) {
-		super(playerName, AbilityInfo.AGirl, true, false, false, des);
-		
-		this.rank= AbilityRank.A;
-		this.normalSkillCoolTime =60;
-		this.normalSkillStack =15;
-	}
-	
-	public void activeSkill(PlayerInteractEvent event){
-		Player player = event.getPlayer();
-		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
-		{
-			switch (EventFilter.PlayerInteract(event))
-			{
-				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
-			}
-		}
-	}
+    private final static String[] des = {
+            AbilityInfo.AGirl.getName() + "는 귀여움으로 상대를 아사시킵니다.",
+            NamedTextColor.AQUA + "【일반】 " + NamedTextColor.WHITE + "가짜 연약함",
+            "주변의 적을 자신의 앞으로 끌어옵니다.",
+            "끌려 온 플레이어들의 배고픔 지수는 0이 되고",
+            "1초간 강력한 슬로우에 걸립니다."};
+    private final int normalDuration;
 
-	private void leftAction(Player player) {
-		if(CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-			
-			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+    public AGirl(String playerName) {
+        super(playerName, AbilityInfo.AGirl, true, false, false, des);
+
+        this.normalSkillCoolTime = 60;
+        this.normalSkillStack = 15;
+        this.normalDuration = 1;
+        this.rank = AbilityRank.A;
+    }
+
+    public void activeSkill(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+            switch (EventFilter.PlayerInteract(event)) {
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
+            }
+        }
+    }
+
+    private void leftAction(Player player) {
+        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+
+            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 
-			for(Player e:GetPlayerList.getNearByNotTeamMembers(player, 5, 0, 5)) {
-				Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{e.teleport(player);});
-				e.setFoodLevel(0);
-				e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2, 200));
-				e.sendMessage(NamedTextColor.GREEN+"안락소녀"+NamedTextColor.WHITE+"에게 이끌려 갑니다!");
-			}
-		}
-	}
+            for (Player e : GetPlayerList.getNearByNotTeamMembers(player, 5, 0, 5)) {
+                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+                    e.teleport(player);
+                });
+                e.setFoodLevel(0);
+                e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 200));
+                e.sendMessage(NamedTextColor.GREEN + AbilityInfo.AGirl.getName() + NamedTextColor.WHITE + "에게 이끌려 갑니다!");
+            }
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.*;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
@@ -25,13 +26,14 @@ public class Meteor extends Ability {
             " 자신의 위치를 기준으로 2초 뒤 넓은 범위에 30개의 메테오를 떨어뜨립니다.",
             "블럭은 메테오의 폭발에 파괴되지 않습니다."};
 
-    int meteorCount;
+    int normalCount;
+
     public Meteor(String playerName) {
         super(playerName, AbilityInfo.Meteor, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
         this.normalSkillCoolTime = 100;
         this.normalSkillStack = 20;
-        this.meteorCount = 30;
+        this.normalCount = 30;
         this.rank = AbilityRank.A;
     }
 
@@ -39,7 +41,7 @@ public class Meteor extends Ability {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (EventFilter.PlayerInteract(event)) {
-                case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }
     }
@@ -52,7 +54,7 @@ public class Meteor extends Ability {
                 World world = player.getWorld();
                 Vector v = new Vector(0d, -20d, 0d);
                 Vector speed = new Vector(0d, -3d, 0d);
-                for (int count = meteorCount; count > 0; count--) {
+                for (int count = normalCount; count > 0; count--) {
                     Random random = new Random();
                     int X = random.nextInt(15) - 5;
                     int Z = random.nextInt(15) - 5;

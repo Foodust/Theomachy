@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Ability.GOD;
 
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -25,7 +26,8 @@ public class Sans extends Ability {
             NamedTextColor.RED + "【고급】 " + NamedTextColor.AQUA + "가스트 블래스터 Ⅱ",
             "가스트 블래스터를 발사합니다"};
 
-    private final int duration;
+    private final int passiveDuration;
+    private final int rareDistance;
     public Sans(String playerName) {
         super(playerName, AbilityInfo.Sans, true, true, true, des);
         Theomachy.log.info(playerName + abilityName);
@@ -33,7 +35,8 @@ public class Sans extends Ability {
         this.rareSkillCoolTime = 120;
         this.normalSkillStack = 3;
         this.rareSkillStack = 30;
-        this.duration = 3;
+        this.passiveDuration = 3;
+        this.rareDistance = 800;
         this.rank = AbilityRank.S;
     }
 
@@ -50,7 +53,7 @@ public class Sans extends Ability {
     public void passiveSkill(EntityDamageByEntityEvent event) {
         if (event.getEntity().getName().equals(playerName)) {
             if (event.getEntity() instanceof LivingEntity victim) {
-                int durationInSeconds = duration * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)
+                int durationInSeconds = passiveDuration * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)
                 int amplifier = 1; // 위더 효과 강도
                 PotionEffect poisonEffect = new PotionEffect(PotionEffectType.WITHER, durationInSeconds, amplifier);
                 victim.addPotionEffect(poisonEffect);
@@ -72,7 +75,7 @@ public class Sans extends Ability {
             Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
-            for (double distance = 0; distance < 800; distance += 0.5) {
+            for (double distance = 0; distance < rareDistance; distance += 0.5) {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 50);

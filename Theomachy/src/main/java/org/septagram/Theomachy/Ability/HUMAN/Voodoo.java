@@ -35,10 +35,12 @@ public class Voodoo extends Ability {
             "쿨타임은 팻말을 든 채 좌클릭하면 좀 더 쉽게 확인 할 수 있습니다."};
     private String targetName;
     private Block postSign;
+    private final int normalDuration;
     public Voodoo(String playerName) {
         super(playerName, AbilityInfo.Voodoo, true, true, false, des);
         this.normalSkillCoolTime = 180;
         this.normalSkillStack = 20;
+        this.normalDuration = 7;
         this.targetName = null;
         this.postSign = null;
         this.rank = AbilityRank.A;
@@ -91,7 +93,7 @@ public class Voodoo extends Ability {
                 this.targetName = null;
                 postSign.breakNaturally();
                 postSign = null;
-            }, 7 * 20);
+            }, normalDuration * 20L);
         } else
             player.sendMessage(NamedTextColor.RED + targetName + NamedTextColor.WHITE + "플레이어가 존재 하지 않습니다");
     }
