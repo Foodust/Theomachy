@@ -20,7 +20,7 @@ import org.septagram.Theomachy.Handler.CommandModule.Tip;
 
 public class CommandHandler
 {
-	public static void T_Handler(CommandSender sender, Command command, String label, String[] data)
+	public static void tCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
 		if (data[0].equals("start"))
 			GameHandler.GameReady(sender);
@@ -52,7 +52,7 @@ public class CommandHandler
 			sender.sendMessage("잘못된 명령입니다.");
 	}
 	
-	public static void X_Handler(CommandSender sender, Command command, String label, String[] data)
+	public static void xCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
 		String playerName = sender.getName();
 		String targetName = data[0];

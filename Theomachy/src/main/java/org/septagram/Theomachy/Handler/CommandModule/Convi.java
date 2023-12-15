@@ -19,7 +19,7 @@ public class Convi {
 	public static void Module(CommandSender sender) {
 		Player p=(Player) sender;
 		
-		if(Theomachy.GAMB) {
+		if(Theomachy.GAMBLING) {
 			p.openInventory(gui());
 		}else {
 			p.sendMessage(ChatColor.RED+"이 기능은 잠겨있습니다!");

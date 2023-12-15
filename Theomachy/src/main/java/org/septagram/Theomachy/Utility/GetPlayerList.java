@@ -18,13 +18,10 @@ public class GetPlayerList
 		ArrayList<String> memberName  = new ArrayList<String>();
 		if (GameData.PlayerTeam.containsValue(teamName))
 		{
-			Iterator<Entry<String, String>> iterator = GameData.PlayerTeam.entrySet().iterator();
-			while(iterator.hasNext())
-			{
-				Entry<String, String> entry=iterator.next();
-				if (entry.getValue().equals(teamName))
-					memberName.add(entry.getKey());
-			}
+            for (Entry<String, String> entry : GameData.PlayerTeam.entrySet()) {
+                if (entry.getValue().equals(teamName))
+                    memberName.add(entry.getKey());
+            }
 		}
 		ArrayList<Player> memberPlayer = new ArrayList<Player>();
 		for (String e : memberName)

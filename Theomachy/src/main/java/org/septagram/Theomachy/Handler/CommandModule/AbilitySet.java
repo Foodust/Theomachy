@@ -13,7 +13,7 @@ import org.septagram.Theomachy.Ability.HUMAN.*;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.CodeHelper;
 import org.septagram.Theomachy.Utility.PermissionChecker;
-import org.septagram.Theomachy.Utility.RandomNumberConstuctor;
+import org.septagram.Theomachy.Utility.RandomNumberConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +80,8 @@ public class AbilitySet
 	
 	private static void RandomAssignment(CommandSender sender)
 	{
-		
-		CommandSender p=(Player) sender;
-		
-		if (!GameData.PlayerAbility.isEmpty())
+
+        if (!GameData.PlayerAbility.isEmpty())
 		{
 			Bukkit.broadcastMessage("모든 능력을 삭제한 후 재 추첨합니다.");
 			GameData.PlayerAbility.clear();
@@ -92,14 +90,14 @@ public class AbilitySet
 		Bukkit.broadcastMessage(ChatColor.DARK_AQUA+"인식된 플레이어 목록");
 		for(Player e : playerlist)
 			Bukkit.broadcastMessage(ChatColor.GOLD+"  "+e.getName());
-		int[] rn = RandomNumberConstuctor.nonDuplicate();
+		int[] rn = RandomNumberConstructor.nonDuplicate();
 		int length;
-		length = Math.min(playerlist.size(), Blacklist.Canlist);
+		length = Math.min(playerlist.size(), Blacklist.availableList);
 		int i = 0;
 		for (Player player: playerlist)
 		{
 			String playerName = player.getName();
-			abilityAssignment(rn[i++],playerName,p);
+			abilityAssignment(rn[i++],playerName, (Player) sender);
 		}
 		
 		Bukkit.broadcastMessage("모두에게 능력이 적용되었습니다.");

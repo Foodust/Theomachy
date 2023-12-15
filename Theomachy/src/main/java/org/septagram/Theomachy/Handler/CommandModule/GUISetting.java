@@ -43,7 +43,7 @@ public class GUISetting {
 		dura[5]=Theomachy.AUTO_SAVE ? 5:14;
 		dura[6]=Theomachy.ANIMAL  ? 5:14;
 		dura[7]=Theomachy.MONSTER  ? 5:14;
-		dura[8]=Theomachy.GAMB ? 5:14;
+		dura[8]=Theomachy.GAMBLING ? 5:14;
 		
 		for(int i=0;i<n;i++) {
 			wool[i]=new ItemStack(Material.WHITE_WOOL);

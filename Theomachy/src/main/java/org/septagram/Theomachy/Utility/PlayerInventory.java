@@ -12,10 +12,7 @@ public class PlayerInventory
 {
 	public static boolean InHandItemCheck(Player player, Material material)
 	{
-		if (player.getItemInHand().getType() == material)
-			return true;
-		else
-			return false;
+        return player.getInventory().getItemInMainHand().getType() == material;
 	}
 	
 	public static boolean ItemCheck(Player player, Material material, int stack)

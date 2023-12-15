@@ -8,7 +8,7 @@ import org.septagram.Theomachy.DB.AbilityData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Handler.CommandModule.Blacklist;
 
-public class RandomNumberConstuctor
+public class RandomNumberConstructor
 {
 	public static int[] nonDuplicate()
 	{
@@ -23,7 +23,7 @@ public class RandomNumberConstuctor
 			if(!Blacklist.Blacklist.contains(a)) Canlist.add(a); a++;
 		}
 		
-		Blacklist.Canlist=Canlist.size();
+		Blacklist.availableList =Canlist.size();
 		
 		int[] rn;
 		rn=new int[Canlist.size()];

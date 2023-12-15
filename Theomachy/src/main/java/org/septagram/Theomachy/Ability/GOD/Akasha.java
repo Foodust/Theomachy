@@ -24,9 +24,12 @@ public class Akasha extends Ability{
 	private final static String[] des= {
 			AbilityInfo.Akasha.getName() + "는 고통과 향락의 여신입니다.",
 			ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"향락",
-			"주변에 있는 아군에게 기쁨을 주어 15초간 빠르고(SPEED) 건강(REGENERATION)하게 합니다.",
+			"주변에 있는 아군에게 기쁨을 주어 15초간 속도와 재생을 부여 합니다.",
 			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"고통",
 			"주변에 있는 적군에게 고통을 주어 6초간 혼란하게 합니다."};
+
+	private final int enemyDuration;
+	private final int teamDuration;
 	public Akasha(String playerName)
 	{
 		super(playerName, AbilityInfo.Akasha, true, false, false ,des);
@@ -35,6 +38,8 @@ public class Akasha extends Ability{
 		this.firstSkillStack =10;
 		this.secondSkillCoolTime =100;
 		this.secondSkillStack =20;
+		this.teamDuration = 15;
+		this.enemyDuration = 6;
 		this.rank= AbilityRank.S;
 	}
 	
@@ -56,8 +61,8 @@ public class Akasha extends Ability{
 			List<Player> nearPlayers = GetPlayerList.getNearByTeamMembers(player, 20, 20, 20);
 			for(Player nearPlayer : nearPlayers){
 				nearPlayer.sendMessage(ChatColor.DARK_PURPLE+"향락"+ChatColor.WHITE+"이 당신을 즐겁게합니다!");
-				nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,20*15, 0));
-				nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,20*15, 0));
+				nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,teamDuration * 20, 0));
+				nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,teamDuration * 20, 0));
 			}
 		}
 		
@@ -66,15 +71,14 @@ public class Akasha extends Ability{
 	private void rightAction(Player player) {
 		
 		if(CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player,material, secondSkillStack)){
-			
-			List<Player> entityList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
+			List<Player> entityList = GetPlayerList.getNearByNotTeamMembers(player, 15, 15, 15);
 			if(entityList.isEmpty()){
 				player.sendMessage(ChatColor.RED +"주변에 상대팀이 없습니다");
 				return;
 			}
 			Skill.Use(player,material,AbilityCase.RARE, secondSkillStack, secondSkillCoolTime);
 			for(Player e:entityList){
-				e.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION,6 * 20, 0));
+				e.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION,20 * enemyDuration, 0));
 				e.setHealth(e.getHealth()-4);
 			}
 			

@@ -55,7 +55,7 @@ public class GameHandler
 					e.initializeReset();
 				Ready=false;
 				Start=false;
-				CoolTime.ini=true;
+				CoolTime.init =true;
 				List<World> worlds = Bukkit.getWorlds();
 				for (World world : worlds)
 				{

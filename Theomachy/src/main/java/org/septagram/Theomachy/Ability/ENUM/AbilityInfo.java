@@ -1,4 +1,10 @@
 package org.septagram.Theomachy.Ability.ENUM;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
+
 public enum AbilityInfo {
     Zeus(1, "제우스"),
     Poseidon(2, "포세이돈"),
@@ -21,7 +27,6 @@ public enum AbilityInfo {
     Sans(19, "샌즈"),
 
     //========================================================================================================
-
 
     Archer(101, "아쳐"),
     Miner(102, "광부"),
@@ -57,6 +62,12 @@ public enum AbilityInfo {
 
     private final int index;
     private final String name;
+    private static final Map<Integer, String> abilityInfoMap = new HashMap<>();
+    static {
+        for (AbilityInfo ability : AbilityInfo.values()) {
+            abilityInfoMap.put(ability.index, ability.name);
+        }
+    }
     AbilityInfo(int index, String name) {
         this.index = index;
         this.name = name;
@@ -66,5 +77,8 @@ public enum AbilityInfo {
     }
     public int getIndex(){
         return this.index;
+    }
+    public static String getNameByIndex(int index) {
+        return abilityInfoMap.getOrDefault(index, "해당하는 이름 없음");
     }
 }

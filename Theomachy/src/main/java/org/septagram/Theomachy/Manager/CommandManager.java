@@ -43,14 +43,14 @@ public class CommandManager implements CommandExecutor
 				sender.sendMessage(ChatColor.AQUA+"【  안내  】"+ChatColor.WHITE+"/t help, /t con, /t tip 이외의 명령은 모두 OP 전용입니다.");
 			}
 			else
-				CommandHandler.T_Handler(sender, command, label, data);
+				CommandHandler.tCommandHandler(sender, command, label, data);
 		}
 		else if (label.equalsIgnoreCase("x"))
 		{
 			if (data.length==0) //설명 보기
 				sender.sendMessage(ChatColor.YELLOW+("/x  ")+ChatColor.RED+("<Player>     ")+ChatColor.WHITE+("해당 플레이어를 자신의 타겟으로 등록합니다"));
 			else
-				CommandHandler.X_Handler(sender, command, label, data);
+				CommandHandler.xCommandHandler(sender, command, label, data);
 		}
 		return true;
 	}

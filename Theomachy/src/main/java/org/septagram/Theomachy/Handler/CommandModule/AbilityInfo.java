@@ -20,7 +20,6 @@ public class AbilityInfo
 				Collection<Ability> ability = GameData.PlayerAbility.values();
 				for (Ability e : ability)
 					sender.sendMessage(ChatColor.WHITE+e.playerName+"  :  "+ChatColor.YELLOW+e.abilityName);
-						
 			}
 			else
 			{

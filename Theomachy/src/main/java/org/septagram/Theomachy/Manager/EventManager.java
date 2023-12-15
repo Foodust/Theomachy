@@ -35,7 +35,7 @@ import org.septagram.Theomachy.Ability.ENUM.AbilityTag;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
-import org.septagram.Theomachy.Utility.GambManager;
+import org.septagram.Theomachy.Utility.Gambling;
 import org.septagram.Theomachy.Utility.Hangul;
 import org.septagram.Theomachy.Handler.CommandModule.Blacklist;
 import org.septagram.Theomachy.Handler.CommandModule.GUISetting;
@@ -399,7 +399,7 @@ public class EventManager implements Listener
 				
 				switch(ChatColor.stripColor(wool.getItemMeta().getDisplayName())) {
 				case "가챠 ★ 가챠":
-					GambManager.Gamb(p);
+					Gambling.gambling(p);
 					break;
 				}
 			}
