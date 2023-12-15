@@ -59,7 +59,7 @@ public class Horeundal extends Ability {
                     } else {
                         player.sendMessage(ChatColor.AQUA + String.valueOf(finalCount) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
                     }
-                }, (7 + (10 - count)) * 20L);
+                }, (10 - count) * 20L);
             }
         }
     }
