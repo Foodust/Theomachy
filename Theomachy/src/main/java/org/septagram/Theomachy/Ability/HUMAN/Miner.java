@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 
 public class Miner extends Ability
@@ -29,8 +30,7 @@ public class Miner extends Ability
 	{
 		super(playerName, AbilityInfo.Miner, false, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		
-		this.rank=3;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void passiveSkill(BlockBreakEvent event)

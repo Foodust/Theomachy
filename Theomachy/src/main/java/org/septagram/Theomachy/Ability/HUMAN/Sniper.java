@@ -14,6 +14,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -37,7 +38,7 @@ public class Sniper extends Ability {
         this.firstSkillCoolTime = 50;
         this.firstSkillStack = 5;
 
-        this.rank = 3;
+        this.rank = AbilityRank.A;
     }
 
     public void activeSkill(PlayerInteractEvent event) {
@@ -80,7 +81,6 @@ public class Sniper extends Ability {
             if (entity instanceof Arrow) {
                 Skill.Use(player, material, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
                 entity.remove();
-//                @SuppressWarnings("deprecation")
                 Arrow arrow = player.launchProjectile(Arrow.class);
                 arrow.setVelocity(player.getEyeLocation().getDirection().multiply(100));
             }

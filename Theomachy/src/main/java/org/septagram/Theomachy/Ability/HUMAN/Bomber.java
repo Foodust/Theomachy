@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -35,7 +36,7 @@ public class Bomber extends Ability
 		this.firstSkillCoolTime =30;
 		this.firstSkillStack =25;
 		
-		this.rank=3;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

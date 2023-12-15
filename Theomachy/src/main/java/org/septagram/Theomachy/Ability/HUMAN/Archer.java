@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -24,19 +25,20 @@ public class Archer extends Ability
 			   AbilityInfo.Archer.getName() + "입니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"정확함",
 			   "활 공격 데미지가 1.4배로 상승합니다.",
-			   ChatColor.AQUA+"【일반/고급】 "+ChatColor.WHITE+"화살/활 생성",
-			   "일반능력으로 화살을, 고급 능력으로 활을 만듭니다."};
+			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"화살 생성",
+			   "화살을 만듭니다.",
+			   ChatColor.BLUE+"【고급】 "+ChatColor.WHITE+"활 생성",
+			   "활을 만듭니다."};
 	
 	public Archer(String playerName)
 	{
 		super(playerName, AbilityInfo.Archer, true, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
-		this.firstSkillCoolTime =20;
+		this.firstSkillCoolTime =10;
 		this.secondSkillCoolTime =60;
-		this.firstSkillStack =7;
+		this.firstSkillStack =5;
 		this.secondSkillStack =15;
-		
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

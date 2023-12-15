@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Timer.CoolTime;
@@ -43,7 +44,7 @@ public class Artemis extends Ability
 		this.firstSkillStack =7;
 		this.secondSkillStack =15;
 		
-		this.rank=3;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

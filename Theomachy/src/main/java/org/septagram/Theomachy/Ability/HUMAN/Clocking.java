@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
@@ -38,7 +39,7 @@ public class Clocking extends Ability
 		this.firstSkillCoolTime =60;
 		this.firstSkillStack =25;
 		
-		this.rank=3;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)
@@ -59,24 +60,23 @@ public class Clocking extends Ability
 			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 			targetList = player.getWorld().getPlayers();
 			for (Player enemy : targetList)
-				enemy.hidePlayer(player);
-			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{
-				try{
-					if (GameData.PlayerAbility.get(player.getName()).flag)
-					{
-						player.sendMessage("은신 시간이 종료되었습니다.");
-						GameData.PlayerAbility.get(player.getName()).flag = false;
-					}
-					for (Player enemy : targetList)
-						enemy.showPlayer(player);
-				}
-				catch (Exception e)
-				{
-					Bukkit.broadcastMessage(e.getLocalizedMessage());
-				}
-			},7 * 20);
+				enemy.hidePlayer(Theomachy.getPlugin(),player);
 
+			for (int count = 7; count >= 0; count--){
+				int finalCount = count;
+				if(flag){
+					Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+						player.sendMessage(ChatColor.WHITE + "은신 시간이" + String.valueOf(finalCount) +"초 남았습니다.");
+					},(7 - count) * 20L);
+				}
+			}
 			super.flag = true;
+
+			Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				GameData.PlayerAbility.get(player.getName()).flag = false;
+				for (Player enemy : targetList)
+					enemy.showPlayer(Theomachy.getPlugin(),player);
+			}, 8 * 20);
 		}
 	}
 	
@@ -89,7 +89,7 @@ public class Clocking extends Ability
 			{
 				targetList = player.getWorld().getPlayers();
 				for (Player enemy : targetList)
-					enemy.showPlayer(player);
+					enemy.showPlayer(Theomachy.getPlugin(),player);
 				Random random = new Random();
 				if (random.nextInt(5)==0)
 				{

@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Timer.CoolTime;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -20,7 +21,6 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Invincibility extends Ability
 {
-
 	private final static String[] des= {
 			AbilityInfo.Invincibility.getName() +  "은 일정시간 데미지를 받지 않을 수 있는 능력입니다.",
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"천하장사",
@@ -37,7 +37,7 @@ public class Invincibility extends Ability
 		this.secondSkillCoolTime =120;
 		this.firstSkillStack =30;
 		this.secondSkillStack =50;
-		this.rank=3;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)
@@ -57,9 +57,8 @@ public class Invincibility extends Ability
 		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, firstSkillStack))
 		{
 			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
-			{
-				CoolTime.commonSkillCoolTime.put(playerName+"1", 7);
-			}
+
+			CoolTime.commonSkillCoolTime.put(playerName+"1", 7);
 		}
 	}
 	
@@ -68,7 +67,7 @@ public class Invincibility extends Ability
 		if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
 		{
 			Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
-			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 10 * 20, 0));
+			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 5 * 20, 0));
 		}
 	}
 	

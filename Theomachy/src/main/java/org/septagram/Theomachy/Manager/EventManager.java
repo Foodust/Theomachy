@@ -31,7 +31,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
-import org.septagram.Theomachy.Ability.AttackTag;
+import org.septagram.Theomachy.Ability.ENUM.AbilityTag;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
@@ -46,7 +46,7 @@ public class EventManager implements Listener
 	@EventHandler
 	public void onProjectileHit(ProjectileHitEvent event) {
 		if (event.getEntity() instanceof Snowball snowball) {
-			if (snowball.getScoreboardTags().contains(AttackTag.BONEATTACK.getTag())) {
+			if (snowball.getScoreboardTags().contains(AbilityTag.BONEATTACK.getTag())) {
 				if (event.getHitEntity() instanceof LivingEntity target) {
 					target.damage(2);
 					int durationInSeconds = 3 * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)

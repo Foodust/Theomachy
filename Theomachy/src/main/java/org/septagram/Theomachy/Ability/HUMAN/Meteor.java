@@ -9,6 +9,7 @@ import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -21,17 +22,17 @@ public class Meteor extends Ability {
     private final static String[] des = {
             AbilityInfo.Meteor.getName() + "는 유성을 소환하는 능력입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "유성 소환",
-            " 자신의 위치를 기준으로 넓은 범위에 유성을 떨어뜨립니다.",
+            " 자신의 위치를 기준으로 2초 뒤 넓은 범위에 30개의 메테오를 떨어뜨립니다.",
             "블럭은 메테오의 폭발에 파괴되지 않습니다."};
 
+    int meteorCount;
     public Meteor(String playerName) {
         super(playerName, AbilityInfo.Meteor, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
-
         this.firstSkillCoolTime = 100;
         this.firstSkillStack = 20;
-
-        this.rank = 3;
+        this.meteorCount = 30;
+        this.rank = AbilityRank.A;
     }
 
     public void activeSkill(PlayerInteractEvent event) {
@@ -51,17 +52,17 @@ public class Meteor extends Ability {
                 World world = player.getWorld();
                 Vector v = new Vector(0d, -20d, 0d);
                 Vector speed = new Vector(0d, -3d, 0d);
-                for (int count = 30; count > 0; count--) {
+                for (int count = meteorCount; count > 0; count--) {
                     Random random = new Random();
-                    int X = random.nextInt(11) - 5;
-                    int Z = random.nextInt(11) - 5;
-                    Fireball fireball = world.spawn(location.add(X, 0, Z), Fireball.class);
+                    int X = random.nextInt(15) - 5;
+                    int Z = random.nextInt(15) - 5;
+                    Fireball fireball = world.spawn(location.add(X, 10, Z), Fireball.class);
                     fireball.setShooter(player);
                     fireball.setDirection(v);
                     fireball.setVelocity(speed);
                     location.add(-X, 0, -Z);
                 }
-            }, 5 * 10);//}
+            }, 2 * 20);//}
         }
     }
 }

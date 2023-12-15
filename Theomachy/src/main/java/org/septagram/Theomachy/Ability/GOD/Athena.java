@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -41,7 +42,7 @@ public class Athena extends Ability
 		this.firstSkillStack =5;
 		this.secondSkillStack =64;
 		
-		this.rank=4;
+		this.rank= AbilityRank.S;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

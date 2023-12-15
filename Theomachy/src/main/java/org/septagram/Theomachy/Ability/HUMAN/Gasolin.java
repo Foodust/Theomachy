@@ -9,22 +9,21 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
 public class Gasolin extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Gasolin.getName() + "은 내연 기관의 일종입니다.",
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "시동",
-            "불에 의한 데미지를 입으면 시동이 걸려 가속됩니다.",
+            "불에 의한 데미지를 입으면  시동이 걸려 5초간 이동속도가 빨라집니다.",
             "능력에 의한 가속은 다른 가속 효과와 중첩되지 않습니다.",
             "제트 기관보다 가속력이 좋지 않습니다."
     };
 
     public Gasolin(String playerName) {
         super(playerName, AbilityInfo.Gasolin, false, true, false, des);
-
-        this.rank = 3;
-
+        this.rank = AbilityRank.B;
     }
 
     public void passiveSkill(EntityDamageEvent event) {

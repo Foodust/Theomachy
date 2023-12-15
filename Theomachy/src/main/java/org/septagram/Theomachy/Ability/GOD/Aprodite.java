@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -34,7 +35,7 @@ public class Aprodite extends Ability{
 		this.firstSkillCoolTime =500;
 		this.firstSkillStack =64;
 		
-		this.rank=4;
+		this.rank= AbilityRank.S;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

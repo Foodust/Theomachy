@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -28,15 +29,19 @@ public class Witch extends Ability
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"저주 Ⅰ",
 			   "주변의 적에게 각종 디버프를 10초 간 적용합니다.",
 			   ChatColor.YELLOW+"【패시브】 "+ChatColor.WHITE+"저주 Ⅱ",
-			   "자신을 공격한 상대는 7% 확률로 5초간 디버프에 걸리게 됩니다."};
-	
+			   "자신을 공격한 상대는 10% 확률로 5초간 각종 디버프에 걸리게 됩니다."};
+
+	int skillDuration;
+	int passiveDuration;
 	public Witch(String playerName)
 	{
 		super(playerName, AbilityInfo.Witch, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		this.firstSkillCoolTime =60;
 		this.firstSkillStack =15;
-		this.rank=2;
+		this.passiveDuration = 5;
+		this.skillDuration = 10;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)
@@ -55,16 +60,16 @@ public class Witch extends Ability
 		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
 		{
 			List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
-			if (targetList != null)
+			if (!targetList.isEmpty())
 			{
 				Skill.Use(player, material, AbilityCase.NORMAL, firstSkillStack, firstSkillCoolTime);
 				for (Player e : targetList)
 				{
-					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 10 * 20,0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 10 * 20,0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10 * 20,0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 10 * 20,0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 10 * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, skillDuration * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, skillDuration * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, skillDuration * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, skillDuration * 20,0));
+					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, skillDuration * 20,0));
 					e.sendMessage("마녀에 의해 저주에 걸렸습니다.");
 				}
 			}
@@ -83,11 +88,11 @@ public class Witch extends Ability
 			if (rn == 0)
 			{
 				Player target = (Player) event.getDamager();
-				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 5 * 20,0));//*20
-				target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 5 * 20 ,0));
-				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5 * 20,0));
-				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 5 * 20,0));
-				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 5 * 20,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, passiveDuration * 20,0));//*20
+				target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, passiveDuration * 20 ,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, passiveDuration * 20,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, passiveDuration * 20,0));
+				target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, passiveDuration * 20,0));
 				target.sendMessage("마녀에 의해 저주가 걸렸습니다.");
 			}
 		}

@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -34,7 +35,7 @@ public class Akasha extends Ability{
 		this.firstSkillStack =10;
 		this.secondSkillCoolTime =100;
 		this.secondSkillStack =20;
-		this.rank=4;
+		this.rank= AbilityRank.S;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

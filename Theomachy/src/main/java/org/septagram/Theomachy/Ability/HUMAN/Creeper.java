@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -12,12 +13,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
-import org.septagram.Theomachy.Utility.CoolTimeChecker;
-import org.septagram.Theomachy.Utility.EventFilter;
-import org.septagram.Theomachy.Utility.PlayerInventory;
-import org.septagram.Theomachy.Utility.Skill;
+import org.septagram.Theomachy.Utility.*;
+
+import java.util.Random;
 
 public class Creeper extends Ability
 {
@@ -28,17 +29,24 @@ public class Creeper extends Ability
 			   ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"펑!",
 			   "크리퍼와 같은 폭발력의 폭발을 일으킵니다." ,
 			   "번개를 맞은 적이 있다면 폭발력이 두 배로 증가합니다.",
-			   "번개 카운팅은 사망 시 초기화됩니다."};
-	
+			   "번개 카운팅은 사망 시 초기화됩니다.",
+			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"크리퍼 강화",
+			   "자신에게 번개를 발동합니다." ,
+			   "번개 카운팅에 포함됩니다."};
+
+	float damage = 5.0f;
 	public Creeper(String playerName)
 	{
 		super(playerName, AbilityInfo.Creeper, true, false, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.firstSkillCoolTime =60;
-		this.firstSkillStack =20;
-		
-		this.rank=3;
+		this.firstSkillCoolTime = 60;
+		this.firstSkillStack = 20;
+
+		this.secondSkillCoolTime = 120;
+		this.secondSkillStack = 50;
+
+		this.rank= AbilityRank.S;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)
@@ -48,6 +56,7 @@ public class Creeper extends Ability
 		{
             switch (EventFilter.PlayerInteract(event)) {
 				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftAction(player);
+				case RIGHT_CLICK_AIR , RIGHT_CLICK_BLOCK -> rightAction(player);
             }
 		}
 	}
@@ -59,12 +68,21 @@ public class Creeper extends Ability
 			Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);
 			World world = player.getWorld();
 			Location location = player.getLocation();
-			float power = plasma ? 3.0f : 6.0f;
+			float power = plasma ? damage * 2 : damage;
 			player.setHealth(0);
 			world.createExplosion(location, power);
 		}
 	}
-	
+	private void rightAction(Player player)
+	{
+		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, secondSkillStack))
+		{
+			Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
+			World world = player.getWorld();
+			Location location = player.getLocation();
+			world.strikeLightning(location);
+		}
+	}
 	public void passiveSkill(EntityDamageEvent event)
 	{
 		if (event.getCause() == DamageCause.LIGHTNING)

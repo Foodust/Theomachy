@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
 public class Goldspoon extends Ability{
 
@@ -18,13 +19,11 @@ public class Goldspoon extends Ability{
 	
 	public Goldspoon(String playerName) {
 		super(playerName, AbilityInfo.Goldspoon, false, true, false, des);
-		
-		this.rank=2;
+		this.rank= AbilityRank.C;
 	}
 	
 	public void passiveSkill(PlayerRespawnEvent event){
 		Player p=event.getPlayer();
 		p.getInventory().addItem(new ItemStack(Material.GOLDEN_LEGGINGS));
 	}
-	
 }

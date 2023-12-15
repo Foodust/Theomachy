@@ -1,9 +1,9 @@
-package org.septagram.Theomachy.Ability;
+package org.septagram.Theomachy.Ability.ENUM;
 
-public enum AttackTag {
+public enum AbilityTag {
     BONEATTACK("boneAttack");
     private final String tag;
-    AttackTag(String tag) {
+    AbilityTag(String tag) {
         this.tag = tag;
     }
     public  String getTag(){

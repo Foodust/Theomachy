@@ -12,6 +12,7 @@ import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.DirectionChecker;
@@ -38,7 +39,7 @@ public class Wizard extends Ability
 		this.secondSkillCoolTime=300;
 		this.firstSkillStack=25;
 		this.secondSkillStack=45;
-		this.rank=4;
+		this.rank= AbilityRank.S;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

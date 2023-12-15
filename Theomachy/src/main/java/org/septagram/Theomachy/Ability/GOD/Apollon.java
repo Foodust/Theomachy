@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
@@ -41,7 +42,7 @@ public class Apollon extends Ability {
         this.secondSkillCoolTime = 180;
         this.firstSkillStack = 1;
         this.secondSkillStack = 25;
-        this.rank = 2;
+        this.rank = AbilityRank.B;
 
     }
 

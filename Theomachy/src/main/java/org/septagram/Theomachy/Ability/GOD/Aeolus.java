@@ -14,6 +14,7 @@ import org.bukkit.util.Vector;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -39,7 +40,7 @@ public class Aeolus extends Ability {
         this.firstSkillStack = 10;
         this.secondSkillCoolTime = 180;
         this.secondSkillStack = 32;
-        this.rank = 3;
+        this.rank = AbilityRank.A;
     }
 
     public void activeSkill(PlayerInteractEvent event) {

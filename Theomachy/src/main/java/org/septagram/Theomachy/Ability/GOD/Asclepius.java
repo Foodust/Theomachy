@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -36,7 +37,7 @@ public class Asclepius extends Ability
 		this.firstSkillStack =1;
 		this.secondSkillStack =5;
 		
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 
@@ -24,7 +25,7 @@ public class Dionysus extends Ability
 		super(playerName, AbilityInfo.Dionysus, false, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.rank=3;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void passiveSkill(EntityDamageByEntityEvent event)

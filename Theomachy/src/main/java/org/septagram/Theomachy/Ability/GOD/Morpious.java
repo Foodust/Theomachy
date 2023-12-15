@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -29,11 +30,9 @@ public class Morpious extends Ability{
 	
 	public Morpious(String playerName) {
 		super(playerName, AbilityInfo.Morpious, true, false, false, des);
-		
-		this.rank=3;
-		
 		this.firstSkillCoolTime =180;
 		this.firstSkillStack =32;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event){

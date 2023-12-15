@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.BlockFilter;
@@ -22,7 +23,7 @@ import org.septagram.Theomachy.Utility.Skill;
 
 public class Teleporter extends Ability
 {
-	private String abilityTarget;
+
 	private final static String[] des= {
 			AbilityInfo.Teleporter.getName()+ "는 순간이동을 돕는 마법사입니다.",
 		   	ChatColor.AQUA+"【일반】 "+ChatColor.WHITE+"텔레포팅",
@@ -30,7 +31,8 @@ public class Teleporter extends Ability
 			ChatColor.RED+"【고급】 "+ChatColor.WHITE+"치환",
 			"타겟에 등록해 둔 자신의 팀원과 위치를 치환합니다.",
 			"목표 지정: /x <대상>"};
-	
+
+	private String abilityTarget;
 	public Teleporter(String playerName)
 	{
 		super(playerName, AbilityInfo.Teleporter, true, false, false, des);
@@ -41,7 +43,7 @@ public class Teleporter extends Ability
 		this.firstSkillStack =15;
 		this.secondSkillStack =25;
 		
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)
@@ -100,10 +102,10 @@ public class Teleporter extends Ability
 					Location location = player.getLocation();
 					location.setY(location.getY()-1);
 					Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE,secondSkillStack,  secondSkillCoolTime);
-					Location tloc = target.getLocation();
-					Location ploc = player.getLocation();
-					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(ploc);});
-					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(tloc);});
+					Location targetLocation = target.getLocation();
+					Location playerLocation = player.getLocation();
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(playerLocation);});
+					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(targetLocation);});
 					target.sendMessage("텔레포터의 능력에 의해 위치가 텔레포터의 위치로 변경되었습니다.");
 				}
 				else

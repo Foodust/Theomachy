@@ -5,6 +5,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 
 public class Anorexia extends Ability{
@@ -17,7 +18,7 @@ public class Anorexia extends Ability{
 	
 	public Anorexia(String playerName) {
 		super(playerName, AbilityInfo.Anorexia, false, true, false, des);
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 	public void initialize(){
 		GameData.OnlinePlayer.get(playerName).setFoodLevel(10);

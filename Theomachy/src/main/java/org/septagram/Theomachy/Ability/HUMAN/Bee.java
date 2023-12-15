@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -37,11 +38,9 @@ public class Bee extends Ability {
 	
 	public Bee(String playerName) {
 		super(playerName, AbilityInfo.Bee, true, true, false, des);
-		
-		this.rank=3;
-		
 		this.firstSkillCoolTime =180;
 		this.firstSkillStack =32;
+		this.rank= AbilityRank.A;
 	}
 
 	public void activeSkill(PlayerInteractEvent event)

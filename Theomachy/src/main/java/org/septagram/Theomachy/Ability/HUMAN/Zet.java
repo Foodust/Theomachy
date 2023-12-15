@@ -11,20 +11,26 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
 public class Zet extends Ability {
 
     private final static String[] des = {
             AbilityInfo.Zet.getName() + "은 내연 기관의 일종입니다.",
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "시동",
-            "불에 타면 높은 확률로 동력이 생겨 빨라집니다.",
+            "불에 타면 10초간 빨라집니다.",
             "능력에 의한 가속은 다른 가속 효과와 중첩되지 않습니다.",
             "가솔린 기관보다 가속력이 좋습니다."
     };
 
+    private final int duration;
+    private final int amplifier;
+
     public Zet(String playerName) {
         super(playerName, AbilityInfo.Zet, false, true, false, des);
-        this.rank = 4;
+        this.duration = 10;
+        this.amplifier = 3;
+        this.rank = AbilityRank.B;
     }
 
     public void passiveSkill(EntityDamageEvent event) {
@@ -39,14 +45,8 @@ public class Zet extends Ability {
 
         if (!has) {
             if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK) || event.getCause().equals(DamageCause.LAVA)) {
-
-                Random r = new Random();
-
-                if (r.nextInt(4) > 0) {
-                    p.sendMessage("동력이 생겨 빨라집니다!");
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1));
-                }
-
+                p.sendMessage("동력이 생겨 빨라집니다!");
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration * 20, amplifier));
             }
         }
 

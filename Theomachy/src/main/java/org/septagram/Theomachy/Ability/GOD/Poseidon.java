@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
@@ -46,7 +47,7 @@ public class Poseidon extends Ability
 		this.firstSkillCoolTime =240;
 		this.firstSkillStack =5;
 		
-		this.rank=4;
+		this.rank= AbilityRank.S;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

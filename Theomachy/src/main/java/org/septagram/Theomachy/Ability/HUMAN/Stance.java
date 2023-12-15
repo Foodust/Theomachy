@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 
 public class Stance extends Ability
@@ -23,7 +24,7 @@ public class Stance extends Ability
 	{
 		super(playerName, AbilityInfo.Stance, false, true, false ,des);
 		Theomachy.log.info(playerName+abilityName);
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 	
 	public void passiveSkill(EntityDamageEvent event)

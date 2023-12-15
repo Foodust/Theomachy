@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 
@@ -22,7 +23,7 @@ public class Boxer extends Ability
 		super(playerName, AbilityInfo.Boxer, false, true, false, des);
 		Theomachy.log.info(playerName+abilityName);
 		
-		this.rank=4;
+		this.rank= AbilityRank.S;
 	}
 	
 	public void passiveSkill(EntityDamageByEntityEvent event)

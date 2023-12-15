@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 
 public class Eris extends Ability{
@@ -23,7 +24,7 @@ public class Eris extends Ability{
 		
 		super(playerName, AbilityInfo.Eris, false, true, false, des);
 		
-		this.rank=3;
+		this.rank= AbilityRank.A;
 		
 	}
 

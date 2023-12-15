@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Timer.CoolTime;
@@ -40,7 +41,7 @@ public class Assasin extends Ability
 		this.firstSkillStack =0;
 		this.secondSkillStack =15;
 		
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 	
 	public void activeSkill(PlayerInteractEvent event)

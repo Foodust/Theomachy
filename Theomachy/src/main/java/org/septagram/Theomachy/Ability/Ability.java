@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
 public class Ability
 {
@@ -28,7 +29,7 @@ public class Ability
 	public final boolean buffType;
 	public boolean flag = false;
 	public final String[] description;
-	public int rank;
+	public AbilityRank rank;
 	public int firstSkillCoolTime =-1;
 	public int secondSkillCoolTime =-1;
 	public int firstSkillStack =-1;

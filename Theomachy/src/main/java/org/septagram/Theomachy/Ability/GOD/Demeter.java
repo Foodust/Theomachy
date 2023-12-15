@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -35,7 +36,7 @@ public class Demeter extends Ability
 		this.firstSkillCoolTime =30;
 		this.firstSkillStack =10;
 		
-		this.rank=2;
+		this.rank= AbilityRank.B;
 	}
 
 	public void activeSkill(PlayerInteractEvent event)

@@ -229,12 +229,10 @@ public class AbilitySet
 			GameData.PlayerAbility.put(playerName, new Tajja(playerName));
 		else if (abilityNumber == AbilityInfo.AGirl.getIndex())
 			GameData.PlayerAbility.put(playerName, new AGirl(playerName));
-		else if (abilityNumber == AbilityInfo.Megumin.getIndex())
-			GameData.PlayerAbility.put(playerName, new Megumin(playerName));
 		else if (abilityNumber == AbilityInfo.PokeGo.getIndex())
 			GameData.PlayerAbility.put(playerName, new PokeGo(playerName));
-		else if (abilityNumber == AbilityInfo.Darkness.getIndex())
-			GameData.PlayerAbility.put(playerName, new Darkness(playerName));
+		else if (abilityNumber == AbilityInfo.Tanker.getIndex())
+			GameData.PlayerAbility.put(playerName, new Tanker(playerName));
 		else if (abilityNumber == AbilityInfo.Gasolin.getIndex())
 			GameData.PlayerAbility.put(playerName, new Gasolin(playerName));
 		else if (abilityNumber == AbilityInfo.Zet.getIndex())

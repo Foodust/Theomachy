@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
 import org.septagram.Theomachy.Utility.EventFilter;
@@ -29,7 +30,7 @@ public class AGirl extends Ability{
 	public AGirl(String playerName) {
 		super(playerName, AbilityInfo.AGirl, true, false, false, des);
 		
-		this.rank= 3;
+		this.rank= AbilityRank.A;
 		this.firstSkillCoolTime =60;
 		this.firstSkillStack =15;
 	}

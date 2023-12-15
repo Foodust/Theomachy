@@ -1,7 +1,9 @@
 package org.septagram.Theomachy.Ability.HUMAN;
 
+import java.util.Objects;
 import java.util.TimerTask;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +17,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -22,8 +25,7 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 import org.septagram.Theomachy.Utility.Skill;
 
 public class Voodoo extends Ability {
-    private String targetName = null;
-    private Block postSign = null;
+
     private final static String[] des = {
             AbilityInfo.Voodoo.getName() + "는 팻말을 이용해서 상대를 타격할 수 있는 능력입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "부두술",
@@ -33,13 +35,15 @@ public class Voodoo extends Ability {
             "설치후 7초동안 효과가 지속되며 7초 후에 자동으로 팻말이 부숴집니다.",
             "데미지는 무기의 영향을 받지 않습니다.",
             "쿨타임은 팻말을 든 채 좌클릭하면 좀 더 쉽게 확인 할 수 있습니다."};
-
+    private String targetName;
+    private Block postSign;
     public Voodoo(String playerName) {
         super(playerName, AbilityInfo.Voodoo, true, true, false, des);
         this.firstSkillCoolTime = 180;
         this.firstSkillStack = 20;
-
-        this.rank = 3;
+        this.targetName = null;
+        this.postSign = null;
+        this.rank = AbilityRank.A;
     }
 
     public void passiveSkill(BlockPlaceEvent event) {
@@ -65,7 +69,7 @@ public class Voodoo extends Ability {
 
                 }
             }
-        } else if (event.getPlayer().getItemInHand().getType() == Material.OAK_SIGN) {
+        } else if (event.getPlayer().getInventory().getItemInMainHand().getType() == Material.OAK_SIGN) {
             Action action = event.getAction();
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                 Player player = event.getPlayer();
@@ -77,7 +81,7 @@ public class Voodoo extends Ability {
 
     public void passiveSkill(SignChangeEvent event) {
         Player player = event.getPlayer();
-        String targetName = event.getLine(0);
+        String targetName = Objects.requireNonNull(event.line(0)).toString();
         Player target = GameData.OnlinePlayer.get(targetName);
         if (target != null) {
             Skill.Use(player, material, AbilityCase.NORMAL,firstSkillStack,  firstSkillCoolTime);

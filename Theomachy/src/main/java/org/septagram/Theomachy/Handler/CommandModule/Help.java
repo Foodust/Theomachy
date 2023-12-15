@@ -3,6 +3,7 @@ package org.septagram.Theomachy.Handler.CommandModule;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import org.septagram.Theomachy.Ability.Ability;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.DB.GameData;
 
 public class Help {
@@ -24,122 +26,122 @@ public class Help {
 		Ability ability= GameData.PlayerAbility.get(playerName);
 		if (ability != null)
 		{
-			Inventory i=Bukkit.createInventory(null, 18, ChatColor.BLACK+":::::::: 능력 정보 ::::::::");
-			ItemStack abname=new ItemStack(Material.ITEM_FRAME);
-			ItemStack abdes=new ItemStack(Material.BOOK);
-			ItemStack abcool1=new ItemStack(Material.CLOCK);
-			ItemStack abcool2=new ItemStack(Material.CLOCK);
-			ItemStack rank = new ItemStack(Material.AIR);
+			Inventory inventory= Bukkit.createInventory(null, 18, Component.text( ChatColor.BLACK + ":::::::: 능력 정보 ::::::::"));
+			ItemStack abilityName=new ItemStack(Material.ITEM_FRAME);
+			ItemStack abilityDescription=new ItemStack(Material.BOOK);
+			ItemStack abilityFirstCoolTime=new ItemStack(Material.CLOCK);
+			ItemStack abilitySecondCoolTime=new ItemStack(Material.CLOCK);
+			ItemStack rankStack = new ItemStack(Material.AIR);
 			
-			ItemMeta a=abname.getItemMeta();
-			ItemMeta b=abdes.getItemMeta();
-			ItemMeta c=abcool1.getItemMeta();
-			ItemMeta d=abcool2.getItemMeta();
-			ItemMeta e=rank.getItemMeta();
+			ItemMeta abilityNameItemMeta = abilityName.getItemMeta();
+			ItemMeta abilityDescriptionItemMeta = abilityDescription.getItemMeta();
+			ItemMeta abilityFirstCoolTimeItemMeta = abilityFirstCoolTime.getItemMeta();
+			ItemMeta abilitySecondCoolTimeItemMeta = abilitySecondCoolTime.getItemMeta();
+			ItemMeta rankItemMeta = rankStack.getItemMeta();
 			
-			a.setDisplayName(ChatColor.AQUA+"【능력 이름】 "+ChatColor.WHITE+ability.abilityName);
-			b.setDisplayName(ChatColor.DARK_AQUA+"【능력 설명】");
+			abilityNameItemMeta.displayName(Component.text( ChatColor.AQUA+"【능력 이름】 "+ChatColor.WHITE+ability.abilityName));
+			abilityDescriptionItemMeta.displayName(Component.text( ChatColor.DARK_AQUA+"【능력 설명】"));
 			
-			List<String> blore=new ArrayList<String>();
+			List<Component> descriptions=new ArrayList<Component>();
 			for(int j=0;j<ability.description.length;j++) {
-				blore.add(ChatColor.WHITE+ability.description[j]);
+				descriptions.add(Component.text(ChatColor.WHITE+ability.description[j]));
 			}
-			b.setLore(blore);
+			abilityDescriptionItemMeta.lore(descriptions);;
 			
-			abname.setItemMeta(a);
-			abdes.setItemMeta(b);
-		
+			abilityName.setItemMeta(abilityNameItemMeta);
+			abilityDescription.setItemMeta(abilityDescriptionItemMeta);
+
 			switch(ability.rank) {
-			case -1:
-				rank=new ItemStack(Material.ROTTEN_FLESH);
-				e=rank.getItemMeta();
-				e.setDisplayName("랭크: "+ChatColor.GRAY+"F");
-				rank.setItemMeta(e);
+			case F:
+				rankStack=new ItemStack(Material.ROTTEN_FLESH);
+				rankItemMeta=rankStack.getItemMeta();
+				rankItemMeta.displayName(Component.text( "랭크: "+ChatColor.GRAY+AbilityRank.F.getRank()));
+				rankStack.setItemMeta(rankItemMeta);
 				break;
-			case 1:
-				rank=new ItemStack(Material.IRON_INGOT);
-				e=rank.getItemMeta();
-				e.setDisplayName("랭크: "+ChatColor.WHITE+"C");
-				rank.setItemMeta(e);
+			case C:
+				rankStack=new ItemStack(Material.IRON_INGOT);
+				rankItemMeta=rankStack.getItemMeta();
+				rankItemMeta.displayName(Component.text("랭크: "+ChatColor.WHITE+ AbilityRank.C.getRank()));
+				rankStack.setItemMeta(rankItemMeta);
 				break;
-			case 2:
-				rank=new ItemStack(Material.GOLD_INGOT);
-				e=rank.getItemMeta();
-				e.setDisplayName("랭크: "+ChatColor.GREEN+"B");
-				rank.setItemMeta(e);
+			case B:
+				rankStack=new ItemStack(Material.GOLD_INGOT);
+				rankItemMeta=rankStack.getItemMeta();
+				rankItemMeta.displayName(Component.text("랭크: "+ChatColor.GREEN+AbilityRank.B.getRank()));
+				rankStack.setItemMeta(rankItemMeta);
 				break;
-			case 3:
-				rank=new ItemStack(Material.EMERALD);
-				e=rank.getItemMeta();
-				e.setDisplayName("랭크: "+ChatColor.AQUA+"A");
-				rank.setItemMeta(e);
+			case A:
+				rankStack=new ItemStack(Material.EMERALD);
+				rankItemMeta=rankStack.getItemMeta();
+				rankItemMeta.displayName(Component.text("랭크: "+ChatColor.AQUA+ AbilityRank.A.getRank()));
+				rankStack.setItemMeta(rankItemMeta);
 				break;
-			case 4:
-				rank=new ItemStack(Material.DIAMOND);
-				e=rank.getItemMeta();
-				e.setDisplayName("랭크: "+ChatColor.YELLOW+"S");
-				rank.setItemMeta(e);
+			case S:
+				rankStack=new ItemStack(Material.DIAMOND);
+				rankItemMeta=rankStack.getItemMeta();
+				rankItemMeta.displayName(Component.text("랭크: "+ChatColor.YELLOW+ AbilityRank.S.getRank()));
+				rankStack.setItemMeta(rankItemMeta);
 				break;
 			}
 			
-			i.setItem(4, abname);
-			i.setItem(0, abdes);
-			i.setItem(8, rank);
+			inventory.setItem(4, abilityName);
+			inventory.setItem(0, abilityDescription);
+			inventory.setItem(8, rankStack);
 			
 			if(ability.activeType) {
 				if(ability.secondSkillCoolTime !=-1) {
-					abcool1=new ItemStack(Material.CLOCK);
-					abcool2=new ItemStack(Material.CLOCK);
+					abilityFirstCoolTime=new ItemStack(Material.CLOCK);
+					abilitySecondCoolTime=new ItemStack(Material.CLOCK);
 					
-					List<String> clore=new ArrayList<String>();
-					c.setDisplayName(ChatColor.GREEN+"~ 일반 능력 ~");
-					clore.add( ChatColor.WHITE+"쿨타임: "+ability.firstSkillCoolTime +" 초 소요");
-					clore.add(ChatColor.WHITE+"조약돌: "+ability.firstSkillStack +"개 소모");
+					List<Component> firstSkillExplain=new ArrayList<Component>();
+					abilityFirstCoolTimeItemMeta.displayName(Component.text(ChatColor.GREEN+"~ 일반 능력 | 블레이즈 막대 좌클릭~"));
+					firstSkillExplain.add(Component.text(ChatColor.WHITE+"쿨타임: "+ability.firstSkillCoolTime +" 초 소요"));
+					firstSkillExplain.add(Component.text(ChatColor.WHITE+"조약돌: "+ability.firstSkillStack +"개 소모"));
 					
-					c.setLore(clore);
-					abcool1.setItemMeta(c);
+					abilityFirstCoolTimeItemMeta.lore(firstSkillExplain);
+					abilityFirstCoolTime.setItemMeta(abilityFirstCoolTimeItemMeta);
 					
-					List<String> dlore=new ArrayList<String>();
-					d.setLore(null);
-					d.setDisplayName(ChatColor.YELLOW+"~ 고급 능력 ~");
-					dlore.add(ChatColor.WHITE+"쿨타임: "+ability.secondSkillCoolTime +" 초 소요");
-					dlore.add(ChatColor.WHITE+"조약돌: "+ability.secondSkillStack +"개 소모");
+					List<Component> secondSkillExplain=new ArrayList<Component>();
+					abilitySecondCoolTimeItemMeta.lore(null);
+					abilitySecondCoolTimeItemMeta.displayName(Component.text(ChatColor.YELLOW+"~ 고급 능력 | 블레이즈 막대 우클릭 ~"));
+					secondSkillExplain.add(Component.text(ChatColor.WHITE+"쿨타임: "+ability.secondSkillCoolTime +" 초 소요"));
+					secondSkillExplain.add(Component.text(ChatColor.WHITE+"조약돌: "+ability.secondSkillStack +"개 소모"));
 					
-					d.setLore(dlore);
-					abcool2.setItemMeta(d);
+					abilitySecondCoolTimeItemMeta.lore(secondSkillExplain);
+					abilitySecondCoolTime.setItemMeta(abilitySecondCoolTimeItemMeta);
 					
-					i.setItem(9, abcool1);
-					i.setItem(17, abcool2);
+					inventory.setItem(9, abilityFirstCoolTime);
+					inventory.setItem(17, abilitySecondCoolTime);
 					
 				}else {
-					abcool1=new ItemStack(Material.CLOCK);
+					abilityFirstCoolTime=new ItemStack(Material.CLOCK);
 					
-					List<String> clore=new ArrayList<String>();
-					c.setDisplayName(ChatColor.GREEN+"~ 일반 능력 ~");
-					clore.add(ChatColor.WHITE+"쿨타임: "+ability.firstSkillCoolTime +" 초 소요");
-					clore.add(ChatColor.WHITE+"조약돌: "+ability.firstSkillStack +"개 소모");
-					c.setLore(clore);
+					List<Component> firstSkillExplain=new ArrayList<Component>();
+					abilityFirstCoolTimeItemMeta.displayName(Component.text(ChatColor.GREEN+"~ 일반 능력 | 블레이즈 막대 좌클릭 ~"));
+					firstSkillExplain.add(Component.text(ChatColor.WHITE+"쿨타임: "+ability.firstSkillCoolTime +" 초 소요"));
+					firstSkillExplain.add(Component.text(ChatColor.WHITE+"조약돌: "+ability.firstSkillStack +"개 소모"));
+					abilityFirstCoolTimeItemMeta.lore(firstSkillExplain);
 					
-					abcool1.setItemMeta(c);
+					abilityFirstCoolTime.setItemMeta(abilityFirstCoolTimeItemMeta);
 					
-					i.setItem(13, abcool1);
+					inventory.setItem(13, abilityFirstCoolTime);
 				}
 			}if (!ability.activeType && ability.passiveType) {
-				abcool1=new ItemStack(Material.CLOCK);
+				abilityFirstCoolTime=new ItemStack(Material.CLOCK);
 				
-				List<String> clore=new ArrayList<String>();
-				c.setDisplayName(ChatColor.GREEN+"~ 패시브 능력 ~");
-				clore.add(ChatColor.WHITE+"능력 설명을 확인하세요.");
-				c.setLore(clore);
+				List<Component> passiveSkillExplain=new ArrayList<Component>();
+				abilityFirstCoolTimeItemMeta.displayName(Component.text(ChatColor.GREEN+"~ 패시브 능력 ~"));
+				passiveSkillExplain.add(Component.text(ChatColor.WHITE+"능력 설명을 확인하세요."));
+				abilityFirstCoolTimeItemMeta.lore(passiveSkillExplain);
 				
-				abcool1.setItemMeta(c);
+				abilityFirstCoolTime.setItemMeta(abilityFirstCoolTimeItemMeta);
 				
-				i.setItem(13, abcool1);
+				inventory.setItem(13, abilityFirstCoolTime);
 			}
 			
 			Player p=(Player)sender;
 			
-			p.openInventory(i);
+			p.openInventory(inventory);
 			
 		}
 		else

@@ -46,15 +46,14 @@ public enum AbilityInfo {
     Bulter(121, "집사"),
     Midoriya(122, "미도리야"),
     Goldspoon(123, "금수저"),
-    Bee(124, "벌"),
+    Bee(124, "여왕벌"),
     Snow(125, "눈사람"),
     Tajja(126, "타짜"),
     AGirl(127, "안락소녀"),
-    Megumin(128, "메구밍"),
-    PokeGo(129, "포케 고!"),
-    Darkness(130, "다크니스"),
-    Gasolin(131, "가솔린"),
-    Zet(132, "제트엔진");
+    PokeGo(128, "포케 고!"),
+    Tanker(129, "탱커"),
+    Gasolin(130, "가솔린"),
+    Zet(131, "제트엔진");
 
     private final int index;
     private final String name;

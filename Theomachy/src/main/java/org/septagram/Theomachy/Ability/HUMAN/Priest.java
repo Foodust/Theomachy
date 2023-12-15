@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.septagram.Theomachy.Ability.ENUM.AbilityCase;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 import org.septagram.Theomachy.Theomachy;
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Utility.CoolTimeChecker;
@@ -29,7 +30,7 @@ public class Priest extends Ability
 			   "자신에게 랜덤으로 버프 5초간 를 적용합니다." ,
 			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"신의 은총 Ⅱ",
 			   "자신의 팀원 모두에게 랜덤으로 버프를 5초간 적용합니다."};
-	
+	private int buffTime;
 	public Priest(String playerName)
 	{
 		super(playerName, AbilityInfo.Priest, true, false,false, des);
@@ -39,8 +40,8 @@ public class Priest extends Ability
 		this.secondSkillCoolTime =90;
 		this.firstSkillStack =30;
 		this.secondSkillStack =45;
-		
-		this.rank=2;
+		this.buffTime = 5 *20;
+		this.rank= AbilityRank.B;
 		
 	}
 	
@@ -58,7 +59,7 @@ public class Priest extends Ability
 
 	private void leftAction(Player player)
 	{
-		int buffTime = 5 * 20;
+
 		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, firstSkillStack))
 		{
 			Skill.Use(player, material, AbilityCase.NORMAL,firstSkillStack, firstSkillCoolTime);
@@ -97,35 +98,33 @@ public class Priest extends Ability
 		{
 			Skill.Use(player, material, AbilityCase.RARE,secondSkillStack, secondSkillCoolTime);
 			List<Player> targetList = GetPlayerList.getTeamMember(player);
-			int buffTime = 5 * 20;
             Random random = new Random();
-            for (Player e : targetList)
+            for (Player team : targetList)
             {
                 if (random.nextInt(2)==0)
                 {
-                    // depre 고쳐 나중에
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, buffTime,0));
-                    e.sendMessage(ChatColor.LIGHT_PURPLE+"데미지 저항 효과가 적용되었습니다.");
+                    team.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, buffTime,0));
+                    team.sendMessage(ChatColor.LIGHT_PURPLE+"데미지 저항 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2)==0)
                 {
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, buffTime,0));
-                    e.sendMessage(ChatColor.RED+"데미지 증가 효과가 적용되었습니다.");
+                    team.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, buffTime,0));
+                    team.sendMessage(ChatColor.RED+"데미지 증가 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2)==0)
                 {
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, buffTime,0));
-                    e.sendMessage(ChatColor.GOLD+"체력회복속도 증가 효과가 적용되었습니다.");
+                    team.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, buffTime,0));
+                    team.sendMessage(ChatColor.GOLD+"체력회복속도 증가 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2)==0)
                 {
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, buffTime,0));
-                    e.sendMessage(ChatColor.AQUA+"이동속도 증가 효과가 적용되었습니다.");
+                    team.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, buffTime,0));
+                    team.sendMessage(ChatColor.AQUA+"이동속도 증가 효과가 적용되었습니다.");
                 }
                 if (random.nextInt(2)==0)
                 {
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, buffTime,0));
-                    e.sendMessage(ChatColor.GREEN+"빠른 채광 효과가 적용되었습니다.");
+                    team.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, buffTime,0));
+                    team.sendMessage(ChatColor.GREEN+"빠른 채광 효과가 적용되었습니다.");
                 }
             }
         }

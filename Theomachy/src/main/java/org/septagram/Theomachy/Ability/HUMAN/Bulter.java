@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
+import org.septagram.Theomachy.Ability.ENUM.AbilityRank;
 
 public class Bulter extends Ability {
 
@@ -18,7 +19,7 @@ public class Bulter extends Ability {
 	public Bulter(String playerName) {
 		super(playerName, AbilityInfo.Bulter, false, true, false, des);
 		
-		this.rank=4;
+		this.rank= AbilityRank.A;
 	}
 	
 	public void passiveSkill(EntityExplodeEvent event){
