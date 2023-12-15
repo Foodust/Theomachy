@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Handler.CommandModule;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -14,7 +15,7 @@ public class CoolTimeHandler
 		if (PermissionChecker.Sender(sender))
 		{
 			CoolTime.init =true;
-			Bukkit.broadcastMessage("관리자가 모든 쿨타임을 초기화 하였습니다.");
+			Bukkit.broadcast(Component.text("관리자가 모든 쿨타임을 초기화 하였습니다."));
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Handler.CommandModule;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.World;
@@ -28,10 +29,10 @@ public class Team {
                         GameData.PlayerTeam.put(player.getName(), teamName);
                         if (teamNameOld == null) //플레이어 팀 초기화
                         {
-                            Bukkit.broadcastMessage("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " (이)가 팀 " + NamedTextColor.DARK_AQUA + teamName + NamedTextColor.WHITE + " 에 등록되었습니다.");
+                            Bukkit.broadcast(Component.text("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " (이)가 팀 " + NamedTextColor.DARK_AQUA + teamName + NamedTextColor.WHITE + " 에 등록되었습니다."));
                         } else //플레이어 팀 변경
                         {
-                            Bukkit.broadcastMessage("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " 의 팀이 변경되었습니다.    " + NamedTextColor.BLUE + teamNameOld + NamedTextColor.WHITE + " > " + NamedTextColor.DARK_AQUA + teamName);
+                            Bukkit.broadcast(Component.text("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " 의 팀이 변경되었습니다.    " + NamedTextColor.BLUE + teamNameOld + NamedTextColor.WHITE + " > " + NamedTextColor.DARK_AQUA + teamName));
                         }
                     }
                 } else {
@@ -43,10 +44,10 @@ public class Team {
                             GameData.PlayerTeam.put(data[i], teamName);
                             if (teamNameOld == null) //플레이어 팀 초기화
                             {
-                                Bukkit.broadcastMessage("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " (이)가 팀 " + NamedTextColor.DARK_AQUA + teamName + NamedTextColor.WHITE + " 에 등록되었습니다.");
+                                Bukkit.broadcast(Component.text("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " (이)가 팀 " + NamedTextColor.DARK_AQUA + teamName + NamedTextColor.WHITE + " 에 등록되었습니다."));
                             } else //플레이어 팀 변경
                             {
-                                Bukkit.broadcastMessage("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " 의 팀이 변경되었습니다.    " + NamedTextColor.BLUE + teamNameOld + NamedTextColor.WHITE + " > " + NamedTextColor.DARK_AQUA + teamName);
+                                Bukkit.broadcast(Component.text("플레이어 " + NamedTextColor.RED + playerName + NamedTextColor.WHITE + " 의 팀이 변경되었습니다.    " + NamedTextColor.BLUE + teamNameOld + NamedTextColor.WHITE + " > " + NamedTextColor.DARK_AQUA + teamName));
                             }
                         } else
                             sender.sendMessage(data[i] + " 해당하는 유저가 없습니다.");

@@ -3,6 +3,7 @@ package org.septagram.Theomachy.Handler.CommandModule;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -83,7 +84,7 @@ public class GUISetting {
 
     public static void guiListener(ItemStack wool) {
 
-        switch (NamedTextColor.stripColor(Objects.requireNonNull(wool.getItemMeta().displayName()).toString())) {
+        switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().displayName()).toString())) {
             case "게임 시작 시 인벤토리 클리어" -> {
                 if (wool.getDurability() == 5) {
                     Theomachy.INVENTORY_CLEAR = false;

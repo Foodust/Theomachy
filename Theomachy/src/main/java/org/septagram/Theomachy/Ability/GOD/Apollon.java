@@ -73,7 +73,7 @@ public class Apollon extends Ability {
             World world = player.getWorld();
             world.setTime(6000);
             world.setStorm(false);
-            Bukkit.broadcastMessage(NamedTextColor.RED + "태양이 매우 뜨거워집니다.");
+            Bukkit.broadcast(Component.text(NamedTextColor.RED + "태양이 매우 뜨거워집니다."));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 for (int count = sunTime; count >= 0; count--) {
                     List<Player> playerList = GameData.OnlinePlayer.get(playerName).getWorld().getPlayers();
@@ -88,7 +88,7 @@ public class Apollon extends Ability {
                 }
             }, delay * 20L);
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                Bukkit.broadcastMessage("태양이 힘을 잃었습니다.");
+                Bukkit.broadcast(Component.text("태양이 힘을 잃었습니다."));
                 world.setTime(18000);
             }, (sunTime + delay + 1) * 20L);
         }

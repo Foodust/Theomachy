@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.TimerTask;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.*;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
@@ -22,9 +24,9 @@ import org.septagram.Theomachy.Utility.PlayerInventory;
 public class GameReadyTimer extends TimerTask {
     private int count = 1;
     private final List<Player> playerList;
-    private String[] setting = new String[8];
+    private final String[] setting = new String[8];
     private Difficulty difficulty;
-    private World world;
+    private final World world;
 
     public GameReadyTimer() {
         this.playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
@@ -66,62 +68,62 @@ public class GameReadyTimer extends TimerTask {
         if (GameHandler.Ready && count < 45) {
             switch (count) {
                 case 1 -> {
-                    Bukkit.broadcastMessage(NamedTextColor.RED + "신들의 전쟁 플러그인은 스카이블럭 전용이며 야생,하드코어로는 부적합합니다");
-                    Bukkit.broadcastMessage(NamedTextColor.RED + "이 점을 숙지 하시고 게임을 즐기시길 바랍니다.");
+                    Bukkit.broadcast(Component.text(NamedTextColor.RED + "신들의 전쟁 플러그인은 스카이블럭 전용이며 야생,하드코어로는 부적합합니다"));
+                    Bukkit.broadcast(Component.text(NamedTextColor.RED + "이 점을 숙지 하시고 게임을 즐기시길 바랍니다."));
                 }
                 case 3 -> {
-                    Bukkit.broadcastMessage(NamedTextColor.AQUA + "플러그인이 배포 중인 곳");
-                    Bukkit.broadcastMessage(NamedTextColor.RED + "현재 배포하지 않음");
+                    Bukkit.broadcast(Component.text(NamedTextColor.AQUA + "플러그인이 배포 중인 곳"));
+                    Bukkit.broadcast(Component.text(NamedTextColor.RED + "현재 배포하지 않음"));
                 }
                 case 8 -> {
-                    Bukkit.broadcastMessage(NamedTextColor.GREEN + "****** 서버 세팅상태 ******");
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "게임 시작 시 인벤토리 클리어 : " + setting[0]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "게임 시작 시 기본 아이템 지급 : " + setting[1]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "게임 시작 시 엔티티 삭제 : " + setting[7]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "부활 시 침대 무시 : " + setting[2]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "서버 자동 저장 : " + setting[3]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "동물 스폰 : " + setting[4]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "몬스터 스폰 : " + setting[5]);
-                    Bukkit.broadcastMessage(NamedTextColor.WHITE + "서버 난이도 : " + setting[6]);
-                    Bukkit.broadcastMessage(NamedTextColor.GREEN + "***************************");
+                    Bukkit.broadcast(Component.text(NamedTextColor.GREEN + "****** 서버 세팅상태 ******"));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "게임 시작 시 인벤토리 클리어 : " + setting[0]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "게임 시작 시 기본 아이템 지급 : " + setting[1]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "게임 시작 시 엔티티 삭제 : " + setting[7]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "부활 시 침대 무시 : " + setting[2]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "서버 자동 저장 : " + setting[3]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "동물 스폰 : " + setting[4]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "몬스터 스폰 : " + setting[5]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.WHITE + "서버 난이도 : " + setting[6]));
+                    Bukkit.broadcast(Component.text(NamedTextColor.GREEN + "***************************"));
                 }
                 case 14 -> {
-                    Bukkit.broadcastMessage(NamedTextColor.DARK_GREEN + "현재 인식된 플레이어 목록");
+                    Bukkit.broadcast(Component.text(NamedTextColor.DARK_GREEN + "현재 인식된 플레이어 목록"));
                     int i = 1;
                     for (Player player : playerList) {
-                        Bukkit.broadcastMessage(i++ + ".  " + NamedTextColor.GOLD + player.getName());
+                        Bukkit.broadcast(Component.text(i++ + ".  " + NamedTextColor.GOLD + player.getName()));
                     }
                 }
                 case 16 -> {
-                    Bukkit.broadcastMessage(NamedTextColor.AQUA + "현재 능력이 적용되지 않은 플레이어 목록");
+                    Bukkit.broadcast(Component.text(NamedTextColor.AQUA + "현재 능력이 적용되지 않은 플레이어 목록"));
                     int j = 1;
                     for (Player player : playerList) {
                         if (!GameData.PlayerAbility.containsKey(player.getName())) {
-                            Bukkit.broadcastMessage(j + ".  " + NamedTextColor.GOLD + player.getName());
+                            Bukkit.broadcast(Component.text(j + ".  " + NamedTextColor.GOLD + player.getName()));
                         }
                     }
                 }
                 case 18 -> {
-                    Bukkit.broadcastMessage(NamedTextColor.BLUE + "현재 팀이 적용되지 않은 플레이어 목록");
+                    Bukkit.broadcast(Component.text(NamedTextColor.BLUE + "현재 팀이 적용되지 않은 플레이어 목록"));
                     int k = 1;
                     for (Player player : playerList) {
                         if (!GameData.PlayerTeam.containsKey(player.getName())) {
-                            Bukkit.broadcastMessage(k + ".  " + NamedTextColor.GOLD + player.getName());
+                            Bukkit.broadcast(Component.text(k + ".  " + NamedTextColor.GOLD + player.getName()));
                         }
                     }
                 }
                 case 24 -> {
-                    Bukkit.broadcastMessage("원작자 : " + NamedTextColor.AQUA + "Septagram(칠각별)");
-                    Bukkit.broadcastMessage(NamedTextColor.RED + "[현재 삭제됨]" +NamedTextColor.WHITE + "원작자 블로그 : http://blog.naver.com/septagram/");
-                    Bukkit.broadcastMessage("의견 및 버그 제보는");
-                    Bukkit.broadcastMessage("가장 최근 수정자 : " + NamedTextColor.DARK_GREEN + "seunhoo@naver.com" + NamedTextColor.WHITE + "으로 보내주세요.");
+                    Bukkit.broadcast(Component.text("원작자 : " + NamedTextColor.AQUA + "Septagram(칠각별)"));
+                    Bukkit.broadcast(Component.text(NamedTextColor.RED + "[현재 삭제됨]" +NamedTextColor.WHITE + "원작자 블로그 : http://blog.naver.com/septagram/"));
+                    Bukkit.broadcast(Component.text("의견 및 버그 제보는"));
+                    Bukkit.broadcast(Component.text("가장 최근 수정자 : " + NamedTextColor.DARK_GREEN + "seunhoo@naver.com" + NamedTextColor.WHITE + "으로 보내주세요."));
                 }
-                case 26 -> Bukkit.broadcastMessage(NamedTextColor.AQUA + "잠시 후 능력이 활성화 되며 팀 스폰지역으로 텔레포트 됩니다");
-                case 28 -> Bukkit.broadcastMessage(NamedTextColor.RED + "5초 전");
-                case 29 -> Bukkit.broadcastMessage(NamedTextColor.RED + "4초 전");
-                case 30 -> Bukkit.broadcastMessage(NamedTextColor.RED + "3초 전");
-                case 31 -> Bukkit.broadcastMessage(NamedTextColor.RED + "2초 전");
-                case 32 -> Bukkit.broadcastMessage(NamedTextColor.RED + "1초 전");
+                case 26 -> Bukkit.broadcast(Component.text(NamedTextColor.AQUA + "잠시 후 능력이 활성화 되며 팀 스폰지역으로 텔레포트 됩니다"));
+                case 28 -> Bukkit.broadcast(Component.text(NamedTextColor.RED + "5초 전"));
+                case 29 -> Bukkit.broadcast(Component.text(NamedTextColor.RED + "4초 전"));
+                case 30 -> Bukkit.broadcast(Component.text(NamedTextColor.RED + "3초 전"));
+                case 31 -> Bukkit.broadcast(Component.text(NamedTextColor.RED + "2초 전"));
+                case 32 -> Bukkit.broadcast(Component.text(NamedTextColor.RED + "1초 전"));
 //				case 1 ->{:
                 case 35 -> {
                     if (Theomachy.ENTITIES_REMOVE) {
@@ -141,7 +143,7 @@ public class GameReadyTimer extends TimerTask {
                         else
                             spawnLocation.setY(spawnLocation.getY() + 1);
                     }
-                    Bukkit.broadcastMessage(NamedTextColor.AQUA + "스폰 지역으로 텔레포트 합니다");
+                    Bukkit.broadcast(Component.text(NamedTextColor.AQUA + "스폰 지역으로 텔레포트 합니다"));
                     for (Player player : playerList) {
                         player.setFoodLevel(20);
                         player.setSaturation(10f);
@@ -186,8 +188,8 @@ public class GameReadyTimer extends TimerTask {
                         e.buff();
                     }
                     GameHandler.Start = true;
-                    Bukkit.broadcastMessage(NamedTextColor.GOLD + "게임 시작!");
-                    Bukkit.broadcastMessage(NamedTextColor.GREEN + "빠른 시작이 설정되었습니다. 관리자는 콘솔로 내용을 확인해주세요.");
+                    Bukkit.broadcast(Component.text(NamedTextColor.GOLD + "게임 시작!"));
+                    Bukkit.broadcast(Component.text(NamedTextColor.GREEN + "빠른 시작이 설정되었습니다. 관리자는 콘솔로 내용을 확인해주세요."));
                 }
             }
         } else

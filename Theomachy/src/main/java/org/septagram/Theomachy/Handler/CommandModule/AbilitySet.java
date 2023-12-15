@@ -1,5 +1,6 @@
 package org.septagram.Theomachy.Handler.CommandModule;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
@@ -75,7 +76,7 @@ public class AbilitySet
 	public static void Reset()
 	{
 		GameData.PlayerAbility.clear();
-		Bukkit.broadcastMessage(NamedTextColor.AQUA+"관리자가 모두의 능력을 초기화 하였습니다.");
+		Bukkit.broadcast(Component.text(NamedTextColor.AQUA+"관리자가 모두의 능력을 초기화 하였습니다."));
 	}
 	
 	private static void RandomAssignment(CommandSender sender)
@@ -83,13 +84,13 @@ public class AbilitySet
 
         if (!GameData.PlayerAbility.isEmpty())
 		{
-			Bukkit.broadcastMessage("모든 능력을 삭제한 후 재 추첨합니다.");
+			Bukkit.broadcast(Component.text("모든 능력을 삭제한 후 재 추첨합니다."));
 			GameData.PlayerAbility.clear();
 		}
 		List<Player> playerlist= new ArrayList<>( Bukkit.getOnlinePlayers());
-		Bukkit.broadcastMessage(NamedTextColor.DARK_AQUA+"인식된 플레이어 목록");
+		Bukkit.broadcast(Component.text(NamedTextColor.DARK_AQUA+"인식된 플레이어 목록"));
 		for(Player e : playerlist)
-			Bukkit.broadcastMessage(NamedTextColor.GOLD+"  "+e.getName());
+			Bukkit.broadcast(Component.text(NamedTextColor.GOLD+"  "+e.getName()));
 		int[] rn = RandomNumberConstructor.nonDuplicate();
 		int length;
 		length = Math.min(playerlist.size(), Blacklist.availableList);
@@ -100,10 +101,10 @@ public class AbilitySet
 			abilityAssignment(rn[i++],playerName, (Player) sender);
 		}
 		
-		Bukkit.broadcastMessage("모두에게 능력이 적용되었습니다.");
-		Bukkit.broadcastMessage("/t help 로 확인해보세요.");
+		Bukkit.broadcast(Component.text("모두에게 능력이 적용되었습니다."));
+		Bukkit.broadcast(Component.text("/t help 로 확인해보세요."));
 		if (length!=playerlist.size())
-			Bukkit.broadcastMessage("인원이 너무 많습니다. 전부에게 능력을 할당하지 못했을수도 있습니다.");
+			Bukkit.broadcast(Component.text("인원이 너무 많습니다. 전부에게 능력을 할당하지 못했을수도 있습니다."));
 	}
 	
 	private static void forceAssignment(CommandSender sender, String[] data)
@@ -121,7 +122,7 @@ public class AbilitySet
 				int abilityCode = Integer.parseInt(abilityName);
 				abilityAssignment(abilityCode, playerName, p);
 				Player player = GameData.OnlinePlayer.get(playerName);
-				Bukkit.broadcastMessage("관리자가 "+NamedTextColor.RED+playerName+NamedTextColor.WHITE+" 에게 능력을 할당하였습니다.");
+				Bukkit.broadcast(Component.text("관리자가 "+NamedTextColor.RED+playerName+NamedTextColor.WHITE+" 에게 능력을 할당하였습니다."));
 				player.sendMessage("능력이 할당되었습니다. /t help로 능력을 확인해보세요.");
 			}
 			catch (NumberFormatException e)

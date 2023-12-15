@@ -6,6 +6,7 @@ import java.util.Objects;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -316,11 +317,11 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onInventoryClick(InventoryClickEvent event) {
-        if (!NamedTextColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":: 블랙리스트 ::") &&
-                !NamedTextColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 능력 정보 ::::::::") &&
-                !NamedTextColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::: 설정 ::::::") &&
-                !NamedTextColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 편의 기능 ::::::::") &&
-                !NamedTextColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 팁 ::::::::"))
+        if (!ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":: 블랙리스트 ::") &&
+                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 능력 정보 ::::::::") &&
+                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::: 설정 ::::::") &&
+                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 편의 기능 ::::::::") &&
+                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 팁 ::::::::"))
             return;
         event.setCancelled(true);
         try {
@@ -328,7 +329,7 @@ public class EventManager implements Listener {
             assert wool != null;
             ItemMeta meta = wool.getItemMeta();
 
-            if (NamedTextColor.stripColor(event.getView().getOriginalTitle()).equals(":: 블랙리스트 ::")) {
+            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":: 블랙리스트 ::")) {
 
                 if (wool.getDurability() == (short) 5) {
                     wool.setDurability((short) 14);
@@ -360,11 +361,11 @@ public class EventManager implements Listener {
                 }
             }
 
-            if (NamedTextColor.stripColor(event.getView().getOriginalTitle()).equals(":::::::: 편의 기능 ::::::::")) {
+            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":::::::: 편의 기능 ::::::::")) {
 
                 Player p = (Player) event.getWhoClicked();
 
-                switch (NamedTextColor.stripColor(wool.getItemMeta().displayName())) {
+                switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().displayName()).toString())) {
                     case "가챠 ★ 가챠" -> {
                         Gambling.gambling(p);
                     }
@@ -372,7 +373,7 @@ public class EventManager implements Listener {
                 }
             }
 
-            if (NamedTextColor.stripColor(event.getView().getOriginalTitle()).equals(":::::: 설정 ::::::")) {
+            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":::::: 설정 ::::::")) {
 
                 GUISetting.guiListener(wool);
 
