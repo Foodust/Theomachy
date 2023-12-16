@@ -42,9 +42,14 @@ public class Blacklist {
         for (int index = 0; index < AbilityData.HUMAN_ABILITY_NUMBER; index++) {
             man[index] = a++;
         }
+        int[] yaiba = new int[AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER];
+        for (int index = 0; index < AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER; index++) {
+            yaiba[index] = a++;
+        }
 
-        ItemStack[] wool = new ItemStack[god.length + man.length + 2];
-        ItemMeta[] meta = new ItemMeta[god.length + man.length + 2];
+        int length = god.length + man.length + yaiba.length + 2;
+        ItemStack[] wool = new ItemStack[length];
+        ItemMeta[] meta = new ItemMeta[length];
 
         for (int index = 1; index <= god.length; index++) {
             wool[index - 1] = new ItemStack(Material.WHITE_WOOL);
@@ -58,18 +63,18 @@ public class Blacklist {
             wool[index - 1].setItemMeta(meta[index]);
         }
 
-        int b = 101;
+        int humanLength = 101;
         for (int index = god.length; index < (god.length + man.length); index++) {
             wool[index] = new ItemStack(Material.WHITE_WOOL);
             meta[index] = wool[index].getItemMeta();
-            meta[index].setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + b);
-            if (!Blacklist.contains(b)) {
+            meta[index].setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + humanLength);
+            if (!Blacklist.contains(humanLength)) {
                 wool[index].setDurability((short) 5);
             } else {
                 wool[index].setDurability((short) 14);
             }
             wool[index].setItemMeta(meta[index]);
-            b++;
+            humanLength++;
         }
 
         for (int i = 0; i < god.length + man.length; i++) {

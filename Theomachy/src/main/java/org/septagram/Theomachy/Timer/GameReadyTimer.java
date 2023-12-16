@@ -67,8 +67,6 @@ public class GameReadyTimer extends TimerTask {
     public void run() {
         if (GameHandler.Ready && count < 45) {
             Bukkit.getScheduler().runTask(Theomachy.getPlugin(), ()->{
-
-
             switch (count) {
                 case 1 -> {
                     Bukkit.broadcastMessage(ChatColor.RED + "신들의 전쟁 플러그인은 스카이블럭 전용이며 야생,하드코어로는 부적합합니다");
@@ -128,7 +126,7 @@ public class GameReadyTimer extends TimerTask {
                 case 31 -> Bukkit.broadcastMessage(ChatColor.RED + "2초 전");
                 case 32 -> Bukkit.broadcastMessage(ChatColor.RED + "1초 전");
 //				case 1 ->{:
-                case 35 -> {
+                case 33 -> {
                     if (Theomachy.ENTITIES_REMOVE) {
                         try {
                             List<Entity> entities = world.getEntities();
@@ -177,7 +175,7 @@ public class GameReadyTimer extends TimerTask {
                     }
                 }
 //				case 2:
-                case 36 -> {
+                case 34 -> {
                     world.setPVP(true);
                     world.setAutoSave(Theomachy.AUTO_SAVE);
                     world.setSpawnFlags(Theomachy.MONSTER, Theomachy.ANIMAL);

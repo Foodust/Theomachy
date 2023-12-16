@@ -9,7 +9,7 @@ import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.PermissionChecker;
 
-public class AbilityInfo
+public class AbilityPlayerInfo
 {
 	public static void showAllAbility(CommandSender sender)
 	{

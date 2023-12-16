@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 
 import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.DB.GameData;
-import org.septagram.Theomachy.Handler.CommandModule.AbilityInfo;
+import org.septagram.Theomachy.Handler.CommandModule.AbilityPlayerInfo;
 import org.septagram.Theomachy.Handler.CommandModule.AbilitySet;
 import org.septagram.Theomachy.Handler.CommandModule.Blacklist;
 import org.septagram.Theomachy.Handler.CommandModule.Convi;
@@ -29,7 +29,7 @@ public class CommandHandler
 		else if (data[0].equals("ability") || data[0].equals("a"))
 			AbilitySet.Module(sender, command, label, data);
 		else if (data[0].equals("alist"))
-			AbilityInfo.showAllAbility(sender);
+			AbilityPlayerInfo.showAllAbility(sender);
 		else if (data[0].equals("help"))
 			Help.Module(sender, command, label, data);
 		else if (data[0].equals("spawn") || data[0].equals("s"))

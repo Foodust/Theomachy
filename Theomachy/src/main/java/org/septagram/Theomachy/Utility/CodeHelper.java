@@ -29,5 +29,10 @@ public class CodeHelper {
         for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet)) {
             sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
+        sender.sendMessage(ChatColor.RED + " 【 귀멸의 칼날 】 ");
+        for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Zenitsu)) {
+            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+        }
+
     }
 }

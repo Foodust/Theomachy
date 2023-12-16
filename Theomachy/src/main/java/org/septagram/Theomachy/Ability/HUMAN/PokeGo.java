@@ -50,14 +50,17 @@ public class PokeGo extends Ability {
 
             Random random = new Random();
 
-            int randomNumber = random.nextInt(2);
+            int randomNumber = random.nextInt(3);
 
-            int abilityNumber;
+            int abilityNumber=0;
             if (randomNumber == 0) {
                 abilityNumber = random.nextInt(AbilityData.GOD_ABILITY_NUMBER) + 1;
                 AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
-            } else {
+            } else if (randomNumber == 1){
                 abilityNumber = random.nextInt(AbilityData.HUMAN_ABILITY_NUMBER) + 101;
+                AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+            } else if (randomNumber == 2) {
+                abilityNumber = random.nextInt(AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER) + 400;
                 AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             }
             event.getPlayer().sendMessage(ChatColor.YELLOW + " ★ 경  " + ChatColor.WHITE + goal + " 보 걷기에 성공했습니다!  " + ChatColor.YELLOW + " 축 ★");

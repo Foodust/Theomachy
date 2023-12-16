@@ -1,5 +1,7 @@
 package org.septagram.Theomachy.Ability.ENUM;
 
+import org.septagram.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collector;
@@ -58,8 +60,9 @@ public enum AbilityInfo {
     PokeGo(128, "포케 고!"),
     Tanker(129, "탱커"),
     Gasolin(130, "가솔린"),
-    Zet(131, "제트엔진");
-
+    Zet(131, "제트엔진"),
+    //========================================================================================================
+    Zenitsu(401,"젠이츠");
     private final int index;
     private final String name;
     private static final Map<Integer, String> abilityInfoMap = new HashMap<>();

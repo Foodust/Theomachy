@@ -11,6 +11,7 @@ import org.septagram.Theomachy.Ability.Ability;
 import org.septagram.Theomachy.Ability.ENUM.AbilityInfo;
 import org.septagram.Theomachy.Ability.GOD.*;
 import org.septagram.Theomachy.Ability.HUMAN.*;
+import org.septagram.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
 import org.septagram.Theomachy.DB.GameData;
 import org.septagram.Theomachy.Utility.CodeHelper;
 import org.septagram.Theomachy.Utility.PermissionChecker;
@@ -236,6 +237,8 @@ public class AbilitySet
 			GameData.PlayerAbility.put(playerName, new Gasolin(playerName));
 		else if (abilityNumber == AbilityInfo.Zet.getIndex())
 			GameData.PlayerAbility.put(playerName, new Zet(playerName));
+		else if (abilityNumber == AbilityInfo.Zenitsu.getIndex())
+			GameData.PlayerAbility.put(playerName,new Zenitsu(playerName));
 		else
 		{
 			p.sendMessage("능력 혹은 능력 코드 번호를 잘못 입력하셨습니다.");
