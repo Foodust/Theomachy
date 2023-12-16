@@ -3,15 +3,11 @@ package org.Theomachy.Manager;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.bukkit.*;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -35,15 +31,16 @@ import org.bukkit.potion.PotionEffectType;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityTag;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Gambling;
+import org.Theomachy.Utility.Gambling.Gambling;
 import org.Theomachy.Utility.Hangul;
-import org.Theomachy.Handler.CommandModule.Blacklist;
-import org.Theomachy.Handler.CommandModule.GUISetting;
-import org.Theomachy.Handler.CommandModule.GameHandler;
+import org.Theomachy.Handler.Ability.Blacklist;
+import org.Theomachy.Handler.CommandModule.SettingCommand;
+import org.Theomachy.Handler.CommandModule.StartStopCommand;
 
 public class EventManager implements Listener {
+
     @EventHandler
     public void onPlayerDamageByMagma(BlockDamageEvent event){
             Block block = event.getBlock();
@@ -84,7 +81,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onPlayerInteractEvent(PlayerInteractEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             String playerName = event.getPlayer().getName();
             Ability ability = GameData.PlayerAbility.get(playerName);
             if (ability != null && ability.activeType) {
@@ -95,7 +92,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onEntityDamage(EntityDamageEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.PlayerAbility.containsKey(playerName))
@@ -110,7 +107,7 @@ public class EventManager implements Listener {
     @EventHandler
     public static void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         try {
-            if (GameHandler.Start) {
+            if (StartStopCommand.Start) {
                 if (event.getDamager() instanceof Player &&
                         (event.getEntity() instanceof Player || event.getEntity() instanceof LivingEntity)) {
 
@@ -155,7 +152,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onPlayerDeath(PlayerDeathEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             for (Ability e : PlayerDeathEventList)
                 e.passiveSkill(event);
             Player player = event.getEntity();
@@ -170,7 +167,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onFoodLevelChange(FoodLevelChangeEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.PlayerAbility.containsKey(playerName))
@@ -181,7 +178,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onEntityRegainHealth(EntityRegainHealthEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.PlayerAbility.containsKey(playerName))
@@ -192,17 +189,30 @@ public class EventManager implements Listener {
 
     @EventHandler
     public static void onBlockBreak(BlockBreakEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             String playerName = event.getPlayer().getName();
             Ability ability = GameData.PlayerAbility.get(playerName);
             if (ability != null)
                 ability.passiveSkill(event);
+
+            Block block = event.getBlock();
+            if (block.getType() == Material.DIAMOND_BLOCK) {
+                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
+                EntityManager.spawnRandomFirework(firework);
+                EntityManager.spawnRandomFirework(firework);
+                EntityManager.spawnRandomFirework(firework);
+                EntityManager.spawnRandomFirework(firework);
+            }
         }
     }
 
     @EventHandler
     public static void onPlayerRespawn(PlayerRespawnEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             Player player = event.getPlayer();
             if (Theomachy.IGNORE_BED) {
                 if (GameData.PlayerTeam.containsKey(player.getName())) {
@@ -258,7 +268,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.Voodoo.getIndex())
                 ability.passiveSkill(event);
@@ -267,7 +277,7 @@ public class EventManager implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.Voodoo.getIndex())
                 ability.passiveSkill(event);
@@ -278,7 +288,7 @@ public class EventManager implements Listener {
     public static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         GameData.OnlinePlayer.put(player.getName(), player);
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             Ability ability = GameData.PlayerAbility.get(player.getName());
             if (ability != null && (ability.abilityCode == AbilityInfo.Poseidon.getIndex() || ability.abilityCode == AbilityInfo.Hephastus.getIndex()))
                 ability.initialize();
@@ -299,10 +309,10 @@ public class EventManager implements Listener {
     @EventHandler
     public static void onEntityExplode(EntityExplodeEvent event) {
         Entity entity = event.getEntity();
-        if (GameHandler.Start && entity.getType() == EntityType.FIREBALL)
+        if (StartStopCommand.Start && entity.getType() == EntityType.FIREBALL)
             event.blockList().clear();
 
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 Ability ability = GameData.PlayerAbility.get(p.getName());
                 if (ability != null && ability.abilityCode == 121) {
@@ -316,7 +326,7 @@ public class EventManager implements Listener {
     @EventHandler
     public static void onPlayerMove(PlayerMoveEvent event) {
 
-        if (GameHandler.Start) {
+        if (StartStopCommand.Start) {
             Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
                 ability.passiveSkill(event);
@@ -384,7 +394,7 @@ public class EventManager implements Listener {
 
             if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":::::: 설정 ::::::")) {
 
-                GUISetting.guiListener(wool);
+                SettingCommand.guiListener(wool);
 
             }
         } catch (NullPointerException ignored) {

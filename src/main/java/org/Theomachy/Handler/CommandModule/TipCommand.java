@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Tip {
+public class TipCommand {
 	public static void Module(CommandSender sender) {
 		Player p=(Player) sender;
 		p.openInventory(gui());

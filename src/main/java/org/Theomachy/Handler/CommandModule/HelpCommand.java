@@ -3,7 +3,6 @@ package org.Theomachy.Handler.CommandModule;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,9 +15,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 
-public class Help {
+public class HelpCommand {
 
 	public static void Module(CommandSender sender, Command command, String label, String[] data)
 	{

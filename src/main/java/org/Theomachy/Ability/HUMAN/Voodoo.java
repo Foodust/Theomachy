@@ -16,11 +16,11 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Voodoo extends Ability {
 
@@ -84,7 +84,7 @@ public class Voodoo extends Ability {
         String targetName = Objects.requireNonNull(event.getLine(0)).toString();
         Player target = GameData.OnlinePlayer.get(targetName);
         if (target != null) {
-            Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             this.targetName = targetName;
             this.postSign = event.getBlock();
             player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");

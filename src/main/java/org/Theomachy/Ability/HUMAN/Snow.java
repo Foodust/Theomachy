@@ -1,5 +1,8 @@
 package org.Theomachy.Ability.HUMAN;
 
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,7 +19,7 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Utility.*;
 
 public class Snow extends Ability {
@@ -50,7 +53,7 @@ public class Snow extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> player.sendMessage("공격 지수 : " + passiveDamage);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
@@ -59,7 +62,7 @@ public class Snow extends Ability {
 
     private void rightAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-            Skill.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             World world = player.getWorld();
             Location location = player.getLocation();
             world.dropItem(location, new ItemStack(Material.SNOWBALL, rareCount));

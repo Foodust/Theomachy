@@ -12,10 +12,10 @@ import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Blacksmith extends Ability {
     private final static String[] des = {
@@ -45,7 +45,7 @@ public class Blacksmith extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
@@ -54,7 +54,7 @@ public class Blacksmith extends Ability {
 
     private void leftAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             World world = player.getWorld();
             world.dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.IRON_INGOT, normalCount));
         }
@@ -62,7 +62,7 @@ public class Blacksmith extends Ability {
 
     private void rightAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.IRON_INGOT, rareSkillStack)) {
-            Skill.Use(player, Material.IRON_INGOT, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, Material.IRON_INGOT, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             World world = player.getWorld();
             world.dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.DIAMOND, rareCount));
         }

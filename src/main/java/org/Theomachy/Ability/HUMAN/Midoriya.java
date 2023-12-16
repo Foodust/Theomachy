@@ -12,10 +12,10 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Midoriya extends Ability {
 
@@ -40,7 +40,7 @@ public class Midoriya extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }
@@ -75,7 +75,7 @@ public class Midoriya extends Ability {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, duration * 20, 0));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 0));
 
-                    Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                    SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                     Ready = false;
                 } else {
                     player.sendMessage("아직 원 포 올의 준비가 되어있지 않군요.");

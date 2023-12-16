@@ -6,7 +6,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 
 public class Anorexia extends Ability {
 

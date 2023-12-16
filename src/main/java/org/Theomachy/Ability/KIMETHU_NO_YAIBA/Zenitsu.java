@@ -1,25 +1,18 @@
 package org.Theomachy.Ability.KIMETHU_NO_YAIBA;
 
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.Ability.ENUM.AbilityTag;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Zenitsu extends Ability {
     private final static String[] des = {
@@ -52,7 +45,7 @@ public class Zenitsu extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
 //                case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
@@ -61,7 +54,7 @@ public class Zenitsu extends Ability {
 
     private void leftAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location location = player.getLocation();
             location.setPitch(0f);
             for (int distance = 0; distance < normalDistance; distance += normalDistance / 10) {
@@ -76,7 +69,7 @@ public class Zenitsu extends Ability {
     // 화뢰신 만들다가 포기함
     private void rightAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
                 Location location = player.getLocation();

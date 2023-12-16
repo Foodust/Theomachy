@@ -13,13 +13,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Clocking extends Ability {
     private List<Player> targetList;
@@ -44,7 +44,7 @@ public class Clocking extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> leftAction(player);
             }
         }
@@ -52,7 +52,7 @@ public class Clocking extends Ability {
 
     private void leftAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             targetList = player.getWorld().getPlayers();
             for (Player enemy : targetList)
                 enemy.hidePlayer(Theomachy.getPlugin(), player);

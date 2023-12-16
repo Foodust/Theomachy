@@ -6,19 +6,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import org.bukkit.entity.Player;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.Utility.PermissionChecker;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Utility.Checker.PermissionChecker;
 
 import java.util.*;
 
-public class Team {
+public class TeamCommand {
     public static void Module(CommandSender sender, Command command, String label, String[] data) {
         if (PermissionChecker.Sender(sender)) {
             if (data.length > 2) {
-                if (Objects.equals(data[2], "random")) {
+                if (Objects.equals(data[1], "random")) {
                     List<Player> onlinePlayers = new ArrayList<>( Bukkit.getOnlinePlayers());
                     Collections.shuffle(onlinePlayers);
-                    String[] teams = {data[3], data[4]};
+                    String[] teams = {data[2], data[3]};
                     int teamIndex = 0;
                     for (Player player : onlinePlayers) {
                         String playerName = player.getName();

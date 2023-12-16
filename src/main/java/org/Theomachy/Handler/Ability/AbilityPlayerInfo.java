@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Ability;
 
 import java.util.Collection;
 
@@ -6,8 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.Utility.PermissionChecker;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Utility.Checker.PermissionChecker;
 
 public class AbilityPlayerInfo
 {

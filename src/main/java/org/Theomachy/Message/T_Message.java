@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.TargetType;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 
 
 public class T_Message

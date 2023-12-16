@@ -1,4 +1,4 @@
-package org.Theomachy.DB;
+package org.Theomachy.Data;
 
 public interface PluginData
 {

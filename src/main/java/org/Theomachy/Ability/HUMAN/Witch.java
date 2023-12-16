@@ -16,11 +16,11 @@ import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.EventFilter;
-import org.Theomachy.Utility.GetPlayerList;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
+import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Witch extends Ability {
     private final static String[] des = {
@@ -46,7 +46,7 @@ public class Witch extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }
@@ -54,9 +54,9 @@ public class Witch extends Ability {
 
     private void leftAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
-            List<Player> targetList = GetPlayerList.getNearByNotTeamMembers(player, 10, 10, 10);
+            List<Player> targetList = PlayerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
             if (!targetList.isEmpty()) {
-                Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 for (Player e : targetList) {
                     e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
                     e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, normalDuration * 20, 0));

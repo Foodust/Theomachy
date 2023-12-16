@@ -33,7 +33,7 @@ public class PlayerInventory
 		inventory.removeItem(new ItemStack(material, stack));
 	}
 	
-	public static void skyBlockBasicItemAdd(Player player)
+	public static void startItem(Player player)
 	{
 		Inventory inventory = player.getInventory();
 		if (Theomachy.INVENTORY_CLEAR)

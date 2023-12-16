@@ -15,11 +15,11 @@ import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.DirectionChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.DirectionChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Wizard extends Ability
 {
@@ -51,7 +51,7 @@ public class Wizard extends Ability
 		Player player = event.getPlayer();
 		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
 				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftClickAction(player);
 				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightClickAction(player);
             }
@@ -69,7 +69,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+				SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
@@ -108,7 +108,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				Skill.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+				SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 				player.setHealth( player.getHealth() / 2 );
 				Vector v = new Vector(0,1.6,0);
 				for (Player e : targetList)

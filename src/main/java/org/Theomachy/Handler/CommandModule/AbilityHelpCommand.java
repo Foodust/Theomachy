@@ -1,17 +1,15 @@
-package org.Theomachy.Utility;
+package org.Theomachy.Handler.CommandModule;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.DB.AbilityData;
 import org.Theomachy.Theomachy;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 
-public class CodeHelper {
+public class AbilityHelpCommand {
 
     public static void ShowAbilityCodeNumber(CommandSender sender) {
         if (sender instanceof Player)
@@ -21,6 +19,7 @@ public class CodeHelper {
     }
 
     private static void showCode(CommandSender sender) {
+
         sender.sendMessage(ChatColor.GOLD + " 【 신 】 ");
         for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans)) {
             sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());

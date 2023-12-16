@@ -16,13 +16,13 @@ import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.T_Message;
 import org.Theomachy.Timer.CoolTime;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class Poseidon extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }
@@ -60,7 +60,7 @@ public class Poseidon extends Ability {
     private void leftAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             if (flag) {
-                Skill.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 Location location = player.getLocation();
                 Vector v = player.getEyeLocation().getDirection();
                 v.setX(Math.round(v.getX()));
@@ -77,13 +77,13 @@ public class Poseidon extends Ability {
 
     class KnockBack extends Thread {
         final Player player;
-        Vector v;
+        Vector vector;
 
         KnockBack(Player player, Vector v) {
             this.player = player;
-            this.v = v.clone();
-            this.v.multiply(10);
-            this.v.setY(10);
+            this.vector = v.clone();
+            this.vector.multiply(5);
+            this.vector.setY(2);
         }
 
         public void run() {
@@ -93,7 +93,7 @@ public class Poseidon extends Ability {
                 for (Player player : players)
                     if (player != this.player && (player.getLocation().getBlock().getType() == Material.WATER ||
                             player.getLocation().getBlock().getType() == Material.WATER))
-                        player.setVelocity(v);
+                        player.setVelocity(vector);
                 try {
                     sleep(1500);
                 } catch (InterruptedException ignored) {

@@ -21,10 +21,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.Theomachy.DB.AbilityData;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.DB.PluginData;
-import org.Theomachy.Handler.CommandModule.Blacklist;
+import org.Theomachy.Data.AbilityData;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Data.PluginData;
+import org.Theomachy.Handler.Ability.Blacklist;
 import org.Theomachy.Manager.CommandManager;
 import org.Theomachy.Manager.EventManager;
 

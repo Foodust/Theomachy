@@ -1,4 +1,4 @@
-package org.Theomachy.Utility;
+package org.Theomachy.Utility.Checker;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

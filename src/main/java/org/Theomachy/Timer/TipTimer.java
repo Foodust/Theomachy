@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import org.Theomachy.Theomachy;
-import org.Theomachy.Handler.CommandModule.GameHandler;
+import org.Theomachy.Handler.CommandModule.StartStopCommand;
 
 public class TipTimer extends TimerTask
 {
@@ -14,7 +14,7 @@ public class TipTimer extends TimerTask
 	
 	public void run()
 	{
-		if (!GameHandler.Ready)
+		if (!StartStopCommand.Ready)
 			this.cancel();
 		if (count%1200 == 0)
 		{
@@ -25,19 +25,19 @@ public class TipTimer extends TimerTask
 			}
 			
 		}
-		if (count%720 == 0)
+		if (count%1200 == 0)
 		{
 			long max = (int) (Runtime.getRuntime().maxMemory() / 1048576);
 			long free = (int) (Runtime.getRuntime().freeMemory() / 1048576);
 			long use = max - free;
 			Bukkit.broadcastMessage(ChatColor.WHITE+"메모리(MB)   "+ChatColor.AQUA+String.valueOf(use)+ChatColor.WHITE+" / "+ChatColor.YELLOW+String.valueOf(max));
 			
-			if (free < 375)
+			if (free < 3750)
 			{
-				System.out.println("메모리 부족, 메모리 청소중...");
+				Theomachy.log.info("메모리 부족, 메모리 청소중...");
 				System.gc();
 				long free2 = (Runtime.getRuntime().freeMemory() / 1048576);
-				System.out.println("현재 사용 가능 메모리 : "+free2+"MB");
+				Theomachy.log.info("현재 사용 가능 메모리 : "+free2+"MB");
 			}
 		}
 		count++;

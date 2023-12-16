@@ -15,14 +15,14 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTime;
-import org.Theomachy.Utility.CoolTimeChecker;
-import org.Theomachy.Utility.DirectionChecker;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Utility.Checker.CoolTimeChecker;
+import org.Theomachy.Utility.Checker.DirectionChecker;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Utility.Skill;
+import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
 public class Assasin extends Ability {
     private final static String[] des = {
@@ -46,7 +46,7 @@ public class Assasin extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
@@ -80,7 +80,7 @@ public class Assasin extends Ability {
                     String targetTeamName = GameData.PlayerTeam.get(target.getName());
                     String playerTeamName = GameData.PlayerTeam.get(player.getName());
                     if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName))) {
-                        Skill.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                        SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                         Location fakeLocation = player.getLocation();
                         Location location = target.getLocation();
                         World world = player.getWorld();

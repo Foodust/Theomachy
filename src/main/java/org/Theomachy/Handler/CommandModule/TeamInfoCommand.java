@@ -7,9 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 
-public class TeamInfo
+public class TeamInfoCommand
 {
 	public static void Module(CommandSender sender, Command command, String label, String[] data)
 	{

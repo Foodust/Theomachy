@@ -1,4 +1,4 @@
-package org.Theomachy.Utility;
+package org.Theomachy.Handler.Handler;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,7 +8,7 @@ import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Timer.CoolTime;
 import org.Theomachy.Message.T_Message;
 
-public class Skill
+public class SkillCoolTimeHandler
 {
 	public static void Use(Player player, Material material, AbilityCase abilityCase, int stack, int coolTime)
 	{

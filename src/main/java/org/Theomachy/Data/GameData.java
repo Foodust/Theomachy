@@ -1,4 +1,4 @@
-package org.Theomachy.DB;
+package org.Theomachy.Data;
 
 import java.util.HashMap;
 

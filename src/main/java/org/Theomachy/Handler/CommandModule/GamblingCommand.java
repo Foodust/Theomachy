@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import org.Theomachy.Theomachy;
 
-public class Convi {
+public class GamblingCommand {
 
 	public static void Module(CommandSender sender) {
 		Player p=(Player) sender;

@@ -8,8 +8,8 @@ import java.util.TimerTask;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityCase;
 import org.Theomachy.Theomachy;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.Handler.CommandModule.GameHandler;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.Theomachy.Message.T_Message;
 
 public class CoolTime extends TimerTask {
@@ -20,7 +20,7 @@ public class CoolTime extends TimerTask {
     private int count = 1;
 
     public void run() {
-        if (!GameHandler.Ready)
+        if (!StartStopCommand.Ready)
             this.cancel();
         try {
             if (!commonSkillCoolTime.isEmpty()) {

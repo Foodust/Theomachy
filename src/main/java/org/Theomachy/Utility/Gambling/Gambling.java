@@ -1,4 +1,4 @@
-package org.Theomachy.Utility;
+package org.Theomachy.Utility.Gambling;
 
 import java.util.Random;
 

@@ -1,5 +1,7 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Ability;
 
+import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
+import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,10 +15,10 @@ import org.Theomachy.Ability.HUMAN.*;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
 import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.Utility.CodeHelper;
-import org.Theomachy.Utility.PermissionChecker;
-import org.Theomachy.Utility.RandomNumberConstructor;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Handler.CommandModule.AbilityHelpCommand;
+import org.Theomachy.Utility.Checker.PermissionChecker;
+import org.Theomachy.Handler.Handler.RandomSkillHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ public class AbilitySet
 	{
 		if (PermissionChecker.Sender(sender))
 		{
-			if (!GameHandler.Ready)
+			if (!StartStopCommand.Ready)
 			{
 				if (data.length<=1)
 				{
@@ -38,7 +40,7 @@ public class AbilitySet
 					sender.sendMessage("/t a <AbilityCode> <Player>  플레이어에게 해당 능력을 적용합니다.");
 				}
 				else if (data[1].equalsIgnoreCase("help"))
-					CodeHelper.ShowAbilityCodeNumber(sender);
+					AbilityHelpCommand.ShowAbilityCodeNumber(sender);
 				else if (data[1].equalsIgnoreCase("remove"))//삭제
 				{
 					if (data[2] != null)
@@ -93,7 +95,7 @@ public class AbilitySet
 		Bukkit.broadcastMessage(ChatColor.DARK_AQUA+"인식된 플레이어 목록");
 		for(Player e : playerlist)
 			Bukkit.broadcastMessage(ChatColor.GOLD+"  "+e.getName());
-		int[] rn = RandomNumberConstructor.nonDuplicate();
+		int[] rn = RandomSkillHandler.nonDuplicate();
 		int length;
 		length = Math.min(playerlist.size(), Blacklist.availableList);
 		int i = 0;
@@ -244,6 +246,8 @@ public class AbilitySet
 			GameData.PlayerAbility.put(playerName,new Itadori(playerName));
 		else if (abilityNumber == AbilityInfo.Jogo.getIndex())
 			GameData.PlayerAbility.put(playerName,new Jogo(playerName));
+		else if (abilityNumber == AbilityInfo.Sukuna.getIndex())
+			GameData.PlayerAbility.put(playerName,new Sukuna(playerName));
 		else
 		{
 			p.sendMessage("능력 혹은 능력 코드 번호를 잘못 입력하셨습니다.");

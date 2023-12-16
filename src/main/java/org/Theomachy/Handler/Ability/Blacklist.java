@@ -1,9 +1,8 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Ability;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,8 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.DB.AbilityData;
-import org.Theomachy.Utility.PermissionChecker;
+import org.Theomachy.Data.AbilityData;
+import org.Theomachy.Utility.Checker.PermissionChecker;
 
 public class Blacklist {
 

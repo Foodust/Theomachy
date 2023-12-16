@@ -1,16 +1,15 @@
-package org.Theomachy.Utility;
+package org.Theomachy.Handler.Handler;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import org.Theomachy.DB.GameData;
+import org.Theomachy.Data.GameData;
 
-public class GetPlayerList
+public class PlayerHandler
 {
 	public static List<Player> getTeamMember(Player player)
 	{

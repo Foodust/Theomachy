@@ -10,11 +10,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.PermissionChecker;
+import org.Theomachy.Utility.Checker.PermissionChecker;
 
 import java.util.Objects;
 
-public class GUISetting {
+public class SettingCommand {
 
     public static void Module(CommandSender sender) {
 
@@ -52,6 +52,7 @@ public class GUISetting {
             meta[i] = wool[i].getItemMeta();
         }
         //def
+        assert meta[0] != null;
         meta[0].setDisplayName(ChatColor.WHITE + "게임 시작 시 인벤토리 클리어");
         meta[1].setDisplayName(ChatColor.WHITE + "게임 시작 시 스카이블럭 아이템 지급");
         meta[2].setDisplayName(ChatColor.WHITE + "게임 시작 시 엔티티 제거");

@@ -4,22 +4,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Timer;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.DB.ServerSetting;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Data.ServerSetting;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTime;
 import org.Theomachy.Timer.GameReadyTimer;
 import org.Theomachy.Timer.TipTimer;
-import org.Theomachy.Utility.PermissionChecker;
+import org.Theomachy.Utility.Checker.PermissionChecker;
 
-public class GameHandler
+public class StartStopCommand
 {
 	public static boolean Ready=false;
 	public static boolean Start=false;

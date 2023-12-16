@@ -15,8 +15,8 @@ import org.bukkit.entity.Player;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Theomachy;
-import org.Theomachy.DB.GameData;
-import org.Theomachy.Handler.CommandModule.GameHandler;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.Theomachy.Utility.PlayerInventory;
 
 
@@ -64,7 +64,7 @@ public class GameReadyTimer extends TimerTask {
 
 
     public void run() {
-        if (GameHandler.Ready && count < 45) {
+        if (StartStopCommand.Ready && count < 45) {
             Bukkit.getScheduler().runTask(Theomachy.getPlugin(), ()->{
             switch (count) {
                 case 1 -> {
@@ -133,7 +133,7 @@ public class GameReadyTimer extends TimerTask {
                                 if (e instanceof Item || e instanceof Monster || e instanceof Animals)
                                     e.remove();
                             }
-                        } catch (NullPointerException e) {
+                        } catch (NullPointerException ignored) {
                         }
                     }
                     Location spawnLocation = world.getSpawnLocation();
@@ -151,26 +151,26 @@ public class GameReadyTimer extends TimerTask {
                         player.setExhaustion(0.0F);
                         player.setExp(0.0F);
                         player.setHealth(20);
-                        PlayerInventory.skyBlockBasicItemAdd(player);
+                        PlayerInventory.startItem(player);
                         String teamName = GameData.PlayerTeam.get(player.getName());
-                        if (teamName != null) {
-                            Location location = GameData.SpawnArea.get(teamName);
-                            if (location != null)
-                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                                    player.teleport(location);
-                                });
-                            else {
-                                player.sendMessage(ChatColor.RED + "팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
-                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                                    player.teleport(spawnLocation);
-                                });
-                            }
-                        } else {
-                            player.sendMessage(ChatColor.RED + "팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
-                            Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                                player.teleport(spawnLocation);
-                            });
-                        }
+//                        if (teamName != null) {
+//                            Location location = GameData.SpawnArea.get(teamName);
+//                            if (location != null)
+//                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+//                                    player.teleport(location);
+//                                });
+//                            else {
+//                                player.sendMessage(ChatColor.RED + "팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
+//                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+//                                    player.teleport(spawnLocation);
+//                                });
+//                            }
+//                        } else {
+//                            player.sendMessage(ChatColor.RED + "팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
+//                            Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+//                                player.teleport(spawnLocation);
+//                            });
+//                        }
                     }
                 }
 //				case 2:
@@ -187,7 +187,7 @@ public class GameReadyTimer extends TimerTask {
                         e.initialize();
                         e.buff();
                     }
-                    GameHandler.Start = true;
+                    StartStopCommand.Start = true;
                     Bukkit.broadcastMessage(ChatColor.GOLD + "게임 시작!");
                     Bukkit.broadcastMessage(ChatColor.GREEN + "빠른 시작이 설정되었습니다. 관리자는 콘솔로 내용을 확인해주세요.");
                 }

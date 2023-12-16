@@ -1,5 +1,7 @@
 package org.Theomachy.Handler.CommandModule;
 
+import org.Theomachy.Timer.CoolTime;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -7,10 +9,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import org.Theomachy.DB.GameData;
-import org.Theomachy.Utility.PermissionChecker;
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Utility.Checker.PermissionChecker;
 
-public class Spawn
+public class SpawnCommand
 {
 	public static void Module(CommandSender sender, Command command, String label, String[] data)
 	{
@@ -30,14 +32,14 @@ public class Spawn
 			else if(data.length == 5){
 				Player player=(Player)sender;
 				String teamName=data[1];
-				Location location = null;
+				Location location = player.getLocation();
 				location.setX(Integer.parseInt(data[2]));
 				location.setY(Integer.parseInt(data[3]));
 				location.setZ(Integer.parseInt(data[4]));
 				GameData.SpawnArea.put(teamName, location);
 				player.sendMessage( ChatColor.WHITE + data[2]+" " + data[3]+ " " + data[4] + "가 팀 "+ChatColor.DARK_AQUA+teamName+ChatColor.WHITE+" 의 스폰지역으로 설정되었습니다.");
 			}
-			else if(data.length == 3)
+			else if(data.length == 2)
 			{
 				Player player=(Player)sender;
 				String teamName=data[1];
@@ -52,6 +54,18 @@ public class Spawn
 				sender.sendMessage(ChatColor.YELLOW + "/t  spawn(s)   " + ChatColor.AQUA + "<TeamName>  스폰지역으로 설정합니다.");
 				sender.sendMessage("좌표로도 등록할 수 있습니다.");
 				sender.sendMessage("ex) /t s  팀    X  Y  Z");
+			}
+		}
+	}
+
+	public static class ClearCommand
+	{
+		public static void Module(CommandSender sender, Command command, String label, String[] data)
+		{
+			if (PermissionChecker.Sender(sender))
+			{
+				CoolTime.init =true;
+				Bukkit.broadcastMessage("관리자가 모든 쿨타임을 초기화 하였습니다.");
 			}
 		}
 	}

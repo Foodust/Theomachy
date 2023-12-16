@@ -11,9 +11,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Ability.ENUM.AbilityRank;
-import org.Theomachy.DB.AbilityData;
-import org.Theomachy.Handler.CommandModule.AbilitySet;
-import org.Theomachy.Utility.EventFilter;
+import org.Theomachy.Data.AbilityData;
+import org.Theomachy.Handler.Ability.AbilitySet;
+import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 
 public class PokeGo extends Ability {
@@ -37,7 +37,7 @@ public class PokeGo extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (EventFilter.PlayerInteract(event)) {
+            switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK ->
                         player.sendMessage(ChatColor.WHITE + String.valueOf(walking) + ChatColor.YELLOW + " 걸음 걸었습니다.");
             }
