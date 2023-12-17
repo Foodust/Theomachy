@@ -2,6 +2,7 @@ package org.Theomachy.Ability.ENUM;
 
 import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collector;
@@ -91,4 +92,6 @@ public enum AbilityInfo {
     public static String getNameByIndex(int index) {
         return abilityInfoMap.getOrDefault(index, "해당하는 이름 없음");
     }
+
+
 }

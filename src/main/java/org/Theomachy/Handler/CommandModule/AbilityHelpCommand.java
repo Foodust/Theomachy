@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.CommandModule;
 
+import org.Theomachy.Data.AbilityData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,19 +22,19 @@ public class AbilityHelpCommand {
     private static void showCode(CommandSender sender) {
 
         sender.sendMessage(ChatColor.GOLD + " 【 신 】 ");
-        for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans)) {
+        for (AbilityInfo abilityInfo : AbilityData.godEnum) {
             sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
         sender.sendMessage(ChatColor.AQUA + " 【 인간 】 ");
-        for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet)) {
+        for (AbilityInfo abilityInfo : AbilityData.humanEnum) {
             sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
         sender.sendMessage(ChatColor.GREEN + " 【 주술회전 】 ");
-        for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Itarodi, AbilityInfo.Jogo)) {
+        for (AbilityInfo abilityInfo : AbilityData.jujuEnum) {
             sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
         sender.sendMessage(ChatColor.RED + " 【 귀멸의 칼날 】 ");
-        for (AbilityInfo abilityInfo : EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Zenitsu)) {
+        for (AbilityInfo abilityInfo : AbilityData.kimetsuEnum) {
             sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
 
