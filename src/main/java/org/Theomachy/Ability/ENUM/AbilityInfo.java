@@ -70,7 +70,8 @@ public enum AbilityInfo {
     Sukuna(303,"료멘 스쿠나"),
 
     //========================================================================================================
-    Zenitsu(401,"젠이츠");
+    Zenitsu(401,"아가츠마 젠이츠"),
+    Rengoku(402,"렌고쿠 쿄주로");
     private final int index;
     private final String name;
     private static final Map<Integer, String> abilityInfoMap = new HashMap<>();

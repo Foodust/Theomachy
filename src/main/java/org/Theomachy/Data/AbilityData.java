@@ -9,7 +9,7 @@ public interface AbilityData
 	EnumSet<AbilityInfo> godEnum = EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans);
 	EnumSet<AbilityInfo> humanEnum = EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet);
 	EnumSet<AbilityInfo> jujuEnum = EnumSet.range(AbilityInfo.Itarodi, AbilityInfo.Sukuna);
-	EnumSet<AbilityInfo> kimetsuEnum = EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Zenitsu);
+	EnumSet<AbilityInfo> kimetsuEnum = EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Rengoku);
 
 	int GOD_ABILITY_NUMBER= godEnum.size();
 	int HUMAN_ABILITY_NUMBER=humanEnum.size();

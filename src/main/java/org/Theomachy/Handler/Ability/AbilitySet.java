@@ -1,6 +1,7 @@
 package org.Theomachy.Handler.Ability;
 
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
+import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Rengoku;
 import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -240,14 +241,20 @@ public class AbilitySet
 			GameData.PlayerAbility.put(playerName, new Gasolin(playerName));
 		else if (abilityNumber == AbilityInfo.Zet.getIndex())
 			GameData.PlayerAbility.put(playerName, new Zet(playerName));
-		else if (abilityNumber == AbilityInfo.Zenitsu.getIndex())
-			GameData.PlayerAbility.put(playerName,new Zenitsu(playerName));
+
+
 		else if (abilityNumber == AbilityInfo.Itarodi.getIndex())
 			GameData.PlayerAbility.put(playerName,new Itadori(playerName));
 		else if (abilityNumber == AbilityInfo.Jogo.getIndex())
 			GameData.PlayerAbility.put(playerName,new Jogo(playerName));
 		else if (abilityNumber == AbilityInfo.Sukuna.getIndex())
 			GameData.PlayerAbility.put(playerName,new Sukuna(playerName));
+
+		else if (abilityNumber == AbilityInfo.Zenitsu.getIndex())
+			GameData.PlayerAbility.put(playerName,new Zenitsu(playerName));
+		else if(abilityNumber == AbilityInfo.Rengoku.getIndex())
+			GameData.PlayerAbility.put(playerName,new Rengoku(playerName));
+
 		else
 		{
 			p.sendMessage("능력 혹은 능력 코드 번호를 잘못 입력하셨습니다.");

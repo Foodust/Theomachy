@@ -21,7 +21,7 @@ public class RyoikiTenkai extends Ability {
     public int rareDistance;
     public int rareDuration;
 
-    public void sendRyoikiTenkai(AbilityInfo abilityInfo, Player player){
+    public void sendRyoikiTenkai(AbilityInfo abilityInfo, Player player) {
 
         int titleFadeIn = 1 * 20;
         int titleFadeOut = 1 * 20;
@@ -78,7 +78,7 @@ public class RyoikiTenkai extends Ability {
                                 JogoSetLava(block);
                             }
                             case Sukuna -> {
-                                SukunaSetWater(block);
+                                setAir(block);
                             }
                         }
                     }
@@ -96,6 +96,9 @@ public class RyoikiTenkai extends Ability {
                     case Jogo -> {
                         JogoSetFire(centerLocation, x, 1, z);
                     }
+                    case Sukuna -> {
+                        SukunaSetWater(centerLocation, x, 1, z);
+                    }
                 }
             }
         }
@@ -109,7 +112,7 @@ public class RyoikiTenkai extends Ability {
     }
 
     private void JogoSetLava(Block block) {
-        if (Math.random() < 0.005) { // 0.5%의 확률로 용암 배치
+        if (Math.random() < 0.005) { // 0.05%의 확률로 용암 배치
             block.setType(Material.LAVA); // 용암 블록 배치
         } else {
             block.setType(Material.AIR); // 나머지는 공기로 설정
@@ -120,12 +123,12 @@ public class RyoikiTenkai extends Ability {
         Location blockLocationFire = centerLocation.clone().add(x, y, z);
         blockLocationFire.getBlock().setType(Material.FIRE);
     }
+    private void SukunaSetWater(Location centerLocation, double x, double y, double z) {
+        Location blockLocationFire = centerLocation.clone().add(x, y, z);
+        blockLocationFire.getBlock().setType(Material.WATER);
+    }
 
-    private void SukunaSetWater(Block block) {
-        if (Math.random() < 0.001) { // 0.1%의 확률로 물 배치
-            block.setType(Material.WATER); // 물 블록 배치
-        } else {
-            block.setType(Material.AIR); // 나머지는 공기로 설정
-        }
+    private void setAir(Block block) {
+        block.setType(Material.AIR);
     }
 }

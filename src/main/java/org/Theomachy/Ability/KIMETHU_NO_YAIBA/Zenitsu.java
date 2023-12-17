@@ -14,6 +14,8 @@ import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 
+import java.util.Objects;
+
 public class Zenitsu extends Ability {
     private final static String[] des = {
             AbilityInfo.Zenitsu.getName(),
@@ -60,7 +62,7 @@ public class Zenitsu extends Ability {
             for (int distance = 0; distance < normalDistance; distance += normalDistance / 10) {
                 Vector direction = location.getDirection().normalize();
                 Location to = location.clone().add(direction.multiply(distance));
-                to.getWorld().strikeLightning(to);
+                Objects.requireNonNull(to.getWorld()).strikeLightning(to);
                 player.teleport(to);
             }
         }
@@ -78,6 +80,7 @@ public class Zenitsu extends Ability {
                     Vector diagonalDirection = new Vector(direction.getX() * 0.75, -0.5, direction.getZ() * 0.75).normalize();
                     Location to = location.clone().add(diagonalDirection.multiply(distance));
                     World world = to.getWorld();
+                    assert world != null;
                     world.strikeLightningEffect(to.add(-10, 0, 10));
                     player.teleport(to);
                 }
