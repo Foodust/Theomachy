@@ -11,6 +11,7 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.Theomachy.Message.T_Message;
+import org.bukkit.Bukkit;
 
 public class CoolTime extends TimerTask {
     public static boolean init = false;
@@ -20,8 +21,10 @@ public class CoolTime extends TimerTask {
     private int count = 1;
 
     public void run() {
-        if (!StartStopCommand.Ready)
+        if (!StartStopCommand.Ready){
             this.cancel();
+        }
+
         try {
             if (!commonSkillCoolTime.isEmpty()) {
                 for (Entry<String, Integer> entry : commonSkillCoolTime.entrySet()) {

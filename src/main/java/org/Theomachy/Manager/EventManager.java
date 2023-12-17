@@ -197,14 +197,12 @@ public class EventManager implements Listener {
 
             Block block = event.getBlock();
             if (block.getType() == Material.DIAMOND_BLOCK) {
-                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + GameData.PlayerTeam.get(event.getPlayer().getName())+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
                 Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
-                EntityManager.spawnRandomFirework(firework);
-                EntityManager.spawnRandomFirework(firework);
-                EntityManager.spawnRandomFirework(firework);
                 EntityManager.spawnRandomFirework(firework);
             }
         }

@@ -153,24 +153,24 @@ public class GameReadyTimer extends TimerTask {
                         player.setHealth(20);
                         PlayerInventory.startItem(player);
                         String teamName = GameData.PlayerTeam.get(player.getName());
-//                        if (teamName != null) {
-//                            Location location = GameData.SpawnArea.get(teamName);
-//                            if (location != null)
-//                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-//                                    player.teleport(location);
-//                                });
-//                            else {
-//                                player.sendMessage(ChatColor.RED + "팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
-//                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-//                                    player.teleport(spawnLocation);
-//                                });
-//                            }
-//                        } else {
-//                            player.sendMessage(ChatColor.RED + "팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
-//                            Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-//                                player.teleport(spawnLocation);
-//                            });
-//                        }
+                        if (teamName != null) {
+                            Location location = GameData.SpawnArea.get(teamName);
+                            if (location != null)
+                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+                                    player.teleport(location);
+                                });
+                            else {
+                                player.sendMessage(ChatColor.RED + "팀의 스폰지역이 설정되지 않아 기본 스폰지역으로 이동합니다.");
+                                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+                                    player.teleport(spawnLocation);
+                                });
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "팀이 지정되지 않아 기본 스폰지역으로 이동합니다.");
+                            Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+                                player.teleport(spawnLocation);
+                            });
+                        }
                     }
                 }
 //				case 2:

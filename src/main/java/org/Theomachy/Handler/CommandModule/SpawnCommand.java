@@ -30,14 +30,14 @@ public class SpawnCommand
 				player.sendMessage("현재 위치가 모든 플레이어의 스폰지역으로 설정되었습니다.");				
 			}
 			else if(data.length == 5){
-				Player player=(Player)sender;
+				World world = Bukkit.getWorlds().get(0);
 				String teamName=data[1];
-				Location location = player.getLocation();
-				location.setX(Integer.parseInt(data[2]));
-				location.setY(Integer.parseInt(data[3]));
-				location.setZ(Integer.parseInt(data[4]));
+				Location location = new Location(world,
+						Double.parseDouble(data[2]),
+						Double.parseDouble(data[3]),
+						Double.parseDouble(data[4]));
 				GameData.SpawnArea.put(teamName, location);
-				player.sendMessage( ChatColor.WHITE + data[2]+" " + data[3]+ " " + data[4] + "가 팀 "+ChatColor.DARK_AQUA+teamName+ChatColor.WHITE+" 의 스폰지역으로 설정되었습니다.");
+				Bukkit.broadcastMessage( ChatColor.WHITE + data[2]+" " + data[3]+ " " + data[4] + "가 팀 "+ChatColor.DARK_AQUA+teamName+ChatColor.WHITE+" 의 스폰지역으로 설정되었습니다.");
 			}
 			else if(data.length == 2)
 			{

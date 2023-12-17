@@ -14,8 +14,10 @@ public class TipTimer extends TimerTask
 	
 	public void run()
 	{
-		if (!StartStopCommand.Ready)
+		if (!StartStopCommand.Ready){
 			this.cancel();
+		}
+
 		if (count%1200 == 0)
 		{
 			if (Theomachy.AUTO_SAVE)
