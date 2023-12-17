@@ -10,8 +10,12 @@ import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class Rengoku extends Ability {
@@ -25,6 +29,8 @@ public class Rengoku extends Ability {
     private final int normalDistance;
     private final int rareDistance;
     private final int rareTime;
+    private final int rareDelay;
+    private final int rareDamage;
 
     public Rengoku(String playerName) {
         super(playerName, AbilityInfo.Rengoku, true, false, false, des);
@@ -35,9 +41,10 @@ public class Rengoku extends Ability {
 
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 32;
-        this.rareDistance = 20;
+        this.rareDistance = 40;
+        this.rareDamage = 10;
         this.rareTime = 1;
-
+        this.rareDelay = 1;
         this.rank = AbilityRank.S;
     }
 
@@ -62,13 +69,27 @@ public class Rengoku extends Ability {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             Location location = player.getLocation();
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,PotionEffect.INFINITE_DURATION, 255));
             location.setPitch(0f);
-            for (float distance = 0; distance < rareDistance; distance += (float) rareDistance / 20) {
-                Vector direction = location.getDirection().normalize();
-                Vector diagonalDirection = new Vector(direction.getX() * 0.75, -0.5, direction.getZ() * 0.75).normalize();
-                Location to = location.clone().add(diagonalDirection.multiply(distance));
-                player.teleport(to);
-            }
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+                location.setPitch(0f);
+                player.removePotionEffect(PotionEffectType.SLOW);
+                for (float distance = 0; distance < rareDistance; distance += (float) rareDistance / 20) {
+                    Vector direction = location.getDirection().normalize();
+                    Location to = location.clone().add(direction.multiply(distance));
+                    World world = player.getWorld();
+                    world.spawnParticle(Particle.FLAME, location, 600, 4, 2, 4);
+                    world.spawnParticle(Particle.FLASH, location, 400, 4, 2, 4);
+                    world.spawnParticle(Particle.LAVA, location, 500, 4, 2, 4);
+                    world.spawnParticle(Particle.EXPLOSION_HUGE, location, 100, 4, 2, 4);
+                    for (Entity entity : world.getNearbyEntities(location, 15, 15, 15)) {
+                        if (entity instanceof LivingEntity && !entity.equals(player)) {
+                            ((LivingEntity) entity).damage(rareDamage, player);
+                        }
+                    }
+                    player.teleport(to);
+                }
+            },rareDelay * 20L);
         }
     }
 }
