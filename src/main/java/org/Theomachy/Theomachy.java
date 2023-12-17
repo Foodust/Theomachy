@@ -98,15 +98,20 @@ public class Theomachy extends JavaPlugin {
             if (!Blacklist.Blacklist.contains(i)) Blacklist.HumanCanlist.add(i);
         }
         for (int i = 301; i <= AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER + 300; i++) {
-            if (!Blacklist.Blacklist.contains(i)) Blacklist.KimethuCanList.add(i);
+            if (!Blacklist.Blacklist.contains(i)) Blacklist.JujuthuCanList.add(i);
         }
         for (int i = 401; i <= AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER + 400; i++) {
             if (!Blacklist.Blacklist.contains(i)) Blacklist.KimethuCanList.add(i);
         }
 
         log.info("[신들의 전쟁] 등록된 능력");
-        log.info("[신들의 전쟁] 신: " + Blacklist.GodCanlist.size() + ", 인간: " + Blacklist.HumanCanlist.size());
-        log.info("[신들의 전쟁] 총합: " + String.valueOf(Blacklist.GodCanlist.size() + Blacklist.HumanCanlist.size()));
+        log.info("[신들의 전쟁] 신: " + Blacklist.GodCanlist.size());
+        log.info("[신들의 전쟁] 인간: " + Blacklist.HumanCanlist.size());
+        log.info("[신들의 전쟁] 주술 회전: " + Blacklist.JujuthuCanList.size());
+        log.info("[신들의 전쟁] 귀멸의 칼날: " + Blacklist.KimethuCanList.size());
+        log.info("[신들의 전쟁] 총합: " + String.valueOf(
+                Blacklist.GodCanlist.size() + Blacklist.HumanCanlist.size() +
+                        Blacklist.JujuthuCanList.size() + Blacklist.KimethuCanList.size()));
 
         log.info("[신들의 전쟁] 게임의 설정 불러오는 중입니다.");
         getConfig().options().copyDefaults(true);

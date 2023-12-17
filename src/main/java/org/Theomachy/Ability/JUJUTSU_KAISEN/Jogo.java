@@ -75,8 +75,7 @@ public class Jogo extends RyoikiTenkai {
     private void rightAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-            Bukkit.broadcastMessage(ChatColor.RED + "영 역 전 개");
-            Bukkit.broadcastMessage(ChatColor.DARK_RED + "개관철위산 (蓋棺鉄囲山)");
+            sendRyoikiTenkai(AbilityInfo.Jogo,player);
             goRyoikiTenkai(player, AbilityInfo.Jogo,Material.NETHERRACK,Material.MAGMA_BLOCK);
         }
     }

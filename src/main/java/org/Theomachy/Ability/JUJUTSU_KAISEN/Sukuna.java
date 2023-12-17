@@ -28,11 +28,11 @@ public class Sukuna extends RyoikiTenkai {
             "영역에 상대방을 가두고 무수한 참격을 날립니다. 자신은 면역입니다."};
 
     private final int rareDamage;
+
     public Sukuna(String playerName) {
         super(playerName, AbilityInfo.Sukuna, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
-//        this.normalSkillCoolTime = 20;
-        this.normalSkillCoolTime = 0;
+        this.normalSkillCoolTime = 20;
         this.normalSkillStack = 10;
         this.normalDamage = 5;
         this.normalDistance = 30;
@@ -76,11 +76,13 @@ public class Sukuna extends RyoikiTenkai {
     private void rightAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-            Bukkit.broadcastMessage(ChatColor.RED + "영 역 전 개");
-            Bukkit.broadcastMessage(ChatColor.DARK_RED + "복마어주자 (伏魔御廚子)");
+
+            sendRyoikiTenkai(AbilityInfo.Sukuna, player);
+
             goRyoikiTenkai(player, AbilityInfo.Sukuna, Material.CRYING_OBSIDIAN, Material.OBSIDIAN);
+
             Location location = player.getLocation();
-            location.add(0,6,0);
+            location.add(0, 6, 0);
             AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 World world = location.getWorld();
@@ -92,8 +94,8 @@ public class Sukuna extends RyoikiTenkai {
                             ((LivingEntity) entity).damage(rareDamage, player);
                         }
                     }
-                }, 0,  2L));
-            }, 20L);
+                }, 0, 2L));
+            }, 2 * 20L);
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId());
             }, rareDuration * 20L);

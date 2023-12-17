@@ -3,10 +3,9 @@ package org.Theomachy.Ability.JUJUTSU_KAISEN;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.ENUM.AbilityInfo;
 import org.Theomachy.Theomachy;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -22,7 +21,42 @@ public class RyoikiTenkai extends Ability {
     public int rareDistance;
     public int rareDuration;
 
+    public void sendRyoikiTenkai(AbilityInfo abilityInfo, Player player){
 
+        int titleFadeIn = 1 * 20;
+        int titleFadeOut = 1 * 20;
+        int titleStay = 5 * 20;
+
+        int subFadeIn = 5 * 20;
+        int subFadeOut = 1 * 20;
+        int subStay = 5 * 20;
+
+        Location playerLocation = player.getLocation();
+        World locationWorld = playerLocation.getWorld();
+        assert locationWorld != null;
+        String area = "";
+        String areaName = "";
+        switch (abilityInfo) {
+            case Jogo -> {
+                area = ChatColor.RED + "영 역 전 개";
+                areaName = ChatColor.DARK_RED + "개관철위산 (蓋棺鉄囲山)";
+            }
+            case Sukuna -> {
+                area = ChatColor.RED + "영 역 전 개";
+                areaName = ChatColor.DARK_RED + "복마어주자 (伏魔御廚子)";
+            }
+        }
+        Bukkit.broadcastMessage(area);
+        Bukkit.broadcastMessage(areaName);
+        player.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
+        player.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
+        for (Entity entity : locationWorld.getNearbyEntities(playerLocation, 15, 15, 15)) {
+            if (entity instanceof Player enemy) {
+                enemy.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
+                enemy.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
+            }
+        }
+    }
 
     public void goRyoikiTenkai(Player player, AbilityInfo abilityInfo, Material floor, Material wall) {
 
