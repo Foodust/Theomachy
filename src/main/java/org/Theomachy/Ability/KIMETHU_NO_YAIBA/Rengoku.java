@@ -40,9 +40,10 @@ public class Rengoku extends Ability {
         this.normalDistance = 20;
 
         this.rareSkillCoolTime = 120;
-        this.rareSkillStack = 32;
+        this.rareSkillStack = 50;
+
         this.rareDistance = 40;
-        this.rareDamage = 10;
+        this.rareDamage = 20;
         this.rareTime = 1;
         this.rareDelay = 1;
         this.rank = AbilityRank.S;
@@ -68,28 +69,26 @@ public class Rengoku extends Ability {
     private void rightAction(Player player) {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-            Location location = player.getLocation();
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,PotionEffect.INFINITE_DURATION, 255));
-            location.setPitch(0f);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-                location.setPitch(0f);
+
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, PotionEffect.INFINITE_DURATION, 255));
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 player.removePotionEffect(PotionEffectType.SLOW);
                 for (float distance = 0; distance < rareDistance; distance += (float) rareDistance / 20) {
+                    Location location = player.getLocation();
+                    location.setPitch(0f);
                     Vector direction = location.getDirection().normalize();
-                    Location to = location.clone().add(direction.multiply(distance));
+                    Location to = location.clone().add(direction.multiply(distance / 15));
                     World world = player.getWorld();
-                    world.spawnParticle(Particle.FLAME, location, 600, 4, 2, 4);
-                    world.spawnParticle(Particle.FLASH, location, 400, 4, 2, 4);
-                    world.spawnParticle(Particle.LAVA, location, 500, 4, 2, 4);
-                    world.spawnParticle(Particle.EXPLOSION_HUGE, location, 100, 4, 2, 4);
-                    for (Entity entity : world.getNearbyEntities(location, 15, 15, 15)) {
+                    world.spawnParticle(Particle.FLAME, location, 1200);
+                    world.spawnParticle(Particle.FLASH, location, 500, 1, 2, 1);
+                    for (Entity entity : world.getNearbyEntities(location, 20, 5, 20)) {
                         if (entity instanceof LivingEntity && !entity.equals(player)) {
                             ((LivingEntity) entity).damage(rareDamage, player);
                         }
                     }
                     player.teleport(to);
                 }
-            },rareDelay * 20L);
+            }, rareDelay * 20L);
         }
     }
 }

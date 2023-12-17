@@ -21,7 +21,7 @@ public class Zenitsu extends Ability {
             AbilityInfo.Zenitsu.getName(),
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제1의 형 「벽력일섬」(霹靂一閃)",
             "전광석화의 기세로 접근해서 일직선의 일격에 목을 벤다."};
-//            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제7의 형 「화뢰신」(火 雷 神)",
+    //            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제7의 형 「화뢰신」(火 雷 神)",
 //            "온 신경을 다리에 집중시켜서 눈 깜짝할 새도 없이 상현에게 참격을 날렸다."};
     private final int normalDistance;
     private final double rareJumpDistance;
@@ -63,6 +63,7 @@ public class Zenitsu extends Ability {
                 Vector direction = location.getDirection().normalize();
                 Location to = location.clone().add(direction.multiply(distance));
                 Objects.requireNonNull(to.getWorld()).strikeLightning(to);
+                player.getWorld().spawnParticle(Particle.FLASH, location, 500, 1, 2, 1);
                 player.teleport(to);
             }
         }
@@ -73,9 +74,9 @@ public class Zenitsu extends Ability {
         if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 Location location = player.getLocation();
-                for(int distance = 0 ;distance < rareDistance ; distance += rareDistance / 10){
+                for (int distance = 0; distance < rareDistance; distance += rareDistance / 10) {
                     Vector direction = location.getDirection().normalize();
                     Vector diagonalDirection = new Vector(direction.getX() * 0.75, -0.5, direction.getZ() * 0.75).normalize();
                     Location to = location.clone().add(diagonalDirection.multiply(distance));
@@ -84,7 +85,7 @@ public class Zenitsu extends Ability {
                     world.strikeLightningEffect(to.add(-10, 0, 10));
                     player.teleport(to);
                 }
-            },rareTime * 20L);
+            }, rareTime * 20L);
         }
     }
 }
