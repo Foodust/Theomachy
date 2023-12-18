@@ -5,10 +5,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import org.Theomachy.Ability.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityInfo;
 import org.Theomachy.Theomachy;
-
-import java.util.EnumSet;
 
 public class AbilityHelpCommand {
 

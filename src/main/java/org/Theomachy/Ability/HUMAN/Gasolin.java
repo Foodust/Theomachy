@@ -8,8 +8,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 
 public class Gasolin extends Ability {
 

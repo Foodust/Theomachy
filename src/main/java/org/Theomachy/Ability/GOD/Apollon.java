@@ -9,9 +9,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import org.Theomachy.Ability.ENUM.AbilityCase;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;

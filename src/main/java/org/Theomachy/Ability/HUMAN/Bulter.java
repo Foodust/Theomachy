@@ -1,14 +1,13 @@
 package org.Theomachy.Ability.HUMAN;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 
 public class Bulter extends Ability {
 

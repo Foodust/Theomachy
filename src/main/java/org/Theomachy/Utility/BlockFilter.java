@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import org.Theomachy.Ability.ENUM.TargetType;
+import org.Theomachy.ENUM.TargetType;
 import org.Theomachy.Message.T_Message;
 
 

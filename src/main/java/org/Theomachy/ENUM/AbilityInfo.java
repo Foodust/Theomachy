@@ -1,12 +1,7 @@
-package org.Theomachy.Ability.ENUM;
+package org.Theomachy.ENUM;
 
-import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
-
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Stream;
 
 public enum AbilityInfo {
     Zeus(1, "제우스"),

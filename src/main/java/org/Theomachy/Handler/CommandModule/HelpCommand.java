@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityRank;
 import org.Theomachy.Data.GameData;
 
 public class HelpCommand {

@@ -12,9 +12,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import org.Theomachy.Ability.ENUM.AbilityCase;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;

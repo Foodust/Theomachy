@@ -24,7 +24,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Data.PluginData;
-import org.Theomachy.Handler.Ability.Blacklist;
+import org.Theomachy.Handler.CommandModule.BlacklistCommand;
 import org.Theomachy.Manager.CommandManager;
 import org.Theomachy.Manager.EventManager;
 
@@ -85,33 +85,33 @@ public class Theomachy extends JavaPlugin {
             bufferedReader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                Blacklist.Blacklist.add(Integer.parseInt(line));
+                BlacklistCommand.Blacklist.add(Integer.parseInt(line));
             }
         } catch (IOException e) {
             log.info(e.toString());
         }
 
         for (int i = 1; i <= AbilityData.GOD_ABILITY_NUMBER; i++) {
-            if (!Blacklist.Blacklist.contains(i)) Blacklist.GodCanlist.add(i);
+            if (!BlacklistCommand.Blacklist.contains(i)) BlacklistCommand.GodCanlist.add(i);
         }
         for (int i = 101; i <= AbilityData.HUMAN_ABILITY_NUMBER + 100; i++) {
-            if (!Blacklist.Blacklist.contains(i)) Blacklist.HumanCanlist.add(i);
+            if (!BlacklistCommand.Blacklist.contains(i)) BlacklistCommand.HumanCanlist.add(i);
         }
         for (int i = 301; i <= AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER + 300; i++) {
-            if (!Blacklist.Blacklist.contains(i)) Blacklist.JujuthuCanList.add(i);
+            if (!BlacklistCommand.Blacklist.contains(i)) BlacklistCommand.JujuthuCanList.add(i);
         }
         for (int i = 401; i <= AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER + 400; i++) {
-            if (!Blacklist.Blacklist.contains(i)) Blacklist.KimethuCanList.add(i);
+            if (!BlacklistCommand.Blacklist.contains(i)) BlacklistCommand.KimethuCanList.add(i);
         }
 
         log.info("[신들의 전쟁] 등록된 능력");
-        log.info("[신들의 전쟁] 신: " + Blacklist.GodCanlist.size());
-        log.info("[신들의 전쟁] 인간: " + Blacklist.HumanCanlist.size());
-        log.info("[신들의 전쟁] 주술 회전: " + Blacklist.JujuthuCanList.size());
-        log.info("[신들의 전쟁] 귀멸의 칼날: " + Blacklist.KimethuCanList.size());
+        log.info("[신들의 전쟁] 신: " + BlacklistCommand.GodCanlist.size());
+        log.info("[신들의 전쟁] 인간: " + BlacklistCommand.HumanCanlist.size());
+        log.info("[신들의 전쟁] 주술 회전: " + BlacklistCommand.JujuthuCanList.size());
+        log.info("[신들의 전쟁] 귀멸의 칼날: " + BlacklistCommand.KimethuCanList.size());
         log.info("[신들의 전쟁] 총합: " + String.valueOf(
-                Blacklist.GodCanlist.size() + Blacklist.HumanCanlist.size() +
-                        Blacklist.JujuthuCanList.size() + Blacklist.KimethuCanList.size()));
+                BlacklistCommand.GodCanlist.size() + BlacklistCommand.HumanCanlist.size() +
+                        BlacklistCommand.JujuthuCanList.size() + BlacklistCommand.KimethuCanList.size()));
 
         log.info("[신들의 전쟁] 게임의 설정 불러오는 중입니다.");
         getConfig().options().copyDefaults(true);
@@ -158,7 +158,7 @@ public class Theomachy extends JavaPlugin {
         try {
             bw = new BufferedWriter(new FileWriter(file));
 
-            for (int i : Blacklist.Blacklist) {
+            for (int i : BlacklistCommand.Blacklist) {
                 bw.write(String.valueOf(i));
                 bw.newLine();
             }

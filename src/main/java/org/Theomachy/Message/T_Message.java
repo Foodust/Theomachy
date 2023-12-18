@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import org.Theomachy.Ability.ENUM.AbilityCase;
-import org.Theomachy.Ability.ENUM.TargetType;
+import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.ENUM.TargetType;
 import org.Theomachy.Data.GameData;
 
 

@@ -9,10 +9,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 import org.Theomachy.Data.AbilityData;
-import org.Theomachy.Handler.Ability.AbilitySet;
+import org.Theomachy.Handler.CommandModule.AbilitySetCommand;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 
@@ -53,16 +53,16 @@ public class PokeGo extends Ability {
             int abilityNumber = 0;
             if (randomNumber == 0) {
                 abilityNumber = random.nextInt(AbilityData.GOD_ABILITY_NUMBER) + 1;
-                AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 1) {
                 abilityNumber = random.nextInt(AbilityData.HUMAN_ABILITY_NUMBER) + 101;
-                AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 2) {
                 abilityNumber = random.nextInt(AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER) + 301;
-                AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 3) {
                 abilityNumber = random.nextInt(AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER) + 401;
-                AbilitySet.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             }
             event.getPlayer().sendMessage(ChatColor.YELLOW + " ★ 경  " + ChatColor.WHITE + goal + " 보 걷기에 성공했습니다!  " + ChatColor.YELLOW + " 축 ★");
             event.getPlayer().sendMessage(ChatColor.AQUA + AbilityInfo.getNameByIndex(abilityNumber) + ChatColor.WHITE + "!! 너로 정했다!!");

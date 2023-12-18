@@ -1,8 +1,7 @@
-package org.Theomachy.Handler.Ability;
+package org.Theomachy.Handler.CommandModule;
 
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
 import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Rengoku;
-import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,23 +9,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityInfo;
 import org.Theomachy.Ability.GOD.*;
 import org.Theomachy.Ability.HUMAN.*;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
 import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.CommandModule.AbilityHelpCommand;
 import org.Theomachy.Utility.Checker.PermissionChecker;
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
 
-import javax.swing.*;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbilitySet {
+public class AbilitySetCommand {
     public static void Module(CommandSender sender, Command command, String label, String[] data) {
         if (PermissionChecker.Sender(sender)) {
             if (!StartStopCommand.Ready) {
@@ -85,7 +81,7 @@ public class AbilitySet {
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
         int[] rn = RandomSkillHandler.nonDuplicate();
         int length;
-        length = Math.min(playerlist.size(), Blacklist.availableList);
+        length = Math.min(playerlist.size(), BlacklistCommand.availableList);
         int i = 0;
         for (Player player : playerlist) {
             String playerName = player.getName();

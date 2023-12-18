@@ -1,4 +1,4 @@
-package org.Theomachy.Ability.ENUM;
+package org.Theomachy.ENUM;
 
 public enum AbilityCase {
     COMMON,NORMAL,RARE

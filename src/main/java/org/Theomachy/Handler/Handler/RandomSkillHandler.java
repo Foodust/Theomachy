@@ -6,19 +6,19 @@ import java.util.Random;
 
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Handler.Ability.Blacklist;
+import org.Theomachy.Handler.CommandModule.BlacklistCommand;
 
 public class RandomSkillHandler {
     public static int[] nonDuplicate() {
 
         List<Integer> availableAbilities = new ArrayList<Integer>();
         Random random = new Random();
-        addAvailableAbilities(availableAbilities, AbilityData.GOD_ABILITY_NUMBER, 0, Blacklist.Blacklist);
-        addAvailableAbilities(availableAbilities, AbilityData.HUMAN_ABILITY_NUMBER, 101, Blacklist.Blacklist);
-        addAvailableAbilities(availableAbilities, AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER, 301, Blacklist.Blacklist);
-        addAvailableAbilities(availableAbilities, AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER, 401, Blacklist.Blacklist);
+        addAvailableAbilities(availableAbilities, AbilityData.GOD_ABILITY_NUMBER, 0, BlacklistCommand.Blacklist);
+        addAvailableAbilities(availableAbilities, AbilityData.HUMAN_ABILITY_NUMBER, 101, BlacklistCommand.Blacklist);
+        addAvailableAbilities(availableAbilities, AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER, 301, BlacklistCommand.Blacklist);
+        addAvailableAbilities(availableAbilities, AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER, 401, BlacklistCommand.Blacklist);
 
-        Blacklist.availableList = availableAbilities.size();
+        BlacklistCommand.availableList = availableAbilities.size();
 
         int[] randomNumbers = new int[availableAbilities.size()];
 

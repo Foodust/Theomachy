@@ -1,4 +1,4 @@
-package org.Theomachy.Ability.ENUM;
+package org.Theomachy.ENUM;
 
 public enum TargetType {
     ENTITY_TOO_FAR,TARGET_TOO_FAR

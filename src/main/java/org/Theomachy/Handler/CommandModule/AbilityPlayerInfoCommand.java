@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.Ability;
+package org.Theomachy.Handler.CommandModule;
 
 import java.util.Collection;
 
@@ -9,7 +9,7 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Utility.Checker.PermissionChecker;
 
-public class AbilityPlayerInfo
+public class AbilityPlayerInfoCommand
 {
 	public static void showAllAbility(CommandSender sender)
 	{

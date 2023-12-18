@@ -1,8 +1,8 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
-import org.Theomachy.Ability.ENUM.AbilityCase;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
@@ -10,7 +10,6 @@ import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;

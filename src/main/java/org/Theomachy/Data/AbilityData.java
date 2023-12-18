@@ -1,6 +1,6 @@
 package org.Theomachy.Data;
 
-import org.Theomachy.Ability.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityInfo;
 
 import java.util.EnumSet;
 

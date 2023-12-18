@@ -1,7 +1,7 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityInfo;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
 import org.bukkit.block.Block;

@@ -1,22 +1,17 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityCase;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Jogo extends RyoikiTenkai {
     private final static String[] des = {

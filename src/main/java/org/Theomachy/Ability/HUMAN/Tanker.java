@@ -1,17 +1,12 @@
 package org.Theomachy.Ability.HUMAN;
 
-import java.util.Random;
-
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.util.Vector;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityInfo;
-import org.Theomachy.Ability.ENUM.AbilityRank;
+import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.ENUM.AbilityRank;
 
 public class Tanker extends Ability {
 

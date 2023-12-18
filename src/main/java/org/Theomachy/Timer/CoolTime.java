@@ -6,12 +6,11 @@ import java.util.Map.Entry;
 import java.util.TimerTask;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Ability.ENUM.AbilityCase;
+import org.Theomachy.ENUM.AbilityCase;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.CommandModule.StartStopCommand;
 import org.Theomachy.Message.T_Message;
-import org.bukkit.Bukkit;
 
 public class CoolTime extends TimerTask {
     public static boolean init = false;

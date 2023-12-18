@@ -2,7 +2,7 @@ package org.Theomachy.Utility.Checker;
 
 import org.bukkit.entity.Player;
 
-import org.Theomachy.Ability.ENUM.AbilityCase;
+import org.Theomachy.ENUM.AbilityCase;
 import org.Theomachy.Timer.CoolTime;
 import org.Theomachy.Message.T_Message;
 

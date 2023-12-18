@@ -5,9 +5,6 @@ import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.Ability.AbilityPlayerInfo;
-import org.Theomachy.Handler.Ability.AbilitySet;
-import org.Theomachy.Handler.Ability.Blacklist;
 
 public class MainCommand
 {
@@ -16,14 +13,14 @@ public class MainCommand
         switch (data[0]) {
             case "start" -> StartStopCommand.GameReady(sender);
             case "stop" -> StartStopCommand.GameStop(sender);
-            case "ability", "a" -> AbilitySet.Module(sender, command, label, data);
-            case "alist" -> AbilityPlayerInfo.showAllAbility(sender);
+            case "ability", "a" -> AbilitySetCommand.Module(sender, command, label, data);
+            case "alist" -> AbilityPlayerInfoCommand.showAllAbility(sender);
             case "help" -> HelpCommand.Module(sender, command, label, data);
             case "spawn", "s" -> SpawnCommand.Module(sender, command, label, data);
             case "team", "t" -> TeamCommand.Module(sender, command, label, data);
             case "info", "i" -> TeamInfoCommand.Module(sender, command, label, data);
             case "clear", "c" -> SpawnCommand.ClearCommand.Module(sender, command, label, data);
-            case "black" -> Blacklist.Module(sender);
+            case "black" -> BlacklistCommand.Module(sender);
             case "set" -> SettingCommand.Module(sender);
             case "con" -> GamblingCommand.Module(sender);
             case "tip" -> TipCommand.Module(sender);
