@@ -34,21 +34,21 @@ public class BlacklistCommand {
     //추가라벨
     private static Inventory blacklistGui() {
         Inventory gui = Bukkit.createInventory(null, 54, ChatColor.BLACK + ":: 블랙리스트 ::");
-        int[] god = createAndFillArray(1, AbilityData.GOD_ABILITY_NUMBER);
-        int[] human = createAndFillArray(101, AbilityData.HUMAN_ABILITY_NUMBER);
-        int[] juju = createAndFillArray(301, AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER);
-        int[] yaiba = createAndFillArray(401, AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER);
-
-        int length = god.length + human.length + juju.length + yaiba.length + 2;
-        ItemStack[] wool = new ItemStack[length];
-        ItemMeta[] meta = new ItemMeta[length];
-
-        createWool(wool, meta, 1, god.length, 1);
-        createWool(wool, meta, god.length, human.length,101);
-        createWool(wool, meta, human.length, juju.length,301);
-        createWool(wool, meta, juju.length, yaiba.length,401);
-
-        fillInventory(gui, wool);
+//        int[] god = createAndFillArray(1, AbilityData.GOD_ABILITY_NUMBER);
+//        int[] human = createAndFillArray(101, AbilityData.HUMAN_ABILITY_NUMBER);
+//        int[] juju = createAndFillArray(301, AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER);
+//        int[] yaiba = createAndFillArray(401, AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER);
+//
+//        int length = god.length + human.length + juju.length + yaiba.length + 2;
+//        ItemStack[] wool = new ItemStack[length];
+//        ItemMeta[] meta = new ItemMeta[length];
+//
+//        createWool(wool, meta, 1, god.length, 1);
+//        createWool(wool, meta, god.length, god.length + human.length,101);
+//        createWool(wool, meta, human.length, god.length + human.length + juju.length,301);
+//        createWool(wool, meta, juju.length, length,401);
+//
+//        fillInventory(gui, wool);
 
         return gui;
     }
@@ -57,12 +57,9 @@ public class BlacklistCommand {
             wool[index - 1] = new ItemStack(Material.WHITE_WOOL);
             meta[index] = wool[index - 1].getItemMeta();
             meta[index].setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + String.valueOf(index));
-            if (!Blacklist.contains(checkNum)) {
-                wool[index - 1].setDurability((short) 5);
-            } else {
-                wool[index - 1].setDurability((short) 14);
-            }
+            wool[index -1].setDurability((short) (!Blacklist.contains(checkNum) ? 14 : 5));
             wool[index - 1].setItemMeta(meta[index]);
+            checkNum++;
         }
     }
     public static int[] createAndFillArray(int startIndex, int arrayLength) {
