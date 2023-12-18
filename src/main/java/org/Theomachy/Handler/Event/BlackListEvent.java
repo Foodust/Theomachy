@@ -21,7 +21,7 @@ public class BlackListEvent implements Listener {
 
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
-        if (event.getView().getTitle().equals(CommonMessage.BLACKLIST.getMessage())) {
+        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
             Player player = (Player) event.getPlayer();
             BlacklistModule.openBlackListInventory(player);
         }
