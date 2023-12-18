@@ -7,8 +7,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 
 public class Goldspoon extends Ability {
 

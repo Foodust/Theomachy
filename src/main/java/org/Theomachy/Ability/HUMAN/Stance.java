@@ -6,8 +6,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
 public class Stance extends Ability {

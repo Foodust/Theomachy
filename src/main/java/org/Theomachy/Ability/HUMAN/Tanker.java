@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 
 public class Tanker extends Ability {
 

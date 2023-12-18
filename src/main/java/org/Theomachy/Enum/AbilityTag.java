@@ -1,4 +1,4 @@
-package org.Theomachy.ENUM;
+package org.Theomachy.Enum;
 
 public enum AbilityTag {
     BONEATTACK("boneAttack");

@@ -9,10 +9,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.AbilityData;
-import org.Theomachy.Handler.CommandModule.AbilitySetCommand;
+import org.Theomachy.Handler.Command.AbilitySetCommand;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 
@@ -61,7 +61,7 @@ public class PokeGo extends Ability {
                 abilityNumber = random.nextInt(AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER) + 301;
                 AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 3) {
-                abilityNumber = random.nextInt(AbilityData.KIMETHU_NO_YAIBA_ABILITY_NUMBER) + 401;
+                abilityNumber = random.nextInt(AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER) + 401;
                 AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             }
             event.getPlayer().sendMessage(ChatColor.YELLOW + " ★ 경  " + ChatColor.WHITE + goal + " 보 걷기에 성공했습니다!  " + ChatColor.YELLOW + " 축 ★");

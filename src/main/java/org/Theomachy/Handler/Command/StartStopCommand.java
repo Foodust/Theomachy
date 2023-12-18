@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Command;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +17,6 @@ import org.Theomachy.Timer.CoolTime;
 import org.Theomachy.Timer.GameReadyTimer;
 import org.Theomachy.Timer.TipTimer;
 import org.Theomachy.Utility.Checker.PermissionChecker;
-import org.bukkit.scheduler.BukkitTask;
 
 public class StartStopCommand {
     public static boolean Ready = false;

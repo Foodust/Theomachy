@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

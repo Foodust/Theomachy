@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import org.jetbrains.annotations.NotNull;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Handler.CommandModule.MainCommand;
+import org.Theomachy.Handler.Command.MainCommand;
 
 import java.util.Objects;
 

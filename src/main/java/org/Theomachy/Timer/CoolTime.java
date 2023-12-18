@@ -6,10 +6,10 @@ import java.util.Map.Entry;
 import java.util.TimerTask;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.CommandModule.StartStopCommand;
+import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Message.T_Message;
 
 public class CoolTime extends TimerTask {

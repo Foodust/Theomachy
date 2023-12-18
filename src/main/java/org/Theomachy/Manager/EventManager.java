@@ -3,6 +3,7 @@ package org.Theomachy.Manager;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.*;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
@@ -28,15 +29,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityTag;
-import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.Enum.AbilityTag;
+import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Utility.Gambling.Gambling;
 import org.Theomachy.Utility.Hangul;
-import org.Theomachy.Handler.CommandModule.BlacklistCommand;
-import org.Theomachy.Handler.CommandModule.SettingCommand;
-import org.Theomachy.Handler.CommandModule.StartStopCommand;
+import org.Theomachy.Handler.Command.SettingCommand;
+import org.Theomachy.Handler.Command.StartStopCommand;
 
 public class EventManager implements Listener {
 
@@ -351,7 +351,7 @@ public class EventManager implements Listener {
                     wool.setDurability((short) 14);
                     String[] y = Objects.requireNonNull(meta.getDisplayName()).split(" ");
                     int num = Integer.parseInt(y[y.length - 1]);
-                    BlacklistCommand.Blacklist.add(num);
+                    BlacklistModule.blacklist.add(num);
 
                     char josa = '가';
                     try {
@@ -365,7 +365,7 @@ public class EventManager implements Listener {
                     wool.setDurability((short) 5);
                     String[] y = Objects.requireNonNull(meta.getDisplayName()).split(" ");
                     Object o = Integer.parseInt(y[y.length - 1]);
-                    BlacklistCommand.Blacklist.remove(o);
+                    BlacklistModule.blacklist.remove(o);
 
                     char josa = '가';
                     try {

@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import org.Theomachy.Theomachy;
-import org.Theomachy.Handler.CommandModule.StartStopCommand;
+import org.Theomachy.Handler.Command.StartStopCommand;
 
 public class TipTimer extends TimerTask
 {

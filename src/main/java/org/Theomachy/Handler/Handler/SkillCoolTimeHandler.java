@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import org.Theomachy.ENUM.AbilityCase;
+import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Timer.CoolTime;
 import org.Theomachy.Message.T_Message;
 

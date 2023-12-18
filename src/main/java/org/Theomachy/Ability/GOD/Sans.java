@@ -12,10 +12,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityTag;
-import org.Theomachy.ENUM.AbilityCase;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityTag;
+import org.Theomachy.Enum.AbilityCase;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Utility.*;
 

@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Command;
 
 import java.util.Iterator;
 import java.util.Map.Entry;

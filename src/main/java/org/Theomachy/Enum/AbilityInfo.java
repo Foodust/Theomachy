@@ -1,4 +1,4 @@
-package org.Theomachy.ENUM;
+package org.Theomachy.Enum;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,7 +86,7 @@ public enum AbilityInfo {
         return this.index;
     }
     public static String getNameByIndex(int index) {
-        return abilityInfoMap.getOrDefault(index, "해당하는 이름 없음");
+        return abilityInfoMap.getOrDefault(index, "");
     }
 
 

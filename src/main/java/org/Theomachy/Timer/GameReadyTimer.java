@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.CommandModule.StartStopCommand;
+import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Utility.PlayerInventory;
 
 

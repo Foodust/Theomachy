@@ -1,11 +1,11 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Data.AbilityData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Theomachy;
 
 public class AbilityHelpCommand {

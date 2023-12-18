@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
 
 public class Anorexia extends Ability {

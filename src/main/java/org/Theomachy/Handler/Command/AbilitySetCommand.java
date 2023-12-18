@@ -1,7 +1,7 @@
-package org.Theomachy.Handler.CommandModule;
+package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
-import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Rengoku;
+import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,12 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityInfo;
+import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Ability.GOD.*;
 import org.Theomachy.Ability.HUMAN.*;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
-import org.Theomachy.Ability.KIMETHU_NO_YAIBA.Zenitsu;
+import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Zenitsu;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Utility.Checker.PermissionChecker;
 import org.Theomachy.Handler.Handler.RandomSkillHandler;

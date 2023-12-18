@@ -1,9 +1,9 @@
-package org.Theomachy.Ability.KIMETHU_NO_YAIBA;
+package org.Theomachy.Ability.KIMETSU_NO_YAIBA;
 
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.ENUM.AbilityCase;
-import org.Theomachy.ENUM.AbilityInfo;
-import org.Theomachy.ENUM.AbilityRank;
+import org.Theomachy.Enum.AbilityCase;
+import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
