@@ -16,12 +16,12 @@ import java.util.List;
 
 public class BlacklistModule {
 
-    public static List<Integer> godCanlist = new ArrayList<Integer>();
-    public static List<Integer> humanCanlist = new ArrayList<Integer>();
-    public static List<Integer> jujutsuCanList = new ArrayList<Integer>();
-    public static List<Integer> kimetsuCanlist = new ArrayList<Integer>();
+    public static List<Integer> godCanlist = new ArrayList<>();
+    public static List<Integer> humanCanlist = new ArrayList<>();
+    public static List<Integer> jujutsuCanList = new ArrayList<>();
+    public static List<Integer> kimetsuCanlist = new ArrayList<>();
     public static int availableList;
-    public static List<Integer> blacklist = new ArrayList<Integer>();
+    public static List<Integer> blacklist = new ArrayList<>();
     public static List<Inventory> blackListInventories = new ArrayList<>();
 
     public static int itemsPerPage = 6 * 9; // 페이지당 아이템 수
@@ -57,15 +57,25 @@ public class BlacklistModule {
                 length = AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER;
             }
         }
-        for (int i = index; i < length; i++) {
+        for (int itemIndex = index; itemIndex <= length; itemIndex++) {
             ItemStack item = !blacklist.contains(index) ? new ItemStack(Material.WHITE_WOOL) : new ItemStack(Material.RED_WOOL);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + index);
-            inventory.setItem(i, item);
+            item.setItemMeta(itemMeta);
+            inventory.setItem(itemIndex, item);
         }
-        inventory.setItem(itemsPerPage,new ItemStack(Material.SPECTRAL_ARROW));
-        inventory.setItem(itemsPerPage - itemsPerPage / 9,new ItemStack(Material.TIPPED_ARROW));
+        ItemStack itemStack = new ItemStack(Material.SPECTRAL_ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        assert itemMeta != null;
+        itemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.NEXT_PAGE.getMessage());
+        itemStack.setItemMeta(itemMeta);
+        inventory.setItem(itemsPerPage,itemStack);
+
+        itemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
+        itemStack.setItemMeta(itemMeta);
+        inventory.setItem(itemsPerPage - itemsPerPage / 9,itemStack);
         return inventory;
     }
 }
