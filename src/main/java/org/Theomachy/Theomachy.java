@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.Theomachy.Handler.Event.BlackListEvent;
+import org.Theomachy.Handler.Event.MenuEvent;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -68,14 +70,16 @@ public class Theomachy extends JavaPlugin {
 
         saveResource("blacklist.yml", true);
 
-        // command
+        // command 등록
         CommandManager commandManager = new CommandManager(this);
-        // recipe
+        // recipe 등록
         NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, "custom_blaze_rod_recipe");
         ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
         getServer().addRecipe(recipe);
-        // event
+        // event 등록
         getServer().getPluginManager().registerEvents(new EventManager(), this);
+        getServer().getPluginManager().registerEvents(new BlackListEvent(), this);
+        getServer().getPluginManager().registerEvents(new MenuEvent(), this);
         // blacklist
         FileInputStream fileInputStream;
         InputStreamReader inputStreamReader;
@@ -91,7 +95,6 @@ public class Theomachy extends JavaPlugin {
         } catch (IOException e) {
             log.info(e.toString());
         }
-
         for (int i = 1; i <= AbilityData.GOD_ABILITY_NUMBER; i++) {
             if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.godCanlist.add(i);
         }
@@ -105,6 +108,7 @@ public class Theomachy extends JavaPlugin {
             if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.kimetsuCanlist.add(i);
         }
 
+        // 기본 정보
         log.info("[신들의 전쟁] 등록된 능력");
         log.info("[신들의 전쟁] 신: " + BlacklistModule.godCanlist.size());
         log.info("[신들의 전쟁] 인간: " + BlacklistModule.humanCanlist.size());
