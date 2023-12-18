@@ -14,7 +14,6 @@ public class BlacklistCommand {
     public static void Module(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             Player player = (Player) sender;
-//            player.openInventory(BlacklistModule.blacklistGui());
             BlacklistModule.openBlackListInventory(player);
         }
     }

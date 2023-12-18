@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Event;
 
 import org.Theomachy.Enum.CommonMessage;
 import org.Theomachy.Handler.Command.SettingCommand;
+import org.Theomachy.Handler.Module.SettingModule;
 import org.Theomachy.Utility.Gambling.Gambling;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,23 +15,24 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Objects;
 
 public class MenuEvent implements Listener {
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(CommonMessage.MENU.getMessage())) {
-            Player p = (Player) event.getWhoClicked();
+        if (event.getView().getTitle().equals(CommonMessage.MENU.getMessage())) {
+            event.setCancelled(true);
+            Player player = (Player) event.getWhoClicked();
             ItemStack wool = event.getCurrentItem();
             assert wool != null;
             String menuName = ChatColor.stripColor(Objects.requireNonNull(Objects.requireNonNull(wool.getItemMeta()).getDisplayName()));
             if (menuName.equals(CommonMessage.GAMBLING.getMessage())) {
-                Gambling.gambling(p);
+                Gambling.gambling(player);
             }
         }
-        else if (ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(CommonMessage.SETTING.getMessage())) {
+        else if (event.getView().getTitle().equals(CommonMessage.SETTING.getMessage())) {
+            event.setCancelled(true);
             ItemStack wool = event.getCurrentItem();
             assert wool != null;
-            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.SETTING.getMessage())) {
-                SettingCommand.guiListener(wool);
+            if (event.getView().getTitle().equals(CommonMessage.SETTING.getMessage())) {
+                SettingModule.guiListener(wool);
             }
         }
     }

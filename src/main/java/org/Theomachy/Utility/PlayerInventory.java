@@ -36,7 +36,7 @@ public class PlayerInventory
 	public static void startItem(Player player)
 	{
 		Inventory inventory = player.getInventory();
-		if (Theomachy.INVENTORY_CLEAR)
+		if (Theomachy.STARTING_INVENTORY_CLEAR)
 		{
 			inventory.clear();
 			player.getInventory().setHelmet(new ItemStack(Material.AIR));
@@ -44,7 +44,7 @@ public class PlayerInventory
 			player.getInventory().setLeggings(new ItemStack(Material.AIR));
 			player.getInventory().setBoots(new ItemStack(Material.AIR));
 		}
-		if (Theomachy.GIVE_ITEM)
+		if (Theomachy.STARTING_GIVE_ITEM)
 		{
 			// 테스트용
 			inventory.addItem(new ItemStack(Material.BLAZE_ROD, 1));

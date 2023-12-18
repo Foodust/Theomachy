@@ -29,13 +29,13 @@ public class GameReadyTimer extends TimerTask {
 
     public GameReadyTimer() {
         this.playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
-        setting[0] = Theomachy.INVENTORY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[1] = Theomachy.GIVE_ITEM ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[0] = Theomachy.STARTING_INVENTORY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[1] = Theomachy.STARTING_GIVE_ITEM ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[2] = Theomachy.IGNORE_BED ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[3] = Theomachy.AUTO_SAVE ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[4] = Theomachy.ANIMAL ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[5] = Theomachy.MONSTER ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[7] = Theomachy.ENTITIES_REMOVE ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[4] = Theomachy.ANIMAL_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[5] = Theomachy.MONSTER_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[7] = Theomachy.STARTING_ENTITY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         difficulty = null;
         switch (Theomachy.DIFFICULTY) {
             case 0 -> {
@@ -126,7 +126,7 @@ public class GameReadyTimer extends TimerTask {
                 case 32 -> Bukkit.broadcastMessage(ChatColor.RED + "1초 전");
 //				case 1 ->{:
                 case 33 -> {
-                    if (Theomachy.ENTITIES_REMOVE) {
+                    if (Theomachy.STARTING_ENTITY_CLEAR) {
                         try {
                             List<Entity> entities = world.getEntities();
                             for (Entity e : entities) {
@@ -177,7 +177,7 @@ public class GameReadyTimer extends TimerTask {
                 case 34 -> {
                     world.setPVP(true);
                     world.setAutoSave(Theomachy.AUTO_SAVE);
-                    world.setSpawnFlags(Theomachy.MONSTER, Theomachy.ANIMAL);
+                    world.setSpawnFlags(Theomachy.MONSTER_SPAWN, Theomachy.ANIMAL_SPAWN);
                     world.setDifficulty(this.difficulty);
                     Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                         world.setTime(6000);

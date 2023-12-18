@@ -11,7 +11,16 @@ public enum CommonMessage {
     GAMBLING(ChatColor.GREEN + "뽑기"),
     NEXT_PAGE(ChatColor.WHITE + "다음 페이지"),
     CURRENT_PAGE(ChatColor.WHITE + "현재 페이지"),
-    PREV_PAGE(ChatColor.WHITE + "이전 페이지");
+    PREV_PAGE(ChatColor.WHITE + "이전 페이지"),
+    STARTING_INVENTORY_CLEAR(ChatColor.WHITE + "게임 시작 시 인벤토리 클리어"),
+    STARTING_GIVE_BASIC_ITEM(ChatColor.WHITE + "게임 시작 시 스카이블럭 아이템 지급"),
+    STARTING_ENTITY_CLEAR(ChatColor.WHITE + "게임 시작 시 엔티티 제거"),
+    IGNORE_BED(ChatColor.WHITE + "침대 무시"),
+    FAST_START(ChatColor.WHITE + "빠른 시작"),
+    SERVER_AUTO_SAVE(ChatColor.WHITE + "서버 자동 저장"),
+    ANIMAL_SPAWN(ChatColor.WHITE + "동물 스폰"),
+    MONSTER_SPWAN(ChatColor.WHITE + "몬스터 스폰"),
+    GAMBLING_ACCEPT(ChatColor.WHITE + "뽑기 허용");
 
     private final String message;
 
