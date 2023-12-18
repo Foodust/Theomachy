@@ -59,7 +59,7 @@ public class BlacklistModule {
                 length = AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER;
             }
         }
-        for (int itemIndex = index - 1; itemIndex <= length; itemIndex++) {
+        for (int itemIndex = index - 1; itemIndex < length; itemIndex++) {
             ItemStack item = setItem(!blacklist.contains(index) ? Material.WHITE_WOOL : Material.RED_WOOL,
                     1,
                     ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + 1) + " : " + (itemIndex + 1));
@@ -74,6 +74,7 @@ public class BlacklistModule {
 
         ItemStack prevItem = setItem(Material.ITEM_FRAME, 1, ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 6, prevItem);
+
         return inventory;
     }
 

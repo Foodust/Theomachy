@@ -71,9 +71,9 @@ public class BlackListEvent implements Listener {
                 Player player = (Player) event.getWhoClicked();
                 int slot = event.getSlot();
                 // 페이지 이동 처리
-                if (slot == BlacklistModule.itemsPerPage && index != 3) { // 마지막 슬롯 (다음 페이지)
+                if (slot == BlacklistModule.itemsPerPage - 4 && index != 3) { // 마지막 슬롯 (다음 페이지)
                     player.openInventory(BlacklistModule.blackListInventories.get(index));
-                } else if (slot == BlacklistModule.itemsPerPage - BlacklistModule.itemsPerPage / 9 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
+                } else if (slot == BlacklistModule.itemsPerPage - 6 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
                     player.openInventory(BlacklistModule.blackListInventories.get(index));
                 }
             }
