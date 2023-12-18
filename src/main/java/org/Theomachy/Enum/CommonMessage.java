@@ -10,6 +10,7 @@ public enum CommonMessage {
     TIP(ChatColor.AQUA + "팁"),
     GAMBLING(ChatColor.GREEN + "뽑기"),
     NEXT_PAGE(ChatColor.WHITE + "다음 페이지"),
+    CURRENT_PAGE(ChatColor.WHITE + "현재 페이지"),
     PREV_PAGE(ChatColor.WHITE + "이전 페이지");
 
     private final String message;

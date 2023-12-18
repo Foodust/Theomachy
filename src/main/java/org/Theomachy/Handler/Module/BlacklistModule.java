@@ -25,15 +25,17 @@ public class BlacklistModule {
     public static List<Inventory> blackListInventories = new ArrayList<>();
 
     public static int itemsPerPage = 6 * 9; // 페이지당 아이템 수
+
     public static void openBlackListInventory(Player player) {
         int totalPages = 4;
-        if (blackListInventories.isEmpty()){
-            for(int i = 1 ; i <= totalPages; i++){
+        if (blackListInventories.isEmpty()) {
+            for (int i = 1; i <= totalPages; i++) {
                 blackListInventories.add(makeInventory(i));
             }
         }
         player.openInventory(blackListInventories.get(0)); // 첫 번째 페이지 인벤토리 열기
     }
+
     //추가라벨
     public static Inventory makeInventory(int page) {
 
@@ -58,26 +60,29 @@ public class BlacklistModule {
             }
         }
         for (int itemIndex = index - 1; itemIndex <= length; itemIndex++) {
-            ItemStack item = !blacklist.contains(index) ? new ItemStack(Material.WHITE_WOOL) : new ItemStack(Material.RED_WOOL);
-            ItemMeta itemMeta = item.getItemMeta();
-            assert itemMeta != null;
-            itemMeta.setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + 1) + " : " + (itemIndex + 1));
-            item.setItemMeta(itemMeta);
+            ItemStack item = setItem(!blacklist.contains(index) ? Material.WHITE_WOOL : Material.RED_WOOL,
+                    1,
+                    ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + 1) + " : " + (itemIndex + 1));
             inventory.setItem(itemIndex, item);
         }
-        ItemStack nextItem = new ItemStack(Material.ITEM_FRAME);
-        ItemMeta nextItemMeta = nextItem.getItemMeta();
-        assert nextItemMeta != null;
-        nextItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.NEXT_PAGE.getMessage());
-        nextItem.setItemMeta(nextItemMeta);
-        inventory.setItem(itemsPerPage - 1,nextItem);
 
-        ItemStack prevItem = new ItemStack(Material.ITEM_FRAME);
+        ItemStack nextItem = setItem(Material.ITEM_FRAME, 1, ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
+        inventory.setItem(itemsPerPage - 4, nextItem);
+
+        ItemStack currentItem = setItem(Material.STICK, page, ChatColor.WHITE + CommonMessage.CURRENT_PAGE.getMessage());
+        inventory.setItem(itemsPerPage - 5, currentItem);
+
+        ItemStack prevItem = setItem(Material.ITEM_FRAME, 1, ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
+        inventory.setItem(itemsPerPage - 6, prevItem);
+        return inventory;
+    }
+
+    public static ItemStack setItem(Material material, int amount, String title) {
+        ItemStack prevItem = new ItemStack(material, amount);
         ItemMeta prevItemMeta = prevItem.getItemMeta();
         assert prevItemMeta != null;
-        prevItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
+        prevItemMeta.setDisplayName(title);
         prevItem.setItemMeta(prevItemMeta);
-        inventory.setItem(itemsPerPage - 9,prevItem);
-        return inventory;
+        return prevItem;
     }
 }
