@@ -30,7 +30,7 @@ public class GamblingCommand {
 
     private static Inventory gui() {
 
-        Inventory con = Bukkit.createInventory(null, 9, CommonMessage.MENU.getMessage());
+        Inventory con = Bukkit.createInventory(null, 9, CommonMessage.GAMBLING.getMessage());
 
         ItemStack itemStack = new ItemStack(Material.GOLD_INGOT);
         ItemMeta itemMeta = itemStack.getItemMeta();

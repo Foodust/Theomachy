@@ -1,7 +1,9 @@
 package org.Theomachy.Handler.Event;
 
 import org.Theomachy.Enum.CommonMessage;
+import org.Theomachy.Handler.Command.SettingCommand;
 import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Utility.Gambling.Gambling;
 import org.Theomachy.Utility.Hangul;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -29,53 +31,70 @@ public class BlackListEvent implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (BlacklistModule.blackListInventories.contains(event.getClickedInventory())) {
+        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
             assert item != null;
             ItemMeta meta = item.getItemMeta();
-            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
-                if (item.getType().equals(Material.WHITE_WOOL)) {
-                    item.setType(Material.RED_WOOL);
-                    assert meta != null;
-                    String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-                    int abilityNum = Integer.parseInt(abilityInfo[1]);
-                    BlacklistModule.blacklist.add(abilityNum);
-                    char josa = '가';
-                    try {
-                        josa = Hangul.getJosa(abilityInfo[0].charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
-                    } catch (Exception ignored) {
-                    }
-                    Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
-                } else if (item.getType().equals(Material.RED_WOOL)) {
-                    item.setType(Material.WHITE_WOOL);
-                    assert meta != null;
-                    String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-                    Object abilityNumObject = Integer.parseInt(abilityInfo[1]);
-                    BlacklistModule.blacklist.remove(abilityNumObject);
 
-                    char josa = '가';
-                    try {
-                        josa = Hangul.getJosa(abilityInfo[0].charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
-                    } catch (Exception ignored) {
-                    }
-                    Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
-                } else if (item.getType().equals(Material.ITEM_FRAME)) {
-                    int index = 0;
-                    for (; index < BlacklistModule.blackListInventories.size(); index++) {
-                        if (event.getInventory().equals(BlacklistModule.blackListInventories.get(index))) {
-                            break;
-                        }
-                    }
-                    Player player = (Player) event.getWhoClicked();
-                    int slot = event.getSlot();
-                    // 페이지 이동 처리
-                    if (slot == BlacklistModule.itemsPerPage && index != 3) { // 마지막 슬롯 (다음 페이지)
-                        player.openInventory( BlacklistModule.blackListInventories.get(++index));
-                    } else if (slot == BlacklistModule.itemsPerPage - BlacklistModule.itemsPerPage / 9 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
-                        player.openInventory( BlacklistModule.blackListInventories.get(--index));
+            if (item.getType().equals(Material.WHITE_WOOL)) {
+                item.setType(Material.RED_WOOL);
+                assert meta != null;
+                String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
+                int abilityNum = Integer.parseInt(abilityInfo[1]);
+                BlacklistModule.blacklist.add(abilityNum);
+                char josa = '가';
+                try {
+                    josa = Hangul.getJosa(abilityInfo[0].charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
+                } catch (Exception ignored) {
+                }
+                Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
+            } else if (item.getType().equals(Material.RED_WOOL)) {
+                item.setType(Material.WHITE_WOOL);
+                assert meta != null;
+                String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
+                Object abilityNumObject = Integer.parseInt(abilityInfo[1]);
+                BlacklistModule.blacklist.remove(abilityNumObject);
+
+                char josa = '가';
+                try {
+                    josa = Hangul.getJosa(abilityInfo[0].charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
+                } catch (Exception ignored) {
+                }
+                Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
+            } else if (item.getType().equals(Material.ITEM_FRAME)) {
+                int index = 0;
+                for (; index < BlacklistModule.blackListInventories.size(); index++) {
+                    if (event.getInventory().equals(BlacklistModule.blackListInventories.get(index))) {
+                        break;
                     }
                 }
+                Player player = (Player) event.getWhoClicked();
+                int slot = event.getSlot();
+                // 페이지 이동 처리
+                if (slot == BlacklistModule.itemsPerPage && index != 3) { // 마지막 슬롯 (다음 페이지)
+                    player.openInventory(BlacklistModule.blackListInventories.get(++index));
+                } else if (slot == BlacklistModule.itemsPerPage - BlacklistModule.itemsPerPage / 9 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
+                    player.openInventory(BlacklistModule.blackListInventories.get(--index));
+                }
+            }
+        }
+        else if (ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(CommonMessage.MENU.getMessage())) {
+            Player p = (Player) event.getWhoClicked();
+            ItemStack wool = event.getCurrentItem();
+            assert wool != null;
+            ItemMeta meta = wool.getItemMeta();
+            String menuName = ChatColor.stripColor(Objects.requireNonNull(Objects.requireNonNull(wool.getItemMeta()).getDisplayName()));
+            if (menuName.equals(CommonMessage.GAMBLING.getMessage())) {
+                Gambling.gambling(p);
+            }
+        }
+        else if (ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(CommonMessage.SETTING.getMessage())) {
+            ItemStack wool = event.getCurrentItem();
+            assert wool != null;
+            ItemMeta meta = wool.getItemMeta();
+            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.SETTING.getMessage())) {
+                SettingCommand.guiListener(wool);
             }
         }
     }

@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.Command;
 
+import org.Theomachy.Enum.CommonMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -29,7 +30,7 @@ public class SettingCommand {
 
     private static Inventory gui() {
 
-        Inventory gui = Bukkit.createInventory(null, 18, ChatColor.BLACK + ":::::: 설정 ::::::");
+        Inventory gui = Bukkit.createInventory(null, 18, CommonMessage.SETTING.getMessage());
 
         final int n = 10;
 
