@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
+import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -81,7 +82,7 @@ public class AbilitySetCommand {
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
         int[] rn = RandomSkillHandler.nonDuplicate();
         int length;
-        length = Math.min(playerlist.size(), BlacklistCommand.availableList);
+        length = Math.min(playerlist.size(), BlacklistModule.availableList);
         int i = 0;
         for (Player player : playerlist) {
             String playerName = player.getName();

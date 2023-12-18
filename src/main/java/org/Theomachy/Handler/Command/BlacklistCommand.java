@@ -11,7 +11,6 @@ import org.Theomachy.Utility.Checker.PermissionChecker;
 
 public class BlacklistCommand {
 
-
     public static void Module(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             Player player = (Player) sender;

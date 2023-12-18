@@ -19,7 +19,7 @@ public class RandomSkillHandler {
         addAvailableAbilities(availableAbilities, AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER, 301, BlacklistModule.blacklist);
         addAvailableAbilities(availableAbilities, AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER, 401, BlacklistModule.blacklist);
 
-        BlacklistCommand.availableList = availableAbilities.size();
+        BlacklistModule.availableList = availableAbilities.size();
 
         int[] randomNumbers = new int[availableAbilities.size()];
 
