@@ -40,19 +40,19 @@ public class BlackListEvent implements Listener {
                 item.setType(Material.RED_WOOL);
                 assert meta != null;
                 String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-                int abilityNum = Integer.parseInt(abilityInfo[1].trim() );
+                int abilityNum = Integer.parseInt(abilityInfo[1].replaceAll(" ",""));
                 BlacklistModule.blacklist.add(abilityNum);
                 char josa = '가';
                 try {
                     josa = Hangul.getJosa(abilityInfo[0].trim().charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
                 } catch (Exception ignored) {
                 }
-                Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
+                Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
             } else if (item.getType().equals(Material.RED_WOOL)) {
                 item.setType(Material.WHITE_WOOL);
                 assert meta != null;
                 String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-                Object abilityNumObject = Integer.parseInt(abilityInfo[1].trim());
+                Object abilityNumObject = Integer.parseInt(abilityInfo[1].replaceAll(" ",""));
                 BlacklistModule.blacklist.remove(abilityNumObject);
 
                 char josa = '가';
@@ -60,7 +60,7 @@ public class BlackListEvent implements Listener {
                     josa = Hangul.getJosa(abilityInfo[0].trim().charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
                 } catch (Exception ignored) {
                 }
-                Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
+                Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
             } else if (item.getType().equals(Material.ITEM_FRAME)) {
                 int index = 0;
                 for (; index < BlacklistModule.blackListInventories.size(); index++) {
@@ -72,9 +72,9 @@ public class BlackListEvent implements Listener {
                 int slot = event.getSlot();
                 // 페이지 이동 처리
                 if (slot == BlacklistModule.itemsPerPage && index != 3) { // 마지막 슬롯 (다음 페이지)
-                    player.openInventory(BlacklistModule.blackListInventories.get(++index));
+                    player.openInventory(BlacklistModule.blackListInventories.get(index));
                 } else if (slot == BlacklistModule.itemsPerPage - BlacklistModule.itemsPerPage / 9 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
-                    player.openInventory(BlacklistModule.blackListInventories.get(--index));
+                    player.openInventory(BlacklistModule.blackListInventories.get(index));
                 }
             }
         }
