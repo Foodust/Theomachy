@@ -3,6 +3,7 @@ package org.Theomachy.Manager;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.Theomachy.Enum.CommonMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.*;
 import org.bukkit.ChatColor;
@@ -41,15 +42,16 @@ import org.Theomachy.Handler.Command.StartStopCommand;
 public class EventManager implements Listener {
 
     @EventHandler
-    public void onPlayerDamageByMagma(BlockDamageEvent event){
-            Block block = event.getBlock();
-            if (block.getType() == Material.MAGMA_BLOCK) {
-                // 블록 위에 있는 플레이어의 피해를 방지
-                if (event.getPlayer().getLocation().getBlock().getType() == Material.MAGMA_BLOCK) {
-                    event.setCancelled(true); // 데미지 이벤트 취소
-                }
+    public void onPlayerDamageByMagma(BlockDamageEvent event) {
+        Block block = event.getBlock();
+        if (block.getType() == Material.MAGMA_BLOCK) {
+            // 블록 위에 있는 플레이어의 피해를 방지
+            if (event.getPlayer().getLocation().getBlock().getType() == Material.MAGMA_BLOCK) {
+                event.setCancelled(true); // 데미지 이벤트 취소
             }
+        }
     }
+
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
         if (event.getEntity() instanceof Snowball snowball) {
@@ -196,11 +198,11 @@ public class EventManager implements Listener {
 
             Block block = event.getBlock();
             if (block.getType() == Material.DIAMOND_BLOCK) {
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName()+ ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
+                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
                 Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
                 EntityManager.spawnRandomFirework(firework);
             }
@@ -327,74 +329,6 @@ public class EventManager implements Listener {
             Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
                 ability.passiveSkill(event);
-        }
-
-    }
-
-    @EventHandler
-    public static void onInventoryClick(InventoryClickEvent event) {
-        if (!ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":: 블랙리스트 ::") &&
-                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 능력 정보 ::::::::") &&
-                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::: 설정 ::::::") &&
-                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 편의 기능 ::::::::") &&
-                !ChatColor.stripColor(event.getView().getOriginalTitle()).equalsIgnoreCase(":::::::: 팁 ::::::::"))
-            return;
-        event.setCancelled(true);
-        try {
-            ItemStack wool = event.getCurrentItem();
-            assert wool != null;
-            ItemMeta meta = wool.getItemMeta();
-
-            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":: 블랙리스트 ::")) {
-
-                if (wool.getDurability() == (short) 5) {
-                    wool.setDurability((short) 14);
-                    String[] y = Objects.requireNonNull(meta.getDisplayName()).split(" ");
-                    int num = Integer.parseInt(y[y.length - 1]);
-                    BlacklistModule.blacklist.add(num);
-
-                    char josa = '가';
-                    try {
-                        josa = Hangul.getJosa(y[0].charAt(y[0].toCharArray().length - 1), '이', '가');
-                    } catch (Exception ignored) {
-                    }
-                    Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + y[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
-                    return;
-                }
-                if (wool.getDurability() == (short) 14) {
-                    wool.setDurability((short) 5);
-                    String[] y = Objects.requireNonNull(meta.getDisplayName()).split(" ");
-                    Object o = Integer.parseInt(y[y.length - 1]);
-                    BlacklistModule.blacklist.remove(o);
-
-                    char josa = '가';
-                    try {
-                        josa = Hangul.getJosa(y[0].charAt(y[0].toCharArray().length - 1), '이', '가');
-                    } catch (Exception ignored) {
-                    }
-                    Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + y[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 벗어났습니다.");
-                    return;
-                }
-            }
-
-            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":::::::: 편의 기능 ::::::::")) {
-
-                Player p = (Player) event.getWhoClicked();
-
-                switch (ChatColor.stripColor(Objects.requireNonNull(wool.getItemMeta().getDisplayName()))) {
-                    case "가챠 ★ 가챠" -> {
-                        Gambling.gambling(p);
-                    }
-
-                }
-            }
-
-            if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(":::::: 설정 ::::::")) {
-
-                SettingCommand.guiListener(wool);
-
-            }
-        } catch (NullPointerException ignored) {
         }
 
     }
