@@ -65,17 +65,19 @@ public class BlacklistModule {
             item.setItemMeta(itemMeta);
             inventory.setItem(itemIndex, item);
         }
-        ItemStack itemStack = new ItemStack(Material.SPECTRAL_ARROW);
-        ItemMeta itemMeta = itemStack.getItemMeta();
+        ItemStack nextItem = new ItemStack(Material.SPECTRAL_ARROW);
+        ItemMeta nextItemMeta = nextItem.getItemMeta();
+        assert nextItemMeta != null;
+        nextItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.NEXT_PAGE.getMessage());
+        nextItem.setItemMeta(nextItemMeta);
+        inventory.setItem(itemsPerPage,nextItem);
 
-        assert itemMeta != null;
-        itemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.NEXT_PAGE.getMessage());
-        itemStack.setItemMeta(itemMeta);
-        inventory.setItem(itemsPerPage,itemStack);
-
-        itemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
-        itemStack.setItemMeta(itemMeta);
-        inventory.setItem(itemsPerPage - itemsPerPage / 9,itemStack);
+        ItemStack prevItem = new ItemStack(Material.SPECTRAL_ARROW);
+        ItemMeta prevItemMeta = prevItem.getItemMeta();
+        assert prevItemMeta != null;
+        prevItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
+        prevItem.setItemMeta(prevItemMeta);
+        inventory.setItem(itemsPerPage - itemsPerPage / 9,prevItem);
         return inventory;
     }
 }
