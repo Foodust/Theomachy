@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.GOD;
 
+import org.Theomachy.Handler.Event.PlayerEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -87,11 +88,11 @@ public class Athena extends Ability {
     }
 
     public void initialize() {
-        EventManager.PlayerDeathEventList.add(this);
+        PlayerEvent.PlayerDeathEventList.add(this);
     }
 
     public void initializeReset() {
-        EventManager.PlayerDeathEventList.remove(this);
+        PlayerEvent.PlayerDeathEventList.remove(this);
     }
 }
 

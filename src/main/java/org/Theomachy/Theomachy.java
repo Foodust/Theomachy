@@ -13,10 +13,7 @@ import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.Theomachy.Handler.Event.BlackListEvent;
 import org.Theomachy.Handler.Event.MenuEvent;
 import org.Theomachy.Handler.Module.BlacklistModule;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -72,14 +69,15 @@ public class Theomachy extends JavaPlugin {
 
         // command 등록
         CommandManager commandManager = new CommandManager(this);
+
         // recipe 등록
         NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, "custom_blaze_rod_recipe");
         ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
         getServer().addRecipe(recipe);
+
         // event 등록
-        getServer().getPluginManager().registerEvents(new EventManager(), this);
-        getServer().getPluginManager().registerEvents(new BlackListEvent(), this);
-        getServer().getPluginManager().registerEvents(new MenuEvent(), this);
+        EventManager.setEvent(getServer(),this);
+
         // blacklist
         FileInputStream fileInputStream;
         InputStreamReader inputStreamReader;

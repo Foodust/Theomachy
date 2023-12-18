@@ -18,7 +18,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Objects;
 
 public class BlackListEvent implements Listener {
-
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
         if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
@@ -26,10 +25,8 @@ public class BlackListEvent implements Listener {
             BlacklistModule.openBlackListInventory(player);
         }
     }
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-//        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
         if (event.getView().getTitle().equals(CommonMessage.BLACKLIST.getMessage())) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
