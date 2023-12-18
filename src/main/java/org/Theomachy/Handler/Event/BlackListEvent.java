@@ -21,10 +21,10 @@ public class BlackListEvent implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+        event.setCancelled(true); // 이벤트 취소 (아이템 이동 방지)
         int index = 0;
-        if (event.getClickedInventory() != null) {
-            event.setCancelled(true); // 이벤트 취소 (아이템 이동 방지)
-            for (; index < BlacklistModule.blackListInventories.size();index++) {
+        if (BlacklistModule.blackListInventories.contains(event.getClickedInventory())) {
+            for (; index < BlacklistModule.blackListInventories.size(); index++) {
                 if (event.getInventory().equals(BlacklistModule.blackListInventories.get(index))) {
                     break;
                 }
@@ -33,25 +33,14 @@ public class BlackListEvent implements Listener {
             int slot = event.getSlot();
             // 페이지 이동 처리
             if (slot == BlacklistModule.itemsPerPage && index != 3) { // 마지막 슬롯 (다음 페이지)
-                afterPage(player, BlacklistModule.blackListInventories.get(++index));
+                openInventory(player, BlacklistModule.blackListInventories.get(++index));
             } else if (slot == BlacklistModule.itemsPerPage - BlacklistModule.itemsPerPage / 9 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
-                beforePage(player,  BlacklistModule.blackListInventories.get(--index), slot);
+                openInventory(player, BlacklistModule.blackListInventories.get(--index));
             }
-
         }
     }
 
-    public void afterPage(Player player, Inventory inventory) {
-        int nextPage = inventory.firstEmpty();
-        if (nextPage != -1) {
+    public void openInventory(Player player, Inventory inventory) {
             player.openInventory(inventory);
-        }
-    }
-
-    public void beforePage(Player player, Inventory inventory, int slot) {
-        int prevPage = slot - 9;
-        if (prevPage >= 0) {
-            player.openInventory(inventory);
-        }
     }
 }

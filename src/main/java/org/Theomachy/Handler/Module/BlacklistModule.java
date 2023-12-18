@@ -77,7 +77,7 @@ public class BlacklistModule {
         assert prevItemMeta != null;
         prevItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
         prevItem.setItemMeta(prevItemMeta);
-        inventory.setItem(itemsPerPage - 8,prevItem);
+        inventory.setItem(itemsPerPage - 9,prevItem);
         return inventory;
     }
 }
