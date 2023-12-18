@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Enum.CommonMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,7 +24,7 @@ public class BlacklistModule {
     public static List<Integer> blacklist = new ArrayList<Integer>();
     public static List<Inventory> blackListInventories = new ArrayList<>();
 
-    public static int itemsPerPage = 6 * 9; // 페이지당 아이템 수
+    public static int itemsPerPage = 7 * 9; // 페이지당 아이템 수
     public static void openBlackListInventory(Player player) {
         int totalPages = 4;
         if (blackListInventories.isEmpty()){
@@ -36,7 +37,7 @@ public class BlacklistModule {
     //추가라벨
     public static Inventory makeInventory(int page) {
 
-        Inventory inventory = Bukkit.createInventory(null, itemsPerPage, ChatColor.BLACK + "블랙리스트 - 페이지 " + (page));
+        Inventory inventory = Bukkit.createInventory(null, itemsPerPage, CommonMessage.BLACKLIST.getMessage());
         int index = 0, length = 0;
         switch (page) {
             case 1 -> {

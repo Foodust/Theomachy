@@ -1,7 +1,9 @@
 package org.Theomachy.Enum;
 
+import org.bukkit.ChatColor;
+
 public enum CommonMessage {
-    BLACKLIST("블랙리스트");
+    BLACKLIST(ChatColor.BLACK + "블랙리스트");
 
     private final String message;
 
