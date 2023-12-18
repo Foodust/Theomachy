@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlacklistModule {
+
+    public static List<Integer> godCanlist = new ArrayList<Integer>();
+    public static List<Integer> humanCanlist = new ArrayList<Integer>();
+    public static List<Integer> jujutsuCanList = new ArrayList<Integer>();
+    public static List<Integer> kimetsuCanlist = new ArrayList<Integer>();
+    public static int availableList;
     public static List<Integer> blacklist = new ArrayList<Integer>();
     public static List<Inventory> blackListInventories = new ArrayList<>();
 

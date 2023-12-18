@@ -93,26 +93,26 @@ public class Theomachy extends JavaPlugin {
         }
 
         for (int i = 1; i <= AbilityData.GOD_ABILITY_NUMBER; i++) {
-            if (!BlacklistModule.blacklist.contains(i)) BlacklistCommand.godCanlist.add(i);
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.godCanlist.add(i);
         }
         for (int i = 101; i <= AbilityData.HUMAN_ABILITY_NUMBER + 100; i++) {
-            if (!BlacklistModule.blacklist.contains(i)) BlacklistCommand.humanCanlist.add(i);
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.humanCanlist.add(i);
         }
         for (int i = 301; i <= AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER + 300; i++) {
-            if (!BlacklistModule.blacklist.contains(i)) BlacklistCommand.jujutsuCanList.add(i);
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.jujutsuCanList.add(i);
         }
         for (int i = 401; i <= AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER + 400; i++) {
-            if (!BlacklistModule.blacklist.contains(i)) BlacklistCommand.kimetsuCanlist.add(i);
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.kimetsuCanlist.add(i);
         }
 
         log.info("[신들의 전쟁] 등록된 능력");
-        log.info("[신들의 전쟁] 신: " + BlacklistCommand.godCanlist.size());
-        log.info("[신들의 전쟁] 인간: " + BlacklistCommand.humanCanlist.size());
-        log.info("[신들의 전쟁] 주술 회전: " + BlacklistCommand.jujutsuCanList.size());
-        log.info("[신들의 전쟁] 귀멸의 칼날: " + BlacklistCommand.kimetsuCanlist.size());
+        log.info("[신들의 전쟁] 신: " + BlacklistModule.godCanlist.size());
+        log.info("[신들의 전쟁] 인간: " + BlacklistModule.humanCanlist.size());
+        log.info("[신들의 전쟁] 주술 회전: " + BlacklistModule.jujutsuCanList.size());
+        log.info("[신들의 전쟁] 귀멸의 칼날: " + BlacklistModule.kimetsuCanlist.size());
         log.info("[신들의 전쟁] 총합: " + String.valueOf(
-                BlacklistCommand.godCanlist.size() + BlacklistCommand.humanCanlist.size() +
-                        BlacklistCommand.jujutsuCanList.size() + BlacklistCommand.kimetsuCanlist.size()));
+                BlacklistModule.godCanlist.size() + BlacklistModule.humanCanlist.size() +
+                        BlacklistModule.jujutsuCanList.size() + BlacklistModule.kimetsuCanlist.size()));
 
         log.info("[신들의 전쟁] 게임의 설정 불러오는 중입니다.");
         getConfig().options().copyDefaults(true);
