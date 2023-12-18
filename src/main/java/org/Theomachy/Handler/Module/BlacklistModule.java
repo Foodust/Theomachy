@@ -44,19 +44,19 @@ public class BlacklistModule {
         switch (page) {
             case 1 -> {
                 index = 1;
-                length = index +AbilityData.GOD_ABILITY_NUMBER;
+                length = index +AbilityData.GOD_ABILITY_NUMBER -1;
             }
             case 2 -> {
                 index = 101;
-                length = index + AbilityData.HUMAN_ABILITY_NUMBER;
+                length = index + AbilityData.HUMAN_ABILITY_NUMBER -1;
             }
             case 3 -> {
                 index = 301;
-                length = index + AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER;
+                length = index + AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER -1;
             }
             case 4 -> {
                 index = 401;
-                length = index + AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER;
+                length = index + AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER -1;
             }
         }
         for (int itemIndex = index - 1; itemIndex < length; itemIndex++) {
