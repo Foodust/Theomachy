@@ -23,12 +23,12 @@ public class BlackListEvent implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         int index = 0;
         if (event.getClickedInventory() != null) {
-            for (; index < BlacklistModule.blackListInventories.size();index    ++) {
+            event.setCancelled(true); // 이벤트 취소 (아이템 이동 방지)
+            for (; index < BlacklistModule.blackListInventories.size();index++) {
                 if (event.getInventory().equals(BlacklistModule.blackListInventories.get(index))) {
                     break;
                 }
             }
-            event.setCancelled(true); // 이벤트 취소 (아이템 이동 방지)
             Player player = (Player) event.getWhoClicked();
             int slot = event.getSlot();
             // 페이지 이동 처리

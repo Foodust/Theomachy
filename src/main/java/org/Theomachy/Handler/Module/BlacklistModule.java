@@ -65,19 +65,19 @@ public class BlacklistModule {
             item.setItemMeta(itemMeta);
             inventory.setItem(itemIndex, item);
         }
-        ItemStack nextItem = new ItemStack(Material.SPECTRAL_ARROW);
+        ItemStack nextItem = new ItemStack(Material.ITEM_FRAME);
         ItemMeta nextItemMeta = nextItem.getItemMeta();
         assert nextItemMeta != null;
         nextItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.NEXT_PAGE.getMessage());
         nextItem.setItemMeta(nextItemMeta);
         inventory.setItem(itemsPerPage - 1,nextItem);
 
-        ItemStack prevItem = new ItemStack(Material.SPECTRAL_ARROW);
+        ItemStack prevItem = new ItemStack(Material.ITEM_FRAME);
         ItemMeta prevItemMeta = prevItem.getItemMeta();
         assert prevItemMeta != null;
         prevItemMeta.setDisplayName(ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
         prevItem.setItemMeta(prevItemMeta);
-        inventory.setItem(itemsPerPage - itemsPerPage / 9,prevItem);
+        inventory.setItem(itemsPerPage - 8,prevItem);
         return inventory;
     }
 }
