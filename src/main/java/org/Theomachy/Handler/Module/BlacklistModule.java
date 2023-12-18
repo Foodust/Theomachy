@@ -24,7 +24,7 @@ public class BlacklistModule {
     public static List<Integer> blacklist = new ArrayList<Integer>();
     public static List<Inventory> blackListInventories = new ArrayList<>();
 
-    public static int itemsPerPage = 7 * 9; // 페이지당 아이템 수
+    public static int itemsPerPage = 6 * 9; // 페이지당 아이템 수
     public static void openBlackListInventory(Player player) {
         int totalPages = 4;
         if (blackListInventories.isEmpty()){
