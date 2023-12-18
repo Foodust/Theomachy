@@ -29,7 +29,8 @@ public class BlackListEvent implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
+//        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
+        if (event.getView().getTitle().equals(CommonMessage.BLACKLIST.getMessage())) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
             assert item != null;
@@ -39,11 +40,11 @@ public class BlackListEvent implements Listener {
                 item.setType(Material.RED_WOOL);
                 assert meta != null;
                 String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-                int abilityNum = Integer.parseInt(abilityInfo[1]);
+                int abilityNum = Integer.parseInt(abilityInfo[1].trim() );
                 BlacklistModule.blacklist.add(abilityNum);
                 char josa = '가';
                 try {
-                    josa = Hangul.getJosa(abilityInfo[0].charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
+                    josa = Hangul.getJosa(abilityInfo[0].trim().charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
                 } catch (Exception ignored) {
                 }
                 Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
@@ -51,12 +52,12 @@ public class BlackListEvent implements Listener {
                 item.setType(Material.WHITE_WOOL);
                 assert meta != null;
                 String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-                Object abilityNumObject = Integer.parseInt(abilityInfo[1]);
+                Object abilityNumObject = Integer.parseInt(abilityInfo[1].trim());
                 BlacklistModule.blacklist.remove(abilityNumObject);
 
                 char josa = '가';
                 try {
-                    josa = Hangul.getJosa(abilityInfo[0].charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
+                    josa = Hangul.getJosa(abilityInfo[0].trim().charAt(abilityInfo[0].toCharArray().length - 1), '이', '가');
                 } catch (Exception ignored) {
                 }
                 Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0] + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
@@ -77,6 +78,5 @@ public class BlackListEvent implements Listener {
                 }
             }
         }
-
     }
 }

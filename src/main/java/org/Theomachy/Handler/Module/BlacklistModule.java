@@ -61,7 +61,7 @@ public class BlacklistModule {
             ItemStack item = !blacklist.contains(index) ? new ItemStack(Material.WHITE_WOOL) : new ItemStack(Material.RED_WOOL);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
-            itemMeta.setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(index) + " : " + index);
+            itemMeta.setDisplayName(ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + 1) + " : " + (itemIndex + 1));
             item.setItemMeta(itemMeta);
             inventory.setItem(itemIndex, item);
         }
