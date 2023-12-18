@@ -35,8 +35,6 @@ public class BlacklistModule {
         }
         player.openInventory(blackListInventories.get(0)); // 첫 번째 페이지 인벤토리 열기
     }
-
-    //추가라벨
     public static Inventory makeInventory(int page) {
 
         Inventory inventory = Bukkit.createInventory(null, itemsPerPage, CommonMessage.BLACKLIST.getMessage());
@@ -44,25 +42,25 @@ public class BlacklistModule {
         switch (page) {
             case 1 -> {
                 index = 1;
-                length = index +AbilityData.GOD_ABILITY_NUMBER -1;
+                length = AbilityData.GOD_ABILITY_NUMBER;
             }
             case 2 -> {
                 index = 101;
-                length = index + AbilityData.HUMAN_ABILITY_NUMBER -1;
+                length = AbilityData.HUMAN_ABILITY_NUMBER;
             }
             case 3 -> {
                 index = 301;
-                length = index + AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER -1;
+                length = AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER;
             }
             case 4 -> {
                 index = 401;
-                length = index + AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER -1;
+                length = AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER;
             }
         }
-        for (int itemIndex = index - 1; itemIndex < length; itemIndex++) {
+        for (int itemIndex = 0; itemIndex < length; itemIndex++) {
             ItemStack item = setItem(!blacklist.contains(index) ? Material.WHITE_WOOL : Material.RED_WOOL,
                     1,
-                    ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + 1) + " : " + (itemIndex + 1));
+                    ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + index) + " : " + (itemIndex + index));
             inventory.setItem(itemIndex, item);
         }
 
