@@ -1,11 +1,16 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Handler.Module.AbilityModule;
+import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Message.TheomachyMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Checker.PermissionChecker;
+
+import java.nio.Buffer;
+import java.util.Objects;
 
 public class AbilitySetCommand {
     public static void Module(CommandSender sender, Command command, String label, String[] data) {
@@ -16,6 +21,7 @@ public class AbilitySetCommand {
                     AbilityModule.explainCommand(sender);
                 }// ability ?
                 else if (data.length == 2) {
+
                     TheomachyMessage byMessage = TheomachyMessage.getByMessage(data[1]);
                     switch (byMessage) {
                         case COMMAND_HELP -> AbilityListHelpCommand.ShowAbilityCodeNumber(sender);
@@ -25,11 +31,12 @@ public class AbilitySetCommand {
                     }
                 }// ability ? or remove name
                 else if (data.length == 3) {
-                    TheomachyMessage byMessage = TheomachyMessage.getByMessage(data[1]);
-                    switch (byMessage) {
-                        case COMMAND_REMOVE -> AbilityModule.Remove(sender, data[2]);
-                        case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilityModule.forceAssignment(sender, data);
-                        default -> AbilityModule.errorMessage(sender);
+                    if (Objects.equals(data[1], TheomachyMessage.COMMAND_REMOVE.getMessage())) {
+                        AbilityModule.Remove(sender, data[2]);
+                    } else if (CommonModule.isNumeric(data[1])) {
+                        AbilityModule.forceAssignment(sender, data);
+                    } else {
+                        AbilityModule.errorMessage(sender);
                     }
                 }
             }

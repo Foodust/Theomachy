@@ -41,13 +41,11 @@ public class AbilityModule {
                     ability, abilityName, Objects.requireNonNull(abilityName.getItemMeta()),
                     abilityDescription, Objects.requireNonNull(abilityDescription.getItemMeta()));
 
-            ItemStack rankStack = new ItemStack(Material.AIR);
-            ItemMeta rankItemMeta = rankStack.getItemMeta();
-            AbilityModule.setRankItem(ability.rank, rankStack, rankItemMeta);
+            ItemStack abilityRank = AbilityModule.setRankItem(ability.rank);
 
             inventory.setItem(0, abilityDescription);
             inventory.setItem(4, abilityName);
-            inventory.setItem(8, rankStack);
+            inventory.setItem(8, abilityRank);
 
             ItemStack abilityPassiveCoolTimeItem = new ItemStack(Material.CLOCK);
             ItemStack abilityNormalCoolTimeItem = new ItemStack(Material.CLOCK);
@@ -107,7 +105,6 @@ public class AbilityModule {
         coolTimeItem.setItemMeta(coolTimeItemMeta);
     }
 
-
     public static void setInfoItem(Ability ability, ItemStack itemNameStack, ItemMeta itemNameMeta, ItemStack itemDesStack, ItemMeta itemDesMeta) {
         itemNameMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_NAME.getMessage() + ChatColor.WHITE + ability.abilityName);
         itemDesMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_EXPLAIN.getMessage());
@@ -118,39 +115,47 @@ public class AbilityModule {
         itemDesStack.setItemMeta(itemDesMeta);
     }
 
-    public static void setRankItem(AbilityRank rank, ItemStack itemStack, ItemMeta itemMeta) {
+    public static ItemStack setRankItem(AbilityRank rank) {
+        ItemStack rankItemStack = new ItemStack(Material.AIR);
+        ItemMeta itemMeta;
         switch (rank) {
             case F -> {
-                itemStack = new ItemStack(Material.ROTTEN_FLESH);
-                itemMeta = itemStack.getItemMeta();
+                rankItemStack = new ItemStack(Material.ROTTEN_FLESH);
+                itemMeta = rankItemStack.getItemMeta();
+                assert itemMeta != null;
                 itemMeta.setDisplayName(TheomachyMessage.EXPLAIN_RANK.getMessage() + ChatColor.GRAY + AbilityRank.F.getRank());
-                itemStack.setItemMeta(itemMeta);
+                rankItemStack.setItemMeta(itemMeta);
             }
             case C -> {
-                itemStack = new ItemStack(Material.IRON_INGOT);
-                itemMeta = itemStack.getItemMeta();
+                rankItemStack = new ItemStack(Material.IRON_INGOT);
+                itemMeta = rankItemStack.getItemMeta();
+                assert itemMeta != null;
                 itemMeta.setDisplayName(TheomachyMessage.EXPLAIN_RANK.getMessage() + ChatColor.WHITE + AbilityRank.C.getRank());
-                itemStack.setItemMeta(itemMeta);
+                rankItemStack.setItemMeta(itemMeta);
             }
             case B -> {
-                itemStack = new ItemStack(Material.GOLD_INGOT);
-                itemMeta = itemStack.getItemMeta();
+                rankItemStack = new ItemStack(Material.GOLD_INGOT);
+                itemMeta = rankItemStack.getItemMeta();
+                assert itemMeta != null;
                 itemMeta.setDisplayName(TheomachyMessage.EXPLAIN_RANK.getMessage() + ChatColor.GREEN + AbilityRank.B.getRank());
-                itemStack.setItemMeta(itemMeta);
+                rankItemStack.setItemMeta(itemMeta);
             }
             case A -> {
-                itemStack = new ItemStack(Material.EMERALD);
-                itemMeta = itemStack.getItemMeta();
+                rankItemStack = new ItemStack(Material.EMERALD);
+                itemMeta = rankItemStack.getItemMeta();
+                assert itemMeta != null;
                 itemMeta.setDisplayName(TheomachyMessage.EXPLAIN_RANK.getMessage() + ChatColor.AQUA + AbilityRank.A.getRank());
-                itemStack.setItemMeta(itemMeta);
+                rankItemStack.setItemMeta(itemMeta);
             }
             case S -> {
-                itemStack = new ItemStack(Material.DIAMOND);
-                itemMeta = itemStack.getItemMeta();
+                rankItemStack = new ItemStack(Material.DIAMOND);
+                itemMeta = rankItemStack.getItemMeta();
+                assert itemMeta != null;
                 itemMeta.setDisplayName(TheomachyMessage.EXPLAIN_RANK.getMessage() + ChatColor.YELLOW + AbilityRank.S.getRank());
-                itemStack.setItemMeta(itemMeta);
+                rankItemStack.setItemMeta(itemMeta);
             }
         }
+        return rankItemStack;
     }
 
     public static void explainCommand(CommandSender sender) {

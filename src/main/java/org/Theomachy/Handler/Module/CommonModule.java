@@ -11,6 +11,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class CommonModule {
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str); // 숫자로 변환 시도
+            return true; // 변환이 성공하면 숫자임
+        } catch (NumberFormatException e) {
+            return false; // 변환이 실패하면 숫자가 아님
+        }
+    }
     public static ItemStack setItem(Material material, int amount, String title) {
         ItemStack prevItem = new ItemStack(material, amount);
         ItemMeta prevItemMeta = prevItem.getItemMeta();

@@ -34,6 +34,8 @@ public class MenuEvent implements Listener {
             ItemStack item = event.getCurrentItem();
             if (item == null) return;
             GamblingModule.gambling(player);
+        } else if(event.getView().getTitle().equals(TheomachyMessage.SETTING_ABILITY_INFO.getMessage())){
+            event.setCancelled(true);
         }
 
     }
