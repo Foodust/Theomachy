@@ -1,8 +1,8 @@
 package org.Theomachy.Ability.GOD;
 
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+import org.Theomachy.Handler.Handler.SkillHandler;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -65,8 +65,8 @@ public class Sans extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Snowball snowball = player.launchProjectile(Snowball.class);
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
             snowball.addScoreboardTag(AbilityTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
@@ -74,8 +74,8 @@ public class Sans extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
             for (double distance = 0; distance < rareDistance; distance += 0.5) {

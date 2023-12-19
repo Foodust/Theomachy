@@ -15,11 +15,11 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.DirectionChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.DirectionChecker;
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Wizard extends Ability
 {
@@ -60,7 +60,7 @@ public class Wizard extends Ability
 
 	private void leftClickAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, normalSkillStack))
+		if (SkillHandler.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, normalSkillStack))
 		{
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
@@ -69,7 +69,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+				SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
@@ -100,7 +100,7 @@ public class Wizard extends Ability
 	
 	private void rightClickAction(Player player)
 	{
-		if (CoolTimeChecker.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
+		if (SkillHandler.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
 			for (Entity e : entityList)
@@ -108,7 +108,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+				SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 				player.setHealth( player.getHealth() / 2 );
 				Vector v = new Vector(0,1.6,0);
 				for (Player e : targetList)

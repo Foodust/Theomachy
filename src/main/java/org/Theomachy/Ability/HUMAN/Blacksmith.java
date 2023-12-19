@@ -12,10 +12,10 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Blacksmith extends Ability {
     private final static String[] des = {
@@ -53,16 +53,16 @@ public class Blacksmith extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             World world = player.getWorld();
             world.dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.IRON_INGOT, normalCount));
         }
     }
 
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.IRON_INGOT, rareSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.IRON_INGOT, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.IRON_INGOT, rareSkillStack)) {
+            SkillHandler.Use(player, Material.IRON_INGOT, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             World world = player.getWorld();
             world.dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.DIAMOND, rareCount));
         }

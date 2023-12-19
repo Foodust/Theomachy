@@ -13,11 +13,11 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class AGirl extends Ability {
 
@@ -48,9 +48,9 @@ public class AGirl extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
 
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 
             for (Player e : PlayerHandler.getNearByNotTeamMembers(player, 5, 0, 5)) {

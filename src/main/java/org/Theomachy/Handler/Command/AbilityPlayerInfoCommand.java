@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Utility.Checker.PermissionChecker;
+import org.Theomachy.Checker.PermissionChecker;
 
 public class AbilityPlayerInfoCommand
 {

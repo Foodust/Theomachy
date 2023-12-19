@@ -9,10 +9,10 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 import java.util.Objects;
 
@@ -55,8 +55,8 @@ public class Zenitsu extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location location = player.getLocation();
             location.setPitch(0f);
             for (int distance = 0; distance < normalDistance; distance += normalDistance / 10) {
@@ -71,8 +71,8 @@ public class Zenitsu extends Ability {
 
     // 화뢰신 만들다가 포기함
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 Location location = player.getLocation();

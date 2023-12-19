@@ -1,4 +1,4 @@
-package org.Theomachy.Utility.Checker;
+package org.Theomachy.Checker;
 
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;

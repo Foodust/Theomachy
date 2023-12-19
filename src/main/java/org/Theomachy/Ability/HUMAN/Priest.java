@@ -15,11 +15,11 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Priest extends Ability {
     private final Material material = Material.COBBLESTONE;
@@ -60,8 +60,8 @@ public class Priest extends Ability {
 
     private void leftAction(Player player) {
 
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
+            SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Random random = new Random();
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, normalDuration * 20, 0));
@@ -87,8 +87,8 @@ public class Priest extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
+            SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             List<Player> targetList = PlayerHandler.getTeamMember(player);
             Random random = new Random();
             for (Player team : targetList) {

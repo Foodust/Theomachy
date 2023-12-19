@@ -15,11 +15,10 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Manager.EventManager;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 import java.util.Objects;
 
@@ -57,21 +56,21 @@ public class Athena extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             player.getInventory().addItem(new ItemStack(Material.BOOK, 3));
         }
     }
 
     private void rightAction(Player player) {
         if (abilityLimitCounter > 0) {
-            if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
                 if (abilityLimitCounter > 1) {
-                    SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                    SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 1));
                     player.sendMessage("남은 교환 횟수 : " + --abilityLimitCounter);
                 } else {
-                    SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, 0);
+                    SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, 0);
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 1));
                     player.sendMessage("남은 교환 횟수 : " + --abilityLimitCounter);
                 }

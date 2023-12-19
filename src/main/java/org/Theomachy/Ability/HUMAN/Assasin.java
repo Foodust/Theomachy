@@ -18,11 +18,11 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.DirectionChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.DirectionChecker;
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Assasin extends Ability {
     private final static String[] des = {
@@ -71,7 +71,7 @@ public class Assasin extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             boolean flag = true;
             List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
             for (Entity entity : entityList) {
@@ -80,7 +80,7 @@ public class Assasin extends Ability {
                     String targetTeamName = GameData.PlayerTeam.get(target.getName());
                     String playerTeamName = GameData.PlayerTeam.get(player.getName());
                     if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName))) {
-                        SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                        SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                         Location fakeLocation = player.getLocation();
                         Location location = target.getLocation();
                         World world = player.getWorld();

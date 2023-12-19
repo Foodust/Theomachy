@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import org.bukkit.entity.Player;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Utility.Checker.PermissionChecker;
+import org.Theomachy.Checker.PermissionChecker;
 
 import java.util.*;
 

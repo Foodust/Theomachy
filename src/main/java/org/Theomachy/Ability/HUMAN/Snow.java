@@ -1,8 +1,8 @@
 package org.Theomachy.Ability.HUMAN;
 
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+import org.Theomachy.Handler.Handler.SkillHandler;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -61,8 +61,8 @@ public class Snow extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
+            SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             World world = player.getWorld();
             Location location = player.getLocation();
             world.dropItem(location, new ItemStack(Material.SNOWBALL, rareCount));

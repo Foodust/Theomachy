@@ -16,7 +16,7 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
 import org.Theomachy.Timer.GameReadyTimer;
 import org.Theomachy.Timer.TipTimer;
-import org.Theomachy.Utility.Checker.PermissionChecker;
+import org.Theomachy.Checker.PermissionChecker;
 import org.bukkit.scheduler.BukkitTask;
 
 public class StartStopCommand {

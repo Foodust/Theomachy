@@ -1,4 +1,4 @@
-package org.Theomachy.Utility.Checker;
+package org.Theomachy.Checker;
 
 import org.bukkit.entity.Player;
 

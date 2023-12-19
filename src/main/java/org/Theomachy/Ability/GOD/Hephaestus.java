@@ -18,10 +18,10 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Hephaestus extends Ability {
     private final static String[] des = {
@@ -55,8 +55,8 @@ public class Hephaestus extends Ability {
         location.setY(location.getY() + 1);
         Block block = location.getBlock();
         if (block.getType() == Material.AIR) {
-            if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-                SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+                SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 block.setBlockData(Bukkit.createBlockData(Material.LAVA));
                 Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
                     new LavaTimer(block);

@@ -13,10 +13,10 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 import java.util.Objects;
 
@@ -47,7 +47,7 @@ public class Morpious extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillCoolTime)) {
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillCoolTime)) {
             String[] team = new String[2];
             team[0] = GameData.PlayerTeam.get(player.getName());
             team[1] = GameData.PlayerTeam.get(abilityTarget);
@@ -58,7 +58,7 @@ public class Morpious extends Ability {
                         player.sendMessage(ChatColor.RED + "목표는 본인이 아니어야 합니다.");
                     } else {
                         Player target = GameData.OnlinePlayer.get(abilityTarget);
-                        SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                        SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                         player.sendMessage(ChatColor.GRAY + "목표를 잠재웠습니다!");
                         target.sendMessage(ChatColor.GRAY + "착한 어른이는 일찍 자고 일찍 일어나야 해요~");
                         target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1200, 0));

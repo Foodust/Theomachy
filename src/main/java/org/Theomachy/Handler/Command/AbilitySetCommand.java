@@ -17,7 +17,7 @@ import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Zenitsu;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Utility.Checker.PermissionChecker;
+import org.Theomachy.Checker.PermissionChecker;
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
 
 import java.util.ArrayList;

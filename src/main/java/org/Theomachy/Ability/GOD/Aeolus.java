@@ -17,12 +17,12 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.DirectionChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.DirectionChecker;
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Aeolus extends Ability {
 
@@ -59,8 +59,8 @@ public class Aeolus extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
+            SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             List<Player> nearPlayers = PlayerHandler.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
                 nearPlayer.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
@@ -71,14 +71,14 @@ public class Aeolus extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
             List<Player> entityList = PlayerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
             ArrayList<Player> targetList = new ArrayList<Player>();
             for (Player e : entityList)
                 if (e != null)
                     targetList.add(e);
             if (!targetList.isEmpty()) {
-                SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                 Vector vector = new Vector(0, 0.5, 0);
                 double vertical = 2.4d;
                 double diagonal = vertical * 1.4d;

@@ -20,11 +20,16 @@ public class CoolTimeTimer extends TimerTask {
     private int count = 1;
 
     public void run() {
-        if (!StartStopCommand.Ready){
+        if (!StartStopCommand.Ready) {
             this.cancel();
         }
-
         try {
+            if (init) {
+                commonSkillCoolTime.clear();
+                normalSkillCoolTime.clear();
+                rareSkillCoolTime.clear();
+                init = false;
+            }
             if (!commonSkillCoolTime.isEmpty()) {
                 for (Entry<String, Integer> entry : commonSkillCoolTime.entrySet()) {
                     String playerName = entry.getKey();
@@ -68,17 +73,12 @@ public class CoolTimeTimer extends TimerTask {
                     }
                 }
             }
-            if (init) {
-                commonSkillCoolTime.clear();
-                normalSkillCoolTime.clear();
-                rareSkillCoolTime.clear();
-                init = false;
-            }
+
             if (count % 150 == 0) {
                 Collection<Ability> playerAbilityList = GameData.PlayerAbility.values();
-                for (Ability e : playerAbilityList) {
-                    if (e.buffType)
-                        e.buff();
+                for (Ability playerAbility : playerAbilityList) {
+                    if (playerAbility.buffType)
+                        playerAbility.buff();
                 }
             }
         } catch (Exception e) {

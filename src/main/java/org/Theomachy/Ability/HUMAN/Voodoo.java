@@ -18,9 +18,9 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
+
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Voodoo extends Ability {
 
@@ -51,7 +51,7 @@ public class Voodoo extends Ability {
         if (material1 == Material.OAK_SIGN || material1 == Material.OAK_HANGING_SIGN || material1 == Material.OAK_WALL_HANGING_SIGN || material1 == Material.OAK_WALL_SIGN) {
             Player player = event.getPlayer();
 
-            if (!(CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)))
+            if (!(SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)))
                 event.setCancelled(true);
         }
     }
@@ -73,7 +73,7 @@ public class Voodoo extends Ability {
             Action action = event.getAction();
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                 Player player = event.getPlayer();
-                if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack))
+                if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack))
                     player.sendMessage("스킬을 사용 할 수 있습니다.");
             }
         }
@@ -84,7 +84,7 @@ public class Voodoo extends Ability {
         String targetName = Objects.requireNonNull(event.getLine(0)).toString();
         Player target = GameData.OnlinePlayer.get(targetName);
         if (target != null) {
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             this.targetName = targetName;
             this.postSign = event.getBlock();
             player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");

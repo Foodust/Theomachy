@@ -16,11 +16,11 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Witch extends Ability {
     private final static String[] des = {
@@ -53,10 +53,10 @@ public class Witch extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
             List<Player> targetList = PlayerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
             if (!targetList.isEmpty()) {
-                SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 for (Player e : targetList) {
                     e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
                     e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, normalDuration * 20, 0));

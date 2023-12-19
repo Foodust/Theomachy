@@ -14,11 +14,11 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Akasha extends Ability {
     private final static String[] des = {
@@ -54,8 +54,8 @@ public class Akasha extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
+            SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             List<Player> nearPlayers = PlayerHandler.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
                 nearPlayer.sendMessage(ChatColor.DARK_PURPLE + "향락" + ChatColor.WHITE + "이 당신을 즐겁게합니다!");
@@ -68,13 +68,13 @@ public class Akasha extends Ability {
 
     private void rightAction(Player player) {
 
-        if (CoolTimeChecker.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
+        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
             List<Player> entityList = PlayerHandler.getNearByNotTeamMembers(player, 15, 15, 15);
             if (entityList.isEmpty()) {
                 player.sendMessage(ChatColor.RED + "주변에 상대팀이 없습니다");
                 return;
             }
-            SkillCoolTimeHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+            SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             for (Player enemy : entityList) {
                 enemy.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * rareDuration, 0));
                 enemy.setHealth(enemy.getHealth() - 4);

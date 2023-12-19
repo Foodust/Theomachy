@@ -13,7 +13,7 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Handler.Command.AbilitySetCommand;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
 
 public class PokeGo extends Ability {

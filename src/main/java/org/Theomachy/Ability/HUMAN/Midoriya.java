@@ -12,10 +12,10 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Utility.Checker.CoolTimeChecker;
-import org.Theomachy.Utility.Checker.MouseEventChecker;
+
+import org.Theomachy.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillCoolTimeHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
 
 public class Midoriya extends Ability {
 
@@ -47,7 +47,7 @@ public class Midoriya extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack) && !Ready) {
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack) && !Ready) {
             Ready = true;
             player.sendMessage(ChatColor.YELLOW + "원" + ChatColor.BLUE + " 포 " + ChatColor.DARK_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
             player.sendMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
@@ -61,7 +61,7 @@ public class Midoriya extends Ability {
         Player d = (Player) event.getEntity();
 
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR && player.getName().equals(this.playerName)) {
-            if (CoolTimeChecker.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
                 if (Ready) {
                     player.sendMessage(ChatColor.YELLOW + "원" + ChatColor.GREEN + " 포 " + ChatColor.AQUA + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
                     player.sendMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
@@ -75,7 +75,7 @@ public class Midoriya extends Ability {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, duration * 20, 0));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 0));
 
-                    SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                    SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                     Ready = false;
                 } else {
                     player.sendMessage("아직 원 포 올의 준비가 되어있지 않군요.");
