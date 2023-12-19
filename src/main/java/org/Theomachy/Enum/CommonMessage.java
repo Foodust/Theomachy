@@ -30,4 +30,12 @@ public enum CommonMessage {
     public String getMessage(){
         return this.message;
     }
+
+    public static CommonMessage getByMessage(String message){
+        for(CommonMessage commonMessage : values()){
+            if(commonMessage.getMessage().equals(message))
+                return commonMessage;
+        }
+        return null;
+    }
 }

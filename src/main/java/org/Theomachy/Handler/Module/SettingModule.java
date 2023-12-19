@@ -28,9 +28,9 @@ public class SettingModule {
     }
 
     public static void guiListener(ItemStack wool) {
-
-        switch (ChatColor.stripColor(Objects.requireNonNull(Objects.requireNonNull(wool.getItemMeta()).getDisplayName()))) {
-            case "게임 시작 시 인벤토리 클리어" -> {
+        CommonMessage byMessage = CommonMessage.getByMessage(Objects.requireNonNull(wool.getItemMeta()).getDisplayName());
+        switch (Objects.requireNonNull(byMessage)) {
+            case STARTING_INVENTORY_CLEAR -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.STARTING_INVENTORY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
@@ -39,7 +39,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "게임 시작 시 스카이블럭 아이텝 지급" -> {
+            case STARTING_GIVE_BASIC_ITEM -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.STARTING_GIVE_ITEM = false;
                     wool.setType(Material.RED_WOOL);
@@ -48,7 +48,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "게임 시작 시 엔티티 제거" -> {
+            case STARTING_ENTITY_CLEAR -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.STARTING_ENTITY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
@@ -57,7 +57,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "침대 무시" -> {
+            case IGNORE_BED -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.IGNORE_BED = false;
                     wool.setType(Material.RED_WOOL);
@@ -66,7 +66,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "빠른 시작" -> {
+            case FAST_START -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.FAST_START = false;
                     wool.setType(Material.RED_WOOL);
@@ -75,7 +75,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "서버 자동 저장" -> {
+            case SERVER_AUTO_SAVE -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.AUTO_SAVE = false;
                     wool.setType(Material.RED_WOOL);
@@ -84,7 +84,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "동물 스폰" -> {
+            case ANIMAL_SPAWN -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.ANIMAL_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
@@ -93,7 +93,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "몬스터 스폰" -> {
+            case MONSTER_SPWAN -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.MONSTER_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
@@ -102,7 +102,7 @@ public class SettingModule {
                     wool.setType(Material.WHITE_WOOL);
                 }
             }
-            case "뽑기 허용" -> {
+            case GAMBLING_ACCEPT -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
                     Theomachy.GAMBLING = false;
                     wool.setType(Material.RED_WOOL);
