@@ -11,23 +11,27 @@ import org.Theomachy.Handler.Command.StartStopCommand;
 public class TipTimer extends TimerTask
 {
 	int count=1;
-	
+
+	@Override
 	public void run()
 	{
 		if (!StartStopCommand.Ready){
 			this.cancel();
 		}
-
-		if (count%1200 == 0)
+		if (count%600 == 0)
 		{
 			if (Theomachy.AUTO_SAVE)
 			{
 				Bukkit.getServer().savePlayers();
 				Theomachy.log.info("[신들의전쟁] 오토세이브 완료");
 			}
-			
+			count = 1;
 		}
-		if (count%1200 == 0)
+		if (count % 300 == 0)
+		{
+			Bukkit.broadcastMessage("[신들의전쟁] 오토세이브 완료");
+		}
+		if (count % 60 == 0)
 		{
 			long max = (int) (Runtime.getRuntime().maxMemory() / 1048576);
 			long free = (int) (Runtime.getRuntime().freeMemory() / 1048576);

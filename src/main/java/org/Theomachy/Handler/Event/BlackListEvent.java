@@ -1,10 +1,7 @@
 package org.Theomachy.Handler.Event;
 
-import org.Theomachy.Enum.CommonMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
-import org.Theomachy.Handler.Module.HangulModule;
-import org.Theomachy.Utility.Hangul;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,16 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Objects;
 
 public class BlackListEvent implements Listener {
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
-        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(CommonMessage.BLACKLIST.getMessage())) {
+        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(TheomachyMessage.BLACKLIST.getMessage())) {
             Player player = (Player) event.getPlayer();
             BlacklistModule.openBlackListInventory(player);
         }
@@ -29,7 +23,7 @@ public class BlackListEvent implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals(CommonMessage.BLACKLIST.getMessage())) {
+        if (event.getView().getTitle().equals(TheomachyMessage.BLACKLIST.getMessage())) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
             assert item != null;

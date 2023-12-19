@@ -62,7 +62,7 @@ public class GameReadyTimer extends TimerTask {
         world = Bukkit.getWorlds().get(0);
     }
 
-
+    @Override
     public void run() {
         if (StartStopCommand.Ready && count < 45) {
             Bukkit.getScheduler().runTask(Theomachy.getPlugin(), ()->{

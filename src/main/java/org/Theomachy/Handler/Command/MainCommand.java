@@ -1,30 +1,33 @@
 package org.Theomachy.Handler.Command;
 
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 
+import java.util.Objects;
+
 public class MainCommand
 {
 	public static void tCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
-        switch (data[0]) {
-            case "start" -> StartStopCommand.GameReady(sender);
-            case "stop" -> StartStopCommand.GameStop(sender);
-            case "ability", "a" -> AbilitySetCommand.Module(sender, command, label, data);
-            case "alist" -> AbilityPlayerInfoCommand.showAllAbility(sender);
-            case "help" -> HelpCommand.Module(sender, command, label, data);
-            case "spawn", "s" -> SpawnCommand.Module(sender, command, label, data);
-            case "team", "t" -> TeamCommand.Module(sender, command, label, data);
-            case "info", "i" -> TeamInfoCommand.Module(sender, command, label, data);
-            case "clear", "c" -> SpawnCommand.ClearCommand.Module(sender, command, label, data);
-            case "black" -> BlacklistCommand.Module(sender);
-            case "set" -> SettingCommand.Module(sender);
-            case "con" -> GamblingCommand.Module(sender);
-            case "tip" -> TipCommand.Module(sender);
-            default -> sender.sendMessage("잘못된 명령입니다.");
+		TheomachyMessage message = TheomachyMessage.getByMessage(data[0]);
+        switch (Objects.requireNonNull(message)) {
+			case COMMAND_START -> StartStopCommand.GameReady(sender);
+			case COMMAND_STOP -> StartStopCommand.GameStop(sender);
+			case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilitySetCommand.Module(sender, command, label, data);
+			case COMMAND_ABILITY_LIST -> AbilityPlayerInfoCommand.showAllAbility(sender);
+			case COMMAND_HELP -> HelpCommand.Module(sender, command, label, data);
+			case COMMAND_SPAWN, COMMAND_SPAWN_S -> SpawnCommand.Module(sender, command, label, data);
+			case COMMAND_TEAM, COMMAND_TEAM_T -> TeamCommand.Module(sender, command, label, data);
+			case COMMAND_INFO -> TeamInfoCommand.Module(sender, command, label, data);
+			case COMMAND_CLEAR, COMMAND_CLEAR_C -> SpawnCommand.ClearCommand.Module(sender, command, label, data);
+			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> BlacklistCommand.Module(sender);
+			case COMMAND_SETTING, COMMAND_SETTING_SET -> SettingCommand.Module(sender);
+			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> GamblingCommand.Module(sender);
+            default -> sender.sendMessage(TheomachyMessage.WRONG_COMMAND.getMessage());
         }
 	}
 	
@@ -38,9 +41,9 @@ public class MainCommand
 			if (GameData.OnlinePlayer.containsKey(targetName))
 				ability.targetSet(sender, targetName);
 			else
-				sender.sendMessage("온라인 플레이어가 아닙니다.  "+targetName);
+				sender.sendMessage(TheomachyMessage.DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);
 		}
 		else
-			sender.sendMessage("능력이 없습니다.");
+			sender.sendMessage(TheomachyMessage.DOES_NOT_HAVE_ABILITY.getMessage());
 	}
 }

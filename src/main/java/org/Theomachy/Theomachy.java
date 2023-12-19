@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import org.Theomachy.Enum.CommonMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -44,7 +44,7 @@ public class Theomachy extends JavaPlugin {
 
     public static Logger log = Bukkit.getLogger();
     public static List<BukkitTask> tasks = new ArrayList<>();
-    public File file = new File(getDataFolder(), CommonMessage.BLACKLIST_YML.getMessage());
+    public File file = new File(getDataFolder(), TheomachyMessage.BLACKLIST_YML.getMessage());
 
     public static Plugin getPlugin() {
         return plugin;
@@ -67,13 +67,13 @@ public class Theomachy extends JavaPlugin {
         log.info("[신들의 전쟁] 플러그인이 활성화되었습니다.   " + PluginData.buildnumber + "  " + PluginData.version);
         log.info("[신들의 전쟁] 플러그인의 기본 설정을 적용 중입니다.");
 
-        saveResource(CommonMessage.BLACKLIST_YML.getMessage(), true);
+        saveResource(TheomachyMessage.BLACKLIST_YML.getMessage(), true);
 
         // command 등록
         CommandManager commandManager = new CommandManager(this);
 
         // recipe 등록
-        NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, CommonMessage.CUSTOM_BLASE_LOD_RECIPE.getMessage());
+        NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, TheomachyMessage.CUSTOM_BLASE_LOD_RECIPE.getMessage());
         ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
         getServer().addRecipe(recipe);
 

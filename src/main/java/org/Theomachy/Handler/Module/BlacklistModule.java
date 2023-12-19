@@ -2,7 +2,7 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Enum.CommonMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -38,7 +38,7 @@ public class BlacklistModule {
     }
     public static Inventory makeInventory(int page) {
 
-        Inventory inventory = Bukkit.createInventory(null, itemsPerPage, CommonMessage.BLACKLIST.getMessage());
+        Inventory inventory = Bukkit.createInventory(null, itemsPerPage, TheomachyMessage.BLACKLIST.getMessage());
         int index = 0, length = 0;
         switch (page) {
             case 1 -> {
@@ -65,13 +65,13 @@ public class BlacklistModule {
             inventory.setItem(itemIndex, item);
         }
 
-        ItemStack nextItem = CommonModule.setItem(Material.ITEM_FRAME, 1, CommonMessage.NEXT_PAGE.getMessage());
+        ItemStack nextItem = CommonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.NEXT_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 4, nextItem);
 
-        ItemStack currentItem = CommonModule.setItem(Material.STICK, page, CommonMessage.CURRENT_PAGE.getMessage());
+        ItemStack currentItem = CommonModule.setItem(Material.STICK, page, TheomachyMessage.CURRENT_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 5, currentItem);
 
-        ItemStack prevItem = CommonModule.setItem(Material.ITEM_FRAME, 1,CommonMessage.PREV_PAGE.getMessage());
+        ItemStack prevItem = CommonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.PREV_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 6, prevItem);
 
         return inventory;

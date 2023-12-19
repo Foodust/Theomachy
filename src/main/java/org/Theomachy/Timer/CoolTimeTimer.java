@@ -19,6 +19,7 @@ public class CoolTimeTimer extends TimerTask {
     public static HashMap<String, Integer> rareSkillCoolTime = new HashMap<String, Integer>();
     private int count = 1;
 
+    @Override
     public void run() {
         if (!StartStopCommand.Ready) {
             this.cancel();
