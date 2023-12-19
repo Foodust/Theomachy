@@ -31,26 +31,20 @@ public class StartStopCommand {
                 Timer t = new Timer();
                 if (!Theomachy.FAST_START) {
 //                    t.schedule(new GameReadyTimer(), 0, 1000);
-                    BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                        GameReadyTimer gameReadyTimer = new GameReadyTimer();
-                    }, 0, 20L);
+                    GameReadyTimer gameReadyTimer = new GameReadyTimer();
+                    BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), gameReadyTimer, 0, 20L);
                     Theomachy.tasks.add(bukkitTask);
                 } else {
 //                    t.schedule(new GameReadyTimer(), 0, 100);
-                    BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                        GameReadyTimer gameReadyTimer = new GameReadyTimer();
-                    }, 0, 2L);
+                    GameReadyTimer gameReadyTimer = new GameReadyTimer();
+                    BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), gameReadyTimer, 0, 2L);
                     Theomachy.tasks.add(bukkitTask);
                 }
-                BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-//                    t.schedule(new TipTimer(), 0, 1000);
-                    TipTimer tipTimer = new TipTimer();
-                }, 0, 20L);
+                //                    t.schedule(new TipTimer(), 0, 1000);
+                BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), new TipTimer(), 0, 20L);
                 Theomachy.tasks.add(bukkitTask);
-                bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-//                    t.schedule(new CoolTimeTimer(), 0, 1000);
-                    CoolTimeTimer coolTimeTimer = new CoolTimeTimer();
-                }, 0, 20L);
+                //                    t.schedule(new CoolTimeTimer(), 0, 1000);
+                bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),new CoolTimeTimer(), 0, 20L);
                 Theomachy.tasks.add(bukkitTask);
 
             } else
