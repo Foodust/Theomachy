@@ -1,4 +1,4 @@
-package org.Theomachy.Manager;
+package org.Theomachy.Handler.Manager;
 
 
 import org.Theomachy.Handler.Event.*;

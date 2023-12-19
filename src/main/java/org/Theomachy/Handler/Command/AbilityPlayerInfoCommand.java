@@ -2,7 +2,7 @@ package org.Theomachy.Handler.Command;
 
 import java.util.Collection;
 
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 

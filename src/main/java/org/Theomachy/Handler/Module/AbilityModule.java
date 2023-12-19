@@ -12,7 +12,7 @@ import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

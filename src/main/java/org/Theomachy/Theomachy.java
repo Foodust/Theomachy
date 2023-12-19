@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -26,8 +26,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Data.VersionData;
-import org.Theomachy.Manager.CommandManager;
-import org.Theomachy.Manager.EventManager;
+import org.Theomachy.Handler.Manager.CommandManager;
+import org.Theomachy.Handler.Manager.EventManager;
 
 public class Theomachy extends JavaPlugin {
     private static Plugin plugin;

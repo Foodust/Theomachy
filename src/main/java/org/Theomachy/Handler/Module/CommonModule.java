@@ -1,7 +1,7 @@
 package org.Theomachy.Handler.Module;
 
-import org.Theomachy.Enum.TheomachyMessage;
-import org.Theomachy.Manager.EntityManager;
+import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Handler.Manager.EntityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

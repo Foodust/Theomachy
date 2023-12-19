@@ -1,14 +1,10 @@
-package org.Theomachy.Manager;
+package org.Theomachy.Handler.Manager;
 
-import org.Theomachy.Theomachy;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.World;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import javax.xml.stream.Location;
 import java.util.Random;
 
 public class EntityManager {

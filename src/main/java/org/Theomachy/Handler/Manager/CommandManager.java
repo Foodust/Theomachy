@@ -1,6 +1,6 @@
-package org.Theomachy.Manager;
+package org.Theomachy.Handler.Manager;
 
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

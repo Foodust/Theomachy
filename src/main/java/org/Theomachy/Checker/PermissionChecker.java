@@ -1,6 +1,6 @@
 package org.Theomachy.Checker;
 
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

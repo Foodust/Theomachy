@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Module;
 
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

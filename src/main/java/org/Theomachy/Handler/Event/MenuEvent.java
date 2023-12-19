@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Event;
 
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.GamblingModule;
 import org.Theomachy.Handler.Module.SettingModule;
 import org.bukkit.ChatColor;

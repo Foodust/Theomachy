@@ -1,4 +1,4 @@
-package org.Theomachy.Enum;
+package org.Theomachy.Message;
 
 import org.bukkit.ChatColor;
 

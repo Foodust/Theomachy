@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Enum.TheomachyMessage;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.AbilityModule;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
