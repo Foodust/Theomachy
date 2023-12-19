@@ -1,5 +1,6 @@
 package org.Theomachy.Ability;
 
+import org.Theomachy.Enum.TheomachyMessage;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -81,7 +82,7 @@ public class Ability
 	
 	public void targetSet(CommandSender sender, String targetName)
 	{
-		sender.sendMessage("타겟을 사용하는 능력이 아닙니다.");
+		sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_TARGET_FOR_ABILITY.getMessage());
 	}
 	
 	public void passiveSkill(ProjectileLaunchEvent event, Player player){}

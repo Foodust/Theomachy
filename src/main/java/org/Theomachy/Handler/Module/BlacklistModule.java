@@ -2,7 +2,7 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Enum.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

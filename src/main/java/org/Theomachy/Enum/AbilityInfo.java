@@ -89,5 +89,4 @@ public enum AbilityInfo {
         return abilityInfoMap.getOrDefault(index, "");
     }
 
-
 }

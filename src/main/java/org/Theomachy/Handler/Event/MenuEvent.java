@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Event;
 
-import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Enum.TheomachyMessage;
 import org.Theomachy.Handler.Module.GamblingModule;
 import org.Theomachy.Handler.Module.SettingModule;
 import org.bukkit.ChatColor;
@@ -30,7 +30,7 @@ public class MenuEvent implements Listener {
             ItemStack wool = event.getCurrentItem();
             assert wool != null;
             if (event.getView().getTitle().equals(TheomachyMessage.SETTING.getMessage())) {
-                SettingModule.guiListener(wool);
+                SettingModule.serverSetting(wool);
             }
         }
     }

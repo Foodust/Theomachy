@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Enum.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -35,7 +35,7 @@ public class Theomachy extends JavaPlugin {
     public static boolean STARTING_GIVE_ITEM = true;
     public static boolean STARTING_ENTITY_CLEAR = true;
     public static boolean IGNORE_BED = true;
-    public static boolean AUTO_SAVE = false;
+    public static boolean SERVER_AUTO_SAVE = false;
     public static boolean ANIMAL_SPAWN = true;
     public static boolean MONSTER_SPAWN = true;
     public static boolean FAST_START = false;
@@ -125,7 +125,7 @@ public class Theomachy extends JavaPlugin {
         STARTING_GIVE_ITEM = getConfig().getBoolean("스카이블럭 아이템 제공");
         STARTING_ENTITY_CLEAR = getConfig().getBoolean("엔티티 제거");
         IGNORE_BED = getConfig().getBoolean("침대 무시");
-        AUTO_SAVE = getConfig().getBoolean("서버 자동 저장");
+        SERVER_AUTO_SAVE = getConfig().getBoolean("서버 자동 저장");
         ANIMAL_SPAWN = getConfig().getBoolean("동물 생성");
         MONSTER_SPAWN = getConfig().getBoolean("몬스터 생성");
         DIFFICULTY = getConfig().getInt("난이도");
@@ -139,13 +139,13 @@ public class Theomachy extends JavaPlugin {
         log.info("[신들의 전쟁] 리스폰 시 침대 무시 : " + IGNORE_BED);
         log.info("[신들의 전쟁] 빠른 시작 : " + FAST_START);
         log.info("[신들의 전쟁] 도박 허용 : " + GAMBLING);
-        log.info("[신들의 전쟁] 서버 자동저장 : " + AUTO_SAVE);
+        log.info("[신들의 전쟁] 서버 자동저장 : " + SERVER_AUTO_SAVE);
         log.info("[신들의 전쟁] 동물 스폰 : " + ANIMAL_SPAWN);
         log.info("[신들의 전쟁] 몬스터 스폰 : " + MONSTER_SPAWN);
         log.info("[신들의 전쟁] 난이도 : " + DIFFICULTY);
         log.info("[신들의 전쟁] ========================================");
 
-        Bukkit.getConsoleSender().sendMessage("====원작자: " + ChatColor.WHITE + "칠각별(septagram)====");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "====원작자: " + ChatColor.WHITE + "칠각별(septagram)====");
         Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "====2차수정자: " + ChatColor.AQUA + "플로리아(humint2003)====");
         Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "====3차수정자: " + ChatColor.GREEN + "프덧(foodust)====");
 

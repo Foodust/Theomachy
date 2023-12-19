@@ -3,6 +3,7 @@ package org.Theomachy.Handler.Command;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
 import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Enum.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -28,31 +29,31 @@ public class AbilitySetCommand {
         if (PermissionChecker.Sender(sender)) {
             if (!StartStopCommand.Ready) {
                 if (data.length <= 1) {
-                    sender.sendMessage("/t a help   모든 능력의 코드를 확인합니다.");
-                    sender.sendMessage("/t a random 현재 접속한 모든 플레이어에게 랜덤으로 능력을 할당합니다.");
-                    sender.sendMessage("/t a remove <Player> 해당 플레이어의 능력을 삭제합니다.");
-                    sender.sendMessage("/t a reset  모든 능력을 초기화 합니다");
-                    sender.sendMessage("/t a <AbilityCode> <Player>  플레이어에게 해당 능력을 적용합니다.");
-                } else if (data[1].equalsIgnoreCase("help"))
+                    sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_LIST_HELP.getMessage());
+                    sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_SET_RANDOM.getMessage());
+                    sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_REMOVE_PLAYER.getMessage());
+                    sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_RESET.getMessage());
+                    sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_SET.getMessage());
+                } else if (data[1].equalsIgnoreCase(TheomachyMessage.COMMAND_HELP.getMessage()))
                     AbilityHelpCommand.ShowAbilityCodeNumber(sender);
-                else if (data[1].equalsIgnoreCase("remove"))//삭제
+                else if (data[1].equalsIgnoreCase(TheomachyMessage.COMMAND_REMOVE.getMessage())) //삭제
                 {
                     if (data[2] != null)
                         Remove(sender, data[2]);
                     else
-                        sender.sendMessage("능력을 삭제 할 플레이어의 이름을 적어주세요.");
-                } else if (data[1].equalsIgnoreCase("reset"))//리셋
+                        sender.sendMessage(TheomachyMessage.ERROR_SET_REMOVE_PLAYER_NAME.getMessage());
+                } else if (data[1].equalsIgnoreCase(TheomachyMessage.COMMAND_RESET.getMessage()))//리셋
                     Reset();
-                else if (data[1].equalsIgnoreCase("random"))//랜덤
+                else if (data[1].equalsIgnoreCase(TheomachyMessage.COMMAND_RANDOM.getMessage()))//랜덤
                     RandomAssignment(sender);
                 else if (data.length >= 3)
                     forceAssignment(sender, data);
                 else {
-                    sender.sendMessage("잘못된 입력입니다.");
-                    sender.sendMessage("/t a 로 명령어를 확인하세요.");
+                    sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
+                    sender.sendMessage(TheomachyMessage.ERROR_CHECK_T_A_COMMAND.getMessage());
                 }
             } else
-                sender.sendMessage("게임 시작 후에는 능력을 변경 할 수 없습니다.");
+                sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_CHANGE_ABILITY_IN_GAME.getMessage());
         }
     }
 
@@ -60,24 +61,24 @@ public class AbilitySetCommand {
         Ability ability = GameData.PlayerAbility.get(playerName);
         if (ability != null) {
             GameData.PlayerAbility.remove(playerName);
-            sender.sendMessage("플레이어의 능력을 삭제하였습니다.");
+            sender.sendMessage(TheomachyMessage.INFO_REMOVE_PLAYER_ABILITY.getMessage());
         } else
-            sender.sendMessage("플레이어의 능력이 없습니다.");
+            sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
     }
 
     public static void Reset() {
         GameData.PlayerAbility.clear();
-        Bukkit.broadcastMessage(ChatColor.AQUA + "관리자가 모두의 능력을 초기화 하였습니다.");
+        Bukkit.broadcastMessage(TheomachyMessage.INFO_REMOVE_ALL_PLAYER_ABILITY.getMessage());
     }
 
     private static void RandomAssignment(CommandSender sender) {
 
         if (!GameData.PlayerAbility.isEmpty()) {
-            Bukkit.broadcastMessage("모든 능력을 삭제한 후 재 추첨합니다.");
+            Bukkit.broadcastMessage(TheomachyMessage.INFO_RESET_AND_RANDOM_ABILITY.getMessage());
             GameData.PlayerAbility.clear();
         }
         List<Player> playerlist = new ArrayList<>(Bukkit.getOnlinePlayers());
-        Bukkit.broadcastMessage(ChatColor.DARK_AQUA + "인식된 플레이어 목록");
+        Bukkit.broadcastMessage(TheomachyMessage.INFO_AVAILABLE_PLAYERS.getMessage());
         for (Player e : playerlist)
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
         int[] rn = RandomSkillHandler.nonDuplicate();
@@ -89,10 +90,10 @@ public class AbilitySetCommand {
             abilityAssignment(rn[i++], playerName, (Player) sender);
         }
 
-        Bukkit.broadcastMessage("모두에게 능력이 적용되었습니다.");
-        Bukkit.broadcastMessage("/t help 로 확인해보세요.");
+        Bukkit.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
+        Bukkit.broadcastMessage(TheomachyMessage.INFO_CHECK_ABILITY.getMessage());
         if (length != playerlist.size())
-            Bukkit.broadcastMessage("인원이 너무 많습니다. 전부에게 능력을 할당하지 못했을수도 있습니다.");
+            Bukkit.broadcastMessage(TheomachyMessage.ERROR_TOO_MANY_PLAYER.getMessage());
     }
 
     private static void forceAssignment(CommandSender sender, String[] data) {
@@ -108,16 +109,20 @@ public class AbilitySetCommand {
                     abilityAssignment(abilityCode, playerName, p);
                     Player player = GameData.OnlinePlayer.get(playerName);
                     Bukkit.broadcastMessage("관리자가 " + ChatColor.RED + playerName + ChatColor.WHITE + " 에게 능력을 할당하였습니다.");
-                    player.sendMessage("능력이 할당되었습니다. /t help로 능력을 확인해보세요.");
+
+                    player.sendMessage(TheomachyMessage.INFO_SET_PLAYER_ABILITY.getMessage());
+                    player.sendMessage(TheomachyMessage.INFO_CHECK_ABILITY.getMessage());
+
                 } catch (NumberFormatException e) {
-                    sender.sendMessage("능력코드는 정수를 입력해 주세요");
+                    sender.sendMessage(TheomachyMessage.ERROR_ABILITY_CODE_IS_INTEGER.getMessage());
                 }
             } else
-                sender.sendMessage(playerName + " 에 해당하는 온라인 유저가 없습니다.");
+                sender.sendMessage(playerName + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
         }
     }
     public static void abilityAssignment(int abilityNumber, String playerName, CommandSender p)
     {
+
         if (abilityNumber == AbilityInfo.Zeus.getIndex())
             GameData.PlayerAbility.put(playerName, new Zeus(playerName));
         else if (abilityNumber == AbilityInfo.Poseidon.getIndex())
@@ -232,11 +237,10 @@ public class AbilitySetCommand {
             GameData.PlayerAbility.put(playerName,new Zenitsu(playerName));
         else if(abilityNumber == AbilityInfo.Rengoku.getIndex())
             GameData.PlayerAbility.put(playerName,new Rengoku(playerName));
-
         else
         {
-            p.sendMessage("능력 혹은 능력 코드 번호를 잘못 입력하셨습니다.");
-            p.sendMessage("/t a help 명령어로 능력 코드를 확인하실 수 있습니다.");
+            p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
+            p.sendMessage(TheomachyMessage.INFO_ALL_ABILITY.getMessage());
         }
     }
     public static void abilityAssignment(AbilityInfo abilityInfo, String playerName, CommandSender p) {
@@ -297,8 +301,8 @@ public class AbilitySetCommand {
             case Zenitsu -> GameData.PlayerAbility.put(playerName, new Zenitsu(playerName));
             case Rengoku -> GameData.PlayerAbility.put(playerName, new Rengoku(playerName));
             default -> {
-                p.sendMessage("능력 혹은 능력 코드 번호를 잘못 입력하셨습니다.");
-                p.sendMessage("/t a help 명령어로 능력 코드를 확인하실 수 있습니다.");
+                p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
+                p.sendMessage(TheomachyMessage.INFO_ALL_ABILITY.getMessage());
             }
         }
     }

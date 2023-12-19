@@ -1,5 +1,6 @@
 package org.Theomachy.Checker;
 
+import org.Theomachy.Enum.TheomachyMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -11,7 +12,7 @@ public class PermissionChecker
 			return true;
 		else
 		{
-			player.sendMessage("권한이 없습니다.");
+			player.sendMessage(TheomachyMessage.ERROR_PERMISSION_DENIED.getMessage());
 			return false;
 		}
 	}
@@ -22,7 +23,7 @@ public class PermissionChecker
 			return true;
 		else
 		{
-			sender.sendMessage("권한이 없습니다.");
+			sender.sendMessage(TheomachyMessage.ERROR_PERMISSION_DENIED.getMessage());
 			return false;
 		}
 	}

@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Enum.TheomachyMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -27,7 +27,7 @@ public class MainCommand
 			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> BlacklistCommand.Module(sender);
 			case COMMAND_SETTING, COMMAND_SETTING_SET -> SettingCommand.Module(sender);
 			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> GamblingCommand.Module(sender);
-            default -> sender.sendMessage(TheomachyMessage.WRONG_COMMAND.getMessage());
+            default -> sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
         }
 	}
 	
@@ -41,9 +41,9 @@ public class MainCommand
 			if (GameData.OnlinePlayer.containsKey(targetName))
 				ability.targetSet(sender, targetName);
 			else
-				sender.sendMessage(TheomachyMessage.DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);
+				sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);
 		}
 		else
-			sender.sendMessage(TheomachyMessage.DOES_NOT_HAVE_ABILITY.getMessage());
+			sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
 	}
 }

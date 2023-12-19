@@ -20,7 +20,7 @@ public class TipTimer extends TimerTask
 		}
 		if (count%600 == 0)
 		{
-			if (Theomachy.AUTO_SAVE)
+			if (Theomachy.SERVER_AUTO_SAVE)
 			{
 				Bukkit.getServer().savePlayers();
 				Theomachy.log.info("[신들의전쟁] 오토세이브 완료");

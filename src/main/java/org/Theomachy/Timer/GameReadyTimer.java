@@ -32,7 +32,7 @@ public class GameReadyTimer extends TimerTask {
         setting[0] = Theomachy.STARTING_INVENTORY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[1] = Theomachy.STARTING_GIVE_ITEM ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[2] = Theomachy.IGNORE_BED ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[3] = Theomachy.AUTO_SAVE ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[3] = Theomachy.SERVER_AUTO_SAVE ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[4] = Theomachy.ANIMAL_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[5] = Theomachy.MONSTER_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[7] = Theomachy.STARTING_ENTITY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
@@ -176,7 +176,7 @@ public class GameReadyTimer extends TimerTask {
 //				case 2:
                 case 34 -> {
                     world.setPVP(true);
-                    world.setAutoSave(Theomachy.AUTO_SAVE);
+                    world.setAutoSave(Theomachy.SERVER_AUTO_SAVE);
                     world.setSpawnFlags(Theomachy.MONSTER_SPAWN, Theomachy.ANIMAL_SPAWN);
                     world.setDifficulty(this.difficulty);
                     Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
