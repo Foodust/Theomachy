@@ -32,94 +32,94 @@ public class SettingModule {
         String broadcastMessage = byMessage.getMessage();
         switch (Objects.requireNonNull(byMessage)) {
             case SETTING_STARTING_INVENTORY_CLEAR -> {
-                broadcastMessage += check(Theomachy.STARTING_INVENTORY_CLEAR, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.STARTING_INVENTORY_CLEAR = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.STARTING_INVENTORY_CLEAR = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.STARTING_INVENTORY_CLEAR, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.STARTING_INVENTORY_CLEAR = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.STARTING_INVENTORY_CLEAR = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_STARTING_GIVE_ITEM -> {
-                broadcastMessage += check(Theomachy.STARTING_GIVE_ITEM, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.STARTING_GIVE_ITEM = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.STARTING_GIVE_ITEM = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.STARTING_GIVE_ITEM, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.STARTING_GIVE_ITEM = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.STARTING_GIVE_ITEM = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_STARTING_ENTITY_CLEAR -> {
-                broadcastMessage += check(Theomachy.STARTING_ENTITY_CLEAR, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.STARTING_ENTITY_CLEAR = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.STARTING_ENTITY_CLEAR = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.STARTING_ENTITY_CLEAR, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.STARTING_ENTITY_CLEAR = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.STARTING_ENTITY_CLEAR = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_IGNORE_BED -> {
-                broadcastMessage += check(Theomachy.IGNORE_BED, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.IGNORE_BED = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.IGNORE_BED = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.IGNORE_BED, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.IGNORE_BED = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.IGNORE_BED = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_FAST_START -> {
-                broadcastMessage += check(Theomachy.FAST_START, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.FAST_START = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.FAST_START = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.FAST_START, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.FAST_START = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.FAST_START = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_SERVER_AUTO_SAVE -> {
-                broadcastMessage += check(Theomachy.SERVER_AUTO_SAVE, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.SERVER_AUTO_SAVE = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.SERVER_AUTO_SAVE = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.SERVER_AUTO_SAVE, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.SERVER_AUTO_SAVE = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.SERVER_AUTO_SAVE = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_ANIMAL_SPAWN -> {
-                broadcastMessage += check(Theomachy.ANIMAL_SPAWN, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.ANIMAL_SPAWN = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.ANIMAL_SPAWN = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.ANIMAL_SPAWN, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.ANIMAL_SPAWN = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.ANIMAL_SPAWN = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_MONSTER_SPAWN -> {
-                broadcastMessage += check(Theomachy.MONSTER_SPAWN, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.MONSTER_SPAWN = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.MONSTER_SPAWN = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.MONSTER_SPAWN, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.MONSTER_SPAWN = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.MONSTER_SPAWN = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
             case SETTING_GAMBLING_ACCEPT -> {
-                broadcastMessage += check(Theomachy.GAMBLING, wool);
-//                if (wool.getType() == Material.WHITE_WOOL) {
-//                    Theomachy.GAMBLING = false;
-//                    wool.setType(Material.RED_WOOL);
-//                } else {
-//                    Theomachy.GAMBLING = true;
-//                    wool.setType(Material.WHITE_WOOL);
-//                }
+//                broadcastMessage += check(Theomachy.GAMBLING, wool);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.GAMBLING = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.GAMBLING = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
             }
         }
         Bukkit.broadcastMessage(broadcastMessage + TheomachyMessage.INFO_SET_MESSAGE.getMessage());

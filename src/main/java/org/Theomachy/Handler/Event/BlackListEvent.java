@@ -26,7 +26,7 @@ public class BlackListEvent implements Listener {
         if (event.getView().getTitle().equals(TheomachyMessage.SETTING_BLACKLIST.getMessage())) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
-            assert item != null;
+            if (item == null) return;
             ItemMeta meta = item.getItemMeta();
 
             if (item.getType().equals(Material.WHITE_WOOL)) {

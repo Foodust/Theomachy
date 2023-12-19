@@ -18,20 +18,23 @@ public class MenuEvent implements Listener {
         if (event.getView().getTitle().equals(TheomachyMessage.SETTING_MENU.getMessage())) {
             event.setCancelled(true);
             Player player = (Player) event.getWhoClicked();
-            ItemStack wool = event.getCurrentItem();
-            assert wool != null;
-            String menuName = ChatColor.stripColor(Objects.requireNonNull(Objects.requireNonNull(wool.getItemMeta()).getDisplayName()));
-            if (menuName.equals(TheomachyMessage.SETTING_GAMBLING.getMessage())) {
-                GamblingModule.gambling(player);
-            }
-        }
-        else if (event.getView().getTitle().equals(TheomachyMessage.SETTING.getMessage())) {
+            ItemStack item = event.getCurrentItem();
+            if (item == null) return;
+
+        } else if (event.getView().getTitle().equals(TheomachyMessage.SETTING.getMessage())) {
             event.setCancelled(true);
-            ItemStack wool = event.getCurrentItem();
-            assert wool != null;
+            ItemStack item = event.getCurrentItem();
+            if (item == null) return;
             if (event.getView().getTitle().equals(TheomachyMessage.SETTING.getMessage())) {
-                SettingModule.serverSetting(wool);
+                SettingModule.serverSetting(item);
             }
+        } else if (event.getView().getTitle().equals(TheomachyMessage.SETTING_GAMBLING.getMessage())) {
+            event.setCancelled(true);
+            Player player = (Player) event.getWhoClicked();
+            ItemStack item = event.getCurrentItem();
+            if (item == null) return;
+            GamblingModule.gambling(player);
         }
+
     }
 }
