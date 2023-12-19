@@ -1,6 +1,14 @@
 package org.Theomachy.Handler.Module;
 
+import org.Theomachy.Enum.CommonMessage;
+import org.Theomachy.Manager.EntityManager;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -12,5 +20,12 @@ public class CommonModule {
         prevItemMeta.setDisplayName(title);
         prevItem.setItemMeta(prevItemMeta);
         return prevItem;
+    }
+    public static void breakDiamond(BlockBreakEvent event){
+        for(int i = 0 ; i < 5; i++){
+            Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + CommonMessage.WHO_BREAK_DIAMOND);
+        }
+        Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
+        EntityManager.spawnRandomFirework(firework);
     }
 }

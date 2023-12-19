@@ -17,7 +17,7 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-import org.Theomachy.Timer.CoolTime;
+import org.Theomachy.Timer.CoolTimeTimer;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
@@ -78,7 +78,7 @@ public class Artemis extends Ability {
         Arrow arrow = (Arrow) event.getDamager();
         Player player = (Player) arrow.getShooter();
         Player target = (Player) event.getEntity();
-        if (!CoolTime.commonSkillCoolTime.containsKey(target.getName() + "1")) {
+        if (!CoolTimeTimer.commonSkillCoolTime.containsKey(target.getName() + "1")) {
             Random random = new Random();
             if (random.nextInt(20) <= 2) {
 

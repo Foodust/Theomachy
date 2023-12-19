@@ -17,7 +17,7 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Timer.CoolTime;
+import org.Theomachy.Timer.CoolTimeTimer;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.Checker.DirectionChecker;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
@@ -57,8 +57,8 @@ public class Assasin extends Ability {
         Location temp = player.getLocation();
         Block b = temp.add(0, -1, 0).getBlock();
         if ((b.getType() == Material.AIR) || (b.getType() == Material.SNOW) || (b.getType() == Material.STONE_SLAB)) {
-            if ((!CoolTime.commonSkillCoolTime.containsKey(playerName + "0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)))) {
-                CoolTime.commonSkillCoolTime.put(playerName + "0", normalSkillCoolTime);
+            if ((!CoolTimeTimer.commonSkillCoolTime.containsKey(playerName + "0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)))) {
+                CoolTimeTimer.commonSkillCoolTime.put(playerName + "0", normalSkillCoolTime);
                 PlayerInventory.ItemRemove(player, Material.COBBLESTONE, normalSkillStack);
                 World world = player.getWorld();
                 Location location = player.getLocation();

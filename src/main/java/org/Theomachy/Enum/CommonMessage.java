@@ -3,6 +3,9 @@ package org.Theomachy.Enum;
 import org.bukkit.ChatColor;
 
 public enum CommonMessage {
+    BLACKLIST_YML("blacklist.yml"),
+    CUSTOM_BLASE_LOD_RECIPE("custom_blaze_rod_recipe"),
+    WHO_BREAK_DIAMOND(ChatColor.WHITE + "가 다이아몬드 블럭을 부쉈습니다!"),
     BLACKLIST(ChatColor.BLACK + "블랙리스트"),
     ABILITY_INFO(ChatColor.YELLOW + "능력 정보"),
     SETTING(ChatColor.BLUE + "설정"),

@@ -7,9 +7,12 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.Theomachy.Enum.CommonMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -18,6 +21,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import org.bukkit.scheduler.BukkitTask;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
@@ -39,8 +43,8 @@ public class Theomachy extends JavaPlugin {
     public static boolean GAMBLING = true;
 
     public static Logger log = Bukkit.getLogger();
-
-    public File file = new File(getDataFolder(), "blacklist.yml");
+    public static List<BukkitTask> tasks = new ArrayList<>();
+    public File file = new File(getDataFolder(), CommonMessage.BLACKLIST_YML.getMessage());
 
     public static Plugin getPlugin() {
         return plugin;
@@ -57,18 +61,19 @@ public class Theomachy extends JavaPlugin {
         this.adventure = BukkitAudiences.create(this);
 
         plugin = this;
+
         UpdateChecker.check("5.0");
 
         log.info("[신들의 전쟁] 플러그인이 활성화되었습니다.   " + PluginData.buildnumber + "  " + PluginData.version);
         log.info("[신들의 전쟁] 플러그인의 기본 설정을 적용 중입니다.");
 
-        saveResource("blacklist.yml", true);
+        saveResource(CommonMessage.BLACKLIST_YML.getMessage(), true);
 
         // command 등록
         CommandManager commandManager = new CommandManager(this);
 
         // recipe 등록
-        NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, "custom_blaze_rod_recipe");
+        NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, CommonMessage.CUSTOM_BLASE_LOD_RECIPE.getMessage());
         ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
         getServer().addRecipe(recipe);
 
@@ -128,22 +133,21 @@ public class Theomachy extends JavaPlugin {
         GAMBLING = getConfig().getBoolean("도박 허용");
 
         log.info("[신들의 전쟁] ========================================");
-        log.info("[신들의 전쟁] 게임 시작 시 인벤토리 클리어 : " + String.valueOf(STARTING_INVENTORY_CLEAR));
-        log.info("[신들의 전쟁] 게임 시작 시 스카이블럭 기본 아이템 지급 : " + String.valueOf(STARTING_GIVE_ITEM));
-        log.info("[신들의 전쟁] 게임 시작 시 몬스터,동물,아이템삭제 : " + String.valueOf(STARTING_ENTITY_CLEAR));
-        log.info("[신들의 전쟁] 리스폰 시 침대 무시 : " + String.valueOf(IGNORE_BED));
-        log.info("[신들의 전쟁] 빠른 시작 : " + String.valueOf(FAST_START));
-        log.info("[신들의 전쟁] 도박 허용 : " + String.valueOf(GAMBLING));
-        log.info("[신들의 전쟁] 서버 자동저장 : " + String.valueOf(AUTO_SAVE));
-        log.info("[신들의 전쟁] 동물 스폰 : " + String.valueOf(ANIMAL_SPAWN));
-        log.info("[신들의 전쟁] 몬스터 스폰 : " + String.valueOf(MONSTER_SPAWN));
-        log.info("[신들의 전쟁] 난이도 : " + String.valueOf(DIFFICULTY));
+        log.info("[신들의 전쟁] 게임 시작 시 인벤토리 클리어 : " + STARTING_INVENTORY_CLEAR);
+        log.info("[신들의 전쟁] 게임 시작 시 스카이블럭 기본 아이템 지급 : " + STARTING_GIVE_ITEM);
+        log.info("[신들의 전쟁] 게임 시작 시 몬스터,동물,아이템삭제 : " + STARTING_ENTITY_CLEAR);
+        log.info("[신들의 전쟁] 리스폰 시 침대 무시 : " + IGNORE_BED);
+        log.info("[신들의 전쟁] 빠른 시작 : " + FAST_START);
+        log.info("[신들의 전쟁] 도박 허용 : " + GAMBLING);
+        log.info("[신들의 전쟁] 서버 자동저장 : " + AUTO_SAVE);
+        log.info("[신들의 전쟁] 동물 스폰 : " + ANIMAL_SPAWN);
+        log.info("[신들의 전쟁] 몬스터 스폰 : " + MONSTER_SPAWN);
+        log.info("[신들의 전쟁] 난이도 : " + DIFFICULTY);
         log.info("[신들의 전쟁] ========================================");
 
-        Bukkit.getConsoleSender().sendMessage(
-                "\n====원작자: " + ChatColor.WHITE + "칠각별(septagram)====\n"
-                        + ChatColor.GRAY + "====2차수정자: " + ChatColor.AQUA + "플로리아(humint2003)====\n"
-                        + ChatColor.YELLOW + "====3차수정자: " + ChatColor.GREEN + "프덧(foodust)====\n");
+        Bukkit.getConsoleSender().sendMessage("====원작자: " + ChatColor.WHITE + "칠각별(septagram)====");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "====2차수정자: " + ChatColor.AQUA + "플로리아(humint2003)====");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "====3차수정자: " + ChatColor.GREEN + "프덧(foodust)====");
 
         try {
             for (Player p : Bukkit.getOnlinePlayers()) {
@@ -154,16 +158,20 @@ public class Theomachy extends JavaPlugin {
     }
 
     public void onDisable() {
-        BufferedWriter bw;
+        BufferedWriter bufferedWriter;
+
+        for(BukkitTask task : tasks){
+            task.cancel();
+        }
+        tasks.clear();
+
         try {
-            bw = new BufferedWriter(new FileWriter(file));
-
-            for (int i : BlacklistModule.blacklist) {
-                bw.write(String.valueOf(i));
-                bw.newLine();
+            bufferedWriter = new BufferedWriter(new FileWriter(file));
+            for (int blacklistId : BlacklistModule.blacklist) {
+                bufferedWriter.write(String.valueOf(blacklistId));
+                bufferedWriter.newLine();
             }
-
-            bw.close();
+            bufferedWriter.close();
         } catch (IOException ignored) {
         }
         log.info("[신들의 전쟁] 블랙리스트가 파일로 저장되었습니다. 절대로 플러그인 폴더 내에 blacklist.yml을 건들지 마십시오.");

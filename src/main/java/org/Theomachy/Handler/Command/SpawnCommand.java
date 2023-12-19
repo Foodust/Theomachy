@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Timer.CoolTime;
+import org.Theomachy.Timer.CoolTimeTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -64,7 +64,7 @@ public class SpawnCommand
 		{
 			if (PermissionChecker.Sender(sender))
 			{
-				CoolTime.init =true;
+				CoolTimeTimer.init =true;
 				Bukkit.broadcastMessage("관리자가 모든 쿨타임을 초기화 하였습니다.");
 			}
 		}

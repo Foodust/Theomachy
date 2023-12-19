@@ -13,7 +13,7 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Timer.CoolTime;
+import org.Theomachy.Timer.CoolTimeTimer;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
 import org.Theomachy.Utility.PlayerInventory;
@@ -61,7 +61,7 @@ public class Invincibility extends Ability
 		{
 			SkillCoolTimeHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
-			CoolTime.commonSkillCoolTime.put(playerName+"1", 7);
+			CoolTimeTimer.commonSkillCoolTime.put(playerName+"1", 7);
 		}
 	}
 	
@@ -76,7 +76,7 @@ public class Invincibility extends Ability
 	
 	public void passiveSkill(EntityDamageEvent event)
 	{
-		if (CoolTime.commonSkillCoolTime.containsKey(playerName+"1"))
+		if (CoolTimeTimer.commonSkillCoolTime.containsKey(playerName+"1"))
 		{
 			event.setCancelled(true);
 			event.getEntity().setFireTicks(0);

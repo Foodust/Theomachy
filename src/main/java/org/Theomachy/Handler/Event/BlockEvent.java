@@ -4,6 +4,7 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Handler.Command.StartStopCommand;
+import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Manager.EntityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,18 +29,10 @@ public class BlockEvent implements Listener {
 
             Block block = event.getBlock();
             if (block.getType() == Material.DIAMOND_BLOCK) {
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + ChatColor.WHITE + "에 의해" + "다이아몬드 블럭이 부서졌습니다!");
-                Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
-                EntityManager.spawnRandomFirework(firework);
+                CommonModule.breakDiamond(event);
             }
         }
     }
-
-
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
         if (StartStopCommand.Start) {

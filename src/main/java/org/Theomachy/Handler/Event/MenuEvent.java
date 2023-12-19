@@ -1,16 +1,14 @@
 package org.Theomachy.Handler.Event;
 
 import org.Theomachy.Enum.CommonMessage;
-import org.Theomachy.Handler.Command.SettingCommand;
+import org.Theomachy.Handler.Module.GamblingModule;
 import org.Theomachy.Handler.Module.SettingModule;
-import org.Theomachy.Utility.Gambling.Gambling;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Objects;
 
@@ -24,7 +22,7 @@ public class MenuEvent implements Listener {
             assert wool != null;
             String menuName = ChatColor.stripColor(Objects.requireNonNull(Objects.requireNonNull(wool.getItemMeta()).getDisplayName()));
             if (menuName.equals(CommonMessage.GAMBLING.getMessage())) {
-                Gambling.gambling(player);
+                GamblingModule.gambling(player);
             }
         }
         else if (event.getView().getTitle().equals(CommonMessage.SETTING.getMessage())) {

@@ -3,7 +3,7 @@ package org.Theomachy.Utility.Checker;
 import org.bukkit.entity.Player;
 
 import org.Theomachy.Enum.AbilityCase;
-import org.Theomachy.Timer.CoolTime;
+import org.Theomachy.Timer.CoolTimeTimer;
 import org.Theomachy.Message.AbilityCoolTimeMesage;
 
 public class CoolTimeChecker
@@ -14,9 +14,9 @@ public class CoolTimeChecker
 		
 		if (abilityCase == AbilityCase.COMMON)
 		{
-			if (CoolTime.commonSkillCoolTime.containsKey(key))
+			if (CoolTimeTimer.commonSkillCoolTime.containsKey(key))
 			{
-				int cool = CoolTime.commonSkillCoolTime.get(key);
+				int cool = CoolTimeTimer.commonSkillCoolTime.get(key);
 				AbilityCoolTimeMesage.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
@@ -25,9 +25,9 @@ public class CoolTimeChecker
 		}
 		else if (abilityCase == AbilityCase.NORMAL)
 		{
-			if (CoolTime.normalSkillCoolTime.containsKey(key))
+			if (CoolTimeTimer.normalSkillCoolTime.containsKey(key))
 			{
-				int cool = CoolTime.normalSkillCoolTime.get(key);
+				int cool = CoolTimeTimer.normalSkillCoolTime.get(key);
 				AbilityCoolTimeMesage.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
@@ -36,9 +36,9 @@ public class CoolTimeChecker
 		}
 		else if (abilityCase == AbilityCase.RARE)
 		{
-			if (CoolTime.rareSkillCoolTime.containsKey(key))
+			if (CoolTimeTimer.rareSkillCoolTime.containsKey(key))
 			{
-				int cool = CoolTime.rareSkillCoolTime.get(key);
+				int cool = CoolTimeTimer.rareSkillCoolTime.get(key);
 				AbilityCoolTimeMesage.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}

@@ -12,7 +12,7 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Message.AbilityCoolTimeMesage;
 
-public class CoolTime extends TimerTask {
+public class CoolTimeTimer extends TimerTask {
     public static boolean init = false;
     public static HashMap<String, Integer> commonSkillCoolTime = new HashMap<String, Integer>();
     public static HashMap<String, Integer> normalSkillCoolTime = new HashMap<String, Integer>();
