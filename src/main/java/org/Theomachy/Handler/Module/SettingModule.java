@@ -25,6 +25,7 @@ public class SettingModule {
         inventory.setItem(11, CommonModule.setItem(Theomachy.ANIMAL_SPAWN ? Material.WHITE_WOOL : Material.RED_WOOL, 1, CommonMessage.ANIMAL_SPAWN.getMessage()));
         inventory.setItem(13, CommonModule.setItem(Theomachy.MONSTER_SPAWN ? Material.WHITE_WOOL : Material.RED_WOOL, 1, CommonMessage.MONSTER_SPWAN.getMessage()));
         inventory.setItem(15, CommonModule.setItem(Theomachy.GAMBLING ? Material.WHITE_WOOL : Material.RED_WOOL, 1, CommonMessage.GAMBLING_ACCEPT.getMessage()));
+        player.openInventory(inventory);
     }
 
     public static void guiListener(ItemStack wool) {
