@@ -30,7 +30,7 @@ public class StartStopCommand {
                 Bukkit.broadcastMessage(ChatColor.GOLD + "관리자(" + sender.getName() + ") 가 게임을 시작하였습니다.");
                 Timer t = new Timer();
                 if (!Theomachy.FAST_START) {
-//                    t.schedule(new GameReadyTimer(), 0, 1000);
+                    t.schedule(new GameReadyTimer(), 0, 1000);
                     GameReadyTimer gameReadyTimer = new GameReadyTimer();
                     BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), gameReadyTimer, 0, 20L);
                     Theomachy.tasks.add(bukkitTask);
@@ -41,10 +41,12 @@ public class StartStopCommand {
                     Theomachy.tasks.add(bukkitTask);
                 }
                 //                    t.schedule(new TipTimer(), 0, 1000);
-                BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), new TipTimer(), 0, 20L);
+                TipTimer tipTimer = new TipTimer();
+                BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),tipTimer , 0L, 20L);
                 Theomachy.tasks.add(bukkitTask);
                 //                    t.schedule(new CoolTimeTimer(), 0, 1000);
-                bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),new CoolTimeTimer(), 0, 20L);
+                CoolTimeTimer coolTimeTimer = new CoolTimeTimer();
+                bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), coolTimeTimer, 0L, 20L);
                 Theomachy.tasks.add(bukkitTask);
 
             } else
