@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BlacklistModule {
 
@@ -70,11 +71,43 @@ public class BlacklistModule {
         ItemStack currentItem = CommonModule.setItem(Material.STICK, page, ChatColor.WHITE + CommonMessage.CURRENT_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 5, currentItem);
 
-        ItemStack prevItem = CommonModule.setItem(Material.ITEM_FRAME, 1, ChatColor.WHITE + CommonMessage.PREV_PAGE.getMessage());
+        ItemStack prevItem = CommonModule.setItem(Material.ITEM_FRAME, 1, ChatColor.WHITE + CommonMessage.NEXT_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 6, prevItem);
 
         return inventory;
     }
 
+    public static void setAbilityAllow(ItemStack item, ItemMeta meta){
+        item.setType(Material.WHITE_WOOL);
+        assert meta != null;
+        String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
+        Object abilityNumObject = Integer.parseInt(abilityInfo[1].replaceAll(" ",""));
+        BlacklistModule.blacklist.remove(abilityNumObject);
+        String josa = HangulModule.getJosa(abilityInfo[0].trim());
+        Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
+    }
+    public static void setAbilityExcept(ItemStack item, ItemMeta meta){
+        item.setType(Material.RED_WOOL);
+        assert meta != null;
+        String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
+        int abilityNum = Integer.parseInt(abilityInfo[1].replaceAll(" ",""));
+        BlacklistModule.blacklist.add(abilityNum);
+        String josa = HangulModule.getJosa(abilityInfo[0].trim());
+        Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
+    }
 
+    public static void movePage(Player player, Inventory inventory ,int slot){
+        int index = 0;
+        for (; index < BlacklistModule.blackListInventories.size(); index++) {
+            if (inventory.equals(BlacklistModule.blackListInventories.get(index))) {
+                break;
+            }
+        }
+        // 페이지 이동 처리
+        if (slot == BlacklistModule.itemsPerPage - 4 && index != 3) { // 마지막 슬롯 (다음 페이지)
+            player.openInventory(BlacklistModule.blackListInventories.get(++index));
+        } else if (slot == BlacklistModule.itemsPerPage - 6 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
+            player.openInventory(BlacklistModule.blackListInventories.get(--index));
+        }
+    }
 }

@@ -10,7 +10,7 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Command.StartStopCommand;
-import org.Theomachy.Message.T_Message;
+import org.Theomachy.Message.AbilityCoolTimeMesage;
 
 public class CoolTime extends TimerTask {
     public static boolean init = false;
@@ -31,11 +31,11 @@ public class CoolTime extends TimerTask {
                     int value = entry.getValue() - 1;
                     if (value <= 0) {
                         commonSkillCoolTime.remove(playerName);
-                        T_Message.AbilityReset(AbilityCase.COMMON, playerName);
+                        AbilityCoolTimeMesage.AbilityReset(AbilityCase.COMMON, playerName);
                     } else {
                         commonSkillCoolTime.put(playerName, value);
                         if (value <= 3)
-                            T_Message.CoolTimeCountTeller(AbilityCase.COMMON, playerName, value);
+                            AbilityCoolTimeMesage.CoolTimeCountTeller(AbilityCase.COMMON, playerName, value);
                     }
                 }
             }
@@ -46,11 +46,11 @@ public class CoolTime extends TimerTask {
                     int value = entry.getValue() - 1;
                     if (value <= 0) {
                         normalSkillCoolTime.remove(playerName);
-                        T_Message.AbilityReset(AbilityCase.NORMAL, playerName);
+                        AbilityCoolTimeMesage.AbilityReset(AbilityCase.NORMAL, playerName);
                     } else {
                         normalSkillCoolTime.put(playerName, value);
                         if (value <= 3)
-                            T_Message.CoolTimeCountTeller(AbilityCase.NORMAL, playerName, value);
+                            AbilityCoolTimeMesage.CoolTimeCountTeller(AbilityCase.NORMAL, playerName, value);
                     }
                 }
             }
@@ -60,11 +60,11 @@ public class CoolTime extends TimerTask {
                     int value = entry.getValue() - 1;
                     if (value <= 0) {
                         rareSkillCoolTime.remove(playerName);
-                        T_Message.AbilityReset(AbilityCase.RARE, playerName);
+                        AbilityCoolTimeMesage.AbilityReset(AbilityCase.RARE, playerName);
                     } else {
                         rareSkillCoolTime.put(playerName, value);
                         if (value <= 3)
-                            T_Message.CoolTimeCountTeller(AbilityCase.RARE, playerName, value);
+                            AbilityCoolTimeMesage.CoolTimeCountTeller(AbilityCase.RARE, playerName, value);
                     }
                 }
             }

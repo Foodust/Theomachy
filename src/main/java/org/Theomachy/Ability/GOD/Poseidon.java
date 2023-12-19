@@ -17,7 +17,7 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Message.T_Message;
+import org.Theomachy.Message.AbilityCoolTimeMesage;
 import org.Theomachy.Timer.CoolTime;
 import org.Theomachy.Utility.Checker.CoolTimeChecker;
 import org.Theomachy.Utility.Checker.MouseEventChecker;
@@ -146,7 +146,7 @@ public class Poseidon extends Ability {
         if (event.getCause() == DamageCause.DROWNING) {
             event.setCancelled(true);
             CoolTime.commonSkillCoolTime.put(playerName + "0", 7);
-            T_Message.PassiveEnable(player, 0);
+            AbilityCoolTimeMesage.PassiveEnable(player, 0);
         } else if (CoolTime.commonSkillCoolTime.containsKey(player.getName() + "0")) {
             int rn = (int) (Math.random() * 3);
             if (rn == 0) {

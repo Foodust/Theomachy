@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Timer.CoolTime;
-import org.Theomachy.Message.T_Message;
+import org.Theomachy.Message.AbilityCoolTimeMesage;
 
 public class SkillCoolTimeHandler
 {
@@ -19,6 +19,6 @@ public class SkillCoolTimeHandler
 				case NORMAL -> CoolTime.normalSkillCoolTime.put(player.getName(), coolTime);
 				case RARE -> CoolTime.rareSkillCoolTime.put(player.getName(), coolTime);
             }
-		T_Message.Skill_Used(player, abilityCase);
+		AbilityCoolTimeMesage.Skill_Used(player, abilityCase);
 	}
 }

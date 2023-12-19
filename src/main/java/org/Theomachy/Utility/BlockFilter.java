@@ -5,7 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import org.Theomachy.Enum.TargetType;
-import org.Theomachy.Message.T_Message;
+import org.Theomachy.Message.AbilityCoolTimeMesage;
 
 
 public class BlockFilter
@@ -16,7 +16,7 @@ public class BlockFilter
 			return true;
 		else
 		{
-			T_Message.TooFarError(player, TargetType.TARGET_TOO_FAR);
+			AbilityCoolTimeMesage.TooFarError(player, TargetType.TARGET_TOO_FAR);
 			return false;
 		}
 	}

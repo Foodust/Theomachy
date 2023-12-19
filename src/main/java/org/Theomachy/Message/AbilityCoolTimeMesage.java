@@ -9,7 +9,7 @@ import org.Theomachy.Enum.TargetType;
 import org.Theomachy.Data.GameData;
 
 
-public class T_Message
+public class AbilityCoolTimeMesage
 {
 	public static void CoolTimeTeller(Player player, AbilityCase abilityCase, int cool)
 	{

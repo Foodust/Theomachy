@@ -30,6 +30,7 @@ public class SettingModule {
 
     public static void guiListener(ItemStack wool) {
         CommonMessage byMessage = CommonMessage.getByMessage(Objects.requireNonNull(wool.getItemMeta()).getDisplayName());
+        String broadcastMessage = "가 설정 되었습니다";
         switch (Objects.requireNonNull(byMessage)) {
             case STARTING_INVENTORY_CLEAR -> {
                 if (wool.getType() == Material.WHITE_WOOL) {
