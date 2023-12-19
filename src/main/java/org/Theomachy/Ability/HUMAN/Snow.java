@@ -91,6 +91,6 @@ public class Snow extends Ability {
 
     @Override
     public void initialize() {
-        GameData.OnlinePlayer.get(playerName).getInventory().addItem(new ItemStack(Material.SNOWBALL, 8));
+        GameData.onlinePlayer.get(playerName).getInventory().addItem(new ItemStack(Material.SNOWBALL, 8));
     }
 }

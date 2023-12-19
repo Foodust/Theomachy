@@ -49,15 +49,15 @@ public class Morpious extends Ability {
     private void leftAction(Player player) {
         if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillCoolTime)) {
             String[] team = new String[2];
-            team[0] = GameData.PlayerTeam.get(player.getName());
-            team[1] = GameData.PlayerTeam.get(abilityTarget);
+            team[0] = GameData.playerTeam.get(player.getName());
+            team[1] = GameData.playerTeam.get(abilityTarget);
 
             if (!Objects.equals(team[0], team[1])) {
                 if (abilityTarget != null) {
                     if (player.getName().equals(abilityTarget)) {
                         player.sendMessage(ChatColor.RED + "목표는 본인이 아니어야 합니다.");
                     } else {
-                        Player target = GameData.OnlinePlayer.get(abilityTarget);
+                        Player target = GameData.onlinePlayer.get(abilityTarget);
                         SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                         player.sendMessage(ChatColor.GRAY + "목표를 잠재웠습니다!");
                         target.sendMessage(ChatColor.GRAY + "착한 어른이는 일찍 자고 일찍 일어나야 해요~");

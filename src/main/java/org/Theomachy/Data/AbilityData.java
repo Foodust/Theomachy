@@ -4,16 +4,16 @@ import org.Theomachy.Enum.AbilityInfo;
 
 import java.util.EnumSet;
 
-public interface AbilityData
+public class AbilityData
 {
-	EnumSet<AbilityInfo> godEnum = EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans);
-	EnumSet<AbilityInfo> humanEnum = EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet);
-	EnumSet<AbilityInfo> jujuEnum = EnumSet.range(AbilityInfo.Itarodi, AbilityInfo.Sukuna);
-	EnumSet<AbilityInfo> kimetsuEnum = EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Rengoku);
+	public static EnumSet<AbilityInfo> godEnum = EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans);
+	public static EnumSet<AbilityInfo> humanEnum = EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet);
+	public static EnumSet<AbilityInfo> jujutsuKaisenEnum = EnumSet.range(AbilityInfo.Itarodi, AbilityInfo.Sukuna);
+	public static EnumSet<AbilityInfo> kimetsuNoYaibaEnum = EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Rengoku);
 
-	int GOD_ABILITY_NUMBER= godEnum.size();
-	int HUMAN_ABILITY_NUMBER=humanEnum.size();
-	int JUJUTSU_KAISEN_ABILITY_NUMBER = jujuEnum.size();
-	int KIMETSU_NO_YAIBA_ABILITY_NUMBER = kimetsuEnum.size();
-	int ABILITY_NUMBER=GOD_ABILITY_NUMBER + HUMAN_ABILITY_NUMBER + JUJUTSU_KAISEN_ABILITY_NUMBER + KIMETSU_NO_YAIBA_ABILITY_NUMBER;
+	public static int GOD_ABILITY_NUMBER= godEnum.size();
+	public static int HUMAN_ABILITY_NUMBER=humanEnum.size();
+	public static int JUJUTSU_KAISEN_ABILITY_NUMBER = jujutsuKaisenEnum.size();
+	public static int KIMETSU_NO_YAIBA_ABILITY_NUMBER = kimetsuNoYaibaEnum.size();
+	public static int ABILITY_NUMBER=GOD_ABILITY_NUMBER + HUMAN_ABILITY_NUMBER + JUJUTSU_KAISEN_ABILITY_NUMBER + KIMETSU_NO_YAIBA_ABILITY_NUMBER;
 }

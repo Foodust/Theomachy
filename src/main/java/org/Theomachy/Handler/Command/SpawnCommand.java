@@ -36,7 +36,7 @@ public class SpawnCommand
 						Double.parseDouble(data[2]),
 						Double.parseDouble(data[3]),
 						Double.parseDouble(data[4]));
-				GameData.SpawnArea.put(teamName, location);
+				GameData.spawnArea.put(teamName, location);
 				Bukkit.broadcastMessage( ChatColor.WHITE + data[2]+" " + data[3]+ " " + data[4] + "가 팀 "+ChatColor.DARK_AQUA+teamName+ChatColor.WHITE+" 의 스폰지역으로 설정되었습니다.");
 			}
 			else if(data.length == 2)
@@ -47,7 +47,7 @@ public class SpawnCommand
 				location.setX(location.getX()+0.5);
 				location.setZ(location.getZ()+0.5);
 				location.setYaw((int)player.getLocation().getYaw());
-				GameData.SpawnArea.put(teamName, location);
+				GameData.spawnArea.put(teamName, location);
 				player.sendMessage("현재 위치가 팀 "+ChatColor.DARK_AQUA+teamName+ChatColor.WHITE+" 의 스폰지역으로 설정되었습니다.");	
 			}
 			else{

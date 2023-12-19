@@ -98,7 +98,7 @@ public class GameReadyTimer extends TimerTask {
                     Bukkit.broadcastMessage(ChatColor.AQUA + "현재 능력이 적용되지 않은 플레이어 목록");
                     int j = 1;
                     for (Player player : playerList) {
-                        if (!GameData.PlayerAbility.containsKey(player.getName())) {
+                        if (!GameData.playerAbility.containsKey(player.getName())) {
                             Bukkit.broadcastMessage(j + ".  " + ChatColor.GOLD + player.getName());
                         }
                     }
@@ -107,7 +107,7 @@ public class GameReadyTimer extends TimerTask {
                     Bukkit.broadcastMessage(ChatColor.BLUE + "현재 팀이 적용되지 않은 플레이어 목록");
                     int k = 1;
                     for (Player player : playerList) {
-                        if (!GameData.PlayerTeam.containsKey(player.getName())) {
+                        if (!GameData.playerTeam.containsKey(player.getName())) {
                             Bukkit.broadcastMessage(k + ".  " + ChatColor.GOLD + player.getName());
                         }
                     }
@@ -152,9 +152,9 @@ public class GameReadyTimer extends TimerTask {
                         player.setExp(0.0F);
                         player.setHealth(20);
                         PlayerInventory.startItem(player);
-                        String teamName = GameData.PlayerTeam.get(player.getName());
+                        String teamName = GameData.playerTeam.get(player.getName());
                         if (teamName != null) {
-                            Location location = GameData.SpawnArea.get(teamName);
+                            Location location = GameData.spawnArea.get(teamName);
                             if (location != null)
                                 Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                                     player.teleport(location);
@@ -182,7 +182,7 @@ public class GameReadyTimer extends TimerTask {
                     Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                         world.setTime(6000);
                     });
-                    Collection<Ability> playerAbilityList = GameData.PlayerAbility.values();
+                    Collection<Ability> playerAbilityList = GameData.playerAbility.values();
                     for (Ability e : playerAbilityList) {
                         e.initialize();
                         e.buff();

@@ -27,7 +27,7 @@ public class CommandManager implements CommandExecutor
 		{
 			if (data.length==0) //설명 보기
 			{
-				sender.sendMessage(TheomachyMessage.EXPLAIN_COMMAND.getMessage());
+				sender.sendMessage(TheomachyMessage.EXPLAIN_THEOMACHY_COMMAND.getMessage());
 				sender.sendMessage(TheomachyMessage.EXPLAIN_GAME_START.getMessage());
 				sender.sendMessage(TheomachyMessage.EXPLAIN_GAME_STOP.getMessage());
 				sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_LIST.getMessage());

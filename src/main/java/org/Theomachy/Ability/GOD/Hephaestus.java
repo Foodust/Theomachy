@@ -78,7 +78,7 @@ public class Hephaestus extends Ability {
     }
 
     public void initialize() {
-        Player player = GameData.OnlinePlayer.get(playerName);
+        Player player = GameData.onlinePlayer.get(playerName);
         Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
             player.setMaximumAir(0);
             player.setRemainingAir(0);
@@ -87,7 +87,7 @@ public class Hephaestus extends Ability {
     }
 
     public void initializeReset() {
-        Player player = GameData.OnlinePlayer.get(playerName);
+        Player player = GameData.onlinePlayer.get(playerName);
         Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
             player.setMaximumAir(300);
             player.setRemainingAir(300);

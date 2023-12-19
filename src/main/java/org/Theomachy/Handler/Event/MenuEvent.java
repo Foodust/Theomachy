@@ -15,13 +15,13 @@ import java.util.Objects;
 public class MenuEvent implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals(TheomachyMessage.MENU.getMessage())) {
+        if (event.getView().getTitle().equals(TheomachyMessage.SETTING_MENU.getMessage())) {
             event.setCancelled(true);
             Player player = (Player) event.getWhoClicked();
             ItemStack wool = event.getCurrentItem();
             assert wool != null;
             String menuName = ChatColor.stripColor(Objects.requireNonNull(Objects.requireNonNull(wool.getItemMeta()).getDisplayName()));
-            if (menuName.equals(TheomachyMessage.GAMBLING.getMessage())) {
+            if (menuName.equals(TheomachyMessage.SETTING_GAMBLING.getMessage())) {
                 GamblingModule.gambling(player);
             }
         }

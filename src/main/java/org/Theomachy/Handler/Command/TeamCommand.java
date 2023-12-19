@@ -22,9 +22,9 @@ public class TeamCommand {
                     int teamIndex = 0;
                     for (Player player : onlinePlayers) {
                         String playerName = player.getName();
-                        String teamNameOld = GameData.PlayerTeam.get(playerName);
+                        String teamNameOld = GameData.playerTeam.get(playerName);
                         String teamName = teams[teamIndex++ % 2];
-                        GameData.PlayerTeam.put(player.getName(), teamName);
+                        GameData.playerTeam.put(player.getName(), teamName);
                         if (teamNameOld == null) //플레이어 팀 초기화
                         {
                             Bukkit.broadcastMessage("플레이어 " + ChatColor.RED + playerName + ChatColor.WHITE + " (이)가 팀 " + ChatColor.DARK_AQUA + teamName + ChatColor.WHITE + " 에 등록되었습니다.");
@@ -35,11 +35,11 @@ public class TeamCommand {
                     }
                 } else {
                     for (int i = 2; i < data.length; i++) {
-                        if (GameData.OnlinePlayer.containsKey(data[i])) {
+                        if (GameData.onlinePlayer.containsKey(data[i])) {
                             String playerName = data[i];
                             String teamName = data[1];
-                            String teamNameOld = GameData.PlayerTeam.get(playerName);
-                            GameData.PlayerTeam.put(data[i], teamName);
+                            String teamNameOld = GameData.playerTeam.get(playerName);
+                            GameData.playerTeam.put(data[i], teamName);
                             if (teamNameOld == null) //플레이어 팀 초기화
                             {
                                 Bukkit.broadcastMessage("플레이어 " + ChatColor.RED + playerName + ChatColor.WHITE + " (이)가 팀 " + ChatColor.DARK_AQUA + teamName + ChatColor.WHITE + " 에 등록되었습니다.");

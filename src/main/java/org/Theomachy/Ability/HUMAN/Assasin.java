@@ -77,8 +77,8 @@ public class Assasin extends Ability {
             for (Entity entity : entityList) {
                 if (entity instanceof Player target) {
 
-                    String targetTeamName = GameData.PlayerTeam.get(target.getName());
-                    String playerTeamName = GameData.PlayerTeam.get(player.getName());
+                    String targetTeamName = GameData.playerTeam.get(target.getName());
+                    String playerTeamName = GameData.playerTeam.get(player.getName());
                     if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName))) {
                         SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                         Location fakeLocation = player.getLocation();

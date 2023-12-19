@@ -22,7 +22,7 @@ public class Anorexia extends Ability {
     }
 
     public void initialize() {
-        GameData.OnlinePlayer.get(playerName).setFoodLevel(10);
+        GameData.onlinePlayer.get(playerName).setFoodLevel(10);
     }
 
     public void passiveSkill(FoodLevelChangeEvent event) {

@@ -99,7 +99,7 @@ public class Teleporter extends Ability
 		{
 			if (rareTarget != null)
 			{
-				Player target = GameData.OnlinePlayer.get(rareTarget);
+				Player target = GameData.onlinePlayer.get(rareTarget);
 				if (target != null)
 				{
 					Location location = player.getLocation();
@@ -121,8 +121,8 @@ public class Teleporter extends Ability
 	
 	public void targetSet(CommandSender sender, String targetName)
 	{
-		String playerTeamName = GameData.PlayerTeam.get(playerName);
-		String targetTeamName = GameData.PlayerTeam.get(targetName);
+		String playerTeamName = GameData.playerTeam.get(playerName);
+		String targetTeamName = GameData.playerTeam.get(targetName);
 		if (playerTeamName != null && playerTeamName.equals(targetTeamName))
 		{
 			if (!playerName.equals(targetName))

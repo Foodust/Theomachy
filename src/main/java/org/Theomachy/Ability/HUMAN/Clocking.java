@@ -68,7 +68,7 @@ public class Clocking extends Ability {
             super.flag = true;
 
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                GameData.PlayerAbility.get(player.getName()).flag = false;
+                GameData.playerAbility.get(player.getName()).flag = false;
                 for (Player enemy : targetList)
                     enemy.showPlayer(Theomachy.getPlugin(), player);
             }, 8 * 20);

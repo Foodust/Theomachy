@@ -53,7 +53,7 @@ public class StartStopCommand {
     public static void GameStop(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             if (Ready) {
-                Collection<Ability> playerAbilityList = GameData.PlayerAbility.values();
+                Collection<Ability> playerAbilityList = GameData.playerAbility.values();
                 for (Ability e : playerAbilityList)
                     e.initializeReset();
                 Ready = false;

@@ -19,7 +19,7 @@ public class MainCommand
 			case COMMAND_STOP -> StartStopCommand.GameStop(sender);
 			case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilitySetCommand.Module(sender, command, label, data);
 			case COMMAND_ABILITY_LIST -> AbilityPlayerInfoCommand.showAllAbility(sender);
-			case COMMAND_HELP -> HelpCommand.Module(sender, command, label, data);
+			case COMMAND_HELP -> AbilityHelpCommand.Module(sender, command, label, data);
 			case COMMAND_SPAWN, COMMAND_SPAWN_S -> SpawnCommand.Module(sender, command, label, data);
 			case COMMAND_TEAM, COMMAND_TEAM_T -> TeamCommand.Module(sender, command, label, data);
 			case COMMAND_INFO -> TeamInfoCommand.Module(sender, command, label, data);
@@ -35,10 +35,10 @@ public class MainCommand
 	{
 		String playerName = sender.getName();
 		String targetName = data[0];
-		Ability ability = GameData.PlayerAbility.get(playerName);
+		Ability ability = GameData.playerAbility.get(playerName);
 		if (ability != null)
 		{
-			if (GameData.OnlinePlayer.containsKey(targetName))
+			if (GameData.onlinePlayer.containsKey(targetName))
 				ability.targetSet(sender, targetName);
 			else
 				sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);

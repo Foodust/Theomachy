@@ -65,7 +65,7 @@ public class Bee extends Ability {
 					player.sendMessage(ChatColor.RED+"목표는 본인이 아니어야 합니다.");
 				}
 				else{
-					Player target = GameData.OnlinePlayer.get(abilityTarget);
+					Player target = GameData.onlinePlayer.get(abilityTarget);
 					SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");

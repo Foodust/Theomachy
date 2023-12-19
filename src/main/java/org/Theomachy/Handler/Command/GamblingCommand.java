@@ -9,11 +9,11 @@ import org.Theomachy.Theomachy;
 
 public class GamblingCommand {
     public static void Module(CommandSender sender) {
-        Player p = (Player) sender;
+        Player player = (Player) sender;
         if (Theomachy.GAMBLING) {
-            p.openInventory(GamblingModule.gui());
+            GamblingModule.openGamblingInventory(player);
         } else {
-            p.sendMessage(ChatColor.RED + "이 기능은 잠겨있습니다!");
+            player.sendMessage();
         }
     }
 }

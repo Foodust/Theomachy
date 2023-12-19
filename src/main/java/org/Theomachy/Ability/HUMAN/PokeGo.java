@@ -2,6 +2,7 @@ package org.Theomachy.Ability.HUMAN;
 
 import java.util.Random;
 
+import org.Theomachy.Handler.Module.AbilityModule;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -53,16 +54,16 @@ public class PokeGo extends Ability {
             int abilityNumber = 0;
             if (randomNumber == 0) {
                 abilityNumber = random.nextInt(AbilityData.GOD_ABILITY_NUMBER) + 1;
-                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilityModule.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 1) {
                 abilityNumber = random.nextInt(AbilityData.HUMAN_ABILITY_NUMBER) + 101;
-                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilityModule.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 2) {
                 abilityNumber = random.nextInt(AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER) + 301;
-                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilityModule.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             } else if (randomNumber == 3) {
                 abilityNumber = random.nextInt(AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER) + 401;
-                AbilitySetCommand.abilityAssignment(abilityNumber, playerName, event.getPlayer());
+                AbilityModule.abilityAssignment(abilityNumber, playerName, event.getPlayer());
             }
             event.getPlayer().sendMessage(ChatColor.YELLOW + " ★ 경  " + ChatColor.WHITE + goal + " 보 걷기에 성공했습니다!  " + ChatColor.YELLOW + " 축 ★");
             event.getPlayer().sendMessage(ChatColor.AQUA + AbilityInfo.getNameByIndex(abilityNumber) + ChatColor.WHITE + "!! 너로 정했다!!");

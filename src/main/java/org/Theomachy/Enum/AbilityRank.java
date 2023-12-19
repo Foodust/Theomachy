@@ -2,7 +2,6 @@ package org.Theomachy.Enum;
 
 public enum AbilityRank {
     S("S"),
-
     A("A"),
     B("B"),
     C("C"),

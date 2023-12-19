@@ -25,7 +25,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Data.PluginData;
+import org.Theomachy.Data.VersionData;
 import org.Theomachy.Manager.CommandManager;
 import org.Theomachy.Manager.EventManager;
 
@@ -44,7 +44,7 @@ public class Theomachy extends JavaPlugin {
 
     public static Logger log = Bukkit.getLogger();
     public static List<BukkitTask> tasks = new ArrayList<>();
-    public File file = new File(getDataFolder(), TheomachyMessage.BLACKLIST_YML.getMessage());
+    public File file = new File(getDataFolder(), TheomachyMessage.SETTING_BLACKLIST_YML.getMessage());
 
     public static Plugin getPlugin() {
         return plugin;
@@ -64,16 +64,16 @@ public class Theomachy extends JavaPlugin {
 
         UpdateChecker.check("5.0");
 
-        log.info("[신들의 전쟁] 플러그인이 활성화되었습니다.   " + PluginData.buildnumber + "  " + PluginData.version);
+        log.info("[신들의 전쟁] 플러그인이 활성화되었습니다.   " + VersionData.buildNumber + "  " + VersionData.version);
         log.info("[신들의 전쟁] 플러그인의 기본 설정을 적용 중입니다.");
 
-        saveResource(TheomachyMessage.BLACKLIST_YML.getMessage(), true);
+        saveResource(TheomachyMessage.SETTING_BLACKLIST_YML.getMessage(), true);
 
         // command 등록
         CommandManager commandManager = new CommandManager(this);
 
         // recipe 등록
-        NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, TheomachyMessage.CUSTOM_BLASE_LOD_RECIPE.getMessage());
+        NamespacedKey customBlazeRodRecipe = new NamespacedKey(this, TheomachyMessage.SETTING_CUSTOM_BLASE_LOD_RECIPE.getMessage());
         ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
         getServer().addRecipe(recipe);
 
@@ -151,7 +151,7 @@ public class Theomachy extends JavaPlugin {
 
         try {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                GameData.OnlinePlayer.put(p.getName(), p);
+                GameData.onlinePlayer.put(p.getName(), p);
             }
         } catch (NullPointerException ignored) {
         }

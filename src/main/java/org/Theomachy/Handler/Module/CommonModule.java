@@ -21,7 +21,7 @@ public class CommonModule {
     }
     public static void breakDiamond(BlockBreakEvent event){
         for(int i = 0 ; i < 5; i++){
-            Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + TheomachyMessage.WHO_BREAK_DIAMOND);
+            Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + TheomachyMessage.END_WHO_BREAK_DIAMOND);
         }
         Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
         EntityManager.spawnRandomFirework(firework);

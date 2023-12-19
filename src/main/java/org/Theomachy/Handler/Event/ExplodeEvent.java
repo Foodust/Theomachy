@@ -22,7 +22,7 @@ public class ExplodeEvent implements Listener {
 
         if (StartStopCommand.Start) {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                Ability ability = GameData.PlayerAbility.get(p.getName());
+                Ability ability = GameData.playerAbility.get(p.getName());
                 if (ability != null && ability.abilityCode == AbilityInfo.Bulter.getIndex()) {
                     ability.passiveSkill(event);
                 }

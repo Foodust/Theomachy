@@ -38,7 +38,7 @@ public class BlacklistModule {
     }
     public static Inventory makeInventory(int page) {
 
-        Inventory inventory = Bukkit.createInventory(null, itemsPerPage, TheomachyMessage.BLACKLIST.getMessage());
+        Inventory inventory = Bukkit.createInventory(null, itemsPerPage, TheomachyMessage.SETTING_BLACKLIST.getMessage());
         int index = 0, length = 0;
         switch (page) {
             case 1 -> {
@@ -65,13 +65,13 @@ public class BlacklistModule {
             inventory.setItem(itemIndex, item);
         }
 
-        ItemStack nextItem = CommonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.NEXT_PAGE.getMessage());
+        ItemStack nextItem = CommonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.SETTING_NEXT_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 4, nextItem);
 
-        ItemStack currentItem = CommonModule.setItem(Material.STICK, page, TheomachyMessage.CURRENT_PAGE.getMessage());
+        ItemStack currentItem = CommonModule.setItem(Material.STICK, page, TheomachyMessage.SETTING_CURRENT_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 5, currentItem);
 
-        ItemStack prevItem = CommonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.PREV_PAGE.getMessage());
+        ItemStack prevItem = CommonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.SETTING_PREV_PAGE.getMessage());
         inventory.setItem(itemsPerPage - 6, prevItem);
 
         return inventory;

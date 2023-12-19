@@ -2,7 +2,6 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Enum.TheomachyMessage;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -15,56 +14,47 @@ import java.util.Random;
 
 public class GamblingModule {
     static int gamblingSize = 1 * 9;
-    public static Inventory gui() {
-
-        Inventory inventory = Bukkit.createInventory(null, gamblingSize, TheomachyMessage.GAMBLING.getMessage());
-
-        ItemStack itemStack = new ItemStack(Material.GOLD_INGOT);
+    public static void openGamblingInventory(Player player) {
+        Inventory inventory = Bukkit.createInventory(null, gamblingSize, TheomachyMessage.SETTING_GAMBLING.getMessage());
+        ItemStack itemStack = CommonModule.setItem(Material.GOLD_INGOT, 1, TheomachyMessage.SETTING_GAMBLING.getMessage());
         ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
-        itemMeta.setDisplayName(TheomachyMessage.GAMBLING.getMessage());
         List<String> loreList = new ArrayList<String>();
-        loreList.add(ChatColor.WHITE + "조약돌 32개를 소모해 다양한 아이템을");
-        loreList.add(ChatColor.WHITE + "뽑을 수 있습니다.");
+        loreList.add(TheomachyMessage.INFO_GAMBLING1.getMessage());
+        loreList.add(TheomachyMessage.INFO_GAMBLING2.getMessage());
+        assert itemMeta != null;
         itemMeta.setLore(loreList);
         itemStack.setItemMeta(itemMeta);
-
         inventory.setItem(4, itemStack);
-
-        return inventory;
+        player.openInventory(inventory);
     }
     public static void gambling(Player player) {
-        Inventory inv = player.getInventory();
-        int cobbleStone = inv.all(Material.COBBLESTONE).values().stream()
+        Inventory inventory = player.getInventory();
+        int cobbleStone = inventory.all(Material.COBBLESTONE).values().stream()
                 .mapToInt(ItemStack::getAmount)
                 .sum();
         if (cobbleStone >= 32) {
-            Random r = new Random();
+            Random random = new Random();
+            int randomPercentage = 100;
             player.getInventory().removeItem(new ItemStack(Material.COBBLESTONE, 32));
-            int rn = (int) (r.nextInt(100));
-            if (rn <= 4) {
-                player.sendMessage(ChatColor.AQUA + "와우! 축하합니다! 다이아몬드 3개입니다!");
-                player.getInventory().addItem(new ItemStack(Material.DIAMOND, 3));
-            } else if (rn <= 19) {
-                player.sendMessage(ChatColor.GOLD + "대박! 짜잔! 원목 3개 당첨 축하드립니다!");
+            int randomNumber = (int) random.nextInt(randomPercentage);
+            if (randomNumber < 50) {
+                player.sendMessage(randomPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_1.getMessage());
+                int cobblestoneNumber = (int)random.nextInt(41) + 20;
+                player.getInventory().addItem(new ItemStack(Material.COBBLESTONE, cobblestoneNumber));
+            } else if (randomNumber < 80) {
+                player.sendMessage(randomPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_2.getMessage());
                 player.getInventory().addItem(new ItemStack(Material.OAK_LOG, 3));
-            } else if (rn <= 34) {
-                player.sendMessage(ChatColor.RED + "하하하하하하! 이 돌은 서버의 신이 가져간다! 하하하하하!");
-                player.sendMessage(ChatColor.BLUE + "서버의 신의 자비로 능력의 막대를 드립니다.");
-                player.getInventory().addItem(new ItemStack(Material.BLAZE_ROD, 1));
-            } else if (rn <= 79) {
-                player.sendMessage("당신의 운은 평범하군요! 철괴 4개를 드립니다.");
+            } else if (randomNumber < 95) {
+                player.sendMessage(randomPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_3.getMessage());
+            } else if (randomNumber < 99) {
+                player.sendMessage(randomPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_4.getMessage());
                 player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 4));
-            } else if (rn <= 98) {
-                player.sendMessage("당신의 운은 평범하군요! 철괴 6개를 드립니다.");
-                player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 6));
             } else {
-                player.sendMessage(ChatColor.YELLOW + "헐... 대박, 당신의 운은 미쳤군요!");
-                player.sendMessage(ChatColor.AQUA + "다이아몬드 10개를 드립니다!");
-                player.getInventory().addItem(new ItemStack(Material.DIAMOND, 22));
+                Bukkit.broadcastMessage(player.getName() + "님이" + randomPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_5.getMessage());
+                player.getInventory().addItem(new ItemStack(Material.DIAMOND, 10));
             }
         } else {
-            player.sendMessage(ChatColor.RED + "조약돌이 부족합니다!");
+            player.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_COBBLE_STONE.getMessage());
         }
     }
 }

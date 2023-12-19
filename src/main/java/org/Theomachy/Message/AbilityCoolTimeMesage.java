@@ -26,7 +26,7 @@ public class AbilityCoolTimeMesage
 	
 	public static void CoolTimeCountTeller(AbilityCase abilityCase ,String playerName, int cool)
 	{
-		Player player = GameData.OnlinePlayer.get(playerName);
+		Player player = GameData.onlinePlayer.get(playerName);
 		if (player != null)
 		{
             switch (abilityCase) {
@@ -42,7 +42,7 @@ public class AbilityCoolTimeMesage
 	
 	public static void AbilityReset(AbilityCase abilityCase ,String playerName)
 	{
-		Player player = GameData.OnlinePlayer.get(playerName);
+		Player player = GameData.onlinePlayer.get(playerName);
 		if (player != null)
 		{
             switch (abilityCase) {

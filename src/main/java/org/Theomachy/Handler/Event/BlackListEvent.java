@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class BlackListEvent implements Listener {
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
-        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(TheomachyMessage.BLACKLIST.getMessage())) {
+        if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(TheomachyMessage.SETTING_BLACKLIST.getMessage())) {
             Player player = (Player) event.getPlayer();
             BlacklistModule.openBlackListInventory(player);
         }
@@ -23,7 +23,7 @@ public class BlackListEvent implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals(TheomachyMessage.BLACKLIST.getMessage())) {
+        if (event.getView().getTitle().equals(TheomachyMessage.SETTING_BLACKLIST.getMessage())) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
             assert item != null;

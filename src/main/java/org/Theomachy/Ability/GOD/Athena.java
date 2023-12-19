@@ -81,7 +81,7 @@ public class Athena extends Ability {
 
     public void passiveSkill(PlayerDeathEvent event) {
         if (Objects.requireNonNull(event.getEntity().getLastDamageCause()).getCause() != DamageCause.SUICIDE) {
-            Player player = GameData.OnlinePlayer.get(playerName);
+            Player player = GameData.onlinePlayer.get(playerName);
             player.setLevel(player.getLevel() + 1);
         }
     }

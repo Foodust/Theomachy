@@ -55,8 +55,8 @@ public class DamageEvent implements Listener {
         if (StartStopCommand.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
-                if (GameData.PlayerAbility.containsKey(playerName))
-                    GameData.PlayerAbility.get(playerName).passiveSkill(event);
+                if (GameData.playerAbility.containsKey(playerName))
+                    GameData.playerAbility.get(playerName).passiveSkill(event);
             }
             if (event.getCause() == EntityDamageEvent.DamageCause.LIGHTNING && event.getEntity() instanceof LivingEntity le) {
                 le.setNoDamageTicks(0);
@@ -74,8 +74,8 @@ public class DamageEvent implements Listener {
                     String entityName = (event.getEntity()).getName();
                     String DamageName = (event.getDamager()).getName();
 
-                    Ability ability1 = GameData.PlayerAbility.get(entityName);
-                    Ability ability2 = GameData.PlayerAbility.get(DamageName);
+                    Ability ability1 = GameData.playerAbility.get(entityName);
+                    Ability ability2 = GameData.playerAbility.get(DamageName);
 
                     if (ability1 != null)
                         ability1.passiveSkill(event);
@@ -85,7 +85,7 @@ public class DamageEvent implements Listener {
                 } else if (event.getDamager() instanceof Arrow arrow && event.getEntity() instanceof Player) {
                     if (arrow.getShooter() instanceof Player player) {
                         String key = player.getName();
-                        Ability ability = GameData.PlayerAbility.get(key);
+                        Ability ability = GameData.playerAbility.get(key);
 
                         if (ability != null &&
                                 ability.abilityCode == AbilityInfo.Artemis.getIndex() ||
@@ -96,7 +96,7 @@ public class DamageEvent implements Listener {
                 } else if (event.getDamager() instanceof Snowball snow && event.getEntity() instanceof Player) {
                     if (snow.getShooter() instanceof Player player) {
 
-                        Ability ability = GameData.PlayerAbility.get(player.getName());
+                        Ability ability = GameData.playerAbility.get(player.getName());
 
                         if (ability != null && ability.abilityCode == AbilityInfo.Snow.getIndex())
                             ability.passiveSkillSnow(event);

@@ -72,7 +72,7 @@ public class Hermes extends Ability {
     }
 
     public void buff() {
-        Player player = GameData.OnlinePlayer.get(playerName);
+        Player player = GameData.onlinePlayer.get(playerName);
         if (player != null) {
             Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, passiveDuration * 20, 0));

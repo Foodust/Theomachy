@@ -74,7 +74,7 @@ public class Apollon extends Ability {
             Bukkit.broadcastMessage(ChatColor.RED + "태양이 매우 뜨거워집니다.");
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 for (int count = sunTime; count >= 0; count--) {
-                    List<Player> playerList = GameData.OnlinePlayer.get(playerName).getWorld().getPlayers();
+                    List<Player> playerList = GameData.onlinePlayer.get(playerName).getWorld().getPlayers();
                     int finalCount = count;
                     Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                         for (Player players : playerList) {

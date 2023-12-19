@@ -91,7 +91,7 @@ public class Sniper extends Ability {
 
     @Override
     public void initialize() {
-        Player player = GameData.OnlinePlayer.get(this.playerName);
+        Player player = GameData.onlinePlayer.get(this.playerName);
         player.getInventory().addItem(new ItemStack(Material.BOW, 1));
         player.getInventory().addItem(new ItemStack(Material.ARROW, 10));
     }

@@ -30,7 +30,7 @@ public class PlayerEvent implements Listener {
             for (Ability e : PlayerDeathEventList)
                 e.passiveSkill(event);
             Player player = event.getEntity();
-            Ability ability = GameData.PlayerAbility.get(player.getName());
+            Ability ability = GameData.playerAbility.get(player.getName());
             if (ability != null)
                 if (ability.abilityCode == AbilityInfo.Creeper.getIndex() ||
                         ability.abilityCode == AbilityInfo.Hades.getIndex() ||
@@ -45,21 +45,21 @@ public class PlayerEvent implements Listener {
         if (StartStopCommand.Start) {
             Player player = event.getPlayer();
             if (Theomachy.IGNORE_BED) {
-                if (GameData.PlayerTeam.containsKey(player.getName())) {
-                    String teamName = GameData.PlayerTeam.get(player.getName());
-                    Location respawnLocation = GameData.SpawnArea.get(teamName);
+                if (GameData.playerTeam.containsKey(player.getName())) {
+                    String teamName = GameData.playerTeam.get(player.getName());
+                    Location respawnLocation = GameData.spawnArea.get(teamName);
                     if (respawnLocation != null)
                         event.setRespawnLocation(respawnLocation);
                 }
             } else {
-                if (!event.isBedSpawn() && GameData.PlayerTeam.containsKey(player.getName())) {
-                    String teamName = GameData.PlayerTeam.get(player.getName());
-                    Location respawnLocation = GameData.SpawnArea.get(teamName);
+                if (!event.isBedSpawn() && GameData.playerTeam.containsKey(player.getName())) {
+                    String teamName = GameData.playerTeam.get(player.getName());
+                    Location respawnLocation = GameData.spawnArea.get(teamName);
                     if (respawnLocation != null)
                         event.setRespawnLocation(respawnLocation);
                 }
             }
-            Ability ability = GameData.PlayerAbility.get(player.getName());
+            Ability ability = GameData.playerAbility.get(player.getName());
             if (ability != null) {
                 if (ability.buffType)
                     ability.buff();
@@ -72,9 +72,9 @@ public class PlayerEvent implements Listener {
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        GameData.OnlinePlayer.put(player.getName(), player);
+        GameData.onlinePlayer.put(player.getName(), player);
         if (StartStopCommand.Start) {
-            Ability ability = GameData.PlayerAbility.get(player.getName());
+            Ability ability = GameData.playerAbility.get(player.getName());
             if (ability != null && (ability.abilityCode == AbilityInfo.Poseidon.getIndex() || ability.abilityCode == AbilityInfo.Hephastus.getIndex())) {
                 ability.initialize();
             }
@@ -84,7 +84,7 @@ public class PlayerEvent implements Listener {
     @EventHandler
     public static void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        GameData.OnlinePlayer.remove(player.getName());
+        GameData.onlinePlayer.remove(player.getName());
     }
 
     @EventHandler
@@ -95,7 +95,7 @@ public class PlayerEvent implements Listener {
     @EventHandler
     public static void onPlayerMove(PlayerMoveEvent event) {
         if (StartStopCommand.Start) {
-            Ability ability = GameData.PlayerAbility.get(event.getPlayer().getName());
+            Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
                 ability.passiveSkill(event);
         }
@@ -106,7 +106,7 @@ public class PlayerEvent implements Listener {
         Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
             if (event.getEntity() instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
-                    Ability ability = GameData.PlayerAbility.get(player.getName());
+                    Ability ability = GameData.playerAbility.get(player.getName());
                     if (ability != null && ability.abilityCode == AbilityInfo.Sniper.getIndex())
                         ability.passiveSkill(event, player);
                 }
@@ -119,7 +119,7 @@ public class PlayerEvent implements Listener {
     public static void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (StartStopCommand.Start) {
             String playerName = event.getPlayer().getName();
-            Ability ability = GameData.PlayerAbility.get(playerName);
+            Ability ability = GameData.playerAbility.get(playerName);
             if (ability != null && ability.activeType) {
                 ability.activeSkill(event);
             }
@@ -131,8 +131,8 @@ public class PlayerEvent implements Listener {
         if (StartStopCommand.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
-                if (GameData.PlayerAbility.containsKey(playerName))
-                    GameData.PlayerAbility.get(playerName).passiveSkill(event);
+                if (GameData.playerAbility.containsKey(playerName))
+                    GameData.playerAbility.get(playerName).passiveSkill(event);
             }
         }
     }
@@ -142,8 +142,8 @@ public class PlayerEvent implements Listener {
         if (StartStopCommand.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
-                if (GameData.PlayerAbility.containsKey(playerName))
-                    GameData.PlayerAbility.get(playerName).passiveSkill(event);
+                if (GameData.playerAbility.containsKey(playerName))
+                    GameData.playerAbility.get(playerName).passiveSkill(event);
             }
         }
     }

@@ -63,7 +63,7 @@ public class Voodoo extends Ability {
                 assert block != null;
                 if ((block.getType() == Material.OAK_SIGN || block.getType() == Material.OAK_HANGING_SIGN || block.getType() == Material.OAK_WALL_HANGING_SIGN || block.getType() == Material.OAK_WALL_SIGN) &&
                         this.postSign.getState().equals(block.getState())) {
-                    Player player = GameData.OnlinePlayer.get(targetName);
+                    Player player = GameData.onlinePlayer.get(targetName);
                     if (player != null)
                         player.damage(1, event.getPlayer());
 
@@ -82,7 +82,7 @@ public class Voodoo extends Ability {
     public void passiveSkill(SignChangeEvent event) {
         Player player = event.getPlayer();
         String targetName = Objects.requireNonNull(event.getLine(0)).toString();
-        Player target = GameData.OnlinePlayer.get(targetName);
+        Player target = GameData.onlinePlayer.get(targetName);
         if (target != null) {
             SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             this.targetName = targetName;
