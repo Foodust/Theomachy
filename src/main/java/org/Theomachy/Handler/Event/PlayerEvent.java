@@ -5,6 +5,8 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -72,7 +74,13 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
+        // 플레이어가 서버에 접속했을 때 실행될 작업을 정의합니다.
         Player player = event.getPlayer();
+
+        Bukkit.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
+
+        PlayerModule.setPlayerMessage(player,"null", "");
+
         GameData.onlinePlayer.put(player.getName(), player);
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(player.getName());
@@ -148,6 +156,5 @@ public class PlayerEvent implements Listener {
             }
         }
     }
-
 
 }

@@ -113,6 +113,7 @@ public enum TheomachyMessage {
     END_WHO_BREAK_DIAMOND(ChatColor.WHITE + "가 다이아몬드 블럭을 부쉈습니다!"),
 
     // info message
+    INFO_GREETING(ChatColor.AQUA + " 님 환영합니다."),
     INFO_ADMIN_START_GAME(") 가 게임을 시작하였습니다."),
     INFO_ADMIN_STOP_GAME(") 가 게임을 종료하였습니다."),
     INFO_REMOVE_PLAYER_ABILITY(ChatColor.DARK_RED + "의 능력을 삭제하였습니다."),
