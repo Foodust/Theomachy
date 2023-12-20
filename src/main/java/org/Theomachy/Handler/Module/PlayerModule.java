@@ -16,8 +16,7 @@ public class PlayerModule {
             team = scoreboard.registerNewTeam(teamName);
             team.addEntry(player.getName());
         }
-        // 접두사 설정
-//        team.setPrefix(prefix);
+        team.setPrefix(prefix);
     }
 
     public static void removePlayerPrefix(Player player) {

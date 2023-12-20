@@ -79,7 +79,7 @@ public class PlayerEvent implements Listener {
 
         Bukkit.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
 
-        PlayerModule.setPlayerMessage(player,"null", "");
+        PlayerModule.setPlayerMessage(player,"null", "asdasd");
 
         GameData.onlinePlayer.put(player.getName(), player);
         if (GameModule.Start) {
