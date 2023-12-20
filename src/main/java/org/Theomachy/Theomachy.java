@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
@@ -24,6 +25,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Criteria;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
@@ -47,7 +52,10 @@ public class Theomachy extends JavaPlugin {
 
     public static Logger log = Bukkit.getLogger();
     public static List<BukkitTask> tasks = new ArrayList<>();
+    private static final Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
+    public static List<Objective> objectiveList = null;
     public File file = new File(getDataFolder(), TheomachyMessage.SETTING_BLACKLIST_YML.getMessage());
+
 
     public static Plugin getPlugin() {
         return plugin;
@@ -157,9 +165,15 @@ public class Theomachy extends JavaPlugin {
 
         Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
+        // scoreboard
+        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
+        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+
         try {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                GameData.onlinePlayer.put(p.getName(), p);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                GameData.onlinePlayer.put(player.getName(), player);
+                objective.getScore(player.getName()).setScore((int) player.getHealth());
+                player.setScoreboard(scoreboard);
             }
         } catch (NullPointerException ignored) {
         }
