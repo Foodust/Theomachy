@@ -15,11 +15,11 @@ public class AbilityCoolTimeMesage
 	{
         switch (abilityCase) {
             case COMMON ->
-					player.sendMessage("쿨타임이 " + cool + "초 남았습니다!");
+					player.sendMessage(TheomachyMessage.INFO_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
             case NORMAL ->
-                    player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.WHITE + "능력의 쿨타임이 " + cool + "초 남았습니다!");
+                    player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + ChatColor.WHITE + TheomachyMessage.INFO_ABILITY_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
             case RARE ->
-                    player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.WHITE + "능력의 쿨타임이 " + cool + "초 남았습니다!");
+                    player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + ChatColor.WHITE + TheomachyMessage.INFO_ABILITY_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
         }
 	}
 
@@ -31,11 +31,11 @@ public class AbilityCoolTimeMesage
 		{
             switch (abilityCase) {
 				case COMMON ->
-						player.sendMessage(cool + "초 전");
+						player.sendMessage(cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case NORMAL ->
-						player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.WHITE + cool + "초 전");
+						player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + ChatColor.WHITE + cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case RARE ->
-						player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.WHITE + cool + "초 전");
+						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + ChatColor.WHITE + cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
             }
 		}
 	}
@@ -47,11 +47,11 @@ public class AbilityCoolTimeMesage
 		{
             switch (abilityCase) {
 				case COMMON ->
-						player.sendMessage(ChatColor.GOLD + "능력을 다시 사용할 수 있습니다.");
+						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage());
 				case NORMAL ->
-						player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.GOLD + "능력을 다시 사용할 수 있습니다.");
+						player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case RARE ->
-						player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.GOLD + "능력을 다시 사용할 수 있습니다.");
+						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
             }
 		}
 	}
@@ -60,11 +60,11 @@ public class AbilityCoolTimeMesage
 	{
         switch (abilityCase) {
 			case COMMON ->
-					player.sendMessage(ChatColor.YELLOW + "능력을 사용했습니다!");
+					player.sendMessage(TheomachyMessage.INFO_USING_ABILITY.getMessage());
 			case NORMAL ->
-					player.sendMessage(ChatColor.AQUA + "[일반]  " + ChatColor.YELLOW + "능력을 사용했습니다!");
+					player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + TheomachyMessage.INFO_USING_ABILITY.getMessage());
 			case RARE ->
-					player.sendMessage(ChatColor.RED + "[고급]  " + ChatColor.YELLOW + "능력을 사용했습니다!");
+					player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + TheomachyMessage.INFO_USING_ABILITY.getMessage());
         }
 	}
 	
@@ -72,16 +72,16 @@ public class AbilityCoolTimeMesage
 	{
         switch (material) {
             case COBBLESTONE -> {
-                player.sendMessage("조약돌이 부족합니다.");
-                player.sendMessage("필요한 개수 : " + ChatColor.RED + stack);
+                player.sendMessage(TheomachyMessage.ERROR_NOT_ENOUGH_COBBLESTONE.getMessage());
+                player.sendMessage(TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
             }
             case OAK_PLANKS -> {
-                player.sendMessage("가공된 나무가 부족합니다.");
-                player.sendMessage("필요한 개수 : " + ChatColor.RED + stack);
+                player.sendMessage(TheomachyMessage.ERROR_NOT_ENOUGH_OAK.getMessage());
+                player.sendMessage(TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
             }
             case IRON_INGOT -> {
-                player.sendMessage("철괴가 부족합니다.");
-                player.sendMessage("필요한 개수 : " + ChatColor.RED + stack);
+                player.sendMessage(TheomachyMessage.ERROR_NOT_ENOUGH_IRON.getMessage());
+                player.sendMessage(TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
             }
         }
 	}
@@ -89,8 +89,8 @@ public class AbilityCoolTimeMesage
 	public static void TooFarError(Player player, TargetType targetType)
 	{
         switch (targetType) {
-			case ENTITY_TOO_FAR -> player.sendMessage(ChatColor.RED + "대상과의 거리가 너무 멉니다.");
-			case TARGET_TOO_FAR -> player.sendMessage(ChatColor.RED + "목표와의 거리가 너무 멉니다.");
+			case ENTITY_TOO_FAR -> player.sendMessage(TheomachyMessage.ERROR_TOO_FAR_ENTITY.getMessage());
+			case TARGET_TOO_FAR -> player.sendMessage(TheomachyMessage.ERROR_TOO_FAR_TARGET.getMessage());
         }
 		
 	}
@@ -99,7 +99,8 @@ public class AbilityCoolTimeMesage
 	public static void PassiveEnable(Player player, int passiveCase)
 	{
 		switch(passiveCase){
-			case 0-> player.sendMessage(ChatColor.YELLOW+"능력이 활성화 되었습니다.");
+			case 0-> player.sendMessage(TheomachyMessage.INFO_ACTIVATE_ABILITY.getMessage());
+			default -> player.sendMessage(TheomachyMessage.ERROR_DEACTIVATE_ABILITY.getMessage());
 		}
 	}
 }

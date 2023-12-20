@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.TimerTask;
 
 import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.Animals;
@@ -30,34 +31,30 @@ public class GameReadyTimer extends TimerTask {
 
     public GameReadyTimer() {
         this.playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
-        setting[0] = Theomachy.STARTING_INVENTORY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[1] = Theomachy.STARTING_GIVE_ITEM ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[2] = Theomachy.IGNORE_BED ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[3] = Theomachy.SERVER_AUTO_SAVE ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[4] = Theomachy.ANIMAL_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[5] = Theomachy.MONSTER_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[7] = Theomachy.STARTING_ENTITY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
-        setting[8] = Theomachy.DEBUG ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[0] = Theomachy.STARTING_INVENTORY_CLEAR ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[1] = Theomachy.STARTING_GIVE_ITEM ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[2] = Theomachy.IGNORE_BED ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[3] = Theomachy.SERVER_AUTO_SAVE ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[4] = Theomachy.ANIMAL_SPAWN ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[5] = Theomachy.MONSTER_SPAWN ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[7] = Theomachy.STARTING_ENTITY_CLEAR ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
+        setting[8] = Theomachy.DEBUG ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
         difficulty = null;
         switch (Theomachy.DIFFICULTY) {
             case 0 -> {
-                setting[6] = ChatColor.GREEN + "평화로움";
+                setting[6] = TheomachyMessage.DIFFICULT_PEACEFUL.getMessage();
                 difficulty = Difficulty.PEACEFUL;
             }
-            case 1 -> {
-                setting[6] = ChatColor.AQUA + "쉬움";
-                difficulty = Difficulty.EASY;
-            }
             case 2 -> {
-                setting[6] = ChatColor.YELLOW + "보통";
+                setting[6] = TheomachyMessage.DIFFICULT_NORMAL.getMessage();
                 difficulty = Difficulty.NORMAL;
             }
             case 3 -> {
-                setting[6] = ChatColor.GREEN + "어려움";
+                setting[6] = TheomachyMessage.DIFFICULT_HARD.getMessage();
                 difficulty = Difficulty.HARD;
             }
             default -> {
-                setting[6] = ChatColor.GREEN + "쉬움";
+                setting[6] = TheomachyMessage.DIFFICULT_EASY.getMessage();
                 difficulty = Difficulty.EASY;
             }
         }

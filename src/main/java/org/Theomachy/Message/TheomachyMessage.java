@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum TheomachyMessage {
+    // difficult
+    DIFFICULT_PEACEFUL(ChatColor.GREEN + "평화로움"),
+    DIFFICULT_EASY(ChatColor.AQUA + "쉬움"),
+    DIFFICULT_NORMAL(ChatColor.YELLOW + "보통"),
+    DIFFICULT_HARD(ChatColor.RED + "어려움"),
     // tip
     TIP1(ChatColor.AQUA + "【팁 1】  " + ChatColor.WHITE + "능력을 확인 하려면 " + ChatColor.GREEN + "/t help" + ChatColor.WHITE + " 를 입력합니다"),
     TIP2(ChatColor.AQUA + "【팁 2】  " + ChatColor.WHITE + "중앙 건물 양 옆 섬에도 아이템이 숨겨져 있습니다. "),
@@ -48,14 +53,25 @@ public enum TheomachyMessage {
     EXPLAIN_SETTING(ChatColor.YELLOW + "/t setting (set)             " + ChatColor.WHITE + "설정 시스템을 엽니다."),
     EXPLAIN_GAMBLING(ChatColor.YELLOW + "/t gambling (g)  		    " + ChatColor.WHITE + "뽑기 시스템을 엽니다."),
     EXPLAIN_X_COMMAND(ChatColor.YELLOW + "/x  " + ChatColor.RED + "<Player>      " + ChatColor.WHITE + "해당 플레이어를 자신의 타겟으로 등록합니다"),
-
+    EXPLAIN_CHECK_ABILITY("/t help 로 확인해보세요."),
     // command info t a
     EXPLAIN_ABILITY_LIST_HELP(ChatColor.YELLOW + "/t a help " + ChatColor.WHITE + "  모든 능력의 코드를 확인합니다."),
     EXPLAIN_ABILITY_SET_RANDOM(ChatColor.YELLOW + "/t a random " + ChatColor.WHITE + "현재 접속한 모든 플레이어에게 랜덤으로 능력을 할당합니다."),
     EXPLAIN_ABILITY_REMOVE_PLAYER(ChatColor.YELLOW + "/t a remove" + ChatColor.RED + " <Player>" + ChatColor.RED + "  해당 플레이어의 능력을 삭제합니다."),
     EXPLAIN_ABILITY_RESET(ChatColor.YELLOW + "/t a reset  " + ChatColor.WHITE + "모든 능력을 초기화 합니다"),
     EXPLAIN_ABILITY_SET_PLAYER(ChatColor.YELLOW + "/t a " + ChatColor.GREEN + "<AbilityCode>" + ChatColor.RED + " <Player>" + ChatColor.WHITE + "  플레이어에게 해당 능력을 적용합니다."),
+    EXPLAIN_CHECK_ABILITY_CODE("/t a help 명령어로 능력 코드를 확인하실 수 있습니다."),
 
+    // command info t team
+    EXPLAIN_HOW_TO_SET_SPAWN(ChatColor.YELLOW + "/t  spawn(s)   " + ChatColor.AQUA + "<TeamName>  스폰지역으로 설정합니다."),
+    EXPLAIN_HOW_TO_SET_SPAWN_X_Y_Z("좌표로도 등록할 수 있습니다."),
+    EXPLAIN_HOW_TO_SET_SPAWN_X_Y_Z_EXAMPLE("ex) /t s  팀    X  Y  Z"),
+    EXPLAIN_HOW_TO_SET_TEAM(ChatColor.YELLOW + ("/t  team(t)   ") + ChatColor.AQUA + ("<TeamName>  ") + ChatColor.RED + ("<Player>  ") + ChatColor.WHITE + ("플레이어를 팀에 등록합니다.")),
+    EXPLAIN_HOW_TO_SET_TEAM_MESSAGE("한번에 다수의 플레이어를 한 팀에 등록 할 수 있습니다."),
+    EXPLAIN_HOW_TO_SET_TEAM_EXAMPLE("ex) /t t  팀   플레이어1   플레이어2   플레이어3"),
+    EXPLAIN_HOW_TO_SET_TEAM_RANDOM(ChatColor.YELLOW + "/t  team(t)   random" + ChatColor.BLUE + ("<TeamName1>  ") + ChatColor.RED + ("<TeamName2>  ")),
+    EXPLAIN_HOW_TO_SET_TEAM_RANDOM_MESSAGE("무작위로 팀을 배정합니다"),
+    EXPLAIN_HOW_TO_SET_TEAM_RANDOM_EXAMPLE("ex) /t t  random   팀이름1   팀이름2 "),
 
     // command
 
@@ -84,6 +100,8 @@ public enum TheomachyMessage {
     COMMAND_REMOVE("remove"),
     COMMAND_RESET("reset"),
     COMMAND_RANDOM("random"),
+    COMMAND_ON("ON"),
+    COMMAND_OFF("OFF"),
 
     // setting
     SETTING_BLACKLIST_YML("blacklist.yml"),
@@ -136,20 +154,14 @@ public enum TheomachyMessage {
     INFO_SET_PLAYER_ABILITY("능력이 할당되었습니다."),
     INFO_SET(" 에 등록되었습니다."),
     INFO_CHANGE_TEAM(" 의 팀이 변경되었습니다.    "),
-    INFO_CHECK_ABILITY("/t help 로 확인해보세요."),
-    INFO_ALL_ABILITY("/t a help 명령어로 능력 코드를 확인하실 수 있습니다."),
-    INFO_HOW_TO_SET_SPAWN(ChatColor.YELLOW + "/t  spawn(s)   " + ChatColor.AQUA + "<TeamName>  스폰지역으로 설정합니다."),
-    INFO_HOW_TO_SET_SPAWN_X_Y_Z("좌표로도 등록할 수 있습니다."),
-    INFO_HOW_TO_SET_SPAWN_X_Y_Z_EXAMPLE("ex) /t s  팀    X  Y  Z"),
-    INFO_HOW_TO_SET_TEAM(ChatColor.YELLOW + ("/t  team(t)   ") + ChatColor.AQUA + ("<TeamName>  ") + ChatColor.RED + ("<Player>  ") + ChatColor.WHITE + ("플레이어를 팀에 등록합니다.")),
-    INFO_HOW_TO_SET_TEAM_MESSAGE("한번에 다수의 플레이어를 한 팀에 등록 할 수 있습니다."),
-    INFO_HOW_TO_SET_TEAM_EXAMPLE("ex) /t t  팀   플레이어1   플레이어2   플레이어3"),
-    INFO_HOW_TO_SET_TEAM_RANDOM(ChatColor.YELLOW + "/t  team(t)   random" + ChatColor.BLUE + ("<TeamName1>  ") + ChatColor.RED + ("<TeamName2>  ")),
-    INFO_HOW_TO_SET_TEAM_RANDOM_MESSAGE("무작위로 팀을 배정합니다"),
-    INFO_HOW_TO_SET_TEAM_RANDOM_EXAMPLE("ex) /t t  random   팀이름1   팀이름2 "),
+    INFO_CHECK_MY_TEAM(ChatColor.YELLOW + "자신의 팀을 확인합니다"),
     INFO_SET_MESSAGE("되었습니다"),
     INFO_DISABLED(" 비활성화 "),
     INFO_ABLE(" 활성화 "),
+    INFO_BEFORE_SECOND("초 전"),
+    INFO_CAN_ABILITY(ChatColor.GOLD + "능력을 다시 사용할 수 있습니다."),
+    INFO_USING_ABILITY(ChatColor.YELLOW + "능력을 사용했습니다!"),
+    INFO_ACTIVATE_ABILITY(ChatColor.YELLOW+"능력이 활성화 되었습니다."),
     INFO_GAMBLING1(ChatColor.WHITE + "조약돌 32개를 소모해 다양한 아이템을"),
     INFO_GAMBLING2(ChatColor.WHITE + "뽑을 수 있습니다."),
     INFO_GAMBLING_MESSAGE_1(ChatColor.AQUA + "% 확률로 조약돌 20 ~ 60개 당첨 되었습니다!"),
@@ -157,12 +169,18 @@ public enum TheomachyMessage {
     INFO_GAMBLING_MESSAGE_3(ChatColor.BLUE + "% 확률로 아무것도 당첨되지 않았습니다!"),
     INFO_GAMBLING_MESSAGE_4(ChatColor.GREEN + "% 확률로 철괴 4개 당첨 되었습니다!"),
     INFO_GAMBLING_MESSAGE_5(ChatColor.DARK_RED + "% 확률로 다이아몬드 10개 당첨 되었습니다!!!"),
+    INFO_NORMAL_ABILITY(ChatColor.AQUA + "[일반]  "),
+    INFO_RARE_ABILITY(ChatColor.RED + "[고급]  "),
     INFO_GOD(ChatColor.GOLD + " 【 신 】 "),
     INFO_HUMAN(ChatColor.AQUA + " 【 인간 】 "),
     INFO_JUJUTSU_KAISEN(ChatColor.GREEN + " 【 주술회전 】 "),
     INFO_KIMETSU_NO_YAIBA(ChatColor.RED + " 【 귀멸의 칼날 】 "),
     INFO_TOTAL_COUNT("총합"),
     INFO_PLAYER("플레이어 "),
+    INFO_NEED("필요한 개수 : "),
+    INFO_COOL_TIME_IS("쿨타임이 "),
+    INFO_ABILITY_COOL_TIME_IS("능력의 쿨타임이 "),
+    INFO_COOL_TIME_LEFT("초 남았습니다!"),
 
     // error message
     ERROR_DOES_NOT_WHO_HAVE_ABILITY("는" + ChatColor.DARK_RED + "능력이 없습니다."),
@@ -175,6 +193,8 @@ public enum TheomachyMessage {
     ERROR_DOES_NOT_TARGET_FOR_ABILITY("타겟을 사용하는 능력이 아닙니다."),
     ERROR_DOES_NOT_HAVE_COBBLE_STONE(ChatColor.RED + "조약돌이 부족합니다."),
     ERROR_DOES_NOT_START_GAME("게임이 시작되지 않았습니다."),
+    ERROR_DOES_NOT_HAVE_PLAYER_IN_THERE_TEAM("해당 팀에 팀원이 없습니다."),
+    ERROR_DOES_NOT_HAVE_TEAM("소속된 팀이 없습니다."),
     ERROR_DOES_NOT_ACCESS_BLACKLIST_FILE("[신들의 전쟁] 블랙리스트가 파일로 저장되었습니다. 절대로 플러그인 폴더 내에 blacklist.yml을 건들지 마십시오."),
     ERROR_THIS_COMMAND_IS_NOT_ALLOWED(ChatColor.RED + "이 기능은 잠겨있습니다."),
     ERROR_WRONG_COMMAND(ChatColor.RED + "잘못된 명령입니다."),
@@ -187,7 +207,13 @@ public enum TheomachyMessage {
     ERROR_THIS_COMMAND_EXECUTE_IN_GAME("이 명령어는 게임에서 실행해 주십시오."),
     ERROR_DEBUG_IS_ON(ChatColor.RED + "디버그 모드가 활성화 되어있습니다.\n 디버그 모드를 종료 해주세요"),
     ERROR_GAME_ALREADY_STARTED(ChatColor.AQUA + "게임이 이미 시작되었습니다."),
-    ERROR_COOL_TIMER("쿨타이머에 에러가 발생하여 쿨타임이 1초 느려집니다.");
+    ERROR_COOL_TIMER("쿨타이머에 에러가 발생하여 쿨타임이 1초 느려집니다."),
+    ERROR_DEACTIVATE_ABILITY(ChatColor.RED + "능력이 비활성화 되었습니다."),
+    ERROR_TOO_FAR_ENTITY(ChatColor.RED + "대상과의 거리가 너무 멉니다."),
+    ERROR_TOO_FAR_TARGET(ChatColor.RED + "목표와의 거리가 너무 멉니다."),
+    ERROR_NOT_ENOUGH_COBBLESTONE("조약돌이 부족합니다."),
+    ERROR_NOT_ENOUGH_OAK("나무가 부족합니다."),
+    ERROR_NOT_ENOUGH_IRON("철괴가 부족합니다.");
     private final String message;
 
     TheomachyMessage(String message) {

@@ -38,9 +38,9 @@ public class SpawnModule {
             player.sendMessage("현재 위치가 팀 " + ChatColor.DARK_AQUA + teamName + TheomachyMessage.INFO_SETTING_THIS_POSITION_TEAM_SPAWN_POINT.getMessage());
         }
         else{
-            sender.sendMessage(TheomachyMessage.INFO_HOW_TO_SET_SPAWN.getMessage());
-            sender.sendMessage(TheomachyMessage.INFO_HOW_TO_SET_SPAWN_X_Y_Z.getMessage());
-            sender.sendMessage(TheomachyMessage.INFO_HOW_TO_SET_SPAWN_X_Y_Z_EXAMPLE.getMessage());
+            sender.sendMessage(TheomachyMessage.EXPLAIN_HOW_TO_SET_SPAWN.getMessage());
+            sender.sendMessage(TheomachyMessage.EXPLAIN_HOW_TO_SET_SPAWN_X_Y_Z.getMessage());
+            sender.sendMessage(TheomachyMessage.EXPLAIN_HOW_TO_SET_SPAWN_X_Y_Z_EXAMPLE.getMessage());
         }
     }
 }

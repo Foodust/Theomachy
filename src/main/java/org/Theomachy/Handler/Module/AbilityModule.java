@@ -243,7 +243,7 @@ public class AbilityModule {
         }
 
         Bukkit.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_CHECK_ABILITY.getMessage());
+        Bukkit.broadcastMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY.getMessage());
         if (length != playerlist.size())
             Bukkit.broadcastMessage(TheomachyMessage.ERROR_TOO_MANY_PLAYER.getMessage());
     }
@@ -263,7 +263,7 @@ public class AbilityModule {
                     Bukkit.broadcastMessage("관리자가 " + ChatColor.RED + playerName + ChatColor.WHITE + " 에게 능력을 할당하였습니다.");
 
                     player.sendMessage(TheomachyMessage.INFO_SET_PLAYER_ABILITY.getMessage());
-                    player.sendMessage(TheomachyMessage.INFO_CHECK_ABILITY.getMessage());
+                    player.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY.getMessage());
 
                 } catch (NumberFormatException e) {
                     sender.sendMessage(TheomachyMessage.ERROR_ABILITY_CODE_IS_INTEGER.getMessage());
@@ -393,7 +393,7 @@ public class AbilityModule {
             GameData.playerAbility.put(playerName, new Rengoku(playerName));
         else {
             p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
-            p.sendMessage(TheomachyMessage.INFO_ALL_ABILITY.getMessage());
+            p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());
         }
     }
 
@@ -456,7 +456,7 @@ public class AbilityModule {
             case Rengoku -> GameData.playerAbility.put(playerName, new Rengoku(playerName));
             default -> {
                 p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
-                p.sendMessage(TheomachyMessage.INFO_ALL_ABILITY.getMessage());
+                p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());
             }
         }
     }
