@@ -22,7 +22,7 @@ public class CoolTimeTimer extends TimerTask {
 
     @Override
     public void run() {
-        if (!GameModule.Ready) {
+        if (!GameModule.Ready && !Theomachy.DEBUG) {
             this.cancel();
         }
         try {

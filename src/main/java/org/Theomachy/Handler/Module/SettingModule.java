@@ -1,6 +1,5 @@
 package org.Theomachy.Handler.Module;
 
-import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
@@ -40,7 +39,7 @@ public class SettingModule {
         String broadcastMessage = byMessage.getMessage();
         switch (Objects.requireNonNull(byMessage)) {
             case SETTING_STARTING_INVENTORY_CLEAR -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.STARTING_INVENTORY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -49,7 +48,7 @@ public class SettingModule {
                 }
             }
             case SETTING_STARTING_GIVE_ITEM -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.STARTING_GIVE_ITEM = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -58,7 +57,7 @@ public class SettingModule {
                 }
             }
             case SETTING_STARTING_ENTITY_CLEAR -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.STARTING_ENTITY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -67,7 +66,7 @@ public class SettingModule {
                 }
             }
             case SETTING_IGNORE_BED -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.IGNORE_BED = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -76,7 +75,7 @@ public class SettingModule {
                 }
             }
             case SETTING_FAST_START -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.FAST_START = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -85,7 +84,7 @@ public class SettingModule {
                 }
             }
             case SETTING_SERVER_AUTO_SAVE -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.SERVER_AUTO_SAVE = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -94,7 +93,7 @@ public class SettingModule {
                 }
             }
             case SETTING_ANIMAL_SPAWN -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.ANIMAL_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -103,7 +102,7 @@ public class SettingModule {
                 }
             }
             case SETTING_MONSTER_SPAWN -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.MONSTER_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -112,7 +111,7 @@ public class SettingModule {
                 }
             }
             case SETTING_GAMBLING_ACCEPT -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.GAMBLING = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -121,7 +120,7 @@ public class SettingModule {
                 }
             }
             case SETTING_DEBUG_MODE -> {
-                if (checkIsTrue(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
                     Theomachy.DEBUG = false;
                     GameModule.Start = false;
                     wool.setType(Material.RED_WOOL);
@@ -140,7 +139,7 @@ public class SettingModule {
         }
     }
 
-    public static boolean checkIsTrue(Material material, String message) {
+    public static boolean checkWhiteWool(Material material, String message) {
         if (material == Material.WHITE_WOOL) {
             message += TheomachyMessage.INFO_DISABLED.getMessage();
         } else {
