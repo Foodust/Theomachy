@@ -25,7 +25,6 @@ public class GameModule {
         Ready = true;
         Bukkit.broadcastMessage(ChatColor.GOLD + "관리자(" + sender.getName() + TheomachyMessage.INFO_ADMIN_START_GAME.getMessage());
         Theomachy.tasks.add(CommonModule.startTimerTask(new GameReadyTimer(), 0L,  Theomachy.FAST_START ? 1L : 20L));
-        Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
         Theomachy.tasks.add(CommonModule.startTimerTask(new CoolTimeTimer(), 0L, 20L));
     }
     public static void stopGame(CommandSender sender){

@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Timer.TipTimer;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -152,6 +154,8 @@ public class Theomachy extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "====원작자: " + ChatColor.WHITE + "칠각별(septagram)====");
         Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "====2차수정자: " + ChatColor.AQUA + "플로리아(humint2003)====");
         Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "====3차수정자: " + ChatColor.GREEN + "프덧(foodust)====");
+
+        Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
         try {
             for (Player p : Bukkit.getOnlinePlayers()) {

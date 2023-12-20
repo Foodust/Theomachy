@@ -16,9 +16,9 @@ public class TipTimer extends TimerTask
 	@Override
 	public void run()
 	{
-		if (!GameModule.Ready){
-			this.cancel();
-		}
+//		if (!GameModule.Ready){
+//			this.cancel();
+//		}
 		if (count%600 == 0)
 		{
 			if (Theomachy.SERVER_AUTO_SAVE)
