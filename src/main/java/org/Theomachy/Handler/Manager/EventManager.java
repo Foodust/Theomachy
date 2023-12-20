@@ -13,5 +13,6 @@ public class EventManager {
         server.getPluginManager().registerEvents(new DamageEvent(), plugin);
         server.getPluginManager().registerEvents(new ExplodeEvent(), plugin);
         server.getPluginManager().registerEvents(new PlayerEvent(), plugin);
+        server.getPluginManager().registerEvents(new HealthBarEvent(), plugin);
     }
 }
