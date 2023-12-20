@@ -10,7 +10,8 @@ import java.util.Objects;
 
 public class PlayerModule {
     private static final Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
-    public static void setPlayerMessage(Player player,String teamName ,String prefix) {
+
+    public static void setPlayerMessage(Player player, String teamName, String prefix) {
         Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
         Team team = scoreboard.getTeam(teamName);
         if (team == null) {
@@ -28,16 +29,19 @@ public class PlayerModule {
             team.setPrefix("");
         }
     }
-    public static void settingPlayer(){
-        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
-        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-        try {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                GameData.onlinePlayer.put(player.getName(), player);
-                objective.getScore(player.getName()).setScore((int) player.getHealth());
-                player.setScoreboard(scoreboard);
-            }
-        } catch (NullPointerException ignored) {
+
+    public static void setScoreboard() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            setScoreboard(player,DisplaySlot.BELOW_NAME ,TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
         }
+    }
+
+    public static void setScoreboard(Player player, DisplaySlot displaySlot , String message) {
+        player.getScoreboard().clearSlot(displaySlot);
+        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
+        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, message);
+        objective.setDisplaySlot(displaySlot);
+        objective.getScore(player.getName()).setScore((int) player.getHealth());
+        player.setScoreboard(scoreboard);
     }
 }

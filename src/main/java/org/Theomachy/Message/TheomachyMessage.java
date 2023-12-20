@@ -132,7 +132,7 @@ public enum TheomachyMessage {
 
     // ScoreBoard
     SCOREBOARD_HEALTH_BAR("HealthBar"),
-    SCOREBOARD_HEALTH(ChatColor.GREEN + "♥"),
+    SCOREBOARD_HEALTH("♥"),
 
     // info message
     INFO_PLUGIN_ENABLED(VersionData.name + "플러그인이 활성화되었습니다.   " + VersionData.buildNumber + "  " + VersionData.version),

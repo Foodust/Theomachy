@@ -2,14 +2,17 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.*;
 
 import java.util.*;
 
 public class TeamModule {
+
     public static void listTeam(CommandSender sender, String[] data) {
         if (data.length >= 2) {
             String teamName = data[1];
@@ -47,34 +50,58 @@ public class TeamModule {
 
     public static void setTeam(CommandSender sender, String[] data) {
         if (data.length > 2) {
+            // random 팀
             if (Objects.equals(data[1], TheomachyMessage.COMMAND_RANDOM.getMessage())) {
                 List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
                 Collections.shuffle(onlinePlayers);
                 String[] teams = {data[2], data[3]};
                 int teamIndex = 0;
+
                 for (Player player : onlinePlayers) {
                     String playerName = player.getName();
                     String teamNameOld = GameData.playerTeam.get(playerName);
                     String teamName = teams[teamIndex++ % 2];
-                    GameData.playerTeam.put(player.getName(), teamName);
+
+                    ChatColor newTeamColor = CommonModule.findColor(teamName);
                     if (teamNameOld == null) {
-                        Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + " (이)가 팀 " + ChatColor.DARK_AQUA + teamName + ChatColor.WHITE + TheomachyMessage.INFO_SET.getMessage());
+                        Bukkit.broadcastMessage(
+                                TheomachyMessage.INFO_PLAYER.getMessage() +
+                                        ChatColor.RED + playerName +
+                                        ChatColor.WHITE + " (이)가 팀 " +
+                                        newTeamColor + teamName +
+                                        ChatColor.WHITE + TheomachyMessage.INFO_SET.getMessage());
                     } else {
-                        Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + ChatColor.BLUE + teamNameOld + ChatColor.WHITE + " > " + ChatColor.DARK_AQUA + teamName);
+                        GameData.playerTeam.remove(playerName);
+                        ChatColor oldTeamColor = CommonModule.findColor(teamNameOld);
+                        Bukkit.broadcastMessage(
+                                TheomachyMessage.INFO_PLAYER.getMessage() +
+                                        ChatColor.RED + playerName +
+                                        ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() +
+                                        oldTeamColor + teamNameOld +
+                                        ChatColor.WHITE + " > " + newTeamColor  + teamName);
                     }
+                    PlayerModule.setScoreboard(player, DisplaySlot.BELOW_NAME,newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                    GameData.playerTeam.put(player.getName(), teamName);
                 }
-            } else {
+            }
+            // 플레이어 지정
+            else {
                 for (int i = 2; i < data.length; i++) {
                     if (GameData.onlinePlayer.containsKey(data[i])) {
                         String playerName = data[i];
                         String teamName = data[1];
                         String teamNameOld = GameData.playerTeam.get(playerName);
-                        GameData.playerTeam.put(data[i], teamName);
+                        ChatColor newTeamColor = CommonModule.findColor(teamName);
                         if (teamNameOld == null) {
-                            Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + " (이)가 팀 " + ChatColor.DARK_AQUA + teamName + ChatColor.WHITE + TheomachyMessage.INFO_SET.getMessage());
+                            Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + " (이)가 팀 " + newTeamColor + teamName + ChatColor.WHITE + TheomachyMessage.INFO_SET.getMessage());
                         } else {
-                            Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + ChatColor.BLUE + teamNameOld + ChatColor.WHITE + " > " + ChatColor.DARK_AQUA + teamName);
+                            GameData.playerTeam.remove(playerName);
+                            ChatColor oldTeamColor = CommonModule.findColor(teamNameOld);
+                            Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + oldTeamColor +teamNameOld + ChatColor.WHITE + " > " + newTeamColor + teamName);
+
                         }
+                        PlayerModule.setScoreboard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                        GameData.playerTeam.put(data[i], teamName);
                     } else
                         sender.sendMessage(data[i] + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
                 }

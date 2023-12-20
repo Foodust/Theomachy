@@ -1,9 +1,6 @@
 package org.Theomachy;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,15 +12,12 @@ import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.Theomachy.Timer.TipTimer;
 import org.bukkit.*;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.scoreboard.Objective;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.Theomachy.Data.VersionData;
 import org.Theomachy.Handler.Manager.CommandManager;
 import org.Theomachy.Handler.Manager.EventManager;
 
@@ -44,7 +38,7 @@ public class Theomachy extends JavaPlugin {
     public static Logger log = Bukkit.getLogger();
     public static List<BukkitTask> tasks = new ArrayList<>();
 
-    public static List<Objective> objectiveList = null;
+//    public static List<Objective> objectiveList = new ArrayList<>();
     public File file = new File(getDataFolder(), TheomachyMessage.SETTING_BLACKLIST_YML.getMessage());
 
     public static Plugin getPlugin() {
@@ -92,13 +86,13 @@ public class Theomachy extends JavaPlugin {
         Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
         // player setting
-        PlayerModule.settingPlayer();
-
-
+        PlayerModule.setScoreboard();
     }
 
     public void onDisable() {
         BlacklistModule.freeBlackList(file);
+        for(Player player: Bukkit.getOnlinePlayers())
+            PlayerModule.removePlayerPrefix(player);
         if (this.adventure != null) {
             this.adventure.close();
             this.adventure = null;

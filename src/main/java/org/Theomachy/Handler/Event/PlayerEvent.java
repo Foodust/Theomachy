@@ -80,8 +80,6 @@ public class PlayerEvent implements Listener {
 
         Bukkit.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
 
-        PlayerModule.setPlayerMessage(player,"null", ChatColor.GREEN +  String.valueOf(player.getHealth()) + "♥");
-
         GameData.onlinePlayer.put(player.getName(), player);
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(player.getName());

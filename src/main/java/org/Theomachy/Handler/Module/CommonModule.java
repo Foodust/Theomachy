@@ -27,6 +27,23 @@ public class CommonModule {
             return false; // 변환이 실패하면 숫자가 아님
         }
     }
+    public static ChatColor findColor(String message){
+        switch (message.toLowerCase()){
+            case "blue" -> {
+                return ChatColor.BLUE;
+            }
+            case "red" -> {
+                return ChatColor.RED;
+            }
+            case "green" -> {
+                return ChatColor.GREEN;
+            }
+            case "yellow" -> {
+                return  ChatColor.YELLOW;
+            }
+        };
+        return ChatColor.WHITE;
+    }
     public static ItemStack setItem(Material material, int amount, String title) {
         ItemStack prevItem = new ItemStack(material, amount);
         ItemMeta prevItemMeta = prevItem.getItemMeta();
