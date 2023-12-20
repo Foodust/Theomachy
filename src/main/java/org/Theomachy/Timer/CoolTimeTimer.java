@@ -23,6 +23,9 @@ public class CoolTimeTimer extends TimerTask {
     @Override
     public void run() {
         if (!GameModule.Ready && !Theomachy.DEBUG) {
+            commonSkillCoolTime.clear();
+            normalSkillCoolTime.clear();
+            rareSkillCoolTime.clear();
             this.cancel();
         }
         try {

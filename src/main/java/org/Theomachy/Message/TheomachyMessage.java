@@ -107,7 +107,7 @@ public enum TheomachyMessage {
     SETTING_DIFFICULT(ChatColor.WHITE + "난이도"),
     SETTING_MONSTER_SPAWN(ChatColor.WHITE + "몬스터 스폰"),
     SETTING_GAMBLING_ACCEPT(ChatColor.WHITE + "뽑기 허용"),
-    SETTING_DEBUG_MODE(ChatColor.WHITE + "디버그"),
+    SETTING_DEBUG_MODE(ChatColor.WHITE + "디버그 모드"),
 
     // game end
     END_WHO_BREAK_DIAMOND(ChatColor.WHITE + "가 다이아몬드 블럭을 부쉈습니다!"),
