@@ -114,6 +114,7 @@ public enum TheomachyMessage {
 
     // ScoreBoard
     SCOREBOARD_HEALTH_BAR("HealthBar"),
+    SCOREBOARD_HEALTH(ChatColor.GREEN + "♥"),
 
     // info message
     INFO_GREETING(ChatColor.AQUA + " 님 환영합니다."),

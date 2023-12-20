@@ -166,7 +166,7 @@ public class Theomachy extends JavaPlugin {
         Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
         // scoreboard
-        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
+        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
         objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
 
         try {
