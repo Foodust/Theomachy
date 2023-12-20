@@ -131,9 +131,9 @@ public class SettingModule {
 
     public static boolean checkIsTrue(Material material, String message) {
         if (material == Material.WHITE_WOOL) {
-            message += TheomachyMessage.INFO_ABLE.getMessage();
-        } else {
             message += TheomachyMessage.INFO_DISABLED.getMessage();
+        } else {
+            message += TheomachyMessage.INFO_ABLE.getMessage();
         }
         Bukkit.broadcastMessage(message + TheomachyMessage.INFO_SET_MESSAGE.getMessage());
         return material == Material.WHITE_WOOL;
