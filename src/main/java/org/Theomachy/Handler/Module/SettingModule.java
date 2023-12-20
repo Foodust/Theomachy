@@ -3,16 +3,22 @@ package org.Theomachy.Handler.Module;
 import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
+import org.Theomachy.Timer.CoolTimeTimer;
+import org.Theomachy.Timer.TipTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SettingModule {
     static int settingSize = 2 * 9;
+    static List<BukkitTask> taskList = new ArrayList<>();
 
     public static void openSettingInventory(Player player) {
         Inventory inventory = Bukkit.createInventory(null, settingSize, TheomachyMessage.SETTING.getMessage());
@@ -117,16 +123,21 @@ public class SettingModule {
             case SETTING_DEBUG_MODE -> {
                 if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.DEBUG = false;
-                    StartStopCommand.Start = false;
+                    GameModule.Start = false;
                     wool.setType(Material.RED_WOOL);
+                    for(BukkitTask task : taskList){
+                        task.cancel();
+                    }
+                    taskList.clear();
                 } else {
                     Theomachy.DEBUG = true;
-                    StartStopCommand.Start = true;
+                    GameModule.Start = true;
                     wool.setType(Material.WHITE_WOOL);
+                    taskList.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
+                    taskList.add(CommonModule.startTimerTask(new CoolTimeTimer(), 0L, 20L));
                 }
             }
         }
-
     }
 
     public static boolean checkIsTrue(Material material, String message) {

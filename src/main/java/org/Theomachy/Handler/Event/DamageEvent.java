@@ -5,6 +5,7 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityTag;
 import org.Theomachy.Handler.Command.StartStopCommand;
+import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -52,7 +53,7 @@ public class DamageEvent implements Listener {
     }
     @EventHandler
     public static void onEntityDamage(EntityDamageEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.playerAbility.containsKey(playerName))
@@ -67,7 +68,7 @@ public class DamageEvent implements Listener {
     @EventHandler
     public static void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         try {
-            if (StartStopCommand.Start) {
+            if (GameModule.Start) {
                 if (event.getDamager() instanceof Player &&
                         (event.getEntity() instanceof Player || event.getEntity() instanceof LivingEntity)) {
 

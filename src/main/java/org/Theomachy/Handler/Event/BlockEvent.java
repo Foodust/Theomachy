@@ -5,6 +5,7 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Handler.Module.CommonModule;
+import org.Theomachy.Handler.Module.GameModule;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,7 @@ public class BlockEvent implements Listener {
 
     @EventHandler
     public static void onBlockBreak(BlockBreakEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             String playerName = event.getPlayer().getName();
             Ability ability = GameData.playerAbility.get(playerName);
             if (ability != null)
@@ -31,7 +32,7 @@ public class BlockEvent implements Listener {
     }
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.Voodoo.getIndex())
                 ability.passiveSkill(event);
@@ -40,7 +41,7 @@ public class BlockEvent implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.Voodoo.getIndex())
                 ability.passiveSkill(event);

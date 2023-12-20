@@ -25,7 +25,7 @@ public class Midoriya extends Ability {
             "능력 사용 후 상대를 가격하면 원 포 올을 쓸 수 있습니다.",
             "원 포 올을 쓰고 난 뒤에는 각종 디버프에 시달립니다."};
 
-    private boolean Ready;
+    private boolean skillReady;
     private final int duration;
 
     public Midoriya(String playerName) {
@@ -33,7 +33,7 @@ public class Midoriya extends Ability {
         this.rank = AbilityRank.S;
         this.normalSkillCoolTime = 350;
         this.normalSkillStack = 64;
-        this.Ready = false;
+        this.skillReady = false;
         this.duration = 10;
     }
 
@@ -47,8 +47,8 @@ public class Midoriya extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack) && !Ready) {
-            Ready = true;
+        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack) && !skillReady) {
+            skillReady = true;
             player.sendMessage(ChatColor.YELLOW + "원" + ChatColor.BLUE + " 포 " + ChatColor.DARK_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
             player.sendMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
             player.sendMessage(ChatColor.AQUA + "원" + ChatColor.GOLD + " 포 " + ChatColor.DARK_GRAY + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
@@ -62,7 +62,7 @@ public class Midoriya extends Ability {
 
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR && player.getName().equals(this.playerName)) {
             if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-                if (Ready) {
+                if (skillReady) {
                     player.sendMessage(ChatColor.YELLOW + "원" + ChatColor.GREEN + " 포 " + ChatColor.AQUA + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
                     player.sendMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
                     player.sendMessage(ChatColor.AQUA + "원" + ChatColor.GOLD + " 포 " + ChatColor.DARK_GRAY + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
@@ -76,7 +76,7 @@ public class Midoriya extends Ability {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 0));
 
                     SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-                    Ready = false;
+                    skillReady = false;
                 } else {
                     player.sendMessage("아직 원 포 올의 준비가 되어있지 않군요.");
                 }

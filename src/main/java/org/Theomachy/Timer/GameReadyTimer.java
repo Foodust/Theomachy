@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.TimerTask;
 
+import org.Theomachy.Handler.Module.GameModule;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.Animals;
@@ -65,7 +66,7 @@ public class GameReadyTimer extends TimerTask {
 
     @Override
     public void run() {
-        if (StartStopCommand.Ready && count < 45) {
+        if (GameModule.Ready && count < 45) {
             Bukkit.getScheduler().runTask(Theomachy.getPlugin(), ()->{
             switch (count) {
                 case 1 -> {
@@ -188,7 +189,7 @@ public class GameReadyTimer extends TimerTask {
                         e.initialize();
                         e.buff();
                     }
-                    StartStopCommand.Start = true;
+                    GameModule.Start = true;
                     Bukkit.broadcastMessage(ChatColor.GOLD + "게임 시작!");
                     Bukkit.broadcastMessage(ChatColor.GREEN + "빠른 시작이 설정되었습니다. 관리자는 콘솔로 내용을 확인해주세요.");
                 }

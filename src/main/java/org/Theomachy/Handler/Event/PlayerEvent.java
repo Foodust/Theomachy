@@ -4,6 +4,7 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Handler.Command.StartStopCommand;
+import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -26,7 +27,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onPlayerDeath(PlayerDeathEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             for (Ability e : PlayerDeathEventList)
                 e.passiveSkill(event);
             Player player = event.getEntity();
@@ -42,7 +43,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onPlayerRespawn(PlayerRespawnEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             Player player = event.getPlayer();
             if (Theomachy.IGNORE_BED) {
                 if (GameData.playerTeam.containsKey(player.getName())) {
@@ -73,7 +74,7 @@ public class PlayerEvent implements Listener {
     public static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         GameData.onlinePlayer.put(player.getName(), player);
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(player.getName());
             if (ability != null && (ability.abilityCode == AbilityInfo.Poseidon.getIndex() || ability.abilityCode == AbilityInfo.Hephastus.getIndex())) {
                 ability.initialize();
@@ -94,7 +95,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onPlayerMove(PlayerMoveEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
                 ability.passiveSkill(event);
@@ -117,7 +118,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onPlayerInteractEvent(PlayerInteractEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             String playerName = event.getPlayer().getName();
             Ability ability = GameData.playerAbility.get(playerName);
             if (ability != null && ability.activeType) {
@@ -128,7 +129,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onFoodLevelChange(FoodLevelChangeEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.playerAbility.containsKey(playerName))
@@ -139,7 +140,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public static void onEntityRegainHealth(EntityRegainHealthEvent event) {
-        if (StartStopCommand.Start) {
+        if (GameModule.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.playerAbility.containsKey(playerName))

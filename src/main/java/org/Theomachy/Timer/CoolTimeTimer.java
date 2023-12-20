@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityCase;
+import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Command.StartStopCommand;
@@ -21,7 +22,7 @@ public class CoolTimeTimer extends TimerTask {
 
     @Override
     public void run() {
-        if (!StartStopCommand.Ready) {
+        if (!GameModule.Ready) {
             this.cancel();
         }
         try {

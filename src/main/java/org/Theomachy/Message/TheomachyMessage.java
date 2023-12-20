@@ -113,6 +113,8 @@ public enum TheomachyMessage {
     END_WHO_BREAK_DIAMOND(ChatColor.WHITE + "가 다이아몬드 블럭을 부쉈습니다!"),
 
     // info message
+    INFO_ADMIN_START_GAME(") 가 게임을 시작하였습니다."),
+    INFO_ADMIN_STOP_GAME(") 가 게임을 종료하였습니다."),
     INFO_REMOVE_PLAYER_ABILITY(ChatColor.DARK_RED + "의 능력을 삭제하였습니다."),
     INFO_REMOVE_ALL_PLAYER_ABILITY(ChatColor.AQUA + "관리자가 모두의 능력을 초기화 하였습니다."),
     INFO_RESET_AND_RANDOM_ABILITY("모든 능력을 삭제한 후 재 추첨합니다."),
@@ -145,6 +147,7 @@ public enum TheomachyMessage {
     ERROR_DOES_NOT_EXIST_PLAYER_NAME("에 해당하는 온라인 유저가 없습니다."),
     ERROR_DOES_NOT_TARGET_FOR_ABILITY("타겟을 사용하는 능력이 아닙니다."),
     ERROR_DOES_NOT_HAVE_COBBLE_STONE(ChatColor.RED + "조약돌이 부족합니다."),
+    ERROR_DOES_NOT_START_GAME("게임이 시작되지 않았습니다."),
     ERROR_THIS_COMMAND_IS_NOT_ALLOWED(ChatColor.RED + "이 기능은 잠겨있습니다."),
     ERROR_WRONG_COMMAND(ChatColor.RED + "잘못된 명령입니다."),
     ERROR_CHECK_T_A_COMMAND("/t a 로 명령어를 확인하세요."),

@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Manager.EntityManager;
+import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,6 +10,9 @@ import org.bukkit.entity.Firework;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.TimerTask;
 
 public class CommonModule {
     public static boolean isNumeric(String str) {
@@ -33,5 +37,8 @@ public class CommonModule {
         }
         Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
         EntityManager.spawnRandomFirework(firework);
+    }
+    public static BukkitTask startTimerTask(TimerTask task, long delay, long period){
+        return Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),task , delay,period);
     }
 }

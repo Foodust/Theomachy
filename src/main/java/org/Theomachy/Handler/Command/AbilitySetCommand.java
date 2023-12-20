@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Handler.Module.AbilityModule;
 import org.Theomachy.Handler.Module.CommonModule;
+import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class AbilitySetCommand {
     public static void Module(CommandSender sender, Command command, String label, String[] data) {
         if (PermissionChecker.Sender(sender)) {
-            if (!StartStopCommand.Ready) {
+            if (!GameModule.Ready) {
                 // ability
                 if (data.length <= 1) {
                     AbilityModule.explainCommand(sender);

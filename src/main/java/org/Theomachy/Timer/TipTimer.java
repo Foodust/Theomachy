@@ -2,11 +2,11 @@ package org.Theomachy.Timer;
 
 import java.util.TimerTask;
 
+import org.Theomachy.Handler.Module.GameModule;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import org.Theomachy.Theomachy;
-import org.Theomachy.Handler.Command.StartStopCommand;
 
 public class TipTimer extends TimerTask
 {
@@ -15,7 +15,7 @@ public class TipTimer extends TimerTask
 	@Override
 	public void run()
 	{
-		if (!StartStopCommand.Ready){
+		if (!GameModule.Ready){
 			this.cancel();
 		}
 		if (count%600 == 0)
