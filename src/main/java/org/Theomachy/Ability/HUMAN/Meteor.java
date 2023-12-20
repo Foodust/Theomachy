@@ -52,7 +52,7 @@ public class Meteor extends Ability {
             Location location = player.getLocation();
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 World world = player.getWorld();
-                Vector v = new Vector(0d, -20d, 0d);
+                Vector vector = new Vector(0d, -20d, 0d);
                 Vector speed = new Vector(0d, -3d, 0d);
                 for (int count = normalCount; count > 0; count--) {
                     Random random = new Random();
@@ -60,7 +60,7 @@ public class Meteor extends Ability {
                     int Z = random.nextInt(15) - 5;
                     Fireball fireball = world.spawn(location.add(X, 10, Z), Fireball.class);
                     fireball.setShooter(player);
-                    fireball.setDirection(v);
+                    fireball.setDirection(vector);
                     fireball.setVelocity(speed);
                     location.add(-X, 0, -Z);
                 }

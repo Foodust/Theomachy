@@ -17,6 +17,7 @@ import org.joml.AxisAngle4f;
 import java.util.Objects;
 
 public class HealthBarEvent implements Listener {
+
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         if (!(event.getEntity() instanceof LivingEntity entity))
