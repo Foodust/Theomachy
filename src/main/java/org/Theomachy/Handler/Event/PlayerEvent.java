@@ -9,6 +9,7 @@ import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -79,7 +80,7 @@ public class PlayerEvent implements Listener {
 
         Bukkit.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
 
-        PlayerModule.setPlayerMessage(player,"null", "asdasd");
+        PlayerModule.setPlayerMessage(player,"null", ChatColor.GREEN +  String.valueOf(player.getHealth()) + "♥");
 
         GameData.onlinePlayer.put(player.getName(), player);
         if (GameModule.Start) {
