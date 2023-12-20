@@ -8,6 +8,7 @@ import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Zenitsu;
+import org.Theomachy.Checker.PermissionChecker;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
@@ -23,12 +24,25 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class AbilityModule {
+    public static void listOfAbilityPlayer(CommandSender sender)
+    {
+        if (PermissionChecker.Sender(sender))
+        {
+            if (!GameData.playerAbility.isEmpty())
+            {
+                Collection<Ability> ability = GameData.playerAbility.values();
+                for (Ability e : ability)
+                    sender.sendMessage(ChatColor.WHITE+e.playerName+"  :  "+ChatColor.YELLOW+e.abilityName);
+            }
+            else
+            {
+                sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY_ALL_PLAYER.getMessage());
+            }
+        }
+    }
     public static void openAbilityHelpInventory(Player player) {
         Ability ability = GameData.playerAbility.get(player.getName());
         if (ability != null) {
@@ -85,7 +99,7 @@ public class AbilityModule {
             }
             player.openInventory(inventory);
         } else
-            player.sendMessage("능력이 없습니다.");
+            player.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
 
     }
 
@@ -203,7 +217,7 @@ public class AbilityModule {
                 GameData.playerAbility.remove(playerName);
                 sender.sendMessage(playerName + TheomachyMessage.INFO_REMOVE_PLAYER_ABILITY.getMessage());
             } else
-                sender.sendMessage(playerName + TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
+                sender.sendMessage(playerName + TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
         } else {
             sender.sendMessage(TheomachyMessage.ERROR_SET_REMOVE_PLAYER_NAME.getMessage());
         }

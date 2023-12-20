@@ -165,7 +165,8 @@ public enum TheomachyMessage {
     INFO_PLAYER("플레이어 "),
 
     // error message
-    ERROR_DOES_NOT_HAVE_ABILITY("는" + ChatColor.DARK_RED + "능력이 없습니다."),
+    ERROR_DOES_NOT_WHO_HAVE_ABILITY("는" + ChatColor.DARK_RED + "능력이 없습니다."),
+    ERROR_DOES_NOT_HAVE_ABILITY("능력이 없습니다."),
     ERROR_DOES_NOT_ONLINE_PLAYER(ChatColor.RED + "온라인 플레이어가 아닙니다."),
     ERROR_DOES_NOT_CHANGE_ABILITY_IN_GAME("게임 시작 후에는 능력을 변경 할 수 없습니다."),
     ERROR_DOES_NOT_HAVE_ABILITY_PLAYER("플레이어의 능력이 없습니다."),

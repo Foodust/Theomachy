@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.Command;
 
+import org.Theomachy.Handler.Module.AbilityModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,13 +18,13 @@ public class MainCommand
         switch (Objects.requireNonNull(message)) {
 			case COMMAND_START -> StartStopCommand.GameReady(sender);
 			case COMMAND_STOP -> StartStopCommand.GameStop(sender);
-			case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilitySetCommand.module(sender, command, label, data);
-			case COMMAND_ABILITY_LIST -> AbilityPlayerInfoCommand.module(sender);
-			case COMMAND_HELP -> AbilityHelpCommand.module(sender, command, label, data);
+			case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilityCommand.abilitySet(sender, data);
+			case COMMAND_ABILITY_LIST -> AbilityModule.listOfAbilityPlayer(sender);
+			case COMMAND_HELP -> AbilityCommand.abilityHelp(sender);
 			case COMMAND_SPAWN, COMMAND_SPAWN_S -> SpawnCommand.module(sender, command, label, data);
-			case COMMAND_TEAM, COMMAND_TEAM_T -> TeamCommand.module(sender, command, label, data);
-			case COMMAND_INFO -> TeamInfoCommand.module(sender, command, label, data);
-			case COMMAND_CLEAR, COMMAND_CLEAR_C -> AbilityClear.module(sender, command, label, data);
+			case COMMAND_TEAM, COMMAND_TEAM_T -> TeamCommand.setTeam(sender, command, label, data);
+			case COMMAND_INFO -> TeamCommand.listOfTeam(sender, command, label, data);
+			case COMMAND_CLEAR, COMMAND_CLEAR_C -> AbilityCommand.abilityCollTimeClear(sender);
 			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> BlacklistCommand.module(sender);
 			case COMMAND_SETTING, COMMAND_SETTING_SET -> SettingCommand.module(sender);
 			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> GamblingCommand.module(sender);
@@ -44,6 +45,6 @@ public class MainCommand
 				sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);
 		}
 		else
-			sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
+			sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
 	}
 }

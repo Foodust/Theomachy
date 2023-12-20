@@ -1,20 +1,39 @@
 package org.Theomachy.Handler.Command;
 
+import org.Theomachy.Checker.PermissionChecker;
 import org.Theomachy.Handler.Module.AbilityModule;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-
-import org.Theomachy.Checker.PermissionChecker;
+import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-public class AbilitySetCommand {
-    public static void module(CommandSender sender, Command command, String label, String[] data) {
+public class AbilityCommand {
+    public static void abilityCollTimeClear(CommandSender sender)
+    {
+        if (PermissionChecker.Sender(sender))
+        {
+            CoolTimeTimer.init =true;
+            Bukkit.broadcastMessage(TheomachyMessage.INFO_COOL_TIME_CLEAR.getMessage());
+        }
+    }
+    public static void abilityHelp(CommandSender sender) {
+        AbilityModule.openAbilityHelpInventory((Player) sender);
+    }
+    public static void abilityList(CommandSender sender) {
+        if (sender instanceof Player)
+            AbilityModule.showCode(sender);
+        else
+            Theomachy.log.info(TheomachyMessage.ERROR_THIS_COMMAND_EXECUTE_IN_GAME.getMessage());
+    }
+
+    public static void abilitySet(CommandSender sender, String[] data) {
         if (PermissionChecker.Sender(sender)) {
             if (!GameModule.Ready) {
                 // ability
@@ -25,7 +44,7 @@ public class AbilitySetCommand {
 
                     TheomachyMessage byMessage = TheomachyMessage.getByMessage(data[1]);
                     switch (byMessage) {
-                        case COMMAND_HELP -> AbilityListHelpCommand.module(sender);
+                        case COMMAND_HELP -> abilityList(sender);
                         case COMMAND_RESET -> AbilityModule.Reset();
                         case COMMAND_RANDOM -> AbilityModule.RandomAssignment(sender);
                         default -> AbilityModule.errorMessage(sender);
