@@ -25,7 +25,7 @@ public class SettingModule {
         inventory.setItem(11, CommonModule.setItem(Theomachy.ANIMAL_SPAWN ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_ANIMAL_SPAWN.getMessage()));
         inventory.setItem(13, CommonModule.setItem(Theomachy.MONSTER_SPAWN ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_MONSTER_SPAWN.getMessage()));
         inventory.setItem(15, CommonModule.setItem(Theomachy.GAMBLING ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_GAMBLING_ACCEPT.getMessage()));
-        inventory.setItem(17, CommonModule.setItem(Theomachy.GAMBLING ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_DEBUG_MODE.getMessage()));
+        inventory.setItem(17, CommonModule.setItem(Theomachy.DEBUG ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_DEBUG_MODE.getMessage()));
         player.openInventory(inventory);
     }
 
