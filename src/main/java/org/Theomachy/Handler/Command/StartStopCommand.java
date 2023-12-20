@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Timer;
 
+import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -26,6 +27,10 @@ public class StartStopCommand {
     public static void GameReady(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             if (!Ready) {
+                if(Theomachy.DEBUG) {
+                    Bukkit.broadcastMessage(TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
+                    return;
+                }
                 Ready = true;
                 Bukkit.broadcastMessage(ChatColor.GOLD + "관리자(" + sender.getName() + ") 가 게임을 시작하였습니다.");
                 Timer t = new Timer();
@@ -46,7 +51,7 @@ public class StartStopCommand {
                 Theomachy.tasks.add(bukkitTask);
 
             } else
-                sender.sendMessage("게임이 이미 시작되었습니다.");
+                sender.sendMessage(TheomachyMessage.ERROR_GAME_ALREADY_STARTED.getMessage());
         }
     }
 

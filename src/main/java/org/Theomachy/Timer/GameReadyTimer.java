@@ -23,7 +23,7 @@ import org.Theomachy.Utility.PlayerInventory;
 public class GameReadyTimer extends TimerTask {
     private int count = 1;
     private final List<Player> playerList;
-    private final String[] setting = new String[8];
+    private final String[] setting = new String[9];
     private Difficulty difficulty;
     private final World world;
 
@@ -36,6 +36,7 @@ public class GameReadyTimer extends TimerTask {
         setting[4] = Theomachy.ANIMAL_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[5] = Theomachy.MONSTER_SPAWN ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         setting[7] = Theomachy.STARTING_ENTITY_CLEAR ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
+        setting[8] = Theomachy.DEBUG ? ChatColor.AQUA + "ON" : ChatColor.RED + "OFF";
         difficulty = null;
         switch (Theomachy.DIFFICULTY) {
             case 0 -> {

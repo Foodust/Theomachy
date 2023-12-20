@@ -41,6 +41,7 @@ public class Theomachy extends JavaPlugin {
     public static boolean FAST_START = false;
     public static int DIFFICULTY = 1;
     public static boolean GAMBLING = true;
+    public static boolean DEBUG = false;
 
     public static Logger log = Bukkit.getLogger();
     public static List<BukkitTask> tasks = new ArrayList<>();
@@ -51,12 +52,14 @@ public class Theomachy extends JavaPlugin {
     }
 
     private BukkitAudiences adventure;
+
     public @NonNull BukkitAudiences adventure() {
-        if(this.adventure == null) {
+        if (this.adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
         }
         return this.adventure;
     }
+
     public void onEnable() {
         this.adventure = BukkitAudiences.create(this);
 
@@ -78,7 +81,7 @@ public class Theomachy extends JavaPlugin {
         getServer().addRecipe(recipe);
 
         // event 등록
-        EventManager.setEvent(getServer(),this);
+        EventManager.setEvent(getServer(), this);
 
         // blacklist
         FileInputStream fileInputStream;
@@ -121,16 +124,17 @@ public class Theomachy extends JavaPlugin {
         log.info("[신들의 전쟁] 게임의 설정 불러오는 중입니다.");
         getConfig().options().copyDefaults(true);
         saveConfig();
-        STARTING_INVENTORY_CLEAR = getConfig().getBoolean("인벤토리 클리어");
-        STARTING_GIVE_ITEM = getConfig().getBoolean("스카이블럭 아이템 제공");
-        STARTING_ENTITY_CLEAR = getConfig().getBoolean("엔티티 제거");
-        IGNORE_BED = getConfig().getBoolean("침대 무시");
-        SERVER_AUTO_SAVE = getConfig().getBoolean("서버 자동 저장");
-        ANIMAL_SPAWN = getConfig().getBoolean("동물 생성");
-        MONSTER_SPAWN = getConfig().getBoolean("몬스터 생성");
-        DIFFICULTY = getConfig().getInt("난이도");
-        FAST_START = getConfig().getBoolean("빠른 시작");
-        GAMBLING = getConfig().getBoolean("도박 허용");
+        STARTING_INVENTORY_CLEAR = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_STARTING_INVENTORY_CLEAR.getMessage()));
+        STARTING_GIVE_ITEM = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_STARTING_GIVE_ITEM.getMessage()));
+        STARTING_ENTITY_CLEAR = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_STARTING_ENTITY_CLEAR.getMessage()));
+        IGNORE_BED = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_IGNORE_BED.getMessage()));
+        SERVER_AUTO_SAVE = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_SERVER_AUTO_SAVE.getMessage()));
+        ANIMAL_SPAWN = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_ANIMAL_SPAWN.getMessage()));
+        MONSTER_SPAWN = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_MONSTER_SPAWN.getMessage()));
+        DIFFICULTY = getConfig().getInt(ChatColor.stripColor(TheomachyMessage.SETTING_DIFFICULT.getMessage()));
+        FAST_START = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_FAST_START.getMessage()));
+        GAMBLING = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_GAMBLING_ACCEPT.getMessage()));
+        DEBUG = getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_DEBUG_MODE.getMessage()));
 
         log.info("[신들의 전쟁] ========================================");
         log.info("[신들의 전쟁] 게임 시작 시 인벤토리 클리어 : " + STARTING_INVENTORY_CLEAR);
@@ -160,7 +164,7 @@ public class Theomachy extends JavaPlugin {
     public void onDisable() {
         BufferedWriter bufferedWriter;
 
-        for(BukkitTask task : tasks){
+        for (BukkitTask task : tasks) {
             task.cancel();
         }
         tasks.clear();
@@ -175,7 +179,7 @@ public class Theomachy extends JavaPlugin {
         } catch (IOException ignored) {
         }
         log.info("[신들의 전쟁] 블랙리스트가 파일로 저장되었습니다. 절대로 플러그인 폴더 내에 blacklist.yml을 건들지 마십시오.");
-        if(this.adventure != null) {
+        if (this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
         }

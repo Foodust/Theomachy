@@ -19,7 +19,8 @@ import java.util.Objects;
 public class HealthBarEvent implements Listener {
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity entity)) return;
+        if (!(event.getEntity() instanceof LivingEntity entity))
+            return;
         TextDisplay display = (TextDisplay) entity.getWorld().spawn(entity.getLocation(), TextDisplay.class);
         display.addScoreboardTag("health_bar");
         display.setBillboard(Display.Billboard.CENTER);
@@ -32,11 +33,12 @@ public class HealthBarEvent implements Listener {
         ));
         entity.addPassenger(display);
     }
-
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity entity)) return;
-        if (entity.getPassengers().isEmpty()) return;
+        if (!(event.getEntity() instanceof LivingEntity entity))
+            return;
+        if (entity.getPassengers().isEmpty())
+            return;
         for (Entity passenger : entity.getPassengers()) {
             if (passenger instanceof TextDisplay display) {
                 if (entity.getHealth() - event.getDamage() <= 0) {
@@ -50,7 +52,6 @@ public class HealthBarEvent implements Listener {
             }
         }
     }
-
     @EventHandler
     public void onLoad(ChunkLoadEvent event) {
         for (Entity entity : event.getChunk().getEntities()) {

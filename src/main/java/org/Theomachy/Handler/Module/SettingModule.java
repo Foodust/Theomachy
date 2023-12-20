@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.Module;
 
+import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
@@ -24,6 +25,7 @@ public class SettingModule {
         inventory.setItem(11, CommonModule.setItem(Theomachy.ANIMAL_SPAWN ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_ANIMAL_SPAWN.getMessage()));
         inventory.setItem(13, CommonModule.setItem(Theomachy.MONSTER_SPAWN ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_MONSTER_SPAWN.getMessage()));
         inventory.setItem(15, CommonModule.setItem(Theomachy.GAMBLING ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_GAMBLING_ACCEPT.getMessage()));
+        inventory.setItem(17, CommonModule.setItem(Theomachy.GAMBLING ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_DEBUG_MODE.getMessage()));
         player.openInventory(inventory);
     }
 
@@ -118,6 +120,18 @@ public class SettingModule {
                     wool.setType(Material.RED_WOOL);
                 } else {
                     Theomachy.GAMBLING = true;
+                    wool.setType(Material.WHITE_WOOL);
+                }
+            }
+            case SETTING_DEBUG_MODE -> {
+                broadcastMessage += check(Theomachy.DEBUG);
+                if (wool.getType() == Material.WHITE_WOOL) {
+                    Theomachy.DEBUG = false;
+                    StartStopCommand.Start = false;
+                    wool.setType(Material.RED_WOOL);
+                } else {
+                    Theomachy.DEBUG = true;
+                    StartStopCommand.Start = true;
                     wool.setType(Material.WHITE_WOOL);
                 }
             }

@@ -104,8 +104,10 @@ public enum TheomachyMessage {
     SETTING_FAST_START(ChatColor.WHITE + "빠른 시작"),
     SETTING_SERVER_AUTO_SAVE(ChatColor.WHITE + "서버 자동 저장"),
     SETTING_ANIMAL_SPAWN(ChatColor.WHITE + "동물 스폰"),
+    SETTING_DIFFICULT(ChatColor.WHITE + "난이도"),
     SETTING_MONSTER_SPAWN(ChatColor.WHITE + "몬스터 스폰"),
     SETTING_GAMBLING_ACCEPT(ChatColor.WHITE + "뽑기 허용"),
+    SETTING_DEBUG_MODE(ChatColor.WHITE + "디버그"),
 
     // game end
     END_WHO_BREAK_DIAMOND(ChatColor.WHITE + "가 다이아몬드 블럭을 부쉈습니다!"),
@@ -151,7 +153,9 @@ public enum TheomachyMessage {
     ERROR_TOO_MANY_PLAYER("인원이 너무 많습니다. 전부에게 능력을 할당하지 못했을수도 있습니다."),
     ERROR_ABILITY_CODE_IS_INTEGER("능력코드는 정수를 입력해 주세요"),
     ERROR_PERMISSION_DENIED("권한이 없습니다."),
-    ERROR_THIS_COMMAND_EXECUTE_IN_GAME("이 명령어는 게임에서 실행해 주십시오.");
+    ERROR_THIS_COMMAND_EXECUTE_IN_GAME("이 명령어는 게임에서 실행해 주십시오."),
+    ERROR_DEBUG_IS_ON(ChatColor.RED + "디버그 모드가 활성화 되어있습니다.\n 디버그 모드를 종료 해주세요"),
+    ERROR_GAME_ALREADY_STARTED(ChatColor.AQUA + "게임이 이미 시작되었습니다.");
     private final String message;
 
     TheomachyMessage(String message) {
