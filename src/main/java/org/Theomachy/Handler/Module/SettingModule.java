@@ -34,8 +34,7 @@ public class SettingModule {
         String broadcastMessage = byMessage.getMessage();
         switch (Objects.requireNonNull(byMessage)) {
             case SETTING_STARTING_INVENTORY_CLEAR -> {
-                broadcastMessage += check(Theomachy.STARTING_INVENTORY_CLEAR);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.STARTING_INVENTORY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -44,8 +43,7 @@ public class SettingModule {
                 }
             }
             case SETTING_STARTING_GIVE_ITEM -> {
-                broadcastMessage += check(Theomachy.STARTING_GIVE_ITEM);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.STARTING_GIVE_ITEM = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -54,8 +52,7 @@ public class SettingModule {
                 }
             }
             case SETTING_STARTING_ENTITY_CLEAR -> {
-                broadcastMessage += check(Theomachy.STARTING_ENTITY_CLEAR);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.STARTING_ENTITY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -64,8 +61,7 @@ public class SettingModule {
                 }
             }
             case SETTING_IGNORE_BED -> {
-                broadcastMessage += check(Theomachy.IGNORE_BED);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.IGNORE_BED = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -74,8 +70,7 @@ public class SettingModule {
                 }
             }
             case SETTING_FAST_START -> {
-                broadcastMessage += check(Theomachy.FAST_START);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.FAST_START = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -84,8 +79,7 @@ public class SettingModule {
                 }
             }
             case SETTING_SERVER_AUTO_SAVE -> {
-                broadcastMessage += check(Theomachy.SERVER_AUTO_SAVE);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.SERVER_AUTO_SAVE = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -94,8 +88,7 @@ public class SettingModule {
                 }
             }
             case SETTING_ANIMAL_SPAWN -> {
-                broadcastMessage += check(Theomachy.ANIMAL_SPAWN);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.ANIMAL_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -104,8 +97,7 @@ public class SettingModule {
                 }
             }
             case SETTING_MONSTER_SPAWN -> {
-                broadcastMessage += check(Theomachy.MONSTER_SPAWN);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.MONSTER_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -114,8 +106,7 @@ public class SettingModule {
                 }
             }
             case SETTING_GAMBLING_ACCEPT -> {
-                broadcastMessage += check(Theomachy.GAMBLING);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.GAMBLING = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -124,8 +115,7 @@ public class SettingModule {
                 }
             }
             case SETTING_DEBUG_MODE -> {
-                broadcastMessage += check(Theomachy.DEBUG);
-                if (wool.getType() == Material.WHITE_WOOL) {
+                if (checkIsTrue(wool.getType(),broadcastMessage)) {
                     Theomachy.DEBUG = false;
                     StartStopCommand.Start = false;
                     wool.setType(Material.RED_WOOL);
@@ -136,9 +126,16 @@ public class SettingModule {
                 }
             }
         }
-        Bukkit.broadcastMessage(broadcastMessage + TheomachyMessage.INFO_SET_MESSAGE.getMessage());
+
     }
-    public static String check(boolean setting) {
-        return setting ? TheomachyMessage.INFO_ABLE.getMessage() : TheomachyMessage.INFO_DISABLED.getMessage();
+
+    public static boolean checkIsTrue(Material material, String message) {
+        if (material == Material.WHITE_WOOL) {
+            message += TheomachyMessage.INFO_ABLE.getMessage();
+        } else {
+            message += TheomachyMessage.INFO_DISABLED.getMessage();
+        }
+        Bukkit.broadcastMessage(message + TheomachyMessage.INFO_SET_MESSAGE.getMessage());
+        return material == Material.WHITE_WOOL;
     }
 }
