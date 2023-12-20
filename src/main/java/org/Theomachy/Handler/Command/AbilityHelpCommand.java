@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class AbilityHelpCommand {
-    public static void Module(CommandSender sender, Command command, String label, String[] data) {
+    public static void module(CommandSender sender, Command command, String label, String[] data) {
         AbilityModule.openAbilityHelpInventory((Player) sender);
     }
 }

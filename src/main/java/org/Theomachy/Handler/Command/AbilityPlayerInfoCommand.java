@@ -12,7 +12,7 @@ import org.Theomachy.Checker.PermissionChecker;
 
 public class AbilityPlayerInfoCommand
 {
-	public static void showAllAbility(CommandSender sender)
+	public static void module(CommandSender sender)
 	{
 		if (PermissionChecker.Sender(sender))
 		{

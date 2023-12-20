@@ -4,17 +4,17 @@ import org.Theomachy.Handler.Module.AbilityModule;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Timer.CoolTimeTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Checker.PermissionChecker;
 
-import java.nio.Buffer;
 import java.util.Objects;
 
 public class AbilitySetCommand {
-    public static void Module(CommandSender sender, Command command, String label, String[] data) {
+    public static void module(CommandSender sender, Command command, String label, String[] data) {
         if (PermissionChecker.Sender(sender)) {
             if (!GameModule.Ready) {
                 // ability
@@ -25,7 +25,7 @@ public class AbilitySetCommand {
 
                     TheomachyMessage byMessage = TheomachyMessage.getByMessage(data[1]);
                     switch (byMessage) {
-                        case COMMAND_HELP -> AbilityListHelpCommand.ShowAbilityCodeNumber(sender);
+                        case COMMAND_HELP -> AbilityListHelpCommand.module(sender);
                         case COMMAND_RESET -> AbilityModule.Reset();
                         case COMMAND_RANDOM -> AbilityModule.RandomAssignment(sender);
                         default -> AbilityModule.errorMessage(sender);

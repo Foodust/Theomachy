@@ -1,6 +1,6 @@
 package org.Theomachy.Message;
 
-import org.bukkit.Bukkit;
+import org.Theomachy.Data.VersionData;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;
@@ -117,17 +117,36 @@ public enum TheomachyMessage {
     SCOREBOARD_HEALTH(ChatColor.GREEN + "♥"),
 
     // info message
+    INFO_PLUGIN_ENABLED(VersionData.name + "플러그인이 활성화되었습니다.   " + VersionData.buildNumber + "  " + VersionData.version),
+    INFO_LOADING_DEFAULT_SETTING(VersionData.name +"게임의 설정 불러오는 중입니다."),
+    INFO_PLUGIN_DEFAULT_SETTING(VersionData.name + "플러그인의 기본 설정을 적용 중입니다."),
+    INFO_LIST_OF_ACCEPT_ABILITY("등록된 능력"),
+    INFO_BAR(VersionData.name + "========================================"),
     INFO_GREETING(ChatColor.AQUA + " 님 환영합니다."),
     INFO_ADMIN_START_GAME(") 가 게임을 시작하였습니다."),
     INFO_ADMIN_STOP_GAME(") 가 게임을 종료하였습니다."),
+    INFO_SETTING_THIS_POSITION_DEFAULT_SPAWN_POINT("현재 위치가 모든 플레이어의 스폰지역으로 설정되었습니다."),
+    INFO_SETTING_THIS_POSITION_TEAM_SPAWN_POINT(ChatColor.WHITE + " 의 스폰지역으로 설정되었습니다."),
+    INFO_COOL_TIME_CLEAR(ChatColor.YELLOW + "관리자가 모든 쿨타임을 초기화 하였습니다."),
     INFO_REMOVE_PLAYER_ABILITY(ChatColor.DARK_RED + "의 능력을 삭제하였습니다."),
     INFO_REMOVE_ALL_PLAYER_ABILITY(ChatColor.AQUA + "관리자가 모두의 능력을 초기화 하였습니다."),
     INFO_RESET_AND_RANDOM_ABILITY("모든 능력을 삭제한 후 재 추첨합니다."),
     INFO_AVAILABLE_PLAYERS(ChatColor.DARK_AQUA + "인식된 플레이어 목록"),
     INFO_SET_ALL_PLAYER_ABILITY("모두에게 능력이 적용되었습니다."),
     INFO_SET_PLAYER_ABILITY("능력이 할당되었습니다."),
+    INFO_SET(" 에 등록되었습니다."),
+    INFO_CHANGE_TEAM(" 의 팀이 변경되었습니다.    "),
     INFO_CHECK_ABILITY("/t help 로 확인해보세요."),
     INFO_ALL_ABILITY("/t a help 명령어로 능력 코드를 확인하실 수 있습니다."),
+    INFO_HOW_TO_SET_SPAWN(ChatColor.YELLOW + "/t  spawn(s)   " + ChatColor.AQUA + "<TeamName>  스폰지역으로 설정합니다."),
+    INFO_HOW_TO_SET_SPAWN_X_Y_Z("좌표로도 등록할 수 있습니다."),
+    INFO_HOW_TO_SET_SPAWN_X_Y_Z_EXAMPLE("ex) /t s  팀    X  Y  Z"),
+    INFO_HOW_TO_SET_TEAM(ChatColor.YELLOW + ("/t  team(t)   ") + ChatColor.AQUA + ("<TeamName>  ") + ChatColor.RED + ("<Player>  ") + ChatColor.WHITE + ("플레이어를 팀에 등록합니다.")),
+    INFO_HOW_TO_SET_TEAM_MESSAGE("한번에 다수의 플레이어를 한 팀에 등록 할 수 있습니다."),
+    INFO_HOW_TO_SET_TEAM_EXAMPLE("ex) /t t  팀   플레이어1   플레이어2   플레이어3"),
+    INFO_HOW_TO_SET_TEAM_RANDOM(ChatColor.YELLOW + "/t  team(t)   random" + ChatColor.BLUE + ("<TeamName1>  ") + ChatColor.RED + ("<TeamName2>  ")),
+    INFO_HOW_TO_SET_TEAM_RANDOM_MESSAGE("무작위로 팀을 배정합니다"),
+    INFO_HOW_TO_SET_TEAM_RANDOM_EXAMPLE("ex) /t t  random   팀이름1   팀이름2 "),
     INFO_SET_MESSAGE("되었습니다"),
     INFO_DISABLED(" 비활성화 "),
     INFO_ABLE(" 활성화 "),
@@ -142,6 +161,8 @@ public enum TheomachyMessage {
     INFO_HUMAN(ChatColor.AQUA + " 【 인간 】 "),
     INFO_JUJUTSU_KAISEN(ChatColor.GREEN + " 【 주술회전 】 "),
     INFO_KIMETSU_NO_YAIBA(ChatColor.RED + " 【 귀멸의 칼날 】 "),
+    INFO_TOTAL_COUNT("총합"),
+    INFO_PLAYER("플레이어 "),
 
     // error message
     ERROR_DOES_NOT_HAVE_ABILITY("는" + ChatColor.DARK_RED + "능력이 없습니다."),
@@ -153,6 +174,7 @@ public enum TheomachyMessage {
     ERROR_DOES_NOT_TARGET_FOR_ABILITY("타겟을 사용하는 능력이 아닙니다."),
     ERROR_DOES_NOT_HAVE_COBBLE_STONE(ChatColor.RED + "조약돌이 부족합니다."),
     ERROR_DOES_NOT_START_GAME("게임이 시작되지 않았습니다."),
+    ERROR_DOES_NOT_ACCESS_BLACKLIST_FILE("[신들의 전쟁] 블랙리스트가 파일로 저장되었습니다. 절대로 플러그인 폴더 내에 blacklist.yml을 건들지 마십시오."),
     ERROR_THIS_COMMAND_IS_NOT_ALLOWED(ChatColor.RED + "이 기능은 잠겨있습니다."),
     ERROR_WRONG_COMMAND(ChatColor.RED + "잘못된 명령입니다."),
     ERROR_CHECK_T_A_COMMAND("/t a 로 명령어를 확인하세요."),

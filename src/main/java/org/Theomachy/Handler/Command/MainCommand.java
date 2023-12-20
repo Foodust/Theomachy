@@ -17,16 +17,16 @@ public class MainCommand
         switch (Objects.requireNonNull(message)) {
 			case COMMAND_START -> StartStopCommand.GameReady(sender);
 			case COMMAND_STOP -> StartStopCommand.GameStop(sender);
-			case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilitySetCommand.Module(sender, command, label, data);
-			case COMMAND_ABILITY_LIST -> AbilityPlayerInfoCommand.showAllAbility(sender);
-			case COMMAND_HELP -> AbilityHelpCommand.Module(sender, command, label, data);
-			case COMMAND_SPAWN, COMMAND_SPAWN_S -> SpawnCommand.Module(sender, command, label, data);
-			case COMMAND_TEAM, COMMAND_TEAM_T -> TeamCommand.Module(sender, command, label, data);
-			case COMMAND_INFO -> TeamInfoCommand.Module(sender, command, label, data);
-			case COMMAND_CLEAR, COMMAND_CLEAR_C -> SpawnCommand.ClearCommand.Module(sender, command, label, data);
-			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> BlacklistCommand.Module(sender);
-			case COMMAND_SETTING, COMMAND_SETTING_SET -> SettingCommand.Module(sender);
-			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> GamblingCommand.Module(sender);
+			case COMMAND_ABILITY, COMMAND_ABILITY_A -> AbilitySetCommand.module(sender, command, label, data);
+			case COMMAND_ABILITY_LIST -> AbilityPlayerInfoCommand.module(sender);
+			case COMMAND_HELP -> AbilityHelpCommand.module(sender, command, label, data);
+			case COMMAND_SPAWN, COMMAND_SPAWN_S -> SpawnCommand.module(sender, command, label, data);
+			case COMMAND_TEAM, COMMAND_TEAM_T -> TeamCommand.module(sender, command, label, data);
+			case COMMAND_INFO -> TeamInfoCommand.module(sender, command, label, data);
+			case COMMAND_CLEAR, COMMAND_CLEAR_C -> AbilityClear.module(sender, command, label, data);
+			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> BlacklistCommand.module(sender);
+			case COMMAND_SETTING, COMMAND_SETTING_SET -> SettingCommand.module(sender);
+			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> GamblingCommand.module(sender);
             default -> sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
         }
 	}

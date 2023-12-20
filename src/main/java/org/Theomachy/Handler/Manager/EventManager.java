@@ -6,7 +6,7 @@ import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 
 public class EventManager {
-    public static void setEvent(Server server ,Plugin plugin){
+    public static void settingEvent(Server server , Plugin plugin){
         server.getPluginManager().registerEvents(new BlackListEvent(), plugin);
         server.getPluginManager().registerEvents(new MenuEvent(), plugin);
         server.getPluginManager().registerEvents(new BlockEvent(), plugin);

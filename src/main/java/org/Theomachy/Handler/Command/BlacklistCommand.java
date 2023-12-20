@@ -8,7 +8,7 @@ import org.Theomachy.Checker.PermissionChecker;
 
 public class BlacklistCommand {
 
-    public static void Module(CommandSender sender) {
+    public static void module(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             Player player = (Player) sender;
             BlacklistModule.openBlackListInventory(player);

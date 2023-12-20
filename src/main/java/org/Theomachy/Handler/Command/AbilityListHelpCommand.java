@@ -9,7 +9,7 @@ import org.Theomachy.Theomachy;
 
 public class AbilityListHelpCommand {
 
-    public static void ShowAbilityCodeNumber(CommandSender sender) {
+    public static void module(CommandSender sender) {
         if (sender instanceof Player)
             AbilityModule.showCode(sender);
         else

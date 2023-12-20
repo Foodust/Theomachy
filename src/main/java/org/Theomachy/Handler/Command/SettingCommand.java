@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.Theomachy.Checker.PermissionChecker;
 
 public class SettingCommand {
-    public static void Module(CommandSender sender) {
+    public static void module(CommandSender sender) {
         Player player = (Player) sender;
         if (PermissionChecker.Sender(sender)) {
             SettingModule.openSettingInventory(player);

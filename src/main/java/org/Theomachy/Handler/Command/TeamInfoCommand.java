@@ -11,7 +11,7 @@ import org.Theomachy.Data.GameData;
 
 public class TeamInfoCommand
 {
-	public static void Module(CommandSender sender, Command command, String label, String[] data)
+	public static void module(CommandSender sender, Command command, String label, String[] data)
 	{
 		if (data.length>=2)
 		{

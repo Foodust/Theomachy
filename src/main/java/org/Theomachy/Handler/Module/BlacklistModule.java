@@ -3,6 +3,7 @@ package org.Theomachy.Handler.Module;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,7 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitTask;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +27,6 @@ public class BlacklistModule {
     public static int availableList;
     public static List<Integer> blacklist = new ArrayList<>();
     public static List<Inventory> blackListInventories = new ArrayList<>();
-
     public static int itemsPerPage = 6 * 9; // 페이지당 아이템 수
 
     public static void openBlackListInventory(Player player) {
@@ -109,5 +111,52 @@ public class BlacklistModule {
         } else if (slot == BlacklistModule.itemsPerPage - 6 && index != 0) { // 첫 번째 슬롯 (이전 페이지)
             player.openInventory(BlacklistModule.blackListInventories.get(--index));
         }
+    }
+    public static void settingBlackList(File file){
+        FileInputStream fileInputStream;
+        InputStreamReader inputStreamReader;
+        BufferedReader bufferedReader;
+        try {
+            fileInputStream = new FileInputStream(file);
+            inputStreamReader = new InputStreamReader(fileInputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                BlacklistModule.blacklist.add(Integer.parseInt(line));
+            }
+        } catch (IOException e) {
+            Theomachy.log.info(e.toString());
+        }
+        for (int i = 1; i <= AbilityData.GOD_ABILITY_NUMBER; i++) {
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.godCanlist.add(i);
+        }
+        for (int i = 101; i <= AbilityData.HUMAN_ABILITY_NUMBER + 100; i++) {
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.humanCanlist.add(i);
+        }
+        for (int i = 301; i <= AbilityData.JUJUTSU_KAISEN_ABILITY_NUMBER + 300; i++) {
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.jujutsuCanList.add(i);
+        }
+        for (int i = 401; i <= AbilityData.KIMETSU_NO_YAIBA_ABILITY_NUMBER + 400; i++) {
+            if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.kimetsuCanlist.add(i);
+        }
+    }
+    public static void freeBlackList(File file){
+        BufferedWriter bufferedWriter;
+
+        for (BukkitTask task : Theomachy.tasks) {
+            task.cancel();
+        }
+        Theomachy.tasks.clear();
+
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(file));
+            for (int blacklistId : BlacklistModule.blacklist) {
+                bufferedWriter.write(String.valueOf(blacklistId));
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException ignored) {
+        }
+        Theomachy.log.info(TheomachyMessage.ERROR_DOES_NOT_ACCESS_BLACKLIST_FILE.getMessage());
     }
 }

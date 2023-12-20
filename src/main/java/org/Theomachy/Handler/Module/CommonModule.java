@@ -1,15 +1,19 @@
 package org.Theomachy.Handler.Module;
 
+import org.Theomachy.Data.VersionData;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Manager.EntityManager;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Firework;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.TimerTask;
@@ -40,5 +44,59 @@ public class CommonModule {
     }
     public static BukkitTask startTimerTask(TimerTask task, long delay, long period){
         return Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),task , delay,period);
+    }
+
+    public static void settingBlazeRodRecipe(Plugin plugin){
+        NamespacedKey customBlazeRodRecipe = new NamespacedKey(plugin, TheomachyMessage.SETTING_CUSTOM_BLASE_LOD_RECIPE.getMessage());
+        ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
+        plugin.getServer().addRecipe(recipe);
+    }
+
+    public static void defaultPluginMessage(){
+        Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_ENABLED.getMessage());
+        Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_DEFAULT_SETTING.getMessage());
+    }
+    public static void defaultLogMessage(Plugin plugin){
+        Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_LIST_OF_ACCEPT_ABILITY.getMessage());
+        Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_GOD + " : " + BlacklistModule.godCanlist.size());
+        Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_HUMAN + " : " + BlacklistModule.humanCanlist.size());
+        Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_JUJUTSU_KAISEN + " : " + BlacklistModule.jujutsuCanList.size());
+        Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_KIMETSU_NO_YAIBA + " : " + BlacklistModule.kimetsuCanlist.size());
+        Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_TOTAL_COUNT +  " : " + String.valueOf(
+                BlacklistModule.godCanlist.size() + BlacklistModule.humanCanlist.size() +
+                        BlacklistModule.jujutsuCanList.size() + BlacklistModule.kimetsuCanlist.size()));
+
+        Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_DEFAULT_SETTING.getMessage());
+        plugin.getConfig().options().copyDefaults(true);
+        plugin.saveConfig();
+        Theomachy.STARTING_INVENTORY_CLEAR = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_STARTING_INVENTORY_CLEAR.getMessage()));
+        Theomachy.STARTING_GIVE_ITEM = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_STARTING_GIVE_ITEM.getMessage()));
+        Theomachy.STARTING_ENTITY_CLEAR = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_STARTING_ENTITY_CLEAR.getMessage()));
+        Theomachy.IGNORE_BED = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_IGNORE_BED.getMessage()));
+        Theomachy.SERVER_AUTO_SAVE = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_SERVER_AUTO_SAVE.getMessage()));
+        Theomachy.ANIMAL_SPAWN = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_ANIMAL_SPAWN.getMessage()));
+        Theomachy.MONSTER_SPAWN = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_MONSTER_SPAWN.getMessage()));
+        Theomachy.DIFFICULTY = plugin.getConfig().getInt(ChatColor.stripColor(TheomachyMessage.SETTING_DIFFICULT.getMessage()));
+        Theomachy.FAST_START = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_FAST_START.getMessage()));
+        Theomachy.GAMBLING = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_GAMBLING_ACCEPT.getMessage()));
+        Theomachy.DEBUG = plugin.getConfig().getBoolean(ChatColor.stripColor(TheomachyMessage.SETTING_DEBUG_MODE.getMessage()));
+
+        Theomachy.log.info(TheomachyMessage.INFO_BAR.getMessage());
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_STARTING_INVENTORY_CLEAR + " : " + Theomachy.STARTING_INVENTORY_CLEAR);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_STARTING_GIVE_ITEM + " : " + Theomachy.STARTING_GIVE_ITEM);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_STARTING_ENTITY_CLEAR + " : " + Theomachy.STARTING_ENTITY_CLEAR);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_IGNORE_BED + " : " + Theomachy.IGNORE_BED);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_FAST_START +" : " + Theomachy.FAST_START);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_GAMBLING + " : " + Theomachy.GAMBLING);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_SERVER_AUTO_SAVE +" : " + Theomachy.SERVER_AUTO_SAVE);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_ANIMAL_SPAWN + " : " + Theomachy.ANIMAL_SPAWN);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_MONSTER_SPAWN + " : " + Theomachy.MONSTER_SPAWN);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_DIFFICULT + " : " + Theomachy.DIFFICULTY);
+        Theomachy.log.info(TheomachyMessage.INFO_BAR.getMessage());
+
+        // 소스 작성자
+        Bukkit.getConsoleSender().sendMessage(VersionData.firstAuthor);
+        Bukkit.getConsoleSender().sendMessage(VersionData.secondAuthor);
+        Bukkit.getConsoleSender().sendMessage(VersionData.thirdAuthor);
     }
 }
