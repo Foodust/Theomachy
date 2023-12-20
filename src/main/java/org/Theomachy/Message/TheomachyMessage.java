@@ -8,12 +8,12 @@ import java.util.Map;
 
 public enum TheomachyMessage {
     // tip
-    TIP1(ChatColor.AQUA + "팁 1 : " + ChatColor.WHITE + "능력을 확인 하려면 " + ChatColor.GREEN + "/t help" + ChatColor.WHITE + " 를 입력합니다"),
-    TIP2(ChatColor.AQUA + "팁 2 : " + ChatColor.WHITE + "중앙 건물 양 옆 섬에도 아이템이 숨겨져 있습니다. "),
-    TIP3(ChatColor.AQUA + "팁 3 : " + ChatColor.WHITE + "각 팀의 다이아 몬드 블럭을 파괴 할 시 승리합니다."),
-    TIP4(ChatColor.AQUA + "팁 4 : " + ChatColor.GREEN + "/t gamble " + ChatColor.WHITE + "명령어로 뽑기를 할 수 있습니다."),
-    TIP5(ChatColor.AQUA + "팁 5 : " + ChatColor.WHITE + ChatColor.WHITE + "블레이즈 로드는 제작대에서 나무 막대를 세로로 일렬로 놓으면 만들 수 있습니다."),
-    TIP6(ChatColor.AQUA + "팁 6 : \n"
+    TIP1(ChatColor.AQUA + "【팁 1】  " + ChatColor.WHITE + "능력을 확인 하려면 " + ChatColor.GREEN + "/t help" + ChatColor.WHITE + " 를 입력합니다"),
+    TIP2(ChatColor.AQUA + "【팁 2】  " + ChatColor.WHITE + "중앙 건물 양 옆 섬에도 아이템이 숨겨져 있습니다. "),
+    TIP3(ChatColor.AQUA + "【팁 3】  " + ChatColor.WHITE + "각 팀의 다이아 몬드 블럭을 파괴 할 시 승리합니다."),
+    TIP4(ChatColor.AQUA + "【팁 4】  " + ChatColor.GREEN + "/t gamble " + ChatColor.WHITE + "명령어로 뽑기를 할 수 있습니다."),
+    TIP5(ChatColor.AQUA + "【팁 5】  " + ChatColor.WHITE + ChatColor.WHITE + "블레이즈 로드는 제작대에서 나무 막대를 세로로 일렬로 놓으면 만들 수 있습니다."),
+    TIP6(ChatColor.AQUA + "【팁 6】 \n"
             + ChatColor.AQUA + "【일반】" + ChatColor.WHITE + " 능력은 블레이즈 로드를 좌클릭하여\n"
             + ChatColor.RED + "【고급】" + ChatColor.WHITE + " 능력은 블레이즈 로드를 우클릭하여 이용합니다\n"
             + ChatColor.WHITE + "자세한 내용은 언제나 능력 설명을 참고합시다\n"),
@@ -158,7 +158,8 @@ public enum TheomachyMessage {
     ERROR_PERMISSION_DENIED("권한이 없습니다."),
     ERROR_THIS_COMMAND_EXECUTE_IN_GAME("이 명령어는 게임에서 실행해 주십시오."),
     ERROR_DEBUG_IS_ON(ChatColor.RED + "디버그 모드가 활성화 되어있습니다.\n 디버그 모드를 종료 해주세요"),
-    ERROR_GAME_ALREADY_STARTED(ChatColor.AQUA + "게임이 이미 시작되었습니다.");
+    ERROR_GAME_ALREADY_STARTED(ChatColor.AQUA + "게임이 이미 시작되었습니다."),
+    ERROR_COOL_TIMER("쿨타이머에 에러가 발생하여 쿨타임이 1초 느려집니다.");
     private final String message;
 
     TheomachyMessage(String message) {

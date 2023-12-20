@@ -46,13 +46,11 @@ public class TipTimer extends TimerTask
 			long max = (int) (Runtime.getRuntime().maxMemory() / 1048576);
 			long free = (int) (Runtime.getRuntime().freeMemory() / 1048576);
 			long use = max - free;
-			Bukkit.broadcastMessage(ChatColor.WHITE+"메모리(MB)   "+ChatColor.AQUA+String.valueOf(use)+ChatColor.WHITE+" / "+ChatColor.YELLOW+String.valueOf(max));
+			Theomachy.log.info(ChatColor.WHITE+"메모리(MB)   "+ChatColor.AQUA+ use + ChatColor.WHITE+ " / " + ChatColor.YELLOW + max);
 			if (free < 3750)
 			{
 				Theomachy.log.info("메모리 부족, 메모리 청소중...");
 				System.gc();
-				long free2 = (Runtime.getRuntime().freeMemory() / 1048576);
-				Theomachy.log.info("현재 사용 가능 메모리 : "+free2+"MB");
 			}
 		}
 		count++;

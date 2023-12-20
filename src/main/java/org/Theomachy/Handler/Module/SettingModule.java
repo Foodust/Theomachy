@@ -132,7 +132,6 @@ public class SettingModule {
                     Theomachy.DEBUG = true;
                     GameModule.Start = true;
                     wool.setType(Material.WHITE_WOOL);
-                    taskList.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
                     taskList.add(CommonModule.startTimerTask(new CoolTimeTimer(), 0L, 20L));
                 }
             }

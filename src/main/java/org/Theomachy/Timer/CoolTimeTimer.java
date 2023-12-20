@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Command.StartStopCommand;
@@ -87,7 +88,7 @@ public class CoolTimeTimer extends TimerTask {
                 }
             }
         } catch (Exception e) {
-            Theomachy.log.info("쿨타이머에 에러가 발생하여 쿨타임이 1초 느려집니다.");
+            Theomachy.log.info(TheomachyMessage.ERROR_COOL_TIMER.getMessage());
             Theomachy.log.info(e.getLocalizedMessage());
         }
         count++;
