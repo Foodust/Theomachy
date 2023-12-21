@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
 
 public class AbilityModule  {
     private final BlacklistModule blacklistModule = new BlacklistModule();
-    private final AbilityModule abilityModule = new AbilityModule();
     private  final RandomSkillHandler randomSkillHandler = new RandomSkillHandler();
     public AbilityModule(){};
     public void listOfAbilityPlayer(CommandSender sender) {
@@ -53,11 +52,11 @@ public class AbilityModule  {
 
             ItemStack abilityName = new ItemStack(Material.ITEM_FRAME);
             ItemStack abilityDescription = new ItemStack(Material.BOOK);
-            abilityModule.setInfoItem(
+            setInfoItem(
                     ability, abilityName, Objects.requireNonNull(abilityName.getItemMeta()),
                     abilityDescription, Objects.requireNonNull(abilityDescription.getItemMeta()));
 
-            ItemStack abilityRank = abilityModule.setRankItem(ability.rank);
+            ItemStack abilityRank = setRankItem(ability.rank);
 
             inventory.setItem(0, abilityDescription);
             inventory.setItem(4, abilityName);
@@ -244,7 +243,7 @@ public class AbilityModule  {
         int i = 0;
         for (Player player : playerlist) {
             String playerName = player.getName();
-            abilityModule.abilityAssignment(rn[i++], playerName, (Player) sender);
+            abilityAssignment(rn[i++], playerName, (Player) sender);
         }
 
         Bukkit.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
@@ -263,7 +262,7 @@ public class AbilityModule  {
             if (GameData.onlinePlayer.containsKey(playerName)) {
                 try {
                     int abilityCode = Integer.parseInt(abilityName);
-                    abilityModule.abilityAssignment(abilityCode, playerName, p);
+                    abilityAssignment(abilityCode, playerName, p);
                     Player player = GameData.onlinePlayer.get(playerName);
                     Bukkit.broadcastMessage("관리자가 " + ChatColor.RED + playerName + ChatColor.WHITE + " 에게 능력을 할당하였습니다.");
 
