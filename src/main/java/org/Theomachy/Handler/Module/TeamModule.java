@@ -62,6 +62,7 @@ public class TeamModule {
                     String teamName = teams[teamIndex++ % 2];
 
                     ChatColor newTeamColor = CommonModule.findColor(teamName);
+
                     if (teamNameOld == null) {
                         Bukkit.broadcastMessage(
                                 TheomachyMessage.INFO_PLAYER.getMessage() +
@@ -79,7 +80,8 @@ public class TeamModule {
                                         oldTeamColor + teamNameOld +
                                         ChatColor.WHITE + " > " + newTeamColor  + teamName);
                     }
-                    PlayerModule.setHealthScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                    PlayerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
+                    PlayerModule.setScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                     GameData.playerTeam.put(player.getName(), teamName);
                 }
             }
@@ -99,7 +101,8 @@ public class TeamModule {
                             Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + oldTeamColor +teamNameOld + ChatColor.WHITE + " > " + newTeamColor + teamName);
 
                         }
-                        PlayerModule.setHealthScoreBoard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                        PlayerModule.removeScoreboard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
+                        PlayerModule.setScoreBoard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                         GameData.playerTeam.put(data[i], teamName);
                     } else
                         sender.sendMessage(data[i] + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());

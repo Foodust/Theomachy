@@ -98,8 +98,9 @@ public class Theomachy extends JavaPlugin {
         // player 삭제
         PlayerModule.removeOnlinePlayer();
         // player 체력바 삭제
-        for(Player player: Bukkit.getOnlinePlayers())
-            PlayerModule.removePlayerPrefix(player);
+        for(Player player : Bukkit.getOnlinePlayers()){
+            PlayerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
+        }
         if (this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
