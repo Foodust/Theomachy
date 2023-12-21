@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class PlayerEvent implements Listener {
 
     public static ArrayList<Ability> PlayerDeathEventList = new ArrayList<Ability>();
-
+    private final PlayerModule playerModule = new PlayerModule();
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (GameModule.Start) {
@@ -101,6 +101,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        playerModule.moveHealthBar(event.getPlayer());
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())

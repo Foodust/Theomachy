@@ -45,15 +45,16 @@ public class PlayerModule {
 
     public void runHealthBar() {
         Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                ArmorStand armorStand = GameData.playerHealthBar.get(player.getName());
-                if (armorStand == null)
-                    continue;
-                else {
-                    armorStand.setCustomName(String.valueOf(player.getHealth()));
-                    armorStand.teleport(player.getLocation());
-                }
-            }
-        }, 0, -1);
+        }, 0, 0);
+    }
+
+    public void moveHealthBar(Player player) {
+        ArmorStand armorStand = GameData.playerHealthBar.get(player.getName());
+        if (armorStand == null)
+            return;
+        else {
+            armorStand.setCustomName(String.valueOf(player.getHealth()));
+            armorStand.teleport(player.getLocation());
+        }
     }
 }

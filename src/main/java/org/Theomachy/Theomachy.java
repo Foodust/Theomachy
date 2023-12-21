@@ -97,7 +97,7 @@ public class Theomachy extends JavaPlugin {
         playerModule.setOnlinePlayer();
 
         // player 체력
-        playerModule.runHealthBar();
+//        playerModule.runHealthBar();
     }
 
     public void onDisable() {
