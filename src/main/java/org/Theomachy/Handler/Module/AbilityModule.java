@@ -27,22 +27,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 
 public class AbilityModule {
-    public static void listOfAbilityPlayer(CommandSender sender)
-    {
-        if (PermissionChecker.Sender(sender))
-        {
-            if (!GameData.playerAbility.isEmpty())
-            {
+    public static void listOfAbilityPlayer(CommandSender sender) {
+        if (PermissionChecker.Sender(sender)) {
+            if (!GameData.playerAbility.isEmpty()) {
                 Collection<Ability> ability = GameData.playerAbility.values();
                 for (Ability e : ability)
-                    sender.sendMessage(ChatColor.WHITE+e.playerName+"  :  "+ChatColor.YELLOW+e.abilityName);
-            }
-            else
-            {
+                    sender.sendMessage(ChatColor.WHITE + e.playerName + "  :  " + ChatColor.YELLOW + e.abilityName);
+            } else {
                 sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY_ALL_PLAYER.getMessage());
             }
         }
     }
+
     public static void openAbilityHelpInventory(Player player) {
         Ability ability = GameData.playerAbility.get(player.getName());
         if (ability != null) {
@@ -73,13 +69,13 @@ public class AbilityModule {
                 assert abilityNormalCoolTimeItemMeta != null;
                 setCoolTimeItem(
                         abilityNormalCoolTimeItem, abilityNormalCoolTimeItemMeta, TheomachyMessage.EXPLAIN_ABILITY_NORMAL.getMessage(),
-                        ability.normalSkillCoolTime,ability.normalSkillStack
+                        ability.normalSkillCoolTime, ability.normalSkillStack
                 );
                 if (ability.rareSkillCoolTime != -1) {
                     assert abilityRareCoolTimeItemMeta != null;
                     setCoolTimeItem(
-                            abilityRareCoolTimeItem,abilityRareCoolTimeItemMeta,TheomachyMessage.EXPLAIN_ABILITY_RARE.getMessage(),
-                            ability.rareSkillCoolTime,ability.rareSkillStack
+                            abilityRareCoolTimeItem, abilityRareCoolTimeItemMeta, TheomachyMessage.EXPLAIN_ABILITY_RARE.getMessage(),
+                            ability.rareSkillCoolTime, ability.rareSkillStack
                     );
                     inventory.setItem(9, abilityNormalCoolTimeItem);
                     inventory.setItem(17, abilityRareCoolTimeItem);
@@ -103,7 +99,7 @@ public class AbilityModule {
 
     }
 
-    public static void setCoolTimeItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message, int coolTime, int stack){
+    public static void setCoolTimeItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message, int coolTime, int stack) {
         List<String> skillExplain = new ArrayList<String>();
         coolTimeItemMeta.setDisplayName(Message);
         skillExplain.add(TheomachyMessage.EXPLAIN_COOL_TIME.getMessage() + coolTime + TheomachyMessage.EXPLAIN_COOL_DOWN.getMessage());
@@ -111,7 +107,8 @@ public class AbilityModule {
         coolTimeItemMeta.setLore(skillExplain);
         coolTimeItem.setItemMeta(coolTimeItemMeta);
     }
-    public static void setPassiveItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message){
+
+    public static void setPassiveItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message) {
         List<String> skillExplain = new ArrayList<String>();
         coolTimeItemMeta.setDisplayName(Message);
         skillExplain.add(TheomachyMessage.EXPLAIN_CHECK_THE_ABILITY_DESCRIPTION.getMessage());
@@ -123,7 +120,7 @@ public class AbilityModule {
         itemNameMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_NAME.getMessage() + ChatColor.WHITE + ability.abilityName);
         itemDesMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_EXPLAIN.getMessage());
 
-        itemDesMeta.setLore(Arrays.stream(ability.description).toList());
+        itemDesMeta.setLore(Arrays.stream(ability.description).map(str -> ChatColor.WHITE + str).toList());
 
         itemNameStack.setItemMeta(itemNameMeta);
         itemDesStack.setItemMeta(itemDesMeta);
