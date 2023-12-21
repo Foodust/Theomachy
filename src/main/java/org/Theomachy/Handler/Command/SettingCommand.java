@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 
 import org.Theomachy.Checker.PermissionChecker;
 
-public class SettingCommand extends DefaultUtil {
+public class SettingCommand  {
+    private final SettingModule settingModule = new SettingModule();
     public void module(CommandSender sender) {
         Player player = (Player) sender;
         if (PermissionChecker.Sender(sender)) {

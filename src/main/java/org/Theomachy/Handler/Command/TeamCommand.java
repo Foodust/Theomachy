@@ -13,7 +13,8 @@ import org.Theomachy.Checker.PermissionChecker;
 
 import java.util.*;
 
-public class TeamCommand extends DefaultUtil {
+public class TeamCommand  {
+    private final TeamModule teamModule = new TeamModule();
     public void setTeam(CommandSender sender, Command command, String label, String[] data) {
         if (PermissionChecker.Sender(sender)) {
             teamModule.setTeam(sender, data);

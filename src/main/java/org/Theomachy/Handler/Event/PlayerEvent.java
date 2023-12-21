@@ -25,11 +25,10 @@ import java.util.ArrayList;
 
 public class PlayerEvent implements Listener {
 
-
     public static ArrayList<Ability> PlayerDeathEventList = new ArrayList<Ability>();
 
     @EventHandler
-    public static void onPlayerDeath(PlayerDeathEvent event) {
+    public void onPlayerDeath(PlayerDeathEvent event) {
         if (GameModule.Start) {
             for (Ability e : PlayerDeathEventList)
                 e.passiveSkill(event);
@@ -45,7 +44,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public static void onPlayerRespawn(PlayerRespawnEvent event) {
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (GameModule.Start) {
             Player player = event.getPlayer();
             if (Theomachy.IGNORE_BED) {
@@ -74,7 +73,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public static void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
         // 플레이어가 서버에 접속했을 때 실행될 작업을 정의합니다.
         Player player = event.getPlayer();
 
@@ -90,18 +89,18 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public static void onPlayerQuit(PlayerQuitEvent event) {
+    public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         GameData.onlinePlayer.remove(player.getName());
     }
 
     @EventHandler
-    public static void onPlayerKick(PlayerKickEvent event) {
+    public void onPlayerKick(PlayerKickEvent event) {
         Theomachy.log.info(event.getReason());
     }
 
     @EventHandler
-    public static void onPlayerMove(PlayerMoveEvent event) {
+    public void onPlayerMove(PlayerMoveEvent event) {
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
@@ -110,7 +109,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public static void onProjectileLaunch(ProjectileLaunchEvent event) {
+    public void onProjectileLaunch(ProjectileLaunchEvent event) {
         Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
             if (event.getEntity() instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
@@ -124,7 +123,7 @@ public class PlayerEvent implements Listener {
 
 
     @EventHandler
-    public static void onPlayerInteractEvent(PlayerInteractEvent event) {
+    public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (GameModule.Start) {
             String playerName = event.getPlayer().getName();
             Ability ability = GameData.playerAbility.get(playerName);
@@ -135,7 +134,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public static void onFoodLevelChange(FoodLevelChangeEvent event) {
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
         if (GameModule.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
@@ -146,7 +145,7 @@ public class PlayerEvent implements Listener {
     }
 
     @EventHandler
-    public static void onEntityRegainHealth(EntityRegainHealthEvent event) {
+    public void onEntityRegainHealth(EntityRegainHealthEvent event) {
         if (GameModule.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();

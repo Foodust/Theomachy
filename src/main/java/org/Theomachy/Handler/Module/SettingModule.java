@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SettingModule extends DefaultUtil {
+public class SettingModule  {
     static int settingSize = 2 * 9;
     static List<BukkitTask> taskList = new ArrayList<>();
+    private final CommonModule commonModule = new CommonModule();
 
     public  void openSettingInventory(Player player) {
         Inventory inventory = Bukkit.createInventory(null, settingSize, TheomachyMessage.SETTING.getMessage());

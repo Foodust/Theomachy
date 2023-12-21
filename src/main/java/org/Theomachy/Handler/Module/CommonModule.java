@@ -19,7 +19,8 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.TimerTask;
 
-public class CommonModule extends DefaultUtil {
+public class CommonModule {
+    private final EntityManager entityManager = new EntityManager();
     public boolean isNumeric(String str) {
         try {
             Double.parseDouble(str); // 숫자로 변환 시도

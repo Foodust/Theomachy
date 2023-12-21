@@ -16,7 +16,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.checkerframework.checker.units.qual.C;
 
-public class BlockEvent extends DefaultUtil implements Listener {
+public class BlockEvent  implements Listener {
+    private final CommonModule commonModule = new CommonModule();
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (GameModule.Start) {

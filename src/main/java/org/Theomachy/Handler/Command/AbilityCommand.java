@@ -1,6 +1,7 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Checker.PermissionChecker;
+import org.Theomachy.Handler.Module.AbilityModule;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
@@ -10,10 +11,13 @@ import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.Objects;
 
-public class AbilityCommand extends DefaultUtil {
+public class AbilityCommand  {
+    private  final AbilityModule abilityModule = new AbilityModule();
+    private final CommonModule commonModule = new CommonModule();
     public void abilityCollTimeClear(CommandSender sender)
     {
         if (PermissionChecker.Sender(sender))

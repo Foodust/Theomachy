@@ -10,7 +10,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SpawnModule extends DefaultUtil {
+public class SpawnModule  {
     public void spawnSetting(CommandSender sender, String[] data){
         if(data.length==1)
         {

@@ -13,7 +13,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
-public class MenuEvent extends DefaultUtil implements Listener {
+public class MenuEvent  implements Listener {
+    private final SettingModule settingModule = new SettingModule();
+    private final GamblingModule gamblingModule = new GamblingModule();
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getView().getTitle().equals(TheomachyMessage.SETTING_MENU.getMessage())) {

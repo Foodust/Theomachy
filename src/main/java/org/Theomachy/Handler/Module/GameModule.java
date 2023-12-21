@@ -18,9 +18,10 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.Collection;
 import java.util.List;
 
-public class GameModule extends DefaultUtil {
+public class GameModule  {
     public static boolean Ready = false;
     public static boolean Start = false;
+    private  final CommonModule commonModule = new CommonModule();
 
     public  void startGame(CommandSender sender){
         Ready = true;

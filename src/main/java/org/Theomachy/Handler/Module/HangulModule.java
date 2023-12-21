@@ -3,7 +3,7 @@ package org.Theomachy.Handler.Module;
 import org.Theomachy.Utility.DefaultUtil;
 import org.Theomachy.Utility.Hangul;
 
-public class HangulModule extends DefaultUtil {
+public class HangulModule  {
     public String getJosa(String jongSung){
         char josa = '가';
         try {

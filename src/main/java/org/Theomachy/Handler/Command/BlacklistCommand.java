@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 import org.Theomachy.Checker.PermissionChecker;
 
-public class BlacklistCommand extends DefaultUtil {
-
+public class BlacklistCommand  {
+    private final BlacklistModule blacklistModule = new BlacklistModule();
     public void module(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             Player player = (Player) sender;

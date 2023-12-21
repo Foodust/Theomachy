@@ -7,7 +7,8 @@ import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Checker.PermissionChecker;
 
-public class SpawnCommand extends DefaultUtil {
+public class SpawnCommand  {
+	private final SpawnModule spawnModule = new SpawnModule();
 	public void module(CommandSender sender, Command command, String label, String[] data)
 	{
 		if (PermissionChecker.Sender(sender)) {

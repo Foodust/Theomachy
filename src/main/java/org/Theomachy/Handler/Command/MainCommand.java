@@ -8,10 +8,19 @@ import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.Objects;
 
-public class MainCommand extends DefaultUtil{
+public class MainCommand {
+	private final StartStopCommand startStopCommand = new StartStopCommand();
+	private final AbilityCommand abilityCommand = new AbilityCommand();
+	private final AbilityModule abilityModule = new AbilityModule();
+	private final SpawnCommand spawnCommand = new SpawnCommand();
+	private final TeamCommand teamCommand = new TeamCommand();
+	private final BlacklistCommand blacklistCommand = new BlacklistCommand();
+	private final SettingCommand settingCommand = new SettingCommand();
+	private final GamblingCommand gamblingCommand = new GamblingCommand();
 	public void tCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
 		TheomachyMessage message = TheomachyMessage.getByMessage(data[0]);

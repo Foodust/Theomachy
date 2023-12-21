@@ -13,6 +13,7 @@ import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
+import org.Theomachy.Handler.Handler.RandomSkillHandler;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
@@ -27,7 +28,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AbilityModule extends DefaultUtil {
+public class AbilityModule  {
+    private final BlacklistModule blacklistModule = new BlacklistModule();
+    private final AbilityModule abilityModule = new AbilityModule();
+    private  final RandomSkillHandler randomSkillHandler = new RandomSkillHandler();
     public AbilityModule(){};
     public void listOfAbilityPlayer(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
@@ -236,7 +240,7 @@ public class AbilityModule extends DefaultUtil {
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
         int[] rn = randomSkillHandler.nonDuplicate();
         int length;
-        length = Math.min(playerlist.size(), blacklistModule.availableList);
+        length = Math.min(playerlist.size(), BlacklistModule.availableList);
         int i = 0;
         for (Player player : playerlist) {
             String playerName = player.getName();

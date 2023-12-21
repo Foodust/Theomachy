@@ -13,8 +13,9 @@ import org.Theomachy.Handler.Command.MainCommand;
 import java.util.Objects;
 
 
-public class CommandManager extends DefaultUtil implements CommandExecutor
+public class CommandManager  implements CommandExecutor
 {
+	private final MainCommand mainCommand = new MainCommand();
 	public CommandManager(Theomachy t)
 	{
 		Objects.requireNonNull(t.getCommand("t")).setExecutor(this);

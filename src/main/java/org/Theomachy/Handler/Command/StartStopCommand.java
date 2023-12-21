@@ -22,8 +22,8 @@ import org.Theomachy.Timer.TipTimer;
 import org.Theomachy.Checker.PermissionChecker;
 import org.bukkit.scheduler.BukkitTask;
 
-public class StartStopCommand extends DefaultUtil {
-
+public class StartStopCommand  {
+    private final GameModule gameModule = new GameModule();
 
     public void GameReady(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {

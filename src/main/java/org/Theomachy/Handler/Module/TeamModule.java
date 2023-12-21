@@ -11,8 +11,10 @@ import org.bukkit.scoreboard.*;
 
 import java.util.*;
 
-public class TeamModule extends DefaultUtil {
+public class TeamModule  {
 
+    private final CommonModule commonModule = new CommonModule();
+    private final PlayerModule playerModule = new PlayerModule();
     public void listTeam(CommandSender sender, String[] data) {
         if (data.length >= 2) {
             String teamName = data[1];

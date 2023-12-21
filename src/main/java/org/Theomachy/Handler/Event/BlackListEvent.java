@@ -13,7 +13,8 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class BlackListEvent extends DefaultUtil implements Listener {
+public class BlackListEvent  implements Listener {
+    private final BlacklistModule blacklistModule = new BlacklistModule();
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
         if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(TheomachyMessage.SETTING_BLACKLIST.getMessage())) {

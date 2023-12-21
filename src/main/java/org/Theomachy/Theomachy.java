@@ -45,7 +45,6 @@ public class Theomachy extends JavaPlugin {
     public static Plugin getPlugin() {
         return plugin;
     }
-
     private BukkitAudiences adventure;
     private final EventManager eventManager = new EventManager();
     private final BlacklistModule blacklistModule = new BlacklistModule();
@@ -89,7 +88,7 @@ public class Theomachy extends JavaPlugin {
         // tip timer
         Theomachy.tasks.add(commonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
-        // 설정 제거
+        // 초기화
         GameData.initialize();
 
         // player 등록

@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 
 import org.Theomachy.Theomachy;
 
-public class GamblingCommand extends DefaultUtil {
+public class GamblingCommand  {
+    private final GamblingModule gamblingModule = new GamblingModule();
     public void module(CommandSender sender) {
         Player player = (Player) sender;
         if (Theomachy.GAMBLING) {

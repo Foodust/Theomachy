@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GamblingModule extends DefaultUtil {
+public class GamblingModule {
+    private final CommonModule commonModule = new CommonModule();
 
     public void openGamblingInventory(Player player) {
         int gamblingSize = 1 * 9;

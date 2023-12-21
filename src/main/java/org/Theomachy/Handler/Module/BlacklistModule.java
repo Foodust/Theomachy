@@ -19,16 +19,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class BlacklistModule extends DefaultUtil {
+public class BlacklistModule {
+    private final CommonModule commonModule = new CommonModule();
+    private final HangulModule hangulModule = new HangulModule();
+    private final BlacklistModule blacklistModule = new BlacklistModule();
 
     public static List<Integer> godCanlist = new ArrayList<>();
-    public  static List<Integer> humanCanlist = new ArrayList<>();
-    public  static List<Integer> jujutsuCanList = new ArrayList<>();
-    public  static List<Integer> kimetsuCanlist = new ArrayList<>();
-    public  int availableList;
-    public static  List<Integer> blacklist = new ArrayList<>();
+    public static List<Integer> humanCanlist = new ArrayList<>();
+    public static List<Integer> jujutsuCanList = new ArrayList<>();
+    public static List<Integer> kimetsuCanlist = new ArrayList<>();
+    public static int availableList;
+    public static List<Integer> blacklist = new ArrayList<>();
     public static List<Inventory> blackListInventories = new ArrayList<>();
-    public  int itemsPerPage = 6 * 9; // 페이지당 아이템 수
+    public int itemsPerPage = 6 * 9; // 페이지당 아이템 수
 
     public void openBlackListInventory(Player player) {
         int totalPages = 4;
@@ -39,6 +42,7 @@ public class BlacklistModule extends DefaultUtil {
         }
         player.openInventory(blackListInventories.get(0)); // 첫 번째 페이지 인벤토리 열기
     }
+
     public Inventory makeInventory(int page) {
 
         Inventory inventory = Bukkit.createInventory(null, itemsPerPage, TheomachyMessage.SETTING_BLACKLIST.getMessage());
@@ -80,26 +84,27 @@ public class BlacklistModule extends DefaultUtil {
         return inventory;
     }
 
-    public  void setAbilityAllow(ItemStack item, ItemMeta meta){
+    public void setAbilityAllow(ItemStack item, ItemMeta meta) {
         item.setType(Material.WHITE_WOOL);
         assert meta != null;
         String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-        Object abilityNumObject = Integer.parseInt(abilityInfo[1].replaceAll(" ",""));
+        Object abilityNumObject = Integer.parseInt(abilityInfo[1].replaceAll(" ", ""));
         BlacklistModule.blacklist.remove(abilityNumObject);
         String josa = hangulModule.getJosa(abilityInfo[0].trim());
         Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
     }
-    public  void setAbilityExcept(ItemStack item, ItemMeta meta){
+
+    public void setAbilityExcept(ItemStack item, ItemMeta meta) {
         item.setType(Material.RED_WOOL);
         assert meta != null;
         String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
-        int abilityNum = Integer.parseInt(abilityInfo[1].replaceAll(" ",""));
+        int abilityNum = Integer.parseInt(abilityInfo[1].replaceAll(" ", ""));
         BlacklistModule.blacklist.add(abilityNum);
         String josa = hangulModule.getJosa(abilityInfo[0].trim());
         Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
     }
 
-    public void movePage(Player player, Inventory inventory ,int slot){
+    public void movePage(Player player, Inventory inventory, int slot) {
         int index = 0;
         for (; index < BlacklistModule.blackListInventories.size(); index++) {
             if (inventory.equals(BlacklistModule.blackListInventories.get(index))) {
@@ -113,7 +118,8 @@ public class BlacklistModule extends DefaultUtil {
             player.openInventory(BlacklistModule.blackListInventories.get(--index));
         }
     }
-    public void settingBlackList(File file){
+
+    public void settingBlackList(File file) {
         FileInputStream fileInputStream;
         InputStreamReader inputStreamReader;
         BufferedReader bufferedReader;
@@ -141,7 +147,8 @@ public class BlacklistModule extends DefaultUtil {
             if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.kimetsuCanlist.add(i);
         }
     }
-    public void freeBlackList(File file){
+
+    public void freeBlackList(File file) {
         BufferedWriter bufferedWriter;
 
         for (BukkitTask task : Theomachy.tasks) {

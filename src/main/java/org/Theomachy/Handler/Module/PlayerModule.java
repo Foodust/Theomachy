@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PlayerModule extends DefaultUtil {
+public class PlayerModule  {
+
     public void setOnlinePlayer(){
         for(Player player: Bukkit.getOnlinePlayers())
             GameData.onlinePlayer.put(player.getName(),player);
