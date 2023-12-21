@@ -32,8 +32,7 @@ public class PlayerModule {
         }
     }
 
-    public static void setScoreBoard(Player player, DisplaySlot displaySlot,Criteria criteria ,String name ,  String displayName) {
-        player.getScoreboard().clearSlot(displaySlot);
+    public static void setScoreBoard(Player player, DisplaySlot displaySlot,Criteria criteria ,String name ,String displayName) {
         Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective(name,criteria, displayName);
         objective.setDisplaySlot(displaySlot);

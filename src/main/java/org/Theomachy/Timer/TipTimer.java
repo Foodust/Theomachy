@@ -2,7 +2,6 @@ package org.Theomachy.Timer;
 
 import java.util.TimerTask;
 
-import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,7 +36,7 @@ public class TipTimer extends TimerTask
 				case 4-> Bukkit.broadcastMessage(TheomachyMessage.TIP4.getMessage());
 				case 5-> Bukkit.broadcastMessage(TheomachyMessage.TIP5.getMessage());
 				case 6-> Bukkit.broadcastMessage(TheomachyMessage.TIP6.getMessage());
-				case 7-> Bukkit.broadcastMessage(TheomachyMessage.TIP_ERROR_REPORTING.getMessage());
+				case 7-> Bukkit.broadcastMessage(TheomachyMessage.HEY_DEVELOPER.getMessage());
 				default -> tipCount = 0;
 			}
 		}

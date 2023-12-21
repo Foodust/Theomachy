@@ -38,8 +38,6 @@ public class Theomachy extends JavaPlugin {
 
     public static Logger log = Bukkit.getLogger();
     public static List<BukkitTask> tasks = new ArrayList<>();
-
-//    public static List<Objective> objectiveList = new ArrayList<>();
     public File file = new File(getDataFolder(), TheomachyMessage.SETTING_BLACKLIST_YML.getMessage());
 
     public static Plugin getPlugin() {

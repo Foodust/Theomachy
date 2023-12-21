@@ -22,7 +22,7 @@ public enum TheomachyMessage {
             + ChatColor.AQUA + "【일반】" + ChatColor.WHITE + " 능력은 블레이즈 로드를 좌클릭하여\n"
             + ChatColor.RED + "【고급】" + ChatColor.WHITE + " 능력은 블레이즈 로드를 우클릭하여 이용합니다\n"
             + ChatColor.WHITE + "자세한 내용은 언제나 능력 설명을 참고합시다\n"),
-    TIP_ERROR_REPORTING(ChatColor.GREEN + "오류 제보는 " + ChatColor.WHITE + "seunhoo@naver.com " + ChatColor.GREEN + "또는" + ChatColor.WHITE + "프덧#6170"),
+    HEY_DEVELOPER(ChatColor.GREEN + "개발자 연락은 " + ChatColor.WHITE + "seunhoo@naver.com" + ChatColor.GREEN + " 또는 " + ChatColor.WHITE + "프덧#6170"),
 
     // explain
     EXPLAIN_ABILITY_NORMAL(ChatColor.GREEN + "~ 일반 능력 | 블레이즈 막대 좌클릭~"),

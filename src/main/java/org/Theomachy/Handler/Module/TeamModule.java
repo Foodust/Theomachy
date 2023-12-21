@@ -51,7 +51,7 @@ public class TeamModule {
         if (data.length > 2) {
             // random 팀
             if (Objects.equals(data[1], TheomachyMessage.COMMAND_RANDOM.getMessage())) {
-                List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
+                List<Player> onlinePlayers = PlayerModule.getOnlinePlayer();
                 Collections.shuffle(onlinePlayers);
                 String[] teams = {data[2], data[3]};
                 int teamIndex = 0;
@@ -79,7 +79,7 @@ public class TeamModule {
                                         ChatColor.WHITE + " > " + newTeamColor  + teamName);
                     }
                     PlayerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
-                    PlayerModule.setScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                    PlayerModule.setScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName, newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                     GameData.playerTeam.put(player.getName(), teamName);
                 }
             }
