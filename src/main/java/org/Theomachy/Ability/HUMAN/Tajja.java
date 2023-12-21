@@ -46,14 +46,16 @@ public class Tajja extends Ability {
     public int getSwordDamage(Player player) {
         Inventory inventory = player.getInventory();
         for (ItemStack item : inventory.getContents()) {
-            if (item != null && item.getType().toString().endsWith("_SWORD")){
+            if (item != null &&
+                    (item.getType() == Material.WOODEN_SWORD ||
+                            item.getType() == Material.STONE_SWORD ||
+                            item.getType() == Material.IRON_SWORD ||
+                            item.getType() == Material.GOLDEN_SWORD ||
+                            item.getType() == Material.DIAMOND_SWORD ||
+                            item.getType() == Material.NETHERITE_SWORD)) {
                 ItemMeta meta = item.getItemMeta();
                 assert meta != null;
-                if (meta.hasAttributeModifiers()) {
-                    return (int) Objects.requireNonNull(meta.getAttributeModifiers(Attribute.GENERIC_ATTACK_DAMAGE)).stream()
-                            .mapToDouble(AttributeModifier::getAmount)
-                            .sum();
-                }
+                return (int)Objects.requireNonNull(meta.getAttributeModifiers(Attribute.GENERIC_ATTACK_DAMAGE)).stream().mapToDouble(AttributeModifier::getAmount).sum();
             }
         }
         return -1; // 해당하는 검을 찾지 못한 경우
