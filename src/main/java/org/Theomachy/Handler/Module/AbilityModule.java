@@ -25,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AbilityModule {
     public static void listOfAbilityPlayer(CommandSender sender) {
@@ -120,7 +121,9 @@ public class AbilityModule {
         itemNameMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_NAME.getMessage() + ChatColor.WHITE + ability.abilityName);
         itemDesMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_EXPLAIN.getMessage());
 
-        itemDesMeta.setLore(Arrays.stream(ability.description).map(str -> ChatColor.WHITE + str).toList());
+        itemDesMeta.setLore(Arrays.stream(ability.description)
+                .map(des -> ChatColor.WHITE + des)
+                .collect(Collectors.toList()));
 
         itemNameStack.setItemMeta(itemNameMeta);
         itemDesStack.setItemMeta(itemDesMeta);

@@ -6,10 +6,30 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PlayerModule {
-    private static final Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
+
+    public static void setOnlinePlayer(){
+        for(Player player: Bukkit.getOnlinePlayers())
+            GameData.onlinePlayer.put(player.getName(),player);
+    }
+    public static void removeOnlinePlayer(){
+        GameData.onlinePlayer.clear();
+    }
+
+    public static Player getOnlinePlayerOnce(String playerName){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getName().equals(playerName))
+                return player;
+        }
+        return null;
+    }
+    public static List<Player> getOnlinePlayer(){
+        return new ArrayList<>(Bukkit.getOnlinePlayers());
+    }
 
     public static void setPlayerMessage(Player player, String teamName, String prefix) {
         Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
@@ -22,24 +42,24 @@ public class PlayerModule {
     }
 
     public static void removePlayerPrefix(Player player) {
-        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
-        // 플레이어의 이름을 표시하는 팀 가져오기
-        Team team = scoreboard.getTeam(player.getName());
-        if (team != null) {
-            team.setPrefix("");
-        }
+        Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard().clearSlot(DisplaySlot.BELOW_NAME);
+//        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
+//        Team team = scoreboard.getTeam(player.getName());
+//        if (team != null) {
+//            team.setPrefix("");
+//        }
     }
 
-    public static void setScoreboard() {
+    public static void setHealthScoreBoard() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            setScoreboard(player,DisplaySlot.BELOW_NAME ,TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+            setHealthScoreBoard(player,DisplaySlot.BELOW_NAME, Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(),TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
         }
     }
 
-    public static void setScoreboard(Player player, DisplaySlot displaySlot , String message) {
+    public static void setHealthScoreBoard(Player player, DisplaySlot displaySlot,Criteria criteria ,String name ,  String displayName) {
         player.getScoreboard().clearSlot(displaySlot);
         Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
-        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, message);
+        Objective objective = scoreboard.registerNewObjective(name,criteria, displayName);
         objective.setDisplaySlot(displaySlot);
         objective.getScore(player.getName()).setScore((int) player.getHealth());
         player.setScoreboard(scoreboard);

@@ -2,7 +2,6 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -80,7 +79,7 @@ public class TeamModule {
                                         oldTeamColor + teamNameOld +
                                         ChatColor.WHITE + " > " + newTeamColor  + teamName);
                     }
-                    PlayerModule.setScoreboard(player, DisplaySlot.BELOW_NAME,newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                    PlayerModule.setHealthScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                     GameData.playerTeam.put(player.getName(), teamName);
                 }
             }
@@ -100,7 +99,7 @@ public class TeamModule {
                             Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + oldTeamColor +teamNameOld + ChatColor.WHITE + " > " + newTeamColor + teamName);
 
                         }
-                        PlayerModule.setScoreboard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                        PlayerModule.setHealthScoreBoard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                         GameData.playerTeam.put(data[i], teamName);
                     } else
                         sender.sendMessage(data[i] + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());

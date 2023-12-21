@@ -21,6 +21,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 
+import java.util.List;
+
 public class Ability
 {
 	public final String playerName;

@@ -85,12 +85,19 @@ public class Theomachy extends JavaPlugin {
         // tip timer
         Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
-        // player setting
-        PlayerModule.setScoreboard();
+        // player 등록
+        PlayerModule.setOnlinePlayer();
+
+        // player 체력
+        PlayerModule.setHealthScoreBoard();
     }
 
     public void onDisable() {
+        // blacklist 정리
         BlacklistModule.freeBlackList(file);
+        // player 삭제
+        PlayerModule.removeOnlinePlayer();
+        // player 체력바 삭제
         for(Player player: Bukkit.getOnlinePlayers())
             PlayerModule.removePlayerPrefix(player);
         if (this.adventure != null) {
