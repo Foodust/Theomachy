@@ -47,10 +47,10 @@ public class Theomachy extends JavaPlugin {
     }
 
     private BukkitAudiences adventure;
-    private EventManager eventManager;
-    private BlacklistModule blacklistModule;
-    private CommonModule commonModule;
-    private PlayerModule playerModule;
+    private final EventManager eventManager = new EventManager();
+    private final BlacklistModule blacklistModule = new BlacklistModule();
+    private final CommonModule commonModule = new CommonModule();
+    private final PlayerModule playerModule = new PlayerModule();
     public @NonNull BukkitAudiences adventure() {
         if (this.adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
