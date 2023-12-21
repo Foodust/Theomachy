@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
@@ -85,6 +86,9 @@ public class Theomachy extends JavaPlugin {
         // tip timer
         Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
+        // 설정 제거
+        GameData.initialize();
+
         // player 등록
         PlayerModule.setOnlinePlayer();
 
@@ -95,8 +99,8 @@ public class Theomachy extends JavaPlugin {
     public void onDisable() {
         // blacklist 정리
         BlacklistModule.freeBlackList(file);
-        // player 삭제
-        PlayerModule.removeOnlinePlayer();
+        // 설정 제거
+        GameData.initialize();
         // player 체력바 삭제
         for(Player player : Bukkit.getOnlinePlayers()){
             PlayerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());

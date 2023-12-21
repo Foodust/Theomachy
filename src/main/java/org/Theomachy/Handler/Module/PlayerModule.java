@@ -16,10 +16,6 @@ public class PlayerModule {
         for(Player player: Bukkit.getOnlinePlayers())
             GameData.onlinePlayer.put(player.getName(),player);
     }
-    public static void removeOnlinePlayer(){
-        GameData.onlinePlayer.clear();
-    }
-
     public static Player getOnlinePlayerOnce(String playerName){
         for(Player player : Bukkit.getOnlinePlayers()){
             if(player.getName().equals(playerName))
