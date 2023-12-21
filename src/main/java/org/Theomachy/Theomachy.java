@@ -90,6 +90,11 @@ public class Theomachy extends JavaPlugin {
         // player 등록
         PlayerModule.setOnlinePlayer();
 
+        // player 체력 초기화
+        for(Player player : PlayerModule.getOnlinePlayer()){
+            PlayerModule.removeScoreboard(player,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + player.getName());
+        }
+
         // player 체력
         PlayerModule.setHealthScoreBoard();
     }
