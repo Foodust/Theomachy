@@ -2,6 +2,8 @@ package org.Theomachy.Ability.HUMAN;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.Inventory;
@@ -12,6 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
+
+import java.util.Objects;
 
 public class Tajja extends Ability {
 
@@ -42,16 +46,13 @@ public class Tajja extends Ability {
     public int getSwordDamage(Player player) {
         Inventory inventory = player.getInventory();
         for (ItemStack item : inventory.getContents()) {
-            if (item != null &&
-                    (item.getType() == Material.WOODEN_SWORD ||
-                            item.getType() == Material.STONE_SWORD ||
-                            item.getType() == Material.IRON_SWORD ||
-                            item.getType() == Material.GOLDEN_SWORD ||
-                            item.getType() == Material.DIAMOND_SWORD ||
-                            item.getType() == Material.NETHERITE_SWORD)) {
+            if (item != null && item.getType().toString().endsWith("_SWORD")){
                 ItemMeta meta = item.getItemMeta();
-                if (meta instanceof Damageable damage) {
-                    return damage.getDamage();
+                assert meta != null;
+                if (meta.hasAttributeModifiers()) {
+                    return (int) Objects.requireNonNull(meta.getAttributeModifiers(Attribute.GENERIC_ATTACK_DAMAGE)).stream()
+                            .mapToDouble(AttributeModifier::getAmount)
+                            .sum();
                 }
             }
         }
