@@ -55,14 +55,14 @@ public class TeamModule {
                 Collections.shuffle(onlinePlayers);
                 String[] teams = {data[2], data[3]};
                 int teamIndex = 0;
-                GameData.playerTeam.clear();
                 for (Player player : onlinePlayers) {
                     String playerName = player.getName();
                     String teamNameOld = GameData.playerTeam.get(playerName);
                     String teamName = teams[teamIndex++ % 2];
-
                     ChatColor newTeamColor = CommonModule.findColor(teamName);
+
                     if (teamNameOld == null) {
+                        GameData.playerTeam.clear();
                         Bukkit.broadcastMessage(
                                 TheomachyMessage.INFO_PLAYER.getMessage() +
                                         ChatColor.RED + playerName +
@@ -79,7 +79,8 @@ public class TeamModule {
                                         ChatColor.WHITE + " > " + newTeamColor  + teamName);
                     }
                     PlayerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName);
-                    PlayerModule.setScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName, newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+                    PlayerModule.setScoreBoard(player, DisplaySlot.BELOW_NAME,Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName,
+                            newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                     GameData.playerTeam.put(player.getName(), teamName);
                 }
             }
@@ -92,6 +93,8 @@ public class TeamModule {
                         String teamName = data[1];
                         String teamNameOld = GameData.playerTeam.get(playerName);
                         ChatColor newTeamColor = CommonModule.findColor(teamName);
+                        PlayerModule.removeScoreboard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName);
+                        PlayerModule.setScoreBoard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName, newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                         if (teamNameOld == null) {
                             Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + " (이)가 팀 " + newTeamColor + teamName + ChatColor.WHITE + TheomachyMessage.INFO_SET.getMessage());
                         } else {
@@ -100,8 +103,6 @@ public class TeamModule {
                             Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + oldTeamColor +teamNameOld + ChatColor.WHITE + " > " + newTeamColor + teamName);
 
                         }
-                        PlayerModule.removeScoreboard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName);
-                        PlayerModule.setScoreBoard(Objects.requireNonNull(Bukkit.getPlayer(playerName)), DisplaySlot.BELOW_NAME,Criteria.HEALTH,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + playerName, newTeamColor + teamName +  TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
                         GameData.playerTeam.put(data[i], teamName);
                     } else
                         sender.sendMessage(data[i] + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
