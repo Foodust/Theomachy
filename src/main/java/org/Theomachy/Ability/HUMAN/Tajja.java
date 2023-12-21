@@ -23,7 +23,7 @@ public class Tajja extends Ability {
 
     public Tajja(String playerName) {
         super(playerName, AbilityInfo.Tajja, false, true, false, des);
-        this.rank = AbilityRank.B;
+        this.rank = AbilityRank.A;
     }
 
     public void passiveSkill(EntityDamageByEntityEvent event) {
@@ -31,6 +31,8 @@ public class Tajja extends Ability {
         if (player.getName().equals(this.playerName)) {
             if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
                 int swordDamage = getSwordDamage(player);
+                if(swordDamage == -1)
+                    return;
                 event.setDamage(swordDamage);
                 player.sendMessage("동작그만, 밑장 빼기냐.");
             }
@@ -49,10 +51,10 @@ public class Tajja extends Ability {
                             item.getType() == Material.NETHERITE_SWORD)) {
                 ItemMeta meta = item.getItemMeta();
                 if (meta instanceof Damageable damage) {
-                    return item.getType().getMaxDurability() - damage.getDamage();
+                    return damage.getDamage();
                 }
             }
         }
-        return 1; // 해당하는 검을 찾지 못한 경우
+        return -1; // 해당하는 검을 찾지 못한 경우
     }
 }
