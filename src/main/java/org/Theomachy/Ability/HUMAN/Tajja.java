@@ -35,7 +35,7 @@ public class Tajja extends Ability {
         if (player.getName().equals(this.playerName)) {
             if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
                 int swordDamage = getSwordDamage(player);
-                if(swordDamage == -1)
+                if (swordDamage == -1)
                     return;
                 event.setDamage(swordDamage);
                 player.sendMessage("동작그만, 밑장 빼기냐.");
@@ -44,20 +44,18 @@ public class Tajja extends Ability {
     }
 
     public int getSwordDamage(Player player) {
+        int damage = -1;
         Inventory inventory = player.getInventory();
         for (ItemStack item : inventory.getContents()) {
-            if (item != null &&
-                    (item.getType() == Material.WOODEN_SWORD ||
-                            item.getType() == Material.STONE_SWORD ||
-                            item.getType() == Material.IRON_SWORD ||
-                            item.getType() == Material.GOLDEN_SWORD ||
-                            item.getType() == Material.DIAMOND_SWORD ||
-                            item.getType() == Material.NETHERITE_SWORD)) {
-                ItemMeta meta = item.getItemMeta();
-                assert meta != null;
-                return (int)Objects.requireNonNull(meta.getAttributeModifiers(Attribute.GENERIC_ATTACK_DAMAGE)).stream().mapToDouble(AttributeModifier::getAmount).sum();
-            }
+            if (item != null)
+                switch (item.getType()) {
+                    case WOODEN_SWORD, GOLDEN_SWORD -> damage = 4;
+                    case STONE_SWORD -> damage = 5;
+                    case IRON_SWORD -> damage = 6;
+                    case DIAMOND_SWORD -> damage = 7;
+                    case NETHERITE_SWORD -> damage = 8;
+                }
         }
-        return -1; // 해당하는 검을 찾지 못한 경우
+        return -1;
     }
 }
