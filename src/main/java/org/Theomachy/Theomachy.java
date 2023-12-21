@@ -15,7 +15,9 @@ import org.Theomachy.Handler.Module.BlacklistModule;
 import org.Theomachy.Timer.TipTimer;
 import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -104,7 +106,6 @@ public class Theomachy extends JavaPlugin {
         blacklistModule.freeBlackList(file);
         // 설정 제거
         GameData.initialize();
-        // player 체력바 삭제
         if (this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
