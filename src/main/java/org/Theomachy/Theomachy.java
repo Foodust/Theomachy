@@ -95,12 +95,8 @@ public class Theomachy extends JavaPlugin {
         playerModule.setOnlinePlayer();
 
         // player 체력 초기화
-        for(Player player : playerModule.getOnlinePlayer()){
-            playerModule.removeScoreboard(player,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + player.getName());
-        }
 
         // player 체력
-        playerModule.setHealthScoreBoard();
     }
 
     public void onDisable() {
@@ -109,9 +105,6 @@ public class Theomachy extends JavaPlugin {
         // 설정 제거
         GameData.initialize();
         // player 체력바 삭제
-        for(Player player : Bukkit.getOnlinePlayers()){
-            playerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
-        }
         if (this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
