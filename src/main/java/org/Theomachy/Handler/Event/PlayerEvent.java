@@ -3,13 +3,11 @@ package org.Theomachy.Handler.Event;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -86,6 +84,7 @@ public class PlayerEvent implements Listener {
                 ability.initialize();
             }
         }
+        playerModule.setHealthMessage(player);
     }
 
     @EventHandler
@@ -101,7 +100,6 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        playerModule.moveHealthBar(event.getPlayer());
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())

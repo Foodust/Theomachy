@@ -3,13 +3,15 @@ package org.Theomachy.Handler.Module;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.*;
+import org.bukkit.scoreboard.Criteria;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.*;
 
@@ -32,29 +34,34 @@ public class PlayerModule {
         return new ArrayList<>(Bukkit.getOnlinePlayers());
     }
 
-    public void setHealthBar(Player player, String text) {
+    public ArmorStand setArmorStand(Player player, String text) {
         Location location = player.getLocation();
-        ArmorStand healthBar = (ArmorStand) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ARMOR_STAND); //Spawn the ArmorStand
-        healthBar.setGravity(false); //Make sure it doesn't fall
-        healthBar.setCanPickupItems(false); //I'm not sure what happens if you leave this as it is, but you might as well disable it
-        healthBar.setCustomName(text); //Set this to the text you want
-        healthBar.setCustomNameVisible(true); //This makes the text appear no matter if your looking at the entity or not
-        healthBar.setVisible(false); //Makes the ArmorStand invisible
-        GameData.playerHealthBar.put(player.getName(), healthBar);
+        ArmorStand armorStand = (ArmorStand) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ARMOR_STAND); //Spawn the ArmorStand
+        armorStand.setGravity(false); //Make sure it doesn't fall
+        armorStand.setCanPickupItems(false); //I'm not sure what happens if you leave this as it is, but you might as well disable it
+        armorStand.setCustomName(text); //Set this to the text you want
+        armorStand.setCustomNameVisible(true); //This makes the text appear no matter if your looking at the entity or not
+        armorStand.setVisible(false); //Makes the ArmorStand invisible
+        return armorStand;
     }
 
-    public void runHealthBar() {
-        Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-        }, 0, 0);
-    }
-
-    public void moveHealthBar(Player player) {
-        ArmorStand armorStand = GameData.playerHealthBar.get(player.getName());
+    public void moveArmorStand(Player player,ArmorStand armorStand) {
         if (armorStand == null)
             return;
         else {
             armorStand.setCustomName(String.valueOf(player.getHealth()));
             armorStand.teleport(player.getLocation());
         }
+    }
+    public void setHealthMessage(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            setHealthMessage(player);
+        }
+    }
+    public void setHealthMessage(Player player){
+        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
+        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
+        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        player.setScoreboard(scoreboard);
     }
 }

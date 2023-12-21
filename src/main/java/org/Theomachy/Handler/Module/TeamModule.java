@@ -2,12 +2,10 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.*;
 
 import java.util.*;
 
@@ -82,7 +80,6 @@ public class TeamModule {
                                         oldTeamColor + teamNameOld +
                                         ChatColor.WHITE + " > " + newTeamColor + teamName);
                     }
-                    playerModule.setHealthBar(player, player.getHealth() + " " + newTeamColor + teamName + TheomachyMessage.SCOREBOARD_HEALTH.getMessage()   );
                     GameData.playerTeam.put(playerName, teamName);
                 }
             }
@@ -101,7 +98,6 @@ public class TeamModule {
                             ChatColor oldTeamColor = commonModule.findColor(teamNameOld);
                             Bukkit.broadcastMessage(TheomachyMessage.INFO_PLAYER.getMessage() + ChatColor.RED + playerName + ChatColor.WHITE + TheomachyMessage.INFO_CHANGE_TEAM.getMessage() + oldTeamColor + teamNameOld + ChatColor.WHITE + " > " + newTeamColor + teamName);
                         }
-                        playerModule.setHealthBar(Objects.requireNonNull(Bukkit.getPlayer(playerName)), Objects.requireNonNull(Bukkit.getPlayer(playerName)).getHealth() + " " + newTeamColor + teamName + TheomachyMessage.SCOREBOARD_HEALTH.getMessage()   );
                         GameData.playerTeam.put(data[i], teamName);
                     } else
                         sender.sendMessage(data[i] + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
