@@ -53,15 +53,5 @@ public class PlayerModule {
             armorStand.teleport(player.getLocation());
         }
     }
-    public void setHealthMessage(){
-        for(Player player : Bukkit.getOnlinePlayers()){
-            setHealthMessage(player);
-        }
-    }
-    public void setHealthMessage(Player player){
-        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
-        Objective objective = scoreboard.registerNewObjective(TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage(), Criteria.HEALTH, TheomachyMessage.SCOREBOARD_HEALTH.getMessage());
-        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-        player.setScoreboard(scoreboard);
-    }
+
 }

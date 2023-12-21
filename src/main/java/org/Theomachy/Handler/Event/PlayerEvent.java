@@ -84,7 +84,6 @@ public class PlayerEvent implements Listener {
                 ability.initialize();
             }
         }
-        playerModule.setHealthMessage(player);
     }
 
     @EventHandler

@@ -96,8 +96,6 @@ public class Theomachy extends JavaPlugin {
         // player 등록
         playerModule.setOnlinePlayer();
 
-        // player 체력
-        playerModule.setHealthMessage();
 
     }
 
