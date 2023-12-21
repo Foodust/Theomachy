@@ -51,8 +51,8 @@ public class TeamModule {
         if (data.length > 2) {
             // random 팀
             if (Objects.equals(data[1], TheomachyMessage.COMMAND_RANDOM.getMessage())) {
-                List<Player> onlinePlayers = PlayerModule.getOnlinePlayer();
-                Collections.shuffle(onlinePlayers);
+                List<Player> onlinePlayers = new ArrayList<>(GameData.onlinePlayer.values());
+//                Collections.shuffle(onlinePlayers);
                 String[] teams = {data[2], data[3]};
                 int teamIndex = 0;
                 GameData.playerTeam.clear();
