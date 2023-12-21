@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Event;
 
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,12 +13,12 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class BlackListEvent implements Listener {
+public class BlackListEvent extends DefaultUtil implements Listener {
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
         if (ChatColor.stripColor(event.getView().getOriginalTitle()).equals(TheomachyMessage.SETTING_BLACKLIST.getMessage())) {
             Player player = (Player) event.getPlayer();
-            BlacklistModule.openBlackListInventory(player);
+            blacklistModule.openBlackListInventory(player);
         }
     }
 
@@ -28,13 +29,13 @@ public class BlackListEvent implements Listener {
             ItemStack item = event.getCurrentItem();
             if (item == null) return;
             ItemMeta meta = item.getItemMeta();
-
+            assert meta != null;
             if (item.getType().equals(Material.WHITE_WOOL)) {
-                BlacklistModule.setAbilityExcept(item, meta);
+                blacklistModule.setAbilityExcept(item, meta);
             } else if (item.getType().equals(Material.RED_WOOL)) {
-                BlacklistModule.setAbilityAllow(item, meta);
+                blacklistModule.setAbilityAllow(item, meta);
             } else if (item.getType().equals(Material.ITEM_FRAME)) {
-                BlacklistModule.movePage((Player) event.getWhoClicked(), event.getInventory(), event.getSlot());
+                blacklistModule.movePage((Player) event.getWhoClicked(), event.getInventory(), event.getSlot());
             }
         }
     }

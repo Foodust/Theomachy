@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -9,8 +10,8 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SpawnModule {
-    public static void spawnSetting(CommandSender sender, String[] data){
+public class SpawnModule extends DefaultUtil {
+    public void spawnSetting(CommandSender sender, String[] data){
         if(data.length==1)
         {
             Player player=(Player)sender;

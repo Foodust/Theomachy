@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import java.util.Random;
 
 public class EntityManager {
-    public static void spawnRandomFirework(Firework firework) {
+    public void spawnRandomFirework(Firework firework) {
         Random random = new Random();
         FireworkMeta fireworkMeta = firework.getFireworkMeta();
         FireworkEffect.Type type = FireworkEffect.Type.values()[random.nextInt(FireworkEffect.Type.values().length)];

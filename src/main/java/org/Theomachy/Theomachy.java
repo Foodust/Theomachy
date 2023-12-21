@@ -7,11 +7,13 @@ import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.Theomachy.Data.GameData;
+import org.Theomachy.Handler.Manager.EntityManager;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.Theomachy.Timer.TipTimer;
+import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -45,7 +47,10 @@ public class Theomachy extends JavaPlugin {
     }
 
     private BukkitAudiences adventure;
-
+    private EventManager eventManager;
+    private BlacklistModule blacklistModule;
+    private CommonModule commonModule;
+    private PlayerModule playerModule;
     public @NonNull BukkitAudiences adventure() {
         if (this.adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
@@ -61,7 +66,7 @@ public class Theomachy extends JavaPlugin {
         UpdateChecker.check("5.0");
 
         //plugin 기본 설정 메세지
-        CommonModule.defaultPluginMessage();
+        commonModule.defaultPluginMessage();
 
         // blacklist 세이브
         saveResource(TheomachyMessage.SETTING_BLACKLIST_YML.getMessage(), true);
@@ -70,43 +75,43 @@ public class Theomachy extends JavaPlugin {
         CommandManager commandManager = new CommandManager(this);
 
         // recipe 등록
-        CommonModule.settingBlazeRodRecipe(this);
+        commonModule.settingBlazeRodRecipe(this);
 
         // event 등록
-        EventManager.settingEvent(getServer(), this);
+        eventManager.settingEvent(getServer(), this);
 
         // blacklist
-        BlacklistModule.settingBlackList(file);
+        blacklistModule.settingBlackList(file);
 
         // 기본 정보
-        CommonModule.defaultLogMessage(this);
+        commonModule.defaultLogMessage(this);
 
         // tip timer
-        Theomachy.tasks.add(CommonModule.startTimerTask(new TipTimer(), 0L, 20L));
+        Theomachy.tasks.add(commonModule.startTimerTask(new TipTimer(), 0L, 20L));
 
         // 설정 제거
         GameData.initialize();
 
         // player 등록
-        PlayerModule.setOnlinePlayer();
+        playerModule.setOnlinePlayer();
 
         // player 체력 초기화
-        for(Player player : PlayerModule.getOnlinePlayer()){
-            PlayerModule.removeScoreboard(player,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + player.getName());
+        for(Player player : playerModule.getOnlinePlayer()){
+            playerModule.removeScoreboard(player,TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage() + player.getName());
         }
 
         // player 체력
-        PlayerModule.setHealthScoreBoard();
+        playerModule.setHealthScoreBoard();
     }
 
     public void onDisable() {
         // blacklist 정리
-        BlacklistModule.freeBlackList(file);
+        blacklistModule.freeBlackList(file);
         // 설정 제거
         GameData.initialize();
         // player 체력바 삭제
         for(Player player : Bukkit.getOnlinePlayers()){
-            PlayerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
+            playerModule.removeScoreboard(player, TheomachyMessage.SCOREBOARD_HEALTH_BAR.getMessage());
         }
         if (this.adventure != null) {
             this.adventure.close();

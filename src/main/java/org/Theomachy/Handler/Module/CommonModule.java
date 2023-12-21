@@ -4,6 +4,7 @@ import org.Theomachy.Data.VersionData;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Manager.EntityManager;
 import org.Theomachy.Theomachy;
+import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,8 +19,8 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.TimerTask;
 
-public class CommonModule {
-    public static boolean isNumeric(String str) {
+public class CommonModule extends DefaultUtil {
+    public boolean isNumeric(String str) {
         try {
             Double.parseDouble(str); // 숫자로 변환 시도
             return true; // 변환이 성공하면 숫자임
@@ -28,7 +29,7 @@ public class CommonModule {
         }
     }
 
-    public static ChatColor findColor(String message){
+    public ChatColor findColor(String message){
         switch (message.toLowerCase()){
             case "blue" -> {
                 return ChatColor.BLUE;
@@ -45,7 +46,7 @@ public class CommonModule {
         }
         return ChatColor.WHITE;
     }
-    public static ItemStack setItem(Material material, int amount, String title) {
+    public ItemStack setItem(Material material, int amount, String title) {
         ItemStack prevItem = new ItemStack(material, amount);
         ItemMeta prevItemMeta = prevItem.getItemMeta();
         assert prevItemMeta != null;
@@ -53,28 +54,28 @@ public class CommonModule {
         prevItem.setItemMeta(prevItemMeta);
         return prevItem;
     }
-    public static void breakDiamond(BlockBreakEvent event){
+    public void breakDiamond(BlockBreakEvent event){
         for(int i = 0 ; i < 5; i++){
             Bukkit.broadcastMessage(ChatColor.GREEN + event.getPlayer().getName() + TheomachyMessage.END_WHO_BREAK_DIAMOND);
         }
         Firework firework = event.getPlayer().getWorld().spawn(event.getBlock().getLocation(), Firework.class);
-        EntityManager.spawnRandomFirework(firework);
+        entityManager.spawnRandomFirework(firework);
     }
-    public static BukkitTask startTimerTask(TimerTask task, long delay, long period){
+    public BukkitTask startTimerTask(TimerTask task, long delay, long period){
         return Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),task , delay,period);
     }
 
-    public static void settingBlazeRodRecipe(Plugin plugin){
+    public void settingBlazeRodRecipe(Plugin plugin){
         NamespacedKey customBlazeRodRecipe = new NamespacedKey(plugin, TheomachyMessage.SETTING_CUSTOM_BLASE_LOD_RECIPE.getMessage());
         ShapedRecipe recipe = new ShapedRecipe(customBlazeRodRecipe, new ItemStack(Material.BLAZE_ROD)).shape("|", "|", "|").setIngredient('|', Material.STICK);
         plugin.getServer().addRecipe(recipe);
     }
 
-    public static void defaultPluginMessage(){
+    public void defaultPluginMessage(){
         Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_ENABLED.getMessage());
         Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_DEFAULT_SETTING.getMessage());
     }
-    public static void defaultLogMessage(Plugin plugin){
+    public void defaultLogMessage(Plugin plugin){
         // ability Count
         Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_LIST_OF_ACCEPT_ABILITY.getMessage());
         Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_GOD.getMessage() + " : " + BlacklistModule.godCanlist.size());

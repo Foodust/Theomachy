@@ -14,7 +14,7 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Handler.Handler.RandomSkillHandler;
+import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,8 +27,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AbilityModule {
-    public static void listOfAbilityPlayer(CommandSender sender) {
+public class AbilityModule extends DefaultUtil {
+    public AbilityModule(){};
+    public void listOfAbilityPlayer(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
             if (!GameData.playerAbility.isEmpty()) {
                 Collection<Ability> ability = GameData.playerAbility.values();
@@ -40,7 +41,7 @@ public class AbilityModule {
         }
     }
 
-    public static void openAbilityHelpInventory(Player player) {
+    public void openAbilityHelpInventory(Player player) {
         Ability ability = GameData.playerAbility.get(player.getName());
         if (ability != null) {
             int inventorySize = 2 * 9;
@@ -48,11 +49,11 @@ public class AbilityModule {
 
             ItemStack abilityName = new ItemStack(Material.ITEM_FRAME);
             ItemStack abilityDescription = new ItemStack(Material.BOOK);
-            AbilityModule.setInfoItem(
+            abilityModule.setInfoItem(
                     ability, abilityName, Objects.requireNonNull(abilityName.getItemMeta()),
                     abilityDescription, Objects.requireNonNull(abilityDescription.getItemMeta()));
 
-            ItemStack abilityRank = AbilityModule.setRankItem(ability.rank);
+            ItemStack abilityRank = abilityModule.setRankItem(ability.rank);
 
             inventory.setItem(0, abilityDescription);
             inventory.setItem(4, abilityName);
@@ -100,7 +101,7 @@ public class AbilityModule {
 
     }
 
-    public static void setCoolTimeItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message, int coolTime, int stack) {
+    public void setCoolTimeItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message, int coolTime, int stack) {
         List<String> skillExplain = new ArrayList<String>();
         coolTimeItemMeta.setDisplayName(Message);
         skillExplain.add(TheomachyMessage.EXPLAIN_COOL_TIME.getMessage() + coolTime + TheomachyMessage.EXPLAIN_COOL_DOWN.getMessage());
@@ -109,7 +110,7 @@ public class AbilityModule {
         coolTimeItem.setItemMeta(coolTimeItemMeta);
     }
 
-    public static void setPassiveItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message) {
+    public void setPassiveItem(ItemStack coolTimeItem, ItemMeta coolTimeItemMeta, String Message) {
         List<String> skillExplain = new ArrayList<String>();
         coolTimeItemMeta.setDisplayName(Message);
         skillExplain.add(TheomachyMessage.EXPLAIN_CHECK_THE_ABILITY_DESCRIPTION.getMessage());
@@ -117,7 +118,7 @@ public class AbilityModule {
         coolTimeItem.setItemMeta(coolTimeItemMeta);
     }
 
-    public static void setInfoItem(Ability ability, ItemStack itemNameStack, ItemMeta itemNameMeta, ItemStack itemDesStack, ItemMeta itemDesMeta) {
+    public void setInfoItem(Ability ability, ItemStack itemNameStack, ItemMeta itemNameMeta, ItemStack itemDesStack, ItemMeta itemDesMeta) {
         itemNameMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_NAME.getMessage() + ChatColor.WHITE + ability.abilityName);
         itemDesMeta.setDisplayName(TheomachyMessage.EXPLAIN_ABILITY_EXPLAIN.getMessage());
 
@@ -129,7 +130,7 @@ public class AbilityModule {
         itemDesStack.setItemMeta(itemDesMeta);
     }
 
-    public static ItemStack setRankItem(AbilityRank rank) {
+    public ItemStack setRankItem(AbilityRank rank) {
         ItemStack rankItemStack = new ItemStack(Material.AIR);
         ItemMeta itemMeta;
         switch (rank) {
@@ -172,7 +173,7 @@ public class AbilityModule {
         return rankItemStack;
     }
 
-    public static void explainCommand(CommandSender sender) {
+    public void explainCommand(CommandSender sender) {
         sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_LIST_HELP.getMessage());
         sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_SET_RANDOM.getMessage());
         sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_REMOVE_PLAYER.getMessage());
@@ -180,7 +181,7 @@ public class AbilityModule {
         sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_SET.getMessage());
     }
 
-    public static void showCode(CommandSender sender) {
+    public void showCode(CommandSender sender) {
 
         sender.sendMessage(TheomachyMessage.INFO_GOD.getMessage());
         for (AbilityInfo abilityInfo : AbilityData.godEnum) {
@@ -200,17 +201,17 @@ public class AbilityModule {
         }
     }
 
-    public static void errorMessage(CommandSender sender) {
+    public void errorMessage(CommandSender sender) {
         sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
         sender.sendMessage(TheomachyMessage.ERROR_CHECK_T_A_COMMAND.getMessage());
     }
 
-    public static void Reset() {
+    public void Reset() {
         GameData.playerAbility.clear();
         Bukkit.broadcastMessage(TheomachyMessage.INFO_REMOVE_ALL_PLAYER_ABILITY.getMessage());
     }
 
-    public static void Remove(CommandSender sender, String playerName) {
+    public void remove(CommandSender sender, String playerName) {
         if (playerName != null) {
             Ability ability = GameData.playerAbility.get(playerName);
             if (ability != null) {
@@ -223,7 +224,7 @@ public class AbilityModule {
         }
     }
 
-    public static void RandomAssignment(CommandSender sender) {
+    public void RandomAssignment(CommandSender sender) {
 
         if (!GameData.playerAbility.isEmpty()) {
             Bukkit.broadcastMessage(TheomachyMessage.INFO_RESET_AND_RANDOM_ABILITY.getMessage());
@@ -233,13 +234,13 @@ public class AbilityModule {
         Bukkit.broadcastMessage(TheomachyMessage.INFO_AVAILABLE_PLAYERS.getMessage());
         for (Player e : playerlist)
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
-        int[] rn = RandomSkillHandler.nonDuplicate();
+        int[] rn = randomSkillHandler.nonDuplicate();
         int length;
-        length = Math.min(playerlist.size(), BlacklistModule.availableList);
+        length = Math.min(playerlist.size(), blacklistModule.availableList);
         int i = 0;
         for (Player player : playerlist) {
             String playerName = player.getName();
-            AbilityModule.abilityAssignment(rn[i++], playerName, (Player) sender);
+            abilityModule.abilityAssignment(rn[i++], playerName, (Player) sender);
         }
 
         Bukkit.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
@@ -248,7 +249,7 @@ public class AbilityModule {
             Bukkit.broadcastMessage(TheomachyMessage.ERROR_TOO_MANY_PLAYER.getMessage());
     }
 
-    public static void forceAssignment(CommandSender sender, String[] data) {
+    public void forceAssignment(CommandSender sender, String[] data) {
 
         Player p = (Player) sender;
 
@@ -258,7 +259,7 @@ public class AbilityModule {
             if (GameData.onlinePlayer.containsKey(playerName)) {
                 try {
                     int abilityCode = Integer.parseInt(abilityName);
-                    AbilityModule.abilityAssignment(abilityCode, playerName, p);
+                    abilityModule.abilityAssignment(abilityCode, playerName, p);
                     Player player = GameData.onlinePlayer.get(playerName);
                     Bukkit.broadcastMessage("관리자가 " + ChatColor.RED + playerName + ChatColor.WHITE + " 에게 능력을 할당하였습니다.");
 
@@ -273,7 +274,7 @@ public class AbilityModule {
         }
     }
 
-    public static void abilityAssignment(int abilityNumber, String playerName, CommandSender p) {
+    public void abilityAssignment(int abilityNumber, String playerName, CommandSender p) {
         // god
         if (abilityNumber == AbilityInfo.Zeus.getIndex())
             GameData.playerAbility.put(playerName, new Zeus(playerName));
@@ -397,7 +398,7 @@ public class AbilityModule {
         }
     }
 
-    public static void abilityAssignment(AbilityInfo abilityInfo, String playerName, CommandSender p) {
+    public void abilityAssignment(AbilityInfo abilityInfo, String playerName, CommandSender p) {
         switch (abilityInfo) {
             case Zeus -> GameData.playerAbility.put(playerName, new Zeus(playerName));
             case Poseidon -> GameData.playerAbility.put(playerName, new Poseidon(playerName));

@@ -52,7 +52,7 @@ public class DamageEvent implements Listener {
         }
     }
     @EventHandler
-    public static void onEntityDamage(EntityDamageEvent event) {
+    public void onEntityDamage(EntityDamageEvent event) {
         if (GameModule.Start) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
@@ -66,7 +66,7 @@ public class DamageEvent implements Listener {
     }
 
     @EventHandler
-    public static void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         try {
             if (GameModule.Start) {
                 if (event.getDamager() instanceof Player &&

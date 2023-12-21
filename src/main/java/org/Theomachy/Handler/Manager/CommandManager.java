@@ -1,6 +1,7 @@
 package org.Theomachy.Handler.Manager;
 
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +13,7 @@ import org.Theomachy.Handler.Command.MainCommand;
 import java.util.Objects;
 
 
-public class CommandManager implements CommandExecutor
+public class CommandManager extends DefaultUtil implements CommandExecutor
 {
 	public CommandManager(Theomachy t)
 	{
@@ -42,14 +43,14 @@ public class CommandManager implements CommandExecutor
 				sender.sendMessage(TheomachyMessage.EXPLAIN_GAMBLING.getMessage());
 			}
 			else
-				MainCommand.tCommandHandler(sender, command, label, data);
+				mainCommand.tCommandHandler(sender, command, label, data);
 		}
 		else if (label.equalsIgnoreCase(TheomachyMessage.COMMAND_X.getMessage()))
 		{
 			if (data.length==0) //설명 보기
 				sender.sendMessage(TheomachyMessage.EXPLAIN_X_COMMAND.getMessage());
 			else
-				MainCommand.xCommandHandler(sender, command, label, data);
+				mainCommand.xCommandHandler(sender, command, label, data);
 		}
 		return true;
 	}

@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 public class ExplodeEvent implements Listener {
 
     @EventHandler
-    public static void onEntityExplode(EntityExplodeEvent event) {
+    public void onEntityExplode(EntityExplodeEvent event) {
         Entity entity = event.getEntity();
         if (GameModule.Start && entity.getType() == EntityType.FIREBALL)
             event.blockList().clear();

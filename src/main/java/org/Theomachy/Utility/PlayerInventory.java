@@ -6,7 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import org.Theomachy.Theomachy;
-import org.Theomachy.Message.AbilityCoolTimeMesage;
+import org.Theomachy.Message.AbilityCoolTimeMessage;
 
 public class PlayerInventory
 {
@@ -22,7 +22,7 @@ public class PlayerInventory
 			return true;
 		else
 		{
-			AbilityCoolTimeMesage.LackItemError(player, material, stack);
+			AbilityCoolTimeMessage.LackItemError(player, material, stack);
 			return false;
 		}
 	}
