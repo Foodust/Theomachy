@@ -13,12 +13,12 @@ public enum TheomachyMessage {
     DIFFICULT_NORMAL(ChatColor.YELLOW + "보통"),
     DIFFICULT_HARD(ChatColor.RED + "어려움"),
     // tip
-    TIP1(ChatColor.AQUA + "【팁 1】  " + ChatColor.WHITE + "능력을 확인 하려면 " + ChatColor.GREEN + "/t help" + ChatColor.WHITE + " 를 입력합니다"),
-    TIP2(ChatColor.AQUA + "【팁 2】  " + ChatColor.WHITE + "중앙 건물 양 옆 섬에도 아이템이 숨겨져 있습니다. "),
-    TIP3(ChatColor.AQUA + "【팁 3】  " + ChatColor.WHITE + "각 팀의 다이아 몬드 블럭을 파괴 할 시 승리합니다."),
-    TIP4(ChatColor.AQUA + "【팁 4】  " + ChatColor.GREEN + "/t gamble " + ChatColor.WHITE + "명령어로 뽑기를 할 수 있습니다."),
-    TIP5(ChatColor.AQUA + "【팁 5】  " + ChatColor.WHITE + ChatColor.WHITE + "블레이즈 로드는 제작대에서 나무 막대를 세로로 일렬로 놓으면 만들 수 있습니다."),
-    TIP6(ChatColor.AQUA + "【팁 6】 \n"
+    TIP1(ChatColor.AQUA + "【팁】  " + ChatColor.WHITE + "능력을 확인 하려면 " + ChatColor.GREEN + "/t help" + ChatColor.WHITE + " 를 입력합니다"),
+    TIP2(ChatColor.AQUA + "【팁】  " + ChatColor.WHITE + "중앙 건물 양 옆 섬에도 아이템이 숨겨져 있습니다. "),
+    TIP3(ChatColor.AQUA + "【팁】  " + ChatColor.WHITE + "각 팀의 다이아 몬드 블럭을 파괴 할 시 승리합니다."),
+    TIP4(ChatColor.AQUA + "【팁】  " + ChatColor.GREEN + "/t gamble " + ChatColor.WHITE + "명령어로 뽑기를 할 수 있습니다."),
+    TIP5(ChatColor.AQUA + "【팁】  " + ChatColor.WHITE + ChatColor.WHITE + "블레이즈 로드는 제작대에서 나무 막대를 세로로 일렬로 놓으면 만들 수 있습니다."),
+    TIP6(ChatColor.AQUA + "【팁】 \n"
             + ChatColor.AQUA + "【일반】" + ChatColor.WHITE + " 능력은 블레이즈 로드를 좌클릭하여\n"
             + ChatColor.RED + "【고급】" + ChatColor.WHITE + " 능력은 블레이즈 로드를 우클릭하여 이용합니다\n"
             + ChatColor.WHITE + "자세한 내용은 언제나 능력 설명을 참고합시다\n"),

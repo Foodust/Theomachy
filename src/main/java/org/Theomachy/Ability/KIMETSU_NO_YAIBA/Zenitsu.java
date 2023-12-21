@@ -35,8 +35,8 @@ public class Zenitsu extends Ability {
         this.normalSkillStack = 16;
         this.normalDistance = 20;
 
-        this.rareSkillCoolTime = 120;
-        this.rareSkillStack = 32;
+//        this.rareSkillCoolTime = 120;
+//        this.rareSkillStack = 32;
         this.rareJumpDistance = 1.8f;
         this.rareDistance = 10;
         this.rareTime = 1;

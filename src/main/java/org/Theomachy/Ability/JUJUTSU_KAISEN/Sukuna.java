@@ -40,7 +40,7 @@ public class Sukuna extends RyoikiTenkai {
         this.rareSkillStack = 60;
         this.rareDistance = 15;
         this.rareDuration = 10;
-        this.rareDamage = 3;
+        this.rareDamage = 5;
         this.rank = AbilityRank.S;
     }
 
@@ -83,21 +83,21 @@ public class Sukuna extends RyoikiTenkai {
             Location location = player.getLocation();
             location.add(0, 6, 0);
             AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                World world = location.getWorld();
-                assert world != null;
-                bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                    world.spawnParticle(Particle.SWEEP_ATTACK, location, 3000, 10, 5, 10);
-                    for (Entity entity : world.getNearbyEntities(location, 15, 15, 15)) {
-                        if (entity instanceof LivingEntity && !entity.equals(player)) {
-                            ((LivingEntity) entity).damage(rareDamage, player);
-                        }
-                    }
-                }, 0, 2L));
-            }, 2 * 20L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId());
-            }, rareDuration * 20L);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
+                    () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), 
+                            () -> slash(player,location), 0, 2L)), 2 * 20L);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), 
+                    () -> Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId()), rareDuration * 20L);
+        }
+    }
+    private void slash(Player player, Location location ){
+        World world = location.getWorld();
+        assert world != null;
+        world.spawnParticle(Particle.SWEEP_ATTACK, location, 3000, 10, 5, 10);
+        for (Entity entity : world.getNearbyEntities(location, 15, 15, 15)) {
+            if (entity instanceof LivingEntity && !entity.equals(player)) {
+                ((LivingEntity) entity).damage(rareDamage, player);
+            }
         }
     }
 }
