@@ -22,7 +22,7 @@ public class Tajja extends Ability {
     private final static String[] des = {
             AbilityInfo.Tajja.getName() + "는 손놀림이 빠른 능력입니다.",
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "밑장빼기",
-            "맨손으로 공격시 인벤토리에 있는 검의 데미지를 줄 수 있습니다."
+            "맨손으로 공격시 인벤토리에 있는 검의 데미지의 1/2을 줄 수 있습니다."
     };
 
     public Tajja(String playerName) {
@@ -34,7 +34,7 @@ public class Tajja extends Ability {
         Player player = (Player) event.getDamager();
         if (player.getName().equals(this.playerName)) {
             if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
-                int swordDamage = getSwordDamage(player);
+                double swordDamage = getSwordDamage(player);
                 if (swordDamage == -1)
                     return;
                 event.setDamage(swordDamage);
@@ -43,17 +43,17 @@ public class Tajja extends Ability {
         }
     }
 
-    public int getSwordDamage(Player player) {
-        int damage = -1;
+    public double getSwordDamage(Player player) {
+        double damage = -1;
         Inventory inventory = player.getInventory();
         for (ItemStack item : inventory.getContents()) {
             if (item != null)
                 switch (item.getType()) {
-                    case WOODEN_SWORD, GOLDEN_SWORD -> damage = 4;
-                    case STONE_SWORD -> damage = 5;
-                    case IRON_SWORD -> damage = 6;
-                    case DIAMOND_SWORD -> damage = 7;
-                    case NETHERITE_SWORD -> damage = 8;
+                    case WOODEN_SWORD, GOLDEN_SWORD -> damage = (double) 4 / 2;
+                    case STONE_SWORD -> damage = (double) 5 / 2 ;
+                    case IRON_SWORD -> damage = (double) 6 / 2;
+                    case DIAMOND_SWORD -> damage = (double) 7 / 2;
+                    case NETHERITE_SWORD -> damage = (double) 8 / 2;
                 }
         }
         return damage;
