@@ -55,6 +55,8 @@ public class Tajja extends Ability {
                     case DIAMOND_SWORD -> damage = 7;
                     case NETHERITE_SWORD -> damage = 8;
                 }
+            if (damage != -1)
+                break;
         }
         return -1;
     }
