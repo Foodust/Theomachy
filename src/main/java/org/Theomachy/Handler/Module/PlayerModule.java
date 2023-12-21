@@ -33,10 +33,12 @@ public class PlayerModule {
     }
 
     public static void setScoreBoard(Player player, DisplaySlot displaySlot, Criteria criteria , String name , String displayName) {
-        Scoreboard scoreboard = player.getScoreboard();
+//        Scoreboard scoreboard = player.getScoreboard();
+        Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective(name,criteria, displayName);
         objective.setDisplaySlot(displaySlot);
         objective.getScore(player.getName()).setScore((int) player.getHealth());
+        Bukkit.broadcastMessage(player.getName());
         player.setScoreboard(scoreboard);
     }
     public static void removeScoreboard(Player player, String objectiveName) {
