@@ -23,6 +23,12 @@ public class GameData
 		playerAbility.clear();
 		playerTeam.clear();
 		spawnArea.clear();
+		clearHealthBar();
 		playerHealthBar.clear();
+	}
+	public static void clearHealthBar(){
+		for(ArmorStand armorStand : playerHealthBar.values()){
+			armorStand.remove();
+		}
 	}
 }

@@ -54,6 +54,6 @@ public class PlayerModule {
                     armorStand.teleport(player.getLocation());
                 }
             }
-        }, 0, 0);
+        }, 0, -1);
     }
 }
