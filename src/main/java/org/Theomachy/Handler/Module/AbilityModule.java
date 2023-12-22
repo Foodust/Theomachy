@@ -7,6 +7,7 @@ import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
+import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Tanjiro;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Zenitsu;
 import org.Theomachy.Checker.PermissionChecker;
 import org.Theomachy.Data.AbilityData;
@@ -395,6 +396,8 @@ public class AbilityModule  {
             GameData.playerAbility.put(playerName, new Zenitsu(playerName));
         else if (abilityNumber == AbilityInfo.Rengoku.getIndex())
             GameData.playerAbility.put(playerName, new Rengoku(playerName));
+        else if (abilityNumber == AbilityInfo.Tanjiro.getIndex())
+            GameData.playerAbility.put(playerName, new Tanjiro(playerName));
         else {
             p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
             p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());

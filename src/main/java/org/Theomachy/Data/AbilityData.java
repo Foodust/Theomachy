@@ -9,7 +9,7 @@ public class AbilityData
 	public static EnumSet<AbilityInfo> godEnum = EnumSet.range(AbilityInfo.Zeus, AbilityInfo.Sans);
 	public static EnumSet<AbilityInfo> humanEnum = EnumSet.range(AbilityInfo.Archer, AbilityInfo.Zet);
 	public static EnumSet<AbilityInfo> jujutsuKaisenEnum = EnumSet.range(AbilityInfo.Itarodi, AbilityInfo.Sukuna);
-	public static EnumSet<AbilityInfo> kimetsuNoYaibaEnum = EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Rengoku);
+	public static EnumSet<AbilityInfo> kimetsuNoYaibaEnum = EnumSet.range(AbilityInfo.Zenitsu, AbilityInfo.Tanjiro);
 
 	public static int GOD_ABILITY_NUMBER= godEnum.size();
 	public static int HUMAN_ABILITY_NUMBER=humanEnum.size();
