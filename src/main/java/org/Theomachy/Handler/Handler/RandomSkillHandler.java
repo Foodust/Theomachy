@@ -7,8 +7,6 @@ import java.util.Random;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Handler.Command.BlacklistCommand;
-import org.Theomachy.Utility.DefaultUtil;
 
 public class RandomSkillHandler  {
     private final BlacklistModule blacklistModule = new BlacklistModule();
@@ -44,7 +42,7 @@ public class RandomSkillHandler  {
         Theomachy.log.info(String.valueOf(stringBuilder));
         return randomNumbers;
     }
-    private static void addAvailableAbilities(List<Integer> availableAbilities, int abilityCount, int startNumber, List<Integer> blacklist) {
+    private void addAvailableAbilities(List<Integer> availableAbilities, int abilityCount, int startNumber, List<Integer> blacklist) {
         for (int i = 0; i < abilityCount; i++) {
             int currentNumber = startNumber + i;
             if (!blacklist.contains(currentNumber)) {

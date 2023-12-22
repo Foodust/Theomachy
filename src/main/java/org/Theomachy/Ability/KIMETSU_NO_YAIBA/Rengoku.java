@@ -4,11 +4,12 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
+
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,7 +17,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
+
+import java.util.Objects;
 
 public class Rengoku extends Ability {
     private final static String[] des = {
@@ -26,11 +30,13 @@ public class Rengoku extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "오의 • 제9의 형 「연옥」(煉獄)",
             "작열하는 지옥불처럼 맹렬히 돌진해서, 굉음과 함께 상대방을 도려낸다. "};
 
+    private final int normalDamage;
     private final int normalDistance;
     private final int rareDistance;
     private final int rareTime;
     private final int rareDelay;
     private final int rareDamage;
+    private final PlayerModule playerModule = new PlayerModule();
 
     public Rengoku(String playerName) {
         super(playerName, AbilityInfo.Rengoku, true, false, false, des);
@@ -38,6 +44,7 @@ public class Rengoku extends Ability {
         this.normalSkillCoolTime = 80;
         this.normalSkillStack = 16;
         this.normalDistance = 20;
+        this.normalDamage = 5;
 
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 50;
@@ -51,7 +58,7 @@ public class Rengoku extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -60,15 +67,39 @@ public class Rengoku extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            player.setVelocity(new Vector(0, 1, 0)); // Y축 방향으로 속도 부여 (점프 효과)
 
+            int particles = 300;
+            int radius = 4;
+            BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
+                Location playerLocation = player.getLocation();
+                Vector direction = playerLocation.getDirection();
+                for (double i = 0; i < particles; i++) {
+                    double angle = 2 * Math.PI * i / particles;
+                    double x = playerLocation.getX() + radius * Math.sin(angle) * direction.getX();
+                    double y = playerLocation.getY() + radius * Math.cos(angle);
+                    double z = playerLocation.getZ() + radius * Math.sin(angle) * direction.getZ();
+                    Location circleLocation = new Location(playerLocation.getWorld(),x, y, z);
+                    Objects.requireNonNull(playerLocation.getWorld()).spawnParticle(Particle.FLAME, circleLocation, 1);
+                    // 파티클에 닿은 플레이어 찾기
+                    for (Entity enemy : Objects.requireNonNull(circleLocation.getWorld()).getNearbyEntities(circleLocation, 5, 5 ,5 )) {
+                        if (enemy instanceof LivingEntity && !enemy.equals(player)) {
+                            ((LivingEntity) enemy).damage(normalDamage, player);
+                            enemy.setVelocity(enemy.getVelocity().add(new Vector(0, 0.0001, 0)));
+                        }
+                    }
+                }
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 50.0f, 5.0f);
+            }, 0, 0L);// 파티클을 일정 주기로 생성 (여기서는 2틱(0.1초)마다 생성)
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());},20L);
         }
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, PotionEffect.INFINITE_DURATION, 255));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
@@ -87,6 +118,8 @@ public class Rengoku extends Ability {
                         }
                     }
                     player.teleport(to);
+                    player.playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
                 }
             }, rareDelay * 20L);
         }

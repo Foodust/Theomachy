@@ -3,11 +3,11 @@ package org.Theomachy.Ability.JUJUTSU_KAISEN;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
 import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
+
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -46,7 +46,7 @@ public class Sukuna extends RyoikiTenkai {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -55,8 +55,8 @@ public class Sukuna extends RyoikiTenkai {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
             for (double distance = 0; distance < normalDistance; distance += 0.5) {
@@ -73,8 +73,8 @@ public class Sukuna extends RyoikiTenkai {
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
             sendRyoikiTenkai(AbilityInfo.Sukuna, player);
 

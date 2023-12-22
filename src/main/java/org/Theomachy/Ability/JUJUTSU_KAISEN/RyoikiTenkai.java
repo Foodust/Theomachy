@@ -112,7 +112,7 @@ public class RyoikiTenkai extends Ability {
     }
 
     private void JogoSetLava(Block block) {
-        if (Math.random() < 0.005) { // 0.05%의 확률로 용암 배치
+        if (Math.random() < 0.008) { // 0.05%의 확률로 용암 배치
             block.setType(Material.LAVA); // 용암 블록 배치
         } else {
             block.setType(Material.AIR); // 나머지는 공기로 설정

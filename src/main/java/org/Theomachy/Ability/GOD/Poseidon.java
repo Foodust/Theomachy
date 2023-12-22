@@ -21,8 +21,8 @@ import org.Theomachy.Message.AbilityCoolTimeMessage;
 import org.Theomachy.Timer.CoolTimeTimer;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class Poseidon extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
@@ -58,9 +58,9 @@ public class Poseidon extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             if (flag) {
-                SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 Location location = player.getLocation();
                 Vector v = player.getEyeLocation().getDirection();
                 v.setX(Math.round(v.getX()));

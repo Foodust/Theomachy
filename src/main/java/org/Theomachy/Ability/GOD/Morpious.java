@@ -15,8 +15,8 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 import java.util.Objects;
 
@@ -39,7 +39,7 @@ public class Morpious extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
@@ -47,7 +47,7 @@ public class Morpious extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillCoolTime)) {
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillCoolTime)) {
             String[] team = new String[2];
             team[0] = GameData.playerTeam.get(player.getName());
             team[1] = GameData.playerTeam.get(abilityTarget);
@@ -58,7 +58,7 @@ public class Morpious extends Ability {
                         player.sendMessage(ChatColor.RED + "목표는 본인이 아니어야 합니다.");
                     } else {
                         Player target = GameData.onlinePlayer.get(abilityTarget);
-                        SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                        skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                         player.sendMessage(ChatColor.GRAY + "목표를 잠재웠습니다!");
                         target.sendMessage(ChatColor.GRAY + "착한 어른이는 일찍 자고 일찍 일어나야 해요~");
                         target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1200, 0));

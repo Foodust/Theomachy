@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.TimerTask;
 
 import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
@@ -19,7 +20,7 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Command.StartStopCommand;
-import org.Theomachy.Utility.PlayerInventory;
+
 
 
 public class GameReadyTimer extends TimerTask {
@@ -28,7 +29,7 @@ public class GameReadyTimer extends TimerTask {
     private final String[] setting = new String[9];
     private Difficulty difficulty;
     private final World world;
-
+    private final PlayerModule playerModule = new PlayerModule();
     public GameReadyTimer() {
         this.playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
         setting[0] = Theomachy.STARTING_INVENTORY_CLEAR ? ChatColor.AQUA + TheomachyMessage.COMMAND_ON.getMessage() : ChatColor.RED + TheomachyMessage.COMMAND_OFF.getMessage();
@@ -150,7 +151,7 @@ public class GameReadyTimer extends TimerTask {
                         player.setExhaustion(0.0F);
                         player.setExp(0.0F);
                         player.setHealth(20);
-                        PlayerInventory.startItem(player);
+                        playerModule.startItem(player);
                         String teamName = GameData.playerTeam.get(player.getName());
                         if (teamName != null) {
                             Location location = GameData.spawnArea.get(teamName);

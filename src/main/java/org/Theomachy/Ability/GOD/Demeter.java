@@ -16,8 +16,8 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Demeter extends Ability {
     private final static String[] des = {
@@ -39,7 +39,7 @@ public class Demeter extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK, RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> Action(player);
             }
@@ -47,8 +47,8 @@ public class Demeter extends Ability {
     }
 
     private void Action(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Inventory inventory = player.getInventory();
             inventory.addItem(new ItemStack(Material.BREAD, normalSkillStack));
         }

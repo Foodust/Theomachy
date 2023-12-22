@@ -18,8 +18,8 @@ import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.DirectionChecker;
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Wizard extends Ability
 {
@@ -49,7 +49,7 @@ public class Wizard extends Ability
 	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
-		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
+		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (MouseEventChecker.PlayerInteract(event)) {
 				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftClickAction(player);
@@ -60,7 +60,7 @@ public class Wizard extends Ability
 
 	private void leftClickAction(Player player)
 	{
-		if (SkillHandler.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, material, normalSkillStack))
+		if (skillHandler.Check(player, AbilityCase.NORMAL)&&playerModule.ItemCheck(player, material, normalSkillStack))
 		{
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
@@ -69,7 +69,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+				skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
@@ -100,7 +100,7 @@ public class Wizard extends Ability
 	
 	private void rightClickAction(Player player)
 	{
-		if (SkillHandler.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
+		if (skillHandler.Check(player, AbilityCase.RARE)&&playerModule.ItemCheck(player, material, rareSkillStack)) {
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
 			for (Entity e : entityList)
@@ -108,7 +108,7 @@ public class Wizard extends Ability
 					targetList.add((Player) e);
 			if (!targetList.isEmpty())
 			{
-				SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+				skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 				player.setHealth( player.getHealth() / 2 );
 				Vector v = new Vector(0,1.6,0);
 				for (Player e : targetList)

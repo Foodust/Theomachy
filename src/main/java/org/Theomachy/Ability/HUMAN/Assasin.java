@@ -2,6 +2,7 @@ package org.Theomachy.Ability.HUMAN;
 
 import java.util.List;
 
+import org.Theomachy.Handler.Module.PlayerModule;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -21,10 +22,11 @@ import org.Theomachy.Timer.CoolTimeTimer;
 
 import org.Theomachy.Checker.DirectionChecker;
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Assasin extends Ability {
+
     private final static String[] des = {
             AbilityInfo.Assasin.getName() + "는 민첩한 몸놀림을 가지는 능력입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "더블 점프",
@@ -45,7 +47,7 @@ public class Assasin extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -57,9 +59,9 @@ public class Assasin extends Ability {
         Location temp = player.getLocation();
         Block b = temp.add(0, -1, 0).getBlock();
         if ((b.getType() == Material.AIR) || (b.getType() == Material.SNOW) || (b.getType() == Material.STONE_SLAB)) {
-            if ((!CoolTimeTimer.commonSkillCoolTime.containsKey(playerName + "0") && (PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)))) {
+            if ((!CoolTimeTimer.commonSkillCoolTime.containsKey(playerName + "0") && (playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)))) {
                 CoolTimeTimer.commonSkillCoolTime.put(playerName + "0", normalSkillCoolTime);
-                PlayerInventory.ItemRemove(player, Material.COBBLESTONE, normalSkillStack);
+                playerModule.ItemRemove(player, Material.COBBLESTONE, normalSkillStack);
                 World world = player.getWorld();
                 Location location = player.getLocation();
                 Vector v = player.getEyeLocation().getDirection();
@@ -71,7 +73,7 @@ public class Assasin extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             boolean flag = true;
             List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
             for (Entity entity : entityList) {
@@ -80,7 +82,7 @@ public class Assasin extends Ability {
                     String targetTeamName = GameData.playerTeam.get(target.getName());
                     String playerTeamName = GameData.playerTeam.get(player.getName());
                     if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName))) {
-                        SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                        skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                         Location fakeLocation = player.getLocation();
                         Location location = target.getLocation();
                         World world = player.getWorld();

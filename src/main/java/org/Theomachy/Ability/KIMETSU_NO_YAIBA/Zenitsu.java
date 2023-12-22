@@ -11,8 +11,8 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 import java.util.Objects;
 
@@ -46,7 +46,7 @@ public class Zenitsu extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
 //                case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -55,8 +55,8 @@ public class Zenitsu extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location location = player.getLocation();
             location.setPitch(0f);
             for (int distance = 0; distance < normalDistance; distance += normalDistance / 10) {
@@ -71,8 +71,8 @@ public class Zenitsu extends Ability {
 
     // 화뢰신 만들다가 포기함
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 Location location = player.getLocation();

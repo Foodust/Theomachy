@@ -1,6 +1,6 @@
 package org.Theomachy.Ability.HUMAN;
 
-import org.Theomachy.Handler.Handler.SkillHandler;
+
 
 import org.Theomachy.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
@@ -52,7 +52,7 @@ public class Snow extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> player.sendMessage("공격 지수 : " + passiveDamage);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -61,8 +61,8 @@ public class Snow extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-            SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, material, rareSkillStack)) {
+            skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             World world = player.getWorld();
             Location location = player.getLocation();
             world.dropItem(location, new ItemStack(Material.SNOWBALL, rareCount));

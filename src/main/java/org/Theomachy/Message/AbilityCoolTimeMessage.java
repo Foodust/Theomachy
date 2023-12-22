@@ -47,11 +47,11 @@ public class AbilityCoolTimeMessage
 		{
             switch (abilityCase) {
 				case COMMON ->
-						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage());
+						player.sendMessage("0" + TheomachyMessage.INFO_RARE_ABILITY.getMessage());
 				case NORMAL ->
-						player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + "0" + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case RARE ->
-						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + "0" + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
             }
 		}
 	}

@@ -16,8 +16,8 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Invincibility extends Ability
 {
@@ -46,7 +46,7 @@ public class Invincibility extends Ability
 	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
-		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
+		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (MouseEventChecker.PlayerInteract(event)) {
 				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK-> leftAction(player);
@@ -57,9 +57,9 @@ public class Invincibility extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (SkillHandler.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
+		if (skillHandler.Check(player, AbilityCase.NORMAL)&&playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+			skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 			CoolTimeTimer.commonSkillCoolTime.put(playerName+"1", 7);
 		}
@@ -67,9 +67,9 @@ public class Invincibility extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
+		if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
-			SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+			skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, rareDuration * 20, 0));
 		}
 	}

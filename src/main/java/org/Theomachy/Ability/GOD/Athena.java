@@ -17,8 +17,8 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 import java.util.Objects;
 
@@ -47,7 +47,7 @@ public class Athena extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -56,21 +56,21 @@ public class Athena extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             player.getInventory().addItem(new ItemStack(Material.BOOK, 3));
         }
     }
 
     private void rightAction(Player player) {
         if (abilityLimitCounter > 0) {
-            if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
                 if (abilityLimitCounter > 1) {
-                    SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                    skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 1));
                     player.sendMessage("남은 교환 횟수 : " + --abilityLimitCounter);
                 } else {
-                    SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, 0);
+                    skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, 0);
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 1));
                     player.sendMessage("남은 교환 횟수 : " + --abilityLimitCounter);
                 }

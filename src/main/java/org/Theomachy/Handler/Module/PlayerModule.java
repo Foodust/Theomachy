@@ -1,21 +1,20 @@
 package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Message.AbilityCoolTimeMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Criteria;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.*;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
 public class PlayerModule {
+    private final GameModule gameModule = new GameModule();
 
     public void setOnlinePlayer() {
         for (Player player : Bukkit.getOnlinePlayers())
@@ -53,5 +52,58 @@ public class PlayerModule {
             armorStand.teleport(player.getLocation());
         }
     }
+    public boolean InHandItemCheck(Player player, Material material)
+    {
+        return player.getInventory().getItemInMainHand().getType() == material;
+    }
 
+    public boolean ItemCheck(Player player, Material material, int stack)
+    {
+        Inventory inventory = player.getInventory();
+        if (inventory.contains(material, stack))
+            return true;
+        else
+        {
+            AbilityCoolTimeMessage.LackItemError(player, material, stack);
+            return false;
+        }
+    }
+
+    public void ItemRemove(Player player, Material material, int stack)
+    {
+        Inventory inventory = player.getInventory();
+        inventory.removeItem(new ItemStack(material, stack));
+    }
+
+    public void startItem(Player player)
+    {
+        Inventory inventory = player.getInventory();
+        if (Theomachy.STARTING_INVENTORY_CLEAR)
+        {
+            inventory.clear();
+            player.getInventory().setHelmet(new ItemStack(Material.AIR));
+            player.getInventory().setChestplate(new ItemStack(Material.AIR));
+            player.getInventory().setLeggings(new ItemStack(Material.AIR));
+            player.getInventory().setBoots(new ItemStack(Material.AIR));
+        }
+        if (Theomachy.STARTING_GIVE_ITEM)
+        {
+            // 원본
+            gameModule.giveItem(player,Material.CHEST, 1);
+
+            inventory.addItem(new ItemStack(Material.CHEST, 1));
+            inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
+            inventory.addItem(new ItemStack(Material.ICE, 2));
+            inventory.addItem(new ItemStack(Material.OAK_PLANKS, 3));
+            inventory.addItem(new ItemStack(Material.WHEAT, 9));
+            inventory.addItem(new ItemStack(Material.BONE_MEAL, 3));
+        }
+    }
+    public void damageNearEntity(World world, Location location, Player player, float damage, int x, int y, int z){
+        for (Entity entity : world.getNearbyEntities(location, x, y ,z )) {
+            if (entity instanceof LivingEntity && !entity.equals(player)) {
+                ((LivingEntity) entity).damage(damage, player);
+            }
+        }
+    }
 }

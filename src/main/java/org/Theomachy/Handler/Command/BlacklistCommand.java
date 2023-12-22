@@ -1,7 +1,6 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Handler.Module.BlacklistModule;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

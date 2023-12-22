@@ -15,9 +15,9 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Handler.Handler.PlayerHandler;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
+
 
 public class Aprodite extends Ability {
 
@@ -39,7 +39,7 @@ public class Aprodite extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
@@ -47,11 +47,11 @@ public class Aprodite extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             if (!player.isSneaking() && !player.getLocation().add(0, -1, 0).getBlock().getType().equals(Material.AIR)) {
-                SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 try {
-                    List<Player> list = PlayerHandler.getNearByNotTeamMembers(player, 20, 20, 20);
+                    List<Player> list = playerHandler.getNearByNotTeamMembers(player, 20, 20, 20);
                     for (Player e : list) {
                         Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                             e.teleport(player);

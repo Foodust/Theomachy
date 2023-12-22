@@ -17,9 +17,9 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Handler.Handler.PlayerHandler;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
+
 
 public class Priest extends Ability {
     private final Material material = Material.COBBLESTONE;
@@ -50,7 +50,7 @@ public class Priest extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -60,8 +60,8 @@ public class Priest extends Ability {
 
     private void leftAction(Player player) {
 
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
-            SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, material, normalSkillStack)) {
+            skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Random random = new Random();
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, normalDuration * 20, 0));
@@ -87,9 +87,9 @@ public class Priest extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-            SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-            List<Player> targetList = PlayerHandler.getTeamMember(player);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, material, rareSkillStack)) {
+            skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+            List<Player> targetList = playerHandler.getTeamMember(player);
             Random random = new Random();
             for (Player team : targetList) {
                 if (random.nextInt(2) == 0) {

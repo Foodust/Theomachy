@@ -1,7 +1,6 @@
 package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

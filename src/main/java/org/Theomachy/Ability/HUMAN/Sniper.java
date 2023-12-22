@@ -18,8 +18,8 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Sniper extends Ability {
     public boolean ready = false;
@@ -42,7 +42,7 @@ public class Sniper extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BOW)) {
+        if (playerModule.InHandItemCheck(player, Material.BOW)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
@@ -67,7 +67,7 @@ public class Sniper extends Ability {
                 }, (4 - count) * 20L);
             }
         } else {
-            SkillHandler.Check(player, AbilityCase.NORMAL);
+            skillHandler.Check(player, AbilityCase.NORMAL);
         }
         if (!player.isSneaking()) {
             ready = false;
@@ -78,10 +78,10 @@ public class Sniper extends Ability {
 
     @Override
     public void passiveSkill(ProjectileLaunchEvent event, Player player) {
-        if (this.sniping && (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack))) {
+        if (this.sniping && (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, material, normalSkillStack))) {
             Entity entity = event.getEntity();
             if (entity instanceof Arrow) {
-                SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+                skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 entity.remove();
                 Arrow arrow = player.launchProjectile(Arrow.class);
                 arrow.setVelocity(player.getEyeLocation().getDirection().multiply(100));

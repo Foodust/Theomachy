@@ -14,8 +14,8 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Blacksmith extends Ability {
     private final static String[] des = {
@@ -44,7 +44,7 @@ public class Blacksmith extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -53,16 +53,16 @@ public class Blacksmith extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             World world = player.getWorld();
             world.dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.IRON_INGOT, normalCount));
         }
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.IRON_INGOT, rareSkillStack)) {
-            SkillHandler.Use(player, Material.IRON_INGOT, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.IRON_INGOT, rareSkillStack)) {
+            skillHandler.Use(player, Material.IRON_INGOT, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             World world = player.getWorld();
             world.dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.DIAMOND, rareCount));
         }

@@ -1,14 +1,15 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Handler.Module.AbilityModule;
+import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Utility.DefaultUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ public class MainCommand {
 	private final BlacklistCommand blacklistCommand = new BlacklistCommand();
 	private final SettingCommand settingCommand = new SettingCommand();
 	private final GamblingCommand gamblingCommand = new GamblingCommand();
+	private final GameModule gameModule = new GameModule();
 	public void tCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
 		TheomachyMessage message = TheomachyMessage.getByMessage(data[0]);
@@ -37,6 +39,9 @@ public class MainCommand {
 			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> blacklistCommand.module(sender);
 			case COMMAND_SETTING, COMMAND_SETTING_SET -> settingCommand.module(sender);
 			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> gamblingCommand.module(sender);
+			case COMMAND_GIVE -> giveTestItemCommand(sender);
+//			case COMMAND_SAVE -> saveWorldCommand(sender);
+//			case COMMAND_RELOAD -> reloadWorldCommand();
             default -> sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
         }
 	}
@@ -55,5 +60,17 @@ public class MainCommand {
 		}
 		else
 			sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
+	}
+	public void giveTestItemCommand(CommandSender sender){
+		gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.BLAZE_ROD,1);
+		for(int i = 0  ; i <8; i++){
+			gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.COBBLESTONE,64);
+		}
+	}
+	public void saveWorldCommand(CommandSender sender){
+		gameModule.saveWorld(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())).getLocation());
+	}
+	public void reloadWorldCommand(){
+		gameModule.reloadWorld();
 	}
 }

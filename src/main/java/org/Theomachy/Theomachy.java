@@ -7,17 +7,12 @@ import java.util.logging.Logger;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.Manager.EntityManager;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Module.BlacklistModule;
 import org.Theomachy.Timer.TipTimer;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 

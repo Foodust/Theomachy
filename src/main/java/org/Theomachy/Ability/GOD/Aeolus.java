@@ -3,6 +3,7 @@ package org.Theomachy.Ability.GOD;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.Theomachy.Handler.Module.PlayerModule;
 import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,12 +21,11 @@ import org.Theomachy.Ability.Ability;
 
 import org.Theomachy.Checker.DirectionChecker;
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Handler.Handler.PlayerHandler;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Aeolus extends Ability {
-
+    private final PlayerModule playerModule = new PlayerModule();
     private final static String[] des = {
             AbilityInfo.Aeolus.getName() + "는 폭풍과 바람의 신입니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "자연 바람",
@@ -50,7 +50,7 @@ public class Aeolus extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -59,9 +59,9 @@ public class Aeolus extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, material, normalSkillStack)) {
-            SkillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-            List<Player> nearPlayers = PlayerHandler.getNearByTeamMembers(player, 20, 20, 20);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, material, normalSkillStack)) {
+            skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            List<Player> nearPlayers = playerHandler.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
                 nearPlayer.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, normalDuration * 20, 0));
@@ -71,14 +71,14 @@ public class Aeolus extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, material, rareSkillStack)) {
-            List<Player> entityList = PlayerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, material, rareSkillStack)) {
+            List<Player> entityList = playerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
             ArrayList<Player> targetList = new ArrayList<Player>();
             for (Player e : entityList)
                 if (e != null)
                     targetList.add(e);
             if (!targetList.isEmpty()) {
-                SkillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+                skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                 Vector vector = new Vector(0, 0.5, 0);
                 double vertical = 2.4d;
                 double diagonal = vertical * 1.4d;

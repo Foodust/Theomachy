@@ -1,6 +1,6 @@
 package org.Theomachy.Ability.GOD;
 
-import org.Theomachy.Handler.Handler.SkillHandler;
+
 
 import org.Theomachy.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
@@ -45,7 +45,7 @@ public class Sans extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -65,8 +65,8 @@ public class Sans extends Ability {
     }
 
     private void leftAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Snowball snowball = player.launchProjectile(Snowball.class);
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
             snowball.addScoreboardTag(AbilityTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
@@ -74,8 +74,8 @@ public class Sans extends Ability {
     }
 
     private void rightAction(Player player) {
-        if (SkillHandler.Check(player, AbilityCase.RARE) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+        if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
+            skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             Location startLocation = player.getEyeLocation(); // 플레이어의 눈 위치 가져오기
             World world = player.getWorld();
             for (double distance = 0; distance < rareDistance; distance += 0.5) {

@@ -2,7 +2,6 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

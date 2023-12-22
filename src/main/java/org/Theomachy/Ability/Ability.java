@@ -1,5 +1,12 @@
 package org.Theomachy.Ability;
 
+
+
+
+
+import org.Theomachy.Handler.Handler.PlayerHandler;
+import org.Theomachy.Handler.Handler.SkillHandler;
+import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -40,7 +47,9 @@ public class Ability
 	public int rareSkillStack =-1;
 
 	public Material material = Material.COBBLESTONE;
-	
+	public final PlayerModule playerModule = new PlayerModule();
+	public final SkillHandler skillHandler = new SkillHandler();
+	public final PlayerHandler playerHandler = new PlayerHandler();
 	public Ability(String playerName, AbilityInfo abilityInfo, boolean activeType, boolean passiveType, boolean buffType, String[] des)
 	{
 		this.playerName=playerName;

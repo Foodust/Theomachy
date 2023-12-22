@@ -4,7 +4,6 @@ import org.Theomachy.Data.VersionData;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Handler.Manager.EntityManager;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

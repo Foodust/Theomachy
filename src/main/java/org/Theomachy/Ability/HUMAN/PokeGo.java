@@ -15,7 +15,7 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
+
 
 public class PokeGo extends Ability {
 
@@ -37,7 +37,7 @@ public class PokeGo extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK ->
                         player.sendMessage(ChatColor.WHITE + String.valueOf(walking) + ChatColor.YELLOW + " 걸음 걸었습니다.");

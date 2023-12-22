@@ -1,6 +1,5 @@
 package org.Theomachy.Handler.Module;
 
-import org.Theomachy.Utility.DefaultUtil;
 import org.Theomachy.Utility.Hangul;
 
 public class HangulModule  {

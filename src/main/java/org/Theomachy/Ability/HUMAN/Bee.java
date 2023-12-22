@@ -20,8 +20,8 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Bee extends Ability {
 
@@ -47,7 +47,7 @@ public class Bee extends Ability {
 	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
-		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
+		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (MouseEventChecker.PlayerInteract(event)) {
 				case LEFT_CLICK_AIR,LEFT_CLICK_BLOCK -> leftAction(player);
@@ -58,7 +58,7 @@ public class Bee extends Ability {
 	private void leftAction(Player player)
 	{
 		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
-			if (SkillHandler.Check(player, AbilityCase.NORMAL) && PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
+			if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			if(abilityTarget !=null){
 				if(player.getName().equals(abilityTarget)){
@@ -66,7 +66,7 @@ public class Bee extends Ability {
 				}
 				else{
 					Player target = GameData.onlinePlayer.get(abilityTarget);
-					SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+					skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
 					target.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"에 유혹당했습니다!");

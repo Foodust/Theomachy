@@ -13,9 +13,9 @@ import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
+
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class AbilityModule  {
     private final BlacklistModule blacklistModule = new BlacklistModule();
-    private  final RandomSkillHandler randomSkillHandler = new RandomSkillHandler();
+    private  final RandomSkillHandler randomskillHandler = new RandomSkillHandler();
     public AbilityModule(){};
     public void listOfAbilityPlayer(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {
@@ -237,7 +237,7 @@ public class AbilityModule  {
         Bukkit.broadcastMessage(TheomachyMessage.INFO_AVAILABLE_PLAYERS.getMessage());
         for (Player e : playerlist)
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
-        int[] rn = randomSkillHandler.nonDuplicate();
+        int[] rn = randomskillHandler.nonDuplicate();
         int length;
         length = Math.min(playerlist.size(), BlacklistModule.availableList);
         int i = 0;

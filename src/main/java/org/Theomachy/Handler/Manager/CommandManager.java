@@ -1,7 +1,6 @@
 package org.Theomachy.Handler.Manager;
 
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -100,6 +100,9 @@ public enum TheomachyMessage {
     COMMAND_REMOVE("remove"),
     COMMAND_RESET("reset"),
     COMMAND_RANDOM("random"),
+    COMMAND_SAVE("save"),
+    COMMAND_RELOAD("reload"),
+    COMMAND_GIVE("give"),
     COMMAND_ON("ON"),
     COMMAND_OFF("OFF"),
 
@@ -181,6 +184,9 @@ public enum TheomachyMessage {
     INFO_COOL_TIME_IS("쿨타임이 "),
     INFO_ABILITY_COOL_TIME_IS("능력의 쿨타임이 "),
     INFO_COOL_TIME_LEFT("초 남았습니다!"),
+    INFO_SAVE_THE_WORLD(ChatColor.GREEN + "현재 맵 저장 중"),
+    INFO_RELOAD_THE_WORLD(ChatColor.RED +  "저장 된 맵 다시 불러 오는 중"),
+    INFO_DONE(ChatColor.AQUA +  "완료!"),
 
     // error message
     ERROR_DOES_NOT_WHO_HAVE_ABILITY("는" + ChatColor.DARK_RED + "능력이 없습니다."),

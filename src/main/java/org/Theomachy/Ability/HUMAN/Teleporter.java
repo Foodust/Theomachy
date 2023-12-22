@@ -18,8 +18,8 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Utility.BlockFilter;
 
 import org.Theomachy.Checker.MouseEventChecker;
-import org.Theomachy.Utility.PlayerInventory;
-import org.Theomachy.Handler.Handler.SkillHandler;
+
+
 
 public class Teleporter extends Ability
 {
@@ -52,7 +52,7 @@ public class Teleporter extends Ability
 	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
-		if (PlayerInventory.InHandItemCheck(player, Material.BLAZE_ROD))
+		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
             switch (MouseEventChecker.PlayerInteract(event)) {
 				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
@@ -63,7 +63,7 @@ public class Teleporter extends Ability
 
 	private void leftAction(Player player)
 	{
-		if (SkillHandler.Check(player, AbilityCase.NORMAL)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
+		if (skillHandler.Check(player, AbilityCase.NORMAL)&&playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			Block block = player.getTargetBlock(null, normalDistance);
 			if (BlockFilter.AirToFar(player, block))
@@ -77,7 +77,7 @@ public class Teleporter extends Ability
 
 				if ((block0.getType()==Material.AIR || block1.getType() == Material.SNOW)&&block1.getType()==Material.AIR)
 				{
-					SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+					skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 					Location plocation = player.getLocation();
 					Location tlocation = block.getLocation();
 					tlocation.setPitch(plocation.getPitch());
@@ -95,7 +95,7 @@ public class Teleporter extends Ability
 	
 	private void rightAction(Player player)
 	{
-		if (SkillHandler.Check(player, AbilityCase.RARE)&&PlayerInventory.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
+		if (skillHandler.Check(player, AbilityCase.RARE)&&playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack))
 		{
 			if (rareTarget != null)
 			{
@@ -104,7 +104,7 @@ public class Teleporter extends Ability
 				{
 					Location location = player.getLocation();
 					location.setY(location.getY()-1);
-					SkillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+					skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 					Location targetLocation = target.getLocation();
 					Location playerLocation = player.getLocation();
 					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(playerLocation);});

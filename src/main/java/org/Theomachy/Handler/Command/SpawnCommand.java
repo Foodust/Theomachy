@@ -1,7 +1,6 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Handler.Module.SpawnModule;
-import org.Theomachy.Utility.DefaultUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
