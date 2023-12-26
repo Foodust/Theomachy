@@ -91,4 +91,15 @@ public class GameModule {
     public void giveItem(Player player, Material material, int amount) {
         player.getInventory().addItem(new ItemStack(material, amount));
     }
+
+
+    // 맨손과 같은 기능을 가지는 도구인지 확인하는 메서드
+    public boolean isTool(Material material) {
+        return material == Material.WOODEN_PICKAXE ||
+                material == Material.STONE_PICKAXE ||
+                material == Material.IRON_PICKAXE ||
+                material == Material.GOLDEN_PICKAXE ||
+                material == Material.DIAMOND_PICKAXE;
+        // 여기에 다른 도구 종류도 추가할 수 있습니다.
+    }
 }

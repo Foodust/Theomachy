@@ -8,11 +8,14 @@ import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class BlockEvent  implements Listener {
     private final CommonModule commonModule = new CommonModule();
@@ -47,6 +50,21 @@ public class BlockEvent  implements Listener {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
             if (ability != null && ability.abilityCode == AbilityInfo.Voodoo.getIndex())
                 ability.passiveSkill(event);
+        }
+    }
+    @EventHandler
+    public void onPlayerInteractEvent(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        Block block = event.getClickedBlock();
+
+        if (block != null && block.getType() == Material.DIAMOND_BLOCK) {
+            ItemStack itemInHand = player.getInventory().getItemInMainHand();
+            Material handMaterial = itemInHand.getType();
+
+            // 특정 도구를 사용하고 있는 경우에만 처리
+            if (handMaterial != Material.AIR) {
+                event.setCancelled(true); // 블록 파괴 방지
+            }
         }
     }
 
