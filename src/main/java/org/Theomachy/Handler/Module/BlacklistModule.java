@@ -2,6 +2,7 @@ package org.Theomachy.Handler.Module;
 
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Message.Message;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
@@ -21,6 +22,7 @@ import java.util.Objects;
 public class BlacklistModule {
     private final CommonModule commonModule = new CommonModule();
     private final HangulModule hangulModule = new HangulModule();
+    private final Message message = new Message();
     public static List<Integer> godCanlist = new ArrayList<>();
     public static List<Integer> humanCanlist = new ArrayList<>();
     public static List<Integer> jujutsuCanList = new ArrayList<>();
@@ -88,7 +90,7 @@ public class BlacklistModule {
         Object abilityNumObject = Integer.parseInt(abilityInfo[1].replaceAll(" ", ""));
         BlacklistModule.blacklist.remove(abilityNumObject);
         String josa = hangulModule.getJosa(abilityInfo[0].trim());
-        Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
+        message.broadcastAlam(ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
     }
 
     public void setAbilityExcept(ItemStack item, ItemMeta meta) {
@@ -98,7 +100,7 @@ public class BlacklistModule {
         int abilityNum = Integer.parseInt(abilityInfo[1].replaceAll(" ", ""));
         BlacklistModule.blacklist.add(abilityNum);
         String josa = hangulModule.getJosa(abilityInfo[0].trim());
-        Bukkit.broadcastMessage(ChatColor.GREEN + "【 알림 】 " + ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
+        message.broadcastAlam(ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
     }
 
     public void movePage(Player player, Inventory inventory, int slot) {

@@ -16,6 +16,7 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
+import org.Theomachy.Message.Message;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,7 +32,8 @@ import java.util.stream.Collectors;
 
 public class AbilityModule  {
     private final BlacklistModule blacklistModule = new BlacklistModule();
-    private  final RandomSkillHandler randomskillHandler = new RandomSkillHandler();
+    private final RandomSkillHandler randomskillHandler = new RandomSkillHandler();
+    private final Message message = new Message();
     public AbilityModule(){};
     public void listOfAbilityPlayer(CommandSender sender) {
         if (PermissionChecker.Sender(sender)) {

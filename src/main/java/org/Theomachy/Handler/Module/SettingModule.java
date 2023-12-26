@@ -1,9 +1,11 @@
 package org.Theomachy.Handler.Module;
 
+import org.Theomachy.Message.Message;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -14,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SettingModule  {
+public class SettingModule {
     static int settingSize = 2 * 9;
     static List<BukkitTask> taskList = new ArrayList<>();
     private final CommonModule commonModule = new CommonModule();
+    private final Message message = new Message();
 
-    public  void openSettingInventory(Player player) {
+    public void openSettingInventory(Player player) {
         Inventory inventory = Bukkit.createInventory(null, settingSize, TheomachyMessage.SETTING.getMessage());
         inventory.setItem(0, commonModule.setItem(Theomachy.STARTING_INVENTORY_CLEAR ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_STARTING_INVENTORY_CLEAR.getMessage()));
         inventory.setItem(2, commonModule.setItem(Theomachy.STARTING_GIVE_ITEM ? Material.WHITE_WOOL : Material.RED_WOOL, 1, TheomachyMessage.SETTING_STARTING_GIVE_ITEM.getMessage()));
@@ -34,12 +37,12 @@ public class SettingModule  {
         player.openInventory(inventory);
     }
 
-    public  void serverSetting(ItemStack wool) {
+    public void serverSetting(ItemStack wool) {
         TheomachyMessage byMessage = TheomachyMessage.getByMessage(Objects.requireNonNull(wool.getItemMeta()).getDisplayName());
         String broadcastMessage = byMessage.getMessage();
         switch (Objects.requireNonNull(byMessage)) {
             case SETTING_STARTING_INVENTORY_CLEAR -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.STARTING_INVENTORY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -48,7 +51,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_STARTING_GIVE_ITEM -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.STARTING_GIVE_ITEM = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -57,7 +60,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_STARTING_ENTITY_CLEAR -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.STARTING_ENTITY_CLEAR = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -66,7 +69,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_IGNORE_BED -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.IGNORE_BED = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -75,7 +78,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_FAST_START -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.FAST_START = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -84,7 +87,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_SERVER_AUTO_SAVE -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.SERVER_AUTO_SAVE = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -93,7 +96,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_ANIMAL_SPAWN -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.ANIMAL_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -102,7 +105,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_MONSTER_SPAWN -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.MONSTER_SPAWN = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -111,7 +114,7 @@ public class SettingModule  {
                 }
             }
             case SETTING_GAMBLING_ACCEPT -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.GAMBLING = false;
                     wool.setType(Material.RED_WOOL);
                 } else {
@@ -120,11 +123,11 @@ public class SettingModule  {
                 }
             }
             case SETTING_DEBUG_MODE -> {
-                if (checkWhiteWool(wool.getType(),broadcastMessage)) {
+                if (checkWhiteWool(wool.getType(), broadcastMessage)) {
                     Theomachy.DEBUG = false;
                     GameModule.Start = false;
                     wool.setType(Material.RED_WOOL);
-                    for(BukkitTask task : taskList){
+                    for (BukkitTask task : taskList) {
                         task.cancel();
                     }
                     taskList.clear();
@@ -138,13 +141,13 @@ public class SettingModule  {
         }
     }
 
-    public  boolean checkWhiteWool(Material material, String message) {
+    public boolean checkWhiteWool(Material material, String message) {
         if (material == Material.WHITE_WOOL) {
             message += TheomachyMessage.INFO_DISABLED.getMessage();
         } else {
             message += TheomachyMessage.INFO_ABLE.getMessage();
         }
-        Bukkit.broadcastMessage(message + TheomachyMessage.INFO_SET_MESSAGE.getMessage());
+        this.message.broadcastAlam(ChatColor.WHITE + message + TheomachyMessage.INFO_SET_MESSAGE.getMessage());
         return material == Material.WHITE_WOOL;
     }
 }

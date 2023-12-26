@@ -187,6 +187,7 @@ public enum TheomachyMessage {
     INFO_SAVE_THE_WORLD(ChatColor.GREEN + "현재 맵 저장 중"),
     INFO_RELOAD_THE_WORLD(ChatColor.RED +  "저장 된 맵 다시 불러 오는 중"),
     INFO_DONE(ChatColor.AQUA +  "완료!"),
+    INFO_ALAM(ChatColor.GREEN + "【 알림 】 "),
 
     // error message
     ERROR_DOES_NOT_WHO_HAVE_ABILITY("는" + ChatColor.DARK_RED + "능력이 없습니다."),
