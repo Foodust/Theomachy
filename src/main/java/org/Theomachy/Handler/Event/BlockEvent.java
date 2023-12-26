@@ -5,6 +5,7 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Handler.Module.CommonModule;
 import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Theomachy;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,7 @@ import org.bukkit.event.block.SignChangeEvent;
 
 public class BlockEvent  implements Listener {
     private final CommonModule commonModule = new CommonModule();
+    private final GameModule gameModule = new GameModule();
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (GameModule.Start) {
@@ -26,6 +28,7 @@ public class BlockEvent  implements Listener {
             Block block = event.getBlock();
             if (block.getType() == Material.DIAMOND_BLOCK) {
                 commonModule.breakDiamond(event);
+                gameModule.stopGame();
             }
         }
     }

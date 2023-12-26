@@ -146,6 +146,7 @@ public enum TheomachyMessage {
     INFO_GREETING(ChatColor.AQUA + " 님 환영합니다."),
     INFO_ADMIN_START_GAME(") 가 게임을 시작하였습니다."),
     INFO_ADMIN_STOP_GAME(") 가 게임을 종료하였습니다."),
+    INFO_STOP_GAME(ChatColor.RED +  "게임이 종료 되었습니다!"),
     INFO_SETTING_THIS_POSITION_DEFAULT_SPAWN_POINT("현재 위치가 모든 플레이어의 스폰지역으로 설정되었습니다."),
     INFO_SETTING_THIS_POSITION_TEAM_SPAWN_POINT(ChatColor.WHITE + " 의 스폰지역으로 설정되었습니다."),
     INFO_COOL_TIME_CLEAR(ChatColor.YELLOW + "관리자가 모든 쿨타임을 초기화 하였습니다."),

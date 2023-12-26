@@ -46,6 +46,22 @@ public class GameModule {
         }
         Bukkit.broadcastMessage(ChatColor.RED + "관리자(" + sender.getName() + TheomachyMessage.INFO_ADMIN_STOP_GAME.getMessage());
     }
+    public void stopGame() {
+        Collection<Ability> playerAbilityList = GameData.playerAbility.values();
+        for (Ability e : playerAbilityList)
+            e.initializeReset();
+        GameModule.Ready = false;
+        GameModule.Start = false;
+        CoolTimeTimer.init = true;
+        List<World> worlds = Bukkit.getWorlds();
+        for (World world : worlds) {
+            world.setPVP(ServerSetting.PVP);
+            world.setSpawnFlags(ServerSetting.MONSTER, ServerSetting.ANIMAL);
+            world.setAutoSave(ServerSetting.AUTO_SAVE);
+            world.setDifficulty(ServerSetting.DIFFICULTY);
+        }
+        Bukkit.broadcastMessage(TheomachyMessage.INFO_STOP_GAME.getMessage());
+    }
 
     public void saveWorld(Location location) {
         GameData.allWorld.clear();

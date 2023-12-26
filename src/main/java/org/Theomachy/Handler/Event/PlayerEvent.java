@@ -73,6 +73,7 @@ public class PlayerEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         // 플레이어가 서버에 접속했을 때 실행될 작업을 정의합니다.
+
         Player player = event.getPlayer();
 
         Bukkit.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
