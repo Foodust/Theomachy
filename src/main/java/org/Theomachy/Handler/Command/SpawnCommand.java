@@ -8,9 +8,10 @@ import org.Theomachy.Checker.PermissionChecker;
 
 public class SpawnCommand  {
 	private final SpawnModule spawnModule = new SpawnModule();
+	private final PermissionChecker permissionChecker = new PermissionChecker();
 	public void module(CommandSender sender, Command command, String label, String[] data)
 	{
-		if (PermissionChecker.Sender(sender)) {
+		if (permissionChecker.Sender(sender)) {
 			spawnModule.spawnSetting(sender, data);
 		}
 	}

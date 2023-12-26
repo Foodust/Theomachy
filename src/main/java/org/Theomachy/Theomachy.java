@@ -47,6 +47,7 @@ public class Theomachy extends JavaPlugin {
     private final BlacklistModule blacklistModule = new BlacklistModule();
     private final CommonModule commonModule = new CommonModule();
     private final PlayerModule playerModule = new PlayerModule();
+    private final UpdateChecker updateChecker = new UpdateChecker();
     public @NonNull BukkitAudiences adventure() {
         if (this.adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
@@ -59,7 +60,7 @@ public class Theomachy extends JavaPlugin {
 
         plugin = this;
 
-        UpdateChecker.check("5.0");
+        updateChecker.check("5.0");
 
         //plugin 기본 설정 메세지
         commonModule.defaultPluginMessage();

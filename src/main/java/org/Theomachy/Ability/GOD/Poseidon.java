@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Poseidon extends Ability {
+    private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
     private boolean flag = true;
     private final static String[] des = {
             AbilityInfo.Poseidon.getName() + "은 물의 신입니다.",
@@ -146,7 +147,7 @@ public class Poseidon extends Ability {
         if (event.getCause() == DamageCause.DROWNING) {
             event.setCancelled(true);
             CoolTimeTimer.commonSkillCoolTime.put(playerName + "0", 7);
-            AbilityCoolTimeMessage.PassiveEnable(player, 0);
+            abilityCoolTimeMessage.PassiveEnable(player, 0);
         } else if (CoolTimeTimer.commonSkillCoolTime.containsKey(player.getName() + "0")) {
             int rn = (int) (Math.random() * 3);
             if (rn == 0) {

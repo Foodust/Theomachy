@@ -15,6 +15,7 @@ import java.util.*;
 
 public class PlayerModule {
     private final GameModule gameModule = new GameModule();
+    private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
 
     public void setOnlinePlayer() {
         for (Player player : Bukkit.getOnlinePlayers())
@@ -64,7 +65,7 @@ public class PlayerModule {
             return true;
         else
         {
-            AbilityCoolTimeMessage.LackItemError(player, material, stack);
+            abilityCoolTimeMessage.LackItemError(player, material, stack);
             return false;
         }
     }

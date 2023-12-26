@@ -9,9 +9,9 @@ import org.Theomachy.Checker.PermissionChecker;
 
 public class StartStopCommand  {
     private final GameModule gameModule = new GameModule();
-
+    private final PermissionChecker permissionChecker = new PermissionChecker();
     public void GameReady(CommandSender sender) {
-        if (PermissionChecker.Sender(sender)) {
+        if (permissionChecker.Sender(sender)) {
             if (!GameModule.Ready) {
                 if(Theomachy.DEBUG) {
                     sender.sendMessage(TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
@@ -24,7 +24,7 @@ public class StartStopCommand  {
     }
 
     public void GameStop(CommandSender sender) {
-        if (PermissionChecker.Sender(sender)) {
+        if (permissionChecker.Sender(sender)) {
             if(Theomachy.DEBUG){
                 sender.sendMessage(TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
             }

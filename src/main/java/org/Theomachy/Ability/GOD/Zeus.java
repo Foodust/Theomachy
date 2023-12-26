@@ -36,6 +36,7 @@ public class Zeus extends Ability {
     private final int normalDistance;
     private final int rareDistance;
     private final int rareCount;
+    private final BlockFilter blockFilter = new BlockFilter();
     public Zeus(String playerName) {
         super(playerName, AbilityInfo.Zeus, true, true, false, des);
         Theomachy.log.info(playerName + abilityName);
@@ -63,7 +64,7 @@ public class Zeus extends Ability {
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             Block block = player.getTargetBlock(null, normalDistance);
-            if (BlockFilter.AirToFar(player, block)) {
+            if (blockFilter.AirToFar(player, block)) {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 World world = player.getWorld();
                 Location location = block.getLocation();
@@ -75,7 +76,7 @@ public class Zeus extends Ability {
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             Block block = player.getTargetBlock(null, rareDistance);
-            if (BlockFilter.AirToFar(player, block)) {
+            if (blockFilter.AirToFar(player, block)) {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                 World world = player.getWorld();
                 Location location = block.getLocation();

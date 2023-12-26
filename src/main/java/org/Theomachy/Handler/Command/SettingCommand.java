@@ -8,9 +8,10 @@ import org.Theomachy.Checker.PermissionChecker;
 
 public class SettingCommand  {
     private final SettingModule settingModule = new SettingModule();
+    private final PermissionChecker permissionChecker = new PermissionChecker();
     public void module(CommandSender sender) {
         Player player = (Player) sender;
-        if (PermissionChecker.Sender(sender)) {
+        if (permissionChecker.Sender(sender)) {
             settingModule.openSettingInventory(player);
         }
     }

@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public class PermissionChecker
 {
-	public static boolean Player(Player player)
+	public boolean Player(Player player)
 	{
 		if (player.isOp())
 			return true;
@@ -17,7 +17,7 @@ public class PermissionChecker
 		}
 	}
 	
-	public static boolean Sender(CommandSender sender)
+	public boolean Sender(CommandSender sender)
 	{
 		if (sender.isOp())
 			return true;

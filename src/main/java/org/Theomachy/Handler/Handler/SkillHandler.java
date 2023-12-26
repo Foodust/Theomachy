@@ -10,6 +10,7 @@ import org.Theomachy.Message.AbilityCoolTimeMessage;
 
 public class SkillHandler
 {
+	private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
 	public void Use(Player player, Material material, AbilityCase abilityCase, int stack, int coolTime)
 	{
 		player.getInventory().removeItem(new ItemStack(material, stack));
@@ -19,7 +20,7 @@ public class SkillHandler
 				case NORMAL -> CoolTimeTimer.normalSkillCoolTime.put(player.getName(), coolTime);
 				case RARE -> CoolTimeTimer.rareSkillCoolTime.put(player.getName(), coolTime);
             }
-		AbilityCoolTimeMessage.Skill_Used(player, abilityCase);
+		abilityCoolTimeMessage.Skill_Used(player, abilityCase);
 	}
 	public boolean Check(Player player, AbilityCase abilityCase)
 	{
@@ -30,7 +31,7 @@ public class SkillHandler
 			if (CoolTimeTimer.commonSkillCoolTime.containsKey(key))
 			{
 				int cool = CoolTimeTimer.commonSkillCoolTime.get(key);
-				AbilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
+				abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
 			else
@@ -41,7 +42,7 @@ public class SkillHandler
 			if (CoolTimeTimer.normalSkillCoolTime.containsKey(key))
 			{
 				int cool = CoolTimeTimer.normalSkillCoolTime.get(key);
-				AbilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
+				abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
 			else
@@ -52,7 +53,7 @@ public class SkillHandler
 			if (CoolTimeTimer.rareSkillCoolTime.containsKey(key))
 			{
 				int cool = CoolTimeTimer.rareSkillCoolTime.get(key);
-				AbilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
+				abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
 				return false;
 			}
 			else

@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.Command;
 
+import org.Theomachy.Checker.PermissionChecker;
 import org.Theomachy.Handler.Module.AbilityModule;
 import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Message.TheomachyMessage;
@@ -23,6 +24,7 @@ public class MainCommand {
 	private final SettingCommand settingCommand = new SettingCommand();
 	private final GamblingCommand gamblingCommand = new GamblingCommand();
 	private final GameModule gameModule = new GameModule();
+	private final PermissionChecker permissionChecker = new PermissionChecker();
 	public void tCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
 		TheomachyMessage message = TheomachyMessage.getByMessage(data[0]);
@@ -62,9 +64,11 @@ public class MainCommand {
 			sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
 	}
 	public void giveTestItemCommand(CommandSender sender){
-		gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.BLAZE_ROD,1);
-		for(int i = 0  ; i <8; i++){
-			gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.COBBLESTONE,64);
+		if (permissionChecker.Sender(sender)) {
+			gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.BLAZE_ROD, 1);
+			for (int i = 0; i < 8; i++) {
+				gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.COBBLESTONE, 64);
+			}
 		}
 	}
 	public void saveWorldCommand(CommandSender sender){

@@ -16,9 +16,10 @@ import java.util.Objects;
 public class AbilityCommand  {
     private  final AbilityModule abilityModule = new AbilityModule();
     private final CommonModule commonModule = new CommonModule();
+    private final PermissionChecker permissionChecker = new PermissionChecker();
     public void abilityCollTimeClear(CommandSender sender)
     {
-        if (PermissionChecker.Sender(sender))
+        if (permissionChecker.Sender(sender))
         {
             CoolTimeTimer.init =true;
             Bukkit.broadcastMessage(TheomachyMessage.INFO_COOL_TIME_CLEAR.getMessage());
@@ -35,7 +36,7 @@ public class AbilityCommand  {
     }
 
     public void abilitySet(CommandSender sender, String[] data) {
-        if (PermissionChecker.Sender(sender)) {
+        if (permissionChecker.Sender(sender)) {
             if (!GameModule.Ready) {
                 // ability
                 if (data.length <= 1) {

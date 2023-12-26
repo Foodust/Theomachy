@@ -33,10 +33,11 @@ import java.util.stream.Collectors;
 public class AbilityModule  {
     private final BlacklistModule blacklistModule = new BlacklistModule();
     private final RandomSkillHandler randomskillHandler = new RandomSkillHandler();
+    private final PermissionChecker permissionChecker = new PermissionChecker();
     private final Message message = new Message();
     public AbilityModule(){};
     public void listOfAbilityPlayer(CommandSender sender) {
-        if (PermissionChecker.Sender(sender)) {
+        if (permissionChecker.Sender(sender)) {
             if (!GameData.playerAbility.isEmpty()) {
                 Collection<Ability> ability = GameData.playerAbility.values();
                 for (Ability e : ability)

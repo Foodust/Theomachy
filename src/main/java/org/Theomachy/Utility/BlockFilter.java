@@ -6,17 +6,19 @@ import org.bukkit.entity.Player;
 
 import org.Theomachy.Enum.TargetType;
 import org.Theomachy.Message.AbilityCoolTimeMessage;
+import org.checkerframework.checker.units.qual.A;
 
 
 public class BlockFilter
 {
-	public static boolean AirToFar(Player player, Block block)
+	private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
+	public boolean AirToFar(Player player, Block block)
 	{
 		if (block.getType() != Material.AIR)
 			return true;
 		else
 		{
-			AbilityCoolTimeMessage.TooFarError(player, TargetType.TARGET_TOO_FAR);
+			abilityCoolTimeMessage.TooFarError(player, TargetType.TARGET_TOO_FAR);
 			return false;
 		}
 	}

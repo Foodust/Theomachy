@@ -2,6 +2,9 @@ package org.Theomachy.Timer;
 
 import java.util.TimerTask;
 
+import org.Theomachy.Data.GameData;
+import org.Theomachy.Data.ServerSetting;
+import org.Theomachy.Data.VersionData;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,7 +26,7 @@ public class TipTimer extends TimerTask
 			if (Theomachy.SERVER_AUTO_SAVE)
 			{
 				Bukkit.getServer().savePlayers();
-				Theomachy.log.info("[신들의전쟁] 오토세이브 완료");
+				Theomachy.log.info( VersionData.name + "오토세이브 완료");
 			}
 		}
 		if (count % 180 == 0)

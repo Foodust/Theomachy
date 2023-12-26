@@ -11,7 +11,7 @@ import org.Theomachy.Data.GameData;
 
 public class AbilityCoolTimeMessage
 {
-	public static void CoolTimeTeller(Player player, AbilityCase abilityCase, int cool)
+	public void CoolTimeTeller(Player player, AbilityCase abilityCase, int cool)
 	{
         switch (abilityCase) {
             case COMMON ->
@@ -24,7 +24,7 @@ public class AbilityCoolTimeMessage
 	}
 
 	
-	public static void CoolTimeCountTeller(AbilityCase abilityCase ,String playerName, int cool)
+	public void CoolTimeCountTeller(AbilityCase abilityCase ,String playerName, int cool)
 	{
 		Player player = GameData.onlinePlayer.get(playerName);
 		if (player != null)
@@ -40,7 +40,7 @@ public class AbilityCoolTimeMessage
 		}
 	}
 	
-	public static void AbilityReset(AbilityCase abilityCase ,String playerName)
+	public void AbilityReset(AbilityCase abilityCase ,String playerName)
 	{
 		Player player = GameData.onlinePlayer.get(playerName);
 		if (player != null)
@@ -56,7 +56,7 @@ public class AbilityCoolTimeMessage
 		}
 	}
 
-	public static void Skill_Used(Player player, AbilityCase abilityCase)
+	public void Skill_Used(Player player, AbilityCase abilityCase)
 	{
         switch (abilityCase) {
 			case COMMON ->
@@ -68,7 +68,7 @@ public class AbilityCoolTimeMessage
         }
 	}
 	
-	public static void LackItemError(Player player, Material material, int stack)
+	public void LackItemError(Player player, Material material, int stack)
 	{
         switch (material) {
             case COBBLESTONE -> {
@@ -86,7 +86,7 @@ public class AbilityCoolTimeMessage
         }
 	}
 	
-	public static void TooFarError(Player player, TargetType targetType)
+	public void TooFarError(Player player, TargetType targetType)
 	{
         switch (targetType) {
 			case ENTITY_TOO_FAR -> player.sendMessage(TheomachyMessage.ERROR_TOO_FAR_ENTITY.getMessage());
@@ -96,7 +96,7 @@ public class AbilityCoolTimeMessage
 	}
 
 
-	public static void PassiveEnable(Player player, int passiveCase)
+	public void PassiveEnable(Player player, int passiveCase)
 	{
 		switch(passiveCase){
 			case 0-> player.sendMessage(TheomachyMessage.INFO_ACTIVATE_ABILITY.getMessage());

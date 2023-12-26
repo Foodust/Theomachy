@@ -8,8 +8,9 @@ import org.Theomachy.Checker.PermissionChecker;
 
 public class TeamCommand  {
     private final TeamModule teamModule = new TeamModule();
+    private final PermissionChecker permissionChecker = new PermissionChecker();
     public void setTeam(CommandSender sender, Command command, String label, String[] data) {
-        if (PermissionChecker.Sender(sender)) {
+        if (permissionChecker.Sender(sender)) {
             teamModule.setTeam(sender, data);
         }
     }

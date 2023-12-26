@@ -34,6 +34,7 @@ public class Teleporter extends Ability
 
 	private String rareTarget;
 	private final int normalDistance;
+	private final BlockFilter blockFilter = new BlockFilter();
 	public Teleporter(String playerName)
 	{
 		super(playerName, AbilityInfo.Teleporter, true, false, false, des);
@@ -66,7 +67,7 @@ public class Teleporter extends Ability
 		if (skillHandler.Check(player, AbilityCase.NORMAL)&&playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			Block block = player.getTargetBlock(null, normalDistance);
-			if (BlockFilter.AirToFar(player, block))
+			if (blockFilter.AirToFar(player, block))
 			{
 				Location location0 = block.getLocation();
 				Location location1 = block.getLocation();
