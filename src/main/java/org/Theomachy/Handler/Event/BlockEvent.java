@@ -52,20 +52,4 @@ public class BlockEvent  implements Listener {
                 ability.passiveSkill(event);
         }
     }
-    @EventHandler
-    public void onPlayerInteractEvent(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getClickedBlock();
-
-        if (block != null && block.getType() == Material.DIAMOND_BLOCK) {
-            ItemStack itemInHand = player.getInventory().getItemInMainHand();
-            Material handMaterial = itemInHand.getType();
-
-            // 특정 도구를 사용하고 있는 경우에만 처리
-            if (handMaterial != Material.AIR) {
-                event.setCancelled(true); // 블록 파괴 방지
-            }
-        }
-    }
-
 }

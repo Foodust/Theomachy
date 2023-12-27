@@ -40,7 +40,7 @@ public class MainCommand {
 			case COMMAND_CLEAR, COMMAND_CLEAR_C -> abilityCommand.abilityCollTimeClear(sender);
 			case COMMAND_BLACKLIST, COMMAND_BLACKLIST_B, COMMAND_BLACKLIST_BLACK -> blacklistCommand.module(sender);
 			case COMMAND_SETTING, COMMAND_SETTING_SET -> settingCommand.module(sender);
-			case COMMAND_GAMBLING, COMMAND_GAMBLING_G -> gamblingCommand.module(sender);
+			case COMMAND_GAMBLE, COMMAND_GAMBLING_G -> gamblingCommand.module(sender);
 			case COMMAND_GIVE -> giveTestItemCommand(sender);
 //			case COMMAND_SAVE -> saveWorldCommand(sender);
 //			case COMMAND_RELOAD -> reloadWorldCommand();

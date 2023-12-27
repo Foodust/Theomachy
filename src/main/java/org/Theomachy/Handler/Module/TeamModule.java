@@ -57,6 +57,7 @@ public class TeamModule {
                 Collections.shuffle(onlinePlayers);
                 String[] teams = {data[2], data[3]};
                 int teamIndex = 0;
+                GameData.playerTeam.clear();
                 for (Player player : onlinePlayers) {
                     String playerName = player.getName();
                     String teamNameOld = GameData.playerTeam.get(playerName);
@@ -64,7 +65,6 @@ public class TeamModule {
                     ChatColor newTeamColor = commonModule.findColor(teamName);
 
                     if (teamNameOld == null) {
-                        GameData.playerTeam.clear();
                         Bukkit.broadcastMessage(
                                 TheomachyMessage.INFO_PLAYER.getMessage() +
                                         ChatColor.RED + playerName +

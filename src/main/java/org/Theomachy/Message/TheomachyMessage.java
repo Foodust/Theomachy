@@ -95,7 +95,7 @@ public enum TheomachyMessage {
     COMMAND_BLACKLIST_B("b"),
     COMMAND_SETTING("setting"),
     COMMAND_SETTING_SET("set"),
-    COMMAND_GAMBLING("gambling"),
+    COMMAND_GAMBLE("gamble"),
     COMMAND_GAMBLING_G("g"),
     COMMAND_REMOVE("remove"),
     COMMAND_RESET("reset"),
