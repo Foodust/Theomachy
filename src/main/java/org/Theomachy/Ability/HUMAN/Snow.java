@@ -27,14 +27,14 @@ public class Snow extends Ability {
     private final static String[] des = {
             AbilityInfo.Snow + "는 눈을 이용합니다.",
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "폭설",
-            "죽을 때마다 공격 지수가 1씩 상승 하고 최대 7까지 상승합니다.",
+            "죽을 때마다 눈덩이 데미지가 1씩 상승 하고 최대 7까지 상승합니다.",
             "눈덩이를 맞춰도 상대가 밀려나지 않습니다.",
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "얼음 속성",
             "불에 의한 데미지를 2배로 받습니다.",
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "공격 지수",
-            "현재 공격 지수를 확인 합니다.",
+            "현재 눈덩이 데미지를 확인 합니다.",
             ChatColor.AQUA + "【고급】 " + ChatColor.WHITE + "눈덩이 변환",
-            "눈덩이를 1개 얻습니다.",};
+            "눈덩이를 3개 얻습니다.",};
 
     private int passiveDamage;
 	private final int rareCount;
@@ -43,8 +43,8 @@ public class Snow extends Ability {
         super(playerName, AbilityInfo.Snow, true, true, false, des);
         this.normalSkillCoolTime = 0;
         this.normalSkillStack = 0;
-        this.rareSkillCoolTime = 20;
-        this.rareSkillStack = 5;
+        this.rareSkillCoolTime = 50;
+        this.rareSkillStack = 10;
 		this.rareCount = 3;
         this.passiveDamage = 0;
         this.rank = AbilityRank.A;
