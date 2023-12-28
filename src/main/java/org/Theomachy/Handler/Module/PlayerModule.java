@@ -100,8 +100,8 @@ public class PlayerModule {
             inventory.addItem(new ItemStack(Material.BONE_MEAL, 3));
         }
     }
-    public void damageNearEntity(World world, Location location, Player player, float damage, int x, int y, int z){
-        for (Entity entity : world.getNearbyEntities(location, x, y ,z )) {
+    public void damageNearEntity(Player player,Location location, float damage, int x, int y, int z){
+        for (Entity entity : player.getWorld().getNearbyEntities(location, x, y ,z )) {
             if (entity instanceof LivingEntity && !entity.equals(player)) {
                 ((LivingEntity) entity).damage(damage, player);
             }

@@ -83,7 +83,9 @@ public class Rengoku extends Ability {
                     double z = playerLocation.getZ() + radius * Math.sin(angle) * direction.getZ();
                     Location circleLocation = new Location(playerLocation.getWorld(),x, y, z);
                     Objects.requireNonNull(playerLocation.getWorld()).spawnParticle(Particle.FLAME, circleLocation, 1);
+
                     // 파티클에 닿은 플레이어 찾기
+
                     for (Entity enemy : Objects.requireNonNull(circleLocation.getWorld()).getNearbyEntities(circleLocation, 5, 5 ,5 )) {
                         if (enemy instanceof LivingEntity && !enemy.equals(player)) {
                             ((LivingEntity) enemy).damage(normalDamage, player);

@@ -63,11 +63,7 @@ public class Sukuna extends RyoikiTenkai {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.SWEEP_ATTACK, particleLocation, 50);
-                for (Entity entity : world.getNearbyEntities(particleLocation, 4, 4, 4)) {
-                    if (entity instanceof LivingEntity && !entity.equals(player)) {
-                        ((LivingEntity) entity).damage(normalDamage, player);
-                    }
-                }
+                playerModule.damageNearEntity(player,particleLocation,normalDamage,4,4,4);
             }
         }
     }

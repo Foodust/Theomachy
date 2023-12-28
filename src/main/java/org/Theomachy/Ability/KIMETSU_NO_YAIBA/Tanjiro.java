@@ -40,7 +40,7 @@ public class Tanjiro extends Ability {
         Theomachy.log.info(playerName + abilityName);
         this.normalSkillCoolTime = 40;
         this.normalSkillStack = 10;
-        this.normalDistance = 20;
+        this.normalDistance = 10;
         this.normalDamage = 5;
 
         this.rareSkillCoolTime = 120;
@@ -73,6 +73,7 @@ public class Tanjiro extends Ability {
                 Vector horizontalOffset = direction.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
                 Location particleLocation = startLocation.clone().add(horizontalOffset);
                 world.spawnParticle(Particle.WATER_SPLASH, particleLocation, 100);
+                playerModule.damageNearEntity(player,particleLocation, normalDamage, 4, 4, 4);
             }
         }
     }

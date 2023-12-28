@@ -31,13 +31,17 @@ public class Sans extends Ability {
 
     private final int passiveDuration;
     private final int rareDistance;
+    private final int rareDamage;
     public Sans(String playerName) {
         super(playerName, AbilityInfo.Sans, true, true, true, des);
         Theomachy.log.info(playerName + abilityName);
         this.normalSkillCoolTime = 1;
-        this.rareSkillCoolTime = 120;
         this.normalSkillStack = 3;
+
+        this.rareSkillCoolTime = 120;
         this.rareSkillStack = 30;
+        this.rareDamage = 10;
+
         this.passiveDuration = 3;
         this.rareDistance = 800;
         this.rank = AbilityRank.S;
@@ -82,11 +86,7 @@ public class Sans extends Ability {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 50);
-                for (Entity entity : world.getNearbyEntities(particleLocation, 12, 12, 12)) {
-                    if (entity instanceof LivingEntity && !entity.equals(player)) {
-                        ((LivingEntity) entity).damage(10, player);
-                    }
-                }
+                playerModule.damageNearEntity(player, particleLocation, rareDamage,12,12,12);
             }
         }
     }
