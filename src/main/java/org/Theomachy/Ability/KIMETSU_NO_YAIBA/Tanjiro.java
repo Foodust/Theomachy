@@ -43,7 +43,7 @@ public class Tanjiro extends Ability {
         this.rareDistance = 40;
         this.rareDamage = 20;
         this.rareTime = 1;
-        this.rareDuration = 5L;
+        this.rareDuration = 5 * 20L;
         this.rank = AbilityRank.S;
     }
 
