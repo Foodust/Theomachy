@@ -20,9 +20,9 @@ public class Zenitsu extends Ability {
     private final static String[] des = {
             AbilityInfo.Zenitsu.getName(),
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제1의 형 「벽력일섬」(霹靂一閃)",
-            "전광석화의 기세로 접근해서 일직선의 일격에 목을 벤다."};
-    //            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제7의 형 「화뢰신」(火 雷 神)",
-//            "온 신경을 다리에 집중시켜서 눈 깜짝할 새도 없이 상현에게 참격을 날렸다."};
+            "전광석화의 기세로 접근해서 일직선의 일격에 목을 벤다.",
+            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제7의 형 「화뢰신」(火 雷 神)",
+            "온 신경을 다리에 집중시켜서 뛰어 오른 후 돌진하며 번개를 남긴다."};
     private final int normalDistance;
     private final double rareJumpDistance;
     private final int rareDistance;
@@ -35,8 +35,8 @@ public class Zenitsu extends Ability {
         this.normalSkillStack = 16;
         this.normalDistance = 20;
 
-//        this.rareSkillCoolTime = 120;
-//        this.rareSkillStack = 32;
+        this.rareSkillCoolTime = 120;
+        this.rareSkillStack = 32;
         this.rareJumpDistance = 1.8f;
         this.rareDistance = 10;
         this.rareTime = 1;
@@ -49,7 +49,7 @@ public class Zenitsu extends Ability {
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
             switch (MouseEventChecker.PlayerInteract(event)) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
-//                case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
+                case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
         }
     }
@@ -69,21 +69,20 @@ public class Zenitsu extends Ability {
         }
     }
 
-    // 화뢰신 만들다가 포기함
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                Location location = player.getLocation();
-                for (int distance = 0; distance < rareDistance; distance += rareDistance / 10) {
-                    Vector direction = location.getDirection().normalize();
-                    Vector diagonalDirection = new Vector(direction.getX() * 0.75, -0.5, direction.getZ() * 0.75).normalize();
-                    Location to = location.clone().add(diagonalDirection.multiply(distance));
-                    World world = to.getWorld();
-                    assert world != null;
-                    world.strikeLightningEffect(to.add(-10, 0, 10));
-                    player.teleport(to);
+                for(int i = rareDistance ; i > 0; i--){
+                    Location location = player.getLocation();
+                    Vector direction = player.getLocation().getDirection().multiply(1);
+                    player.setVelocity(direction);
+                    for(int distance = 0; distance < i; distance++ ){
+                        Vector horizontalOffset = direction.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
+                        Location lightningLocation = location.clone().add(horizontalOffset);
+                        Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
+                    }
                 }
             }, rareTime * 20L);
         }
