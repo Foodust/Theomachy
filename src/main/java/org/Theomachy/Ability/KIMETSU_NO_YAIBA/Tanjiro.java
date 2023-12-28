@@ -75,15 +75,16 @@ public class Tanjiro extends Ability {
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-            Location playerLocation = player.getLocation();
+
             int radius = 2;
             // 파티클을 생성하고 플레이어 주변에 회전하도록 설정
             BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
+                Location playerLocation = player.getLocation();
                 for (double t = 0; t < Math.PI * 2; t += Math.PI / 16) {
                     double x = Math.cos(t) * radius;
                     double z = Math.sin(t) * radius;
 
-                    Location particleLocation = playerLocation.clone().add(x, 0, z);
+                    Location particleLocation = playerLocation.clone().add(x, 1, z);
                     World world = player.getWorld();
 
                     // 원하는 파티클을 설정하여 생성
