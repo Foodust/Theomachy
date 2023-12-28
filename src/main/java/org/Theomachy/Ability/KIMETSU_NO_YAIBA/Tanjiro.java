@@ -66,9 +66,13 @@ public class Tanjiro extends Ability {
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-            Vector direction = player.getEyeLocation().getDirection();
-            for (int i = 0; i < normalDistance; i++) {
-                player.getWorld().spawnParticle(Particle.WATER_SPLASH, direction.getX() + i , direction.getY(), direction.getZ() + i, 100);
+            Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(3));
+            World world = player.getWorld();
+            Vector direction = player.getEyeLocation().getDirection().clone();
+            for (double distance = (double) -normalDistance / 2; distance < (double) normalDistance / 2; distance += 0.1) {
+                Vector horizontalOffset = direction.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
+                Location particleLocation = startLocation.clone().add(horizontalOffset);
+                world.spawnParticle(Particle.WATER_SPLASH, particleLocation, 100);
             }
         }
     }
