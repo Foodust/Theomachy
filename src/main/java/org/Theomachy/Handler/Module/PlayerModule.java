@@ -6,7 +6,6 @@ import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -76,28 +75,18 @@ public class PlayerModule {
         inventory.removeItem(new ItemStack(material, stack));
     }
 
-    public void startItem(Player player)
+    public void startingBasicItem(Player player)
     {
-        Inventory inventory = player.getInventory();
-        if (Theomachy.STARTING_INVENTORY_CLEAR)
-        {
-            inventory.clear();
-            player.getInventory().setHelmet(new ItemStack(Material.AIR));
-            player.getInventory().setChestplate(new ItemStack(Material.AIR));
-            player.getInventory().setLeggings(new ItemStack(Material.AIR));
-            player.getInventory().setBoots(new ItemStack(Material.AIR));
+        if (Theomachy.STARTING_INVENTORY_CLEAR) {
+            gameModule.clearItem(player);
         }
-        if (Theomachy.STARTING_GIVE_ITEM)
-        {
-            // 원본
+        if (Theomachy.STARTING_GIVE_ITEM){
             gameModule.giveItem(player,Material.CHEST, 1);
-
-            inventory.addItem(new ItemStack(Material.CHEST, 1));
-            inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
-            inventory.addItem(new ItemStack(Material.ICE, 2));
-            inventory.addItem(new ItemStack(Material.OAK_PLANKS, 3));
-            inventory.addItem(new ItemStack(Material.WHEAT, 9));
-            inventory.addItem(new ItemStack(Material.BONE_MEAL, 3));
+            gameModule.giveItem(player,Material.LAVA_BUCKET, 1);
+            gameModule.giveItem(player,Material.ICE, 2);
+            gameModule.giveItem(player,Material.OAK_PLANKS, 3);
+            gameModule.giveItem(player,Material.WHEAT, 9);
+            gameModule.giveItem(player,Material.BONE_MEAL, 3);
         }
     }
     public void damageNearEntity(Player player,Location location, float damage, int x, int y, int z){

@@ -11,6 +11,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
@@ -91,7 +92,14 @@ public class GameModule {
     public void giveItem(Player player, Material material, int amount) {
         player.getInventory().addItem(new ItemStack(material, amount));
     }
-
+    public  void clearItem(Player player){
+        Inventory inventory = player.getInventory();
+        inventory.clear();
+        player.getInventory().setHelmet(new ItemStack(Material.AIR));
+        player.getInventory().setChestplate(new ItemStack(Material.AIR));
+        player.getInventory().setLeggings(new ItemStack(Material.AIR));
+        player.getInventory().setBoots(new ItemStack(Material.AIR));
+    }
 
     // 맨손과 같은 기능을 가지는 도구인지 확인하는 메서드
     public boolean isTool(Material material) {

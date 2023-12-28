@@ -21,6 +21,7 @@ public class CoolTimeTimer extends TimerTask {
     public static HashMap<String, Integer> rareSkillCoolTime = new HashMap<String, Integer>();
     private int count = 1;
     private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
+
     @Override
     public void run() {
         if (!GameModule.Ready && !Theomachy.DEBUG) {

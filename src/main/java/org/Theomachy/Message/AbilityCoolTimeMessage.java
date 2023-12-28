@@ -98,9 +98,10 @@ public class AbilityCoolTimeMessage
 
 	public void PassiveEnable(Player player, int passiveCase)
 	{
-		switch(passiveCase){
-			case 0-> player.sendMessage(TheomachyMessage.INFO_ACTIVATE_ABILITY.getMessage());
-			default -> player.sendMessage(TheomachyMessage.ERROR_DEACTIVATE_ABILITY.getMessage());
-		}
+        if (passiveCase == 0) {
+            player.sendMessage(TheomachyMessage.INFO_ACTIVATE_ABILITY.getMessage());
+        } else {
+            player.sendMessage(TheomachyMessage.ERROR_DEACTIVATE_ABILITY.getMessage());
+        }
 	}
 }

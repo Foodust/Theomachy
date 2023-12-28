@@ -19,7 +19,6 @@ import org.bukkit.entity.Player;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.Command.StartStopCommand;
 
 
 public class GameReadyTimer extends TimerTask {
@@ -64,7 +63,7 @@ public class GameReadyTimer extends TimerTask {
 
     @Override
     public void run() {
-        if (GameModule.Ready && count < 45) {
+        if (GameModule.Ready && count < 35) {
             Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
                 switch (count) {
                     case 1 -> {
@@ -150,7 +149,7 @@ public class GameReadyTimer extends TimerTask {
                             player.setExhaustion(0.0F);
                             player.setExp(0.0F);
                             player.setHealth(20);
-                            playerModule.startItem(player);
+                            playerModule.startingBasicItem(player);
                             String teamName = GameData.playerTeam.get(player.getName());
                             if (teamName != null) {
                                 Location location = GameData.spawnArea.get(teamName);

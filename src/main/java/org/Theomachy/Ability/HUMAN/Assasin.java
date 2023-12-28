@@ -38,8 +38,8 @@ public class Assasin extends Ability {
         super(playerName, AbilityInfo.Assasin, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
         this.normalSkillCoolTime = 1;
-        this.rareSkillCoolTime = 15;
         this.normalSkillStack = 0;
+        this.rareSkillCoolTime = 15;
         this.rareSkillStack = 15;
 
         this.rank = AbilityRank.B;
@@ -61,7 +61,6 @@ public class Assasin extends Ability {
         if ((b.getType() == Material.AIR) || (b.getType() == Material.SNOW) || (b.getType() == Material.STONE_SLAB)) {
             if ((!CoolTimeTimer.commonSkillCoolTime.containsKey(playerName + "0") && (playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)))) {
                 CoolTimeTimer.commonSkillCoolTime.put(playerName + "0", normalSkillCoolTime);
-                playerModule.ItemRemove(player, Material.COBBLESTONE, normalSkillStack);
                 World world = player.getWorld();
                 Location location = player.getLocation();
                 Vector v = player.getEyeLocation().getDirection();
