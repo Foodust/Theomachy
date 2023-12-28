@@ -76,7 +76,7 @@ public class Tanjiro extends Ability {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
-            int radius = 2;
+            int radius = 1;
             // 파티클을 생성하고 플레이어 주변에 회전하도록 설정
             BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
 

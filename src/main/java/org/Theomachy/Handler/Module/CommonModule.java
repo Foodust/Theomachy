@@ -75,7 +75,7 @@ public class CommonModule {
         Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_ENABLED.getMessage());
         Theomachy.log.info(TheomachyMessage.INFO_PLUGIN_DEFAULT_SETTING.getMessage());
     }
-    public void defaultLogMessage(Plugin plugin){
+    public void defaultSettingAndLogMessage(Plugin plugin){
         // ability Count
         Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_LIST_OF_ACCEPT_ABILITY.getMessage());
         Theomachy.log.info(VersionData.name + TheomachyMessage.INFO_GOD.getMessage() + " : " + BlacklistModule.godCanlist.size());
@@ -115,6 +115,7 @@ public class CommonModule {
         Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_ANIMAL_SPAWN.getMessage() + " : " + Theomachy.ANIMAL_SPAWN);
         Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_MONSTER_SPAWN.getMessage() + " : " + Theomachy.MONSTER_SPAWN);
         Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_DIFFICULT.getMessage() + " : " + Theomachy.DIFFICULTY);
+        Theomachy.log.info(VersionData.name + TheomachyMessage.SETTING_DEBUG_MODE.getMessage() + " : " + Theomachy.DEBUG);
         Theomachy.log.info(TheomachyMessage.INFO_BAR.getMessage());
 
         // developer

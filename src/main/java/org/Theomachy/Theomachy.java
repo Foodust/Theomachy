@@ -81,7 +81,7 @@ public class Theomachy extends JavaPlugin {
         blacklistModule.settingBlackList(file);
 
         // 기본 정보
-        commonModule.defaultLogMessage(this);
+        commonModule.defaultSettingAndLogMessage(this);
 
         // tip timer
         Theomachy.tasks.add(commonModule.startTimerTask(new TipTimer(), 0L, 20L));
