@@ -8,16 +8,10 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-
-import java.util.Objects;
 
 public class Tanjiro extends Ability {
     private final static String[] des = {
@@ -31,12 +25,12 @@ public class Tanjiro extends Ability {
     private final int normalDistance;
     private final int rareDistance;
     private final int rareTime;
-    private final int rareDelay;
+    private final Long rareDuration;
     private final int rareDamage;
     private final PlayerModule playerModule = new PlayerModule();
 
     public Tanjiro(String playerName) {
-        super(playerName, AbilityInfo.Rengoku, true, false, false, des);
+        super(playerName, AbilityInfo.Tanjiro, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
         this.normalSkillCoolTime = 40;
         this.normalSkillStack = 10;
@@ -49,7 +43,7 @@ public class Tanjiro extends Ability {
         this.rareDistance = 40;
         this.rareDamage = 20;
         this.rareTime = 1;
-        this.rareDelay = 1;
+        this.rareDuration = 5L;
         this.rank = AbilityRank.S;
     }
 
@@ -81,6 +75,24 @@ public class Tanjiro extends Ability {
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+            Location playerLocation = player.getLocation();
+            int radius = 2;
+            // 파티클을 생성하고 플레이어 주변에 회전하도록 설정
+            BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
+                for (double t = 0; t < Math.PI * 2; t += Math.PI / 16) {
+                    double x = Math.cos(t) * radius;
+                    double z = Math.sin(t) * radius;
+
+                    Location particleLocation = playerLocation.clone().add(x, 0, z);
+                    World world = player.getWorld();
+
+                    // 원하는 파티클을 설정하여 생성
+                    world.spawnParticle(Particle.WATER_WAKE, particleLocation, 20);
+                }
+            }, 0, 1L);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+                Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());
+            },rareDuration);
         }
     }
 }
