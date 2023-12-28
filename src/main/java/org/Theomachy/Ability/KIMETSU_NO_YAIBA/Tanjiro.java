@@ -79,11 +79,11 @@ public class Tanjiro extends Ability {
             int radius = 2;
             // 파티클을 생성하고 플레이어 주변에 회전하도록 설정
             BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                Location playerLocation = player.getLocation();
+
                 for (double t = 0; t < Math.PI * 2; t += Math.PI / 16) {
                     double x = Math.cos(t) * radius;
                     double z = Math.sin(t) * radius;
-
+                    Location playerLocation = player.getLocation();
                     Location particleLocation = playerLocation.clone().add(x, 1, z);
                     World world = player.getWorld();
 
