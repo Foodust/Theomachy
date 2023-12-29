@@ -75,13 +75,13 @@ public class Zenitsu extends Ability {
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 for(int i = rareDistance ; i > 0; i--){
-                    Vector direction = player.getLocation().getDirection().multiply(2);
+                    Vector direction = player.getLocation().getDirection().multiply(5);
                     player.setVelocity(direction);
 
                     Vector lightningDirection = player.getEyeLocation().getDirection().clone();
                     Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(-2));
 
-                    for(int distance = -i / 2 ; distance < i / 2; distance++ ){
+                    for(int distance = -i; distance < i; distance++ ){
                         Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
                         Location lightningLocation = startLocation.clone().add(horizontalOffset);
                         Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
