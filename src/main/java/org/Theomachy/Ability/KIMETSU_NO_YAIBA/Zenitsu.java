@@ -13,7 +13,6 @@ import org.Theomachy.Theomachy;
 import org.Theomachy.Checker.MouseEventChecker;
 
 
-
 import java.util.Objects;
 
 public class Zenitsu extends Ability {
@@ -37,7 +36,7 @@ public class Zenitsu extends Ability {
 
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 32;
-        this.rareJumpDistance = 1.8f;
+        this.rareJumpDistance = 0.8f;
         this.rareDistance = 10;
         this.rareTime = 1;
 
@@ -74,18 +73,22 @@ public class Zenitsu extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                for(int i = rareDistance ; i > 0; i--){
+                for (int i = rareDistance; i > 0; i--) {
                     Vector direction = player.getLocation().getDirection().multiply(5);
                     player.setVelocity(direction);
 
                     Vector lightningDirection = player.getEyeLocation().getDirection().clone();
                     Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(-2));
 
-                    for(int distance = -i; distance < i; distance++ ){
-                        Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
-                        Location lightningLocation = startLocation.clone().add(horizontalOffset);
-                        Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
-                    }
+                    int finalI = i;
+                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                        for (int distance = -finalI; distance < finalI; distance++) {
+                            Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
+                            Location lightningLocation = startLocation.clone().add(horizontalOffset);
+                            Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
+                        }
+                    }, 10L);
+
                 }
             }, rareTime * 20L);
         }
