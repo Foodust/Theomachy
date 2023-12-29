@@ -26,6 +26,7 @@ public class Zenitsu extends Ability {
     private final double rareJumpDistance;
     private final int rareDistance;
     private final int rareTime;
+    private final double rareDashDistance;
 
     public Zenitsu(String playerName) {
         super(playerName, AbilityInfo.Zenitsu, true, false, false, des);
@@ -37,6 +38,7 @@ public class Zenitsu extends Ability {
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 32;
         this.rareJumpDistance = 1.3f;
+        this.rareDashDistance = 3f;
         this.rareDistance = 10;
         this.rareTime = 1;
 
@@ -74,20 +76,20 @@ public class Zenitsu extends Ability {
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 for (int i = rareDistance; i > 0; i--) {
-                    Vector direction = player.getLocation().getDirection().multiply(5);
+                    Vector direction = player.getLocation().getDirection().multiply(rareDashDistance);
                     player.setVelocity(direction);
 
                     Vector lightningDirection = player.getEyeLocation().getDirection().clone();
-                    Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(-2));
+                    Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(-1));
 
                     int finalI = i;
                     Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                         for (int distance = -finalI; distance < finalI; distance++) {
-                            Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
+                            Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, -20, 0)).normalize().multiply(distance);
                             Location lightningLocation = startLocation.clone().add(horizontalOffset);
                             Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
                         }
-                    }, 10L);
+                    }, 5L);
 
                 }
             }, rareTime * 20L);
