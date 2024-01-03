@@ -17,6 +17,22 @@
 1.20.2 버전으로 업데이트   
 그에 따른 소스 코드 대거 변경 및 로직 변경
 
+현재 개발중임 
+사용가능하나 버그가 많을 수 있음
+
+Intelij 로 개발됨   
+build.gradle 에서   
+destinationDirectory 를 변경후 빌드 하시길 바람
+```
+jar{
+    archiveFileName = 'Theomachy.jar'
+    destinationDirectory = file("C:\\Users\\Admin\\Desktop\\게임\\server1.20.2\\plugins")
+    manifest {
+        attributes 'Main-Class': 'septagram.Theomachy.Theomachy'
+    }
+}
+```
+
 
 * * *
 이하 아래는 패치노트임
