@@ -47,6 +47,7 @@ public class Ability
 	public int rareSkillStack =-1;
 
 	public Material material = Material.COBBLESTONE;
+	public Material skillMaterial =Material.BLAZE_ROD;
 	public final PlayerModule playerModule = new PlayerModule();
 	public final SkillHandler skillHandler = new SkillHandler();
 	public final PlayerHandler playerHandler = new PlayerHandler();

@@ -45,7 +45,7 @@ public class Apollon extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player,skillMaterial)) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftClickAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightClickAction(player);

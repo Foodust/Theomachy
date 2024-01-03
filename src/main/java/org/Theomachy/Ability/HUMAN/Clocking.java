@@ -40,7 +40,7 @@ public class Clocking extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
+        if (playerModule.InHandItemCheck(player,skillMaterial)) {
             switch (event.getAction()) {
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> leftAction(player);
             }

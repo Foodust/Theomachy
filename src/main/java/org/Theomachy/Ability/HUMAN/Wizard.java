@@ -44,7 +44,7 @@ public class Wizard extends Ability
 	public void activeSkill(PlayerInteractEvent event)
 	{
 		Player player = event.getPlayer();
-		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
+		if (playerModule.InHandItemCheck(player,skillMaterial))
 		{
             switch (event.getAction()) {
 				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftClickAction(player);

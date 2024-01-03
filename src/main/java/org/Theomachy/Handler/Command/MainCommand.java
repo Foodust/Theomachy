@@ -65,7 +65,7 @@ public class MainCommand {
 	}
 	public void giveTestItemCommand(CommandSender sender){
 		if (permissionChecker.Sender(sender)) {
-			gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.BLAZE_ROD, 1);
+			gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())),Material.BLAZE_ROD, 1);
 			for (int i = 0; i < 8; i++) {
 				gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.COBBLESTONE, 64);
 			}
