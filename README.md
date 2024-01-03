@@ -1,4 +1,4 @@
-신들의 전쟁 플러그인 version 5.0
+신들의 전쟁 플러그인 version 5.0 ( Mincraft Version : 1.20.2 )
 ===========================================
 * * *
 #### 현재 작성자 :  프덧 ( foodust )
@@ -8,9 +8,8 @@
 > - 두번째 수정자 - 플로리아 ( humint2003 )
 > - 마지막 수정자 - 프덧 ( foodust )
 
-* * *
-
-[사용 기반 소스] <https://github.com/Flair-Delta/Theomchy-Pi-Editon>
+* * * 
+[ 사용 기반 소스 ] <https://github.com/Flair-Delta/Theomchy-Pi-Editon>
 * * *
  
 1.7.10 버전이었던 소스 코드를   
