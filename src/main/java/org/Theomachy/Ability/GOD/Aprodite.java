@@ -27,10 +27,10 @@ public class Aprodite extends Ability {
         super(playerName, AbilityInfo.Aprodite, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
 
-        this.normalSkillCoolTime = 500;
-        this.normalSkillStack = 64;
+        this.normalSkillCoolTime = 120;
+        this.normalSkillStack = 20;
 
-        this.rank = AbilityRank.S;
+        this.rank = AbilityRank.A;
     }
 
     public void activeSkill(PlayerInteractEvent event) {
