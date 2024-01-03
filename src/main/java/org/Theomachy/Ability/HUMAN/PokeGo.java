@@ -45,7 +45,6 @@ public class PokeGo extends Ability {
     }
 
     public void passiveSkill(PlayerMoveEvent event) {
-
         if (walking >= goal) {
             Random random = new Random();
             int randomNumber = random.nextInt(4);
@@ -72,7 +71,6 @@ public class PokeGo extends Ability {
             walking++;
         }
     }
-
     public void initialize() {
         this.walking = 0;
     }

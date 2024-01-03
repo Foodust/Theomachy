@@ -25,6 +25,7 @@ public class PlayerEvent implements Listener {
 
     public static ArrayList<Ability> PlayerDeathEventList = new ArrayList<Ability>();
     private final PlayerModule playerModule = new PlayerModule();
+
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (GameModule.Start) {
@@ -102,7 +103,8 @@ public class PlayerEvent implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
-            if (ability != null && ability.abilityCode == AbilityInfo.PokeGo.getIndex())
+            assert ability != null;
+            if (ability.abilityCode == AbilityInfo.PokeGo.getIndex() || ability.abilityCode == AbilityInfo.Tanjiro.getIndex())
                 ability.passiveSkill(event);
         }
     }

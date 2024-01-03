@@ -9,6 +9,7 @@ import org.Theomachy.Theomachy;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -18,14 +19,14 @@ public class Tanjiro extends Ability {
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제1형 「수면 베기」 (水面切り)",
             "칼을 횡방향으로 베어내는 간단한 참격 기술",
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "오의・제10형 「생생유전」(生生流転)",
-            "물로 이루어진 용 형상의 검기를 휘두르며 회전을 더해가면서 검격의 위력을 점점 증가시키는 기술."};
+            "물로 이루어진 용 형상의 검기를 휘두르며 움직일 때 마다 검격의 위력을 점점 증가시키는 기술."};
 
     private final int normalDamage;
     private final int normalDistance;
     private final int rareDistance;
-    private final int rareTime;
     private final Long rareDuration;
-    private final int rareDamage;
+    private double rareDamage;
+    private boolean rareCheck;
     private final PlayerModule playerModule = new PlayerModule();
 
     public Tanjiro(String playerName) {
@@ -38,11 +39,10 @@ public class Tanjiro extends Ability {
 
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 50;
-
         this.rareDistance = 40;
-        this.rareDamage = 20;
-        this.rareTime = 1;
+        this.rareDamage = 0;
         this.rareDuration = 5 * 20L;
+        this.rareCheck = false;
         this.rank = AbilityRank.S;
     }
 
@@ -74,11 +74,10 @@ public class Tanjiro extends Ability {
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-
+            rareCheck = true;
             int radius = 1;
             // 파티클을 생성하고 플레이어 주변에 회전하도록 설정
             BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-
                 for (double t = 0; t < Math.PI * 2; t += Math.PI / 16) {
                     double x = Math.cos(t) * radius;
                     double z = Math.sin(t) * radius;
@@ -86,8 +85,7 @@ public class Tanjiro extends Ability {
                     Location particleLocation = playerLocation.clone().add(x, 1, z);
                     World world = player.getWorld();
 
-                    // 원하는 파티클을 설정하여 생성
-                    world.spawnParticle(Particle.WATER_WAKE, particleLocation, 20);
+                    world.spawnParticle(Particle.WATER_WAKE, particleLocation, (int) rareDamage);
                 }
             }, 0, 1L);
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
@@ -95,4 +93,10 @@ public class Tanjiro extends Ability {
             },rareDuration);
         }
     }
+    public void passiveSkill(PlayerMoveEvent event) {
+        if(rareCheck){
+            rareDamage += 0.1f;
+        }
+    }
+
 }
