@@ -74,12 +74,8 @@ public class RyoikiTenkai extends Ability {
                         block.setType(wall);
                     } else {
                         switch (abilityInfo) {
-                            case Jogo -> {
-                                JogoSetLava(block);
-                            }
-                            case Sukuna -> {
-                                setAir(block);
-                            }
+                            case Jogo -> JogoSetLava(block);
+                            case Sukuna -> setAir(block);
                         }
                     }
                 }
@@ -123,6 +119,7 @@ public class RyoikiTenkai extends Ability {
         Location blockLocationFire = centerLocation.clone().add(x, y, z);
         blockLocationFire.getBlock().setType(Material.FIRE);
     }
+
     private void SukunaSetWater(Location centerLocation, double x, double y, double z) {
         Location blockLocationFire = centerLocation.clone().add(x, y, z);
         blockLocationFire.getBlock().setType(Material.WATER);
