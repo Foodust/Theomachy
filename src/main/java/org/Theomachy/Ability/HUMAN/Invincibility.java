@@ -15,9 +15,6 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
 
-import org.Theomachy.Checker.MouseEventChecker;
-
-
 
 public class Invincibility extends Ability
 {
@@ -48,7 +45,7 @@ public class Invincibility extends Ability
 		Player player = event.getPlayer();
 		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
 				case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK-> leftAction(player);
 				case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }

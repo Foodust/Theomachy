@@ -9,9 +9,6 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
-import org.Theomachy.Checker.MouseEventChecker;
-
-
 
 public class Jogo extends RyoikiTenkai {
     private final static String[] des = {
@@ -51,7 +48,7 @@ public class Jogo extends RyoikiTenkai {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }

@@ -2,7 +2,6 @@ package org.Theomachy.Ability.HUMAN;
 
 import java.util.List;
 
-import org.Theomachy.Handler.Module.PlayerModule;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -20,10 +19,6 @@ import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
 
-import org.Theomachy.Checker.DirectionChecker;
-import org.Theomachy.Checker.MouseEventChecker;
-
-
 
 public class Assasin extends Ability {
 
@@ -37,8 +32,8 @@ public class Assasin extends Ability {
     public Assasin(String playerName) {
         super(playerName, AbilityInfo.Assasin, true, false, false, des);
         Theomachy.log.info(playerName + abilityName);
-        this.normalSkillCoolTime = 1;
-        this.normalSkillStack = 0;
+        this.normalSkillCoolTime = 10;
+        this.normalSkillStack = 1;
         this.rareSkillCoolTime = 15;
         this.rareSkillStack = 15;
 
@@ -48,7 +43,7 @@ public class Assasin extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
@@ -83,24 +78,22 @@ public class Assasin extends Ability {
                     if ((targetTeamName == null) || !(targetTeamName.equals(playerTeamName))) {
                         skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                         Location fakeLocation = player.getLocation();
-                        Location location = target.getLocation();
                         World world = player.getWorld();
                         List<Player> playerlist = world.getPlayers();
                         for (Player each : playerlist)
                             each.hidePlayer(Theomachy.getPlugin(), player);
-                        switch (DirectionChecker.PlayerDirection(target)) {
-                            case 0 -> location.add(0, 0, -1);
-                            case 1 -> location.add(0.7, 0, -0.7);
-                            case 2 -> location.add(1, 0, 0);
-                            case 3 -> location.add(0.7, 0, 0.7);
-                            case 4 -> location.add(0, 0, 1);
-                            case 5 -> location.add(-0.7, 0, 0.7);
-                            case 6 -> location.add(-1, 0, 0);
-                            case 7 -> location.add(-0.7, 0, -0.7);
-                        }
-                        Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                            player.teleport(location);
-                        });
+
+                        Location enemyLocation = target.getLocation(); // 적 플레이어의 위치 가져오기
+                        Location behindEnemy = enemyLocation.clone().add(enemyLocation.getDirection().multiply(-2)); // 적 플레이어 뒤의 좌표 구하기 (여기서 -2는 뒤로 이동할 거리)
+                        player.teleport(behindEnemy);
+                        Vector direction = enemyLocation.toVector().subtract(player.getLocation().toVector()).normalize();
+                        float yaw = (float) Math.toDegrees(Math.atan2(-direction.getX(), direction.getZ()));
+                        float pitch = (float) Math.toDegrees(Math.asin(-direction.getY()));
+
+                        player.getLocation().setDirection(direction);
+                        player.getLocation().setYaw(yaw);
+                        player.getLocation().setPitch(pitch);
+
                         world.dropItem(fakeLocation.add(0, 1, 0), new ItemStack(Material.POPPY, 1));
                         for (Player each : playerlist)
                             each.showPlayer(Theomachy.getPlugin(), player);

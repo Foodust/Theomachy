@@ -2,7 +2,6 @@ package org.Theomachy.Ability.HUMAN;
 
 
 
-import org.Theomachy.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,7 +19,6 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Utility.*;
 
 public class Snow extends Ability {
 
@@ -53,7 +51,7 @@ public class Snow extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> player.sendMessage("공격 지수 : " + passiveDamage);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }

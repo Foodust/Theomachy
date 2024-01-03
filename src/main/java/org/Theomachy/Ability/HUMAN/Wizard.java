@@ -16,11 +16,6 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
-import org.Theomachy.Checker.DirectionChecker;
-import org.Theomachy.Checker.MouseEventChecker;
-
-
-
 public class Wizard extends Ability
 {
 	private final static String[] des= {
@@ -51,7 +46,7 @@ public class Wizard extends Ability
 		Player player = event.getPlayer();
 		if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD))
 		{
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
 				case LEFT_CLICK_BLOCK,LEFT_CLICK_AIR -> leftClickAction(player);
 				case RIGHT_CLICK_AIR,RIGHT_CLICK_BLOCK -> rightClickAction(player);
             }
@@ -70,28 +65,14 @@ public class Wizard extends Ability
 			if (!targetList.isEmpty())
 			{
 				skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-				Vector v = new Vector(0,0.5,0);
 				double vertical = 2.4d;
 				double diagonal = vertical*1.4d;
 				for (Player enemy : targetList)
 				{
-					enemy.setVelocity(v);
+					Vector pushDirection = player.getLocation().toVector().subtract(enemy.getLocation().toVector()).normalize().multiply(diagonal);
+					enemy.setVelocity(pushDirection);
 					enemy.sendMessage("마법사의 능력에 의해 날아갑니다.");
 				}
-                switch (DirectionChecker.PlayerDirection(player)) {
-                    case 0 -> v.add(new Vector(0, 0, diagonal));
-                    case 1 -> v.add(new Vector(-vertical, 0, vertical));
-                    case 2 -> v.add(new Vector(-diagonal, 0, 0));
-                    case 3 -> v.add(new Vector(-vertical, 0, -vertical));
-                    case 4 -> v.add(new Vector(0, 0, -diagonal));
-                    case 5 -> v.add(new Vector(vertical, 0, -vertical));
-                    case 6 -> v.add(new Vector(diagonal, 0, 0));
-                    case 7 -> v.add(new Vector(vertical, 0, vertical));
-                }
-				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-					for (Player e : targetList)
-						e.setVelocity(v);
-				},2 * 2);
 			}
 			else
 				player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");

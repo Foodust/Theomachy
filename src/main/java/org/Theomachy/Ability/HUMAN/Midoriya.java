@@ -13,9 +13,6 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 
-import org.Theomachy.Checker.MouseEventChecker;
-
-
 
 public class Midoriya extends Ability {
 
@@ -40,7 +37,7 @@ public class Midoriya extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }

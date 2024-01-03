@@ -2,7 +2,6 @@ package org.Theomachy.Ability.GOD;
 
 
 
-import org.Theomachy.Checker.MouseEventChecker;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -17,7 +16,6 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
-import org.Theomachy.Utility.*;
 
 public class Sans extends Ability {
     private final static String[] des = {
@@ -50,7 +48,7 @@ public class Sans extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }

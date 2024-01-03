@@ -17,9 +17,6 @@ import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Theomachy;
 
-import org.Theomachy.Checker.MouseEventChecker;
-
-
 
 public class Sniper extends Ability {
     public boolean ready = false;
@@ -43,7 +40,7 @@ public class Sniper extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BOW)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
             }
         }

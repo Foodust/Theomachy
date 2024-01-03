@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.bukkit.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -18,10 +17,6 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Ability.Ability;
-
-import org.Theomachy.Checker.DirectionChecker;
-import org.Theomachy.Checker.MouseEventChecker;
-
 
 
 public class Aeolus extends Ability {
@@ -51,7 +46,7 @@ public class Aeolus extends Ability {
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player, Material.BLAZE_ROD)) {
-            switch (MouseEventChecker.PlayerInteract(event)) {
+            switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
@@ -87,24 +82,11 @@ public class Aeolus extends Ability {
                     enemy.sendMessage(ChatColor.DARK_AQUA + "강력한 바람 때문에 밀려납니다!");
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, rareDuration * 20, 0));
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, rareDuration * 20, 0));
+                    Vector pushDirection = player.getLocation().toVector().subtract(enemy.getLocation().toVector()).normalize().multiply(diagonal);
+                    enemy.setVelocity(pushDirection);
                 }
-                switch (DirectionChecker.PlayerDirection(player)) {
-                    case 0 -> vector.add(new Vector(0, 0, diagonal));
-                    case 1 -> vector.add(new Vector(-vertical, 0, vertical));
-                    case 2 -> vector.add(new Vector(-diagonal, 0, 0));
-                    case 3 -> vector.add(new Vector(-vertical, 0, -vertical));
-                    case 4 -> vector.add(new Vector(0, 0, -diagonal));
-                    case 5 -> vector.add(new Vector(vertical, 0, -vertical));
-                    case 6 -> vector.add(new Vector(diagonal, 0, 0));
-                    case 7 -> vector.add(new Vector(vertical, 0, vertical));
-                }
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                    for (Player enemy : targetList)
-                        enemy.setVelocity(vector);
-                }, 2 * 20);
-
-            } else
-                player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");
-        }
+            }
+        } else
+            player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");
     }
 }
