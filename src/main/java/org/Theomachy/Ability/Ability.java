@@ -103,7 +103,4 @@ public class Ability
 
 	public void passiveSkillSnow(EntityDamageByEntityEvent event) {}
 
-	public void onPlayerDamageByMagma(BlockDamageEvent event){};
-	
-	
 }
