@@ -92,7 +92,7 @@ public class Rengoku extends Ability {
                     }
                 }
                 player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 50.0f, 5.0f);
-            }, 0, 0L);// 파티클을 일정 주기로 생성 (여기서는 2틱(0.1초)마다 생성)
+            }, 0, 0L);
             Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());},20L);
         }
     }
