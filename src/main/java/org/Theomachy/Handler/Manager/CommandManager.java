@@ -23,7 +23,6 @@ public class CommandManager  implements CommandExecutor
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] data) {
-
 		if (label.equals(TheomachyMessage.COMMAND_T.getMessage()))
 		{
 			if (data.length==0) //설명 보기

@@ -3,8 +3,8 @@ version: '${version}'
 main: org.Theomachy.Theomachy
 api-version: '1.20'
 libraries:
-  - "net.kyori:adventure-platform-bukkit:4.3.1"
-  - "net.kyori:adventure-api:4.14.0"
+  - "net.kyori:adventure-platform-bukkit:4.3.2"
+  - "net.kyori:adventure-api:4.15.0"
 commands:
   t:
     description: 'Your command description'
