@@ -56,7 +56,7 @@ public class AbilityCoolTimeMessage
 		}
 	}
 
-	public void Skill_Used(Player player, AbilityCase abilityCase)
+	public void SkillUsed(Player player, AbilityCase abilityCase)
 	{
         switch (abilityCase) {
 			case COMMON ->

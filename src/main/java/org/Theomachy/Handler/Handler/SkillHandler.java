@@ -20,46 +20,40 @@ public class SkillHandler
 				case NORMAL -> CoolTimeTimer.normalSkillCoolTime.put(player.getName(), coolTime);
 				case RARE -> CoolTimeTimer.rareSkillCoolTime.put(player.getName(), coolTime);
             }
-		abilityCoolTimeMessage.Skill_Used(player, abilityCase);
+		abilityCoolTimeMessage.SkillUsed(player, abilityCase);
 	}
 	public boolean Check(Player player, AbilityCase abilityCase)
 	{
 		String key=player.getName();
 
-		if (abilityCase == AbilityCase.COMMON)
-		{
-			if (CoolTimeTimer.commonSkillCoolTime.containsKey(key))
-			{
-				int cool = CoolTimeTimer.commonSkillCoolTime.get(key);
-				abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
-				return false;
-			}
-			else
-				return true;
-		}
-		else if (abilityCase == AbilityCase.NORMAL)
-		{
-			if (CoolTimeTimer.normalSkillCoolTime.containsKey(key))
-			{
-				int cool = CoolTimeTimer.normalSkillCoolTime.get(key);
-				abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
-				return false;
-			}
-			else
-				return true;
-		}
-		else if (abilityCase == AbilityCase.RARE)
-		{
-			if (CoolTimeTimer.rareSkillCoolTime.containsKey(key))
-			{
-				int cool = CoolTimeTimer.rareSkillCoolTime.get(key);
-				abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
-				return false;
-			}
-			else
-				return true;
-		}
-		else
-			return false;
+        switch (abilityCase) {
+            case COMMON -> {
+                if (CoolTimeTimer.commonSkillCoolTime.containsKey(key)) {
+                    int cool = CoolTimeTimer.commonSkillCoolTime.get(key);
+                    abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
+                    return false;
+                } else
+                    return true;
+            }
+            case NORMAL -> {
+                if (CoolTimeTimer.normalSkillCoolTime.containsKey(key)) {
+                    int cool = CoolTimeTimer.normalSkillCoolTime.get(key);
+                    abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
+                    return false;
+                } else
+                    return true;
+            }
+            case RARE -> {
+                if (CoolTimeTimer.rareSkillCoolTime.containsKey(key)) {
+                    int cool = CoolTimeTimer.rareSkillCoolTime.get(key);
+                    abilityCoolTimeMessage.CoolTimeTeller(player, abilityCase, cool);
+                    return false;
+                } else
+                    return true;
+            }
+            default -> {
+                return false;
+            }
+        }
 	}
 }
