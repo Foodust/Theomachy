@@ -7,6 +7,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,10 +51,12 @@ public class RyoikiTenkai extends Ability {
         Bukkit.broadcastMessage(areaName);
         player.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
         player.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
+        player.setVelocity(new Vector(0,2,0));
         for (Entity entity : locationWorld.getNearbyEntities(playerLocation, 15, 15, 15)) {
             if (entity instanceof Player enemy) {
                 enemy.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
                 enemy.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
+                enemy.setVelocity(new Vector(0, 2, 0));
             }
         }
     }

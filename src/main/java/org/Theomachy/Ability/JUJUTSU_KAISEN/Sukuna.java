@@ -72,16 +72,18 @@ public class Sukuna extends RyoikiTenkai {
 
             sendRyoikiTenkai(AbilityInfo.Sukuna, player);
 
-            goRyoikiTenkai(player, AbilityInfo.Sukuna, Material.CRYING_OBSIDIAN, Material.OBSIDIAN);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+                goRyoikiTenkai(player, AbilityInfo.Sukuna, Material.CRYING_OBSIDIAN, Material.OBSIDIAN);
+                Location location = player.getLocation();
+                location.add(0, 6, 0);
+                AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
+                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
+                        () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
+                                () -> slash(player,location), 0, 2L)), 2 * 20L);
+                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
+                        () -> Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId()), rareDuration * 20L);
+            },20L);
 
-            Location location = player.getLocation();
-            location.add(0, 6, 0);
-            AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
-                    () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), 
-                            () -> slash(player,location), 0, 2L)), 2 * 20L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), 
-                    () -> Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId()), rareDuration * 20L);
         }
     }
     private void slash(Player player, Location location ){
