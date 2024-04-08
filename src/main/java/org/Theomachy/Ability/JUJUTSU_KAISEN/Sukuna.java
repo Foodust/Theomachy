@@ -93,6 +93,7 @@ public class Sukuna extends RyoikiTenkai {
         for (Entity entity : world.getNearbyEntities(location, 15, 15, 15)) {
             if (entity instanceof LivingEntity && !entity.equals(player)) {
                 ((LivingEntity) entity).damage(rareDamage, player);
+                entity.getWorld().playSound(entity.getLocation(),  Sound.ENTITY_PLAYER_ATTACK_CRIT,1 ,1);
             }
         }
     }
