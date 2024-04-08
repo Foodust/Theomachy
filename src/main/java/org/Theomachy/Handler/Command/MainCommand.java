@@ -42,6 +42,7 @@ public class MainCommand {
 			case COMMAND_SETTING, COMMAND_SETTING_SET -> settingCommand.module(sender);
 			case COMMAND_GAMBLE, COMMAND_GAMBLING_G -> gamblingCommand.module(sender);
 			case COMMAND_GIVE -> giveTestItemCommand(sender);
+			case COMMAND_RELOAD -> settingCommand.resetTimer(sender);
 //			case COMMAND_SAVE -> saveWorldCommand(sender);
 //			case COMMAND_RELOAD -> reloadWorldCommand();
             default -> sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
