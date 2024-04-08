@@ -27,8 +27,6 @@ public class SettingCommand {
                 Bukkit.getScheduler().cancelTask(tasks.getTaskId());
             });
             player.sendMessage(TheomachyMessage.INFO_RESET_TIMER.getMessage());
-        }else{
-            player.sendMessage(TheomachyMessage.ERROR_PERMISSION_DENIED.getMessage());
         }
     }
 }

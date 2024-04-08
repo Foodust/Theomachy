@@ -75,13 +75,13 @@ public class DamageEvent implements Listener {
                     String entityName = (event.getEntity()).getName();
                     String DamageName = (event.getDamager()).getName();
 
-                    Ability ability1 = GameData.playerAbility.get(entityName);
-                    Ability ability2 = GameData.playerAbility.get(DamageName);
+                    Ability entityAbility = GameData.playerAbility.get(entityName);
+                    Ability damagerAbility = GameData.playerAbility.get(DamageName);
 
-                    if (ability1 != null)
-                        ability1.passiveSkill(event);
-                    if (ability2 != null)
-                        ability2.passiveSkill(event);
+                    if (entityAbility != null)
+                        entityAbility.passiveSkill(event);
+                    if (damagerAbility != null)
+                        damagerAbility.passiveSkill(event);
 
                 } else if (event.getDamager() instanceof Arrow arrow && event.getEntity() instanceof Player) {
                     if (arrow.getShooter() instanceof Player player) {

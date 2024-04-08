@@ -34,7 +34,7 @@ public class TipTimer extends TimerTask
 			tipCount++;
 			switch (tipCount){
 				case 1-> Bukkit.broadcastMessage(TheomachyMessage.TIP1.getMessage());
-//				case 2-> Bukkit.broadcastMessage(TheomachyMessage.TIP2.getMessage());
+				case 2-> Bukkit.broadcastMessage(TheomachyMessage.TIP2.getMessage());
 				case 3-> Bukkit.broadcastMessage(TheomachyMessage.TIP3.getMessage());
 				case 4-> Bukkit.broadcastMessage(TheomachyMessage.TIP4.getMessage());
 				case 5-> Bukkit.broadcastMessage(TheomachyMessage.TIP5.getMessage());
