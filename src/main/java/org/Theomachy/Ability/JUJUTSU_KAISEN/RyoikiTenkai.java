@@ -51,12 +51,10 @@ public class RyoikiTenkai extends Ability {
         Bukkit.broadcastMessage(areaName);
         player.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
         player.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
-        player.setVelocity(new Vector(0,2,0));
         for (Entity entity : locationWorld.getNearbyEntities(playerLocation, 15, 15, 15)) {
             if (entity instanceof Player enemy) {
                 enemy.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
                 enemy.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
-                enemy.setVelocity(new Vector(0, 2, 0));
             }
         }
     }
@@ -64,7 +62,7 @@ public class RyoikiTenkai extends Ability {
     public void goRyoikiTenkai(Player player, AbilityInfo abilityInfo, Material floor, Material wall) {
 
         Location centerLocation = player.getLocation().add(0, -1, 0); // 발밑 기준으로 블록을 생성할 위치
-        Map<Location, Material> originalBlocks = new HashMap<>();
+        Map<Location, Block> originalBlocks = new HashMap<>();
 
         // 벽 생성
         for (int x = -rareDistance; x <= rareDistance; x++) {
@@ -72,7 +70,7 @@ public class RyoikiTenkai extends Ability {
                 for (int y = 1; y <= rareDistance; y++) {
                     Location blockLocation = centerLocation.clone().add(x, y, z);
                     Block block = blockLocation.getBlock();
-                    originalBlocks.put(blockLocation, block.getType());
+                    originalBlocks.put(blockLocation, block);
                     if (Math.abs(x) == rareDistance || Math.abs(z) == rareDistance || y == rareDistance) {
                         block.setType(wall);
                     } else {
@@ -89,7 +87,7 @@ public class RyoikiTenkai extends Ability {
             for (int z = -rareDistance + 1; z <= rareDistance - 1; z++) {
                 Location blockLocation = centerLocation.clone().add(x, 0, z);
                 Block block = blockLocation.getBlock();
-                originalBlocks.put(blockLocation, block.getType());
+                originalBlocks.put(blockLocation, block);
                 blockLocation.getBlock().setType(floor);
                 switch (abilityInfo) {
                     case Jogo -> {
@@ -102,11 +100,12 @@ public class RyoikiTenkai extends Ability {
             }
         }
         Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-            for (Map.Entry<Location, Material> entry : originalBlocks.entrySet()) {
+            for (Map.Entry<Location, Block> entry : originalBlocks.entrySet()) {
                 Location loc = entry.getKey();
-                Material originalType = entry.getValue();
-                loc.getBlock().setType(originalType); // 원래의 블록 타입으로 되돌림
+                Block originalBlock = entry.getValue();
+                loc.getBlock().setBlockData(originalBlock.getBlockData()); // 원래의 블록 타입으로 되돌림
             }
+            originalBlocks.clear();
         }, rareDuration * 20L); // 10초 후 (20틱 = 1초 * 10초 = 200틱)
     }
 
