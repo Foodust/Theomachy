@@ -43,7 +43,7 @@ public class Tanjiro extends Ability {
         this.rareDamage = 0;
         this.rareDuration = 5 * 20L;
         this.rareCheck = false;
-        this.rank = AbilityRank.S;
+        this.rank = AbilityRank.A;
     }
 
     public void activeSkill(PlayerInteractEvent event) {
@@ -61,12 +61,17 @@ public class Tanjiro extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(3));
             World world = player.getWorld();
-            Vector direction = player.getEyeLocation().getDirection().clone();
-            for (double distance = (double) -normalDistance / 2; distance < (double) normalDistance / 2; distance += 0.1) {
-                Vector horizontalOffset = direction.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
-                Location particleLocation = startLocation.clone().add(horizontalOffset);
-                world.spawnParticle(Particle.WATER_SPLASH, particleLocation, 100);
-                playerModule.damageNearEntity(player, particleLocation, normalDamage, 4, 4, 4);
+            Vector direction = startLocation.getDirection().clone();
+
+            // 삼각형의 세 꼭지점 계산
+            Location temp = startLocation.add(direction);
+            Location startVertex = temp.clone().add(startLocation.getDirection().clone().rotateAroundAxis(direction, Math.toRadians(-80)).multiply(normalDistance));
+            Location endVertex = temp.clone().add(startLocation.getDirection().clone().rotateAroundAxis(direction, Math.toRadians(80)).multiply(normalDistance));
+
+            int normalParticleCount = 500;
+            for (double t = 0; t <= 1; t += 1.0 / normalParticleCount) {
+                Location particleLocation = interpolate(startVertex, endVertex, t);
+                world.spawnParticle(Particle.WATER_SPLASH, particleLocation, 50);
             }
         }
     }
@@ -99,6 +104,16 @@ public class Tanjiro extends Ability {
             rareDamage += 0.1f;
             rareDistance += 0.04f;
         }
+    }
+
+    private Location interpolate(Location start, Location end, double t) {
+        // t 값은 [0, 1] 범위의 비율을 나타냅니다. 0은 시작점, 1은 끝점을 의미하며, 그 사이의 값은 선분 상의 어디에 위치하는지를 나타냅니다.
+        // start와 end 사이를 일정 비율로 이동한 지점을 구합니다.
+        double x = (1 - t) * start.getX() + t * end.getX();
+        double y = (1 - t) * start.getY() + t * end.getY();
+        double z = (1 - t) * start.getZ() + t * end.getZ();
+        // 구한 좌표를 이용하여 새로운 위치를 생성하고 반환합니다.
+        return new Location(start.getWorld(), x, y, z);
     }
 
 }

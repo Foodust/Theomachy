@@ -4,7 +4,6 @@ import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityTag;
-import org.Theomachy.Handler.Command.StartStopCommand;
 import org.Theomachy.Handler.Module.GameModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.Material;
@@ -26,31 +25,6 @@ import java.util.Objects;
 
 public class DamageEvent implements Listener {
 
-    @EventHandler
-    public void onPlayerDamageByMagma(BlockDamageEvent event) {
-        Block block = event.getBlock();
-        if (block.getType() == Material.MAGMA_BLOCK) {
-            // 블록 위에 있는 플레이어의 피해를 방지
-            if (event.getPlayer().getLocation().getBlock().getType() == Material.MAGMA_BLOCK) {
-                event.setCancelled(true); // 데미지 이벤트 취소
-            }
-        }
-    }
-
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent event) {
-        if (event.getEntity() instanceof Snowball snowball) {
-            if (snowball.getScoreboardTags().contains(AbilityTag.BONEATTACK.getTag())) {
-                if (event.getHitEntity() instanceof LivingEntity target) {
-                    target.damage(2);
-                    int durationInSeconds = 3 * 20; // 위더 효과 지속 시간 (틱 단위로 20으로 나누어야됨)
-                    int amplifier = 1; // 위더 효과 강도
-                    PotionEffect poisonEffect = new PotionEffect(PotionEffectType.WITHER, durationInSeconds, amplifier);
-                    target.addPotionEffect(poisonEffect);
-                }
-            }
-        }
-    }
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if (GameModule.Start) {

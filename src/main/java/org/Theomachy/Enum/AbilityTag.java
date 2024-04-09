@@ -1,7 +1,7 @@
 package org.Theomachy.Enum;
 
 public enum AbilityTag {
-    BONEATTACK("boneAttack");
+    BONE_ATTACK("boneAttack");
     private final String tag;
     AbilityTag(String tag) {
         this.tag = tag;

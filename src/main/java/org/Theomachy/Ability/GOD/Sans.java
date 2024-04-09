@@ -71,7 +71,7 @@ public class Sans extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Snowball snowball = player.launchProjectile(Snowball.class);
             snowball.setVelocity(player.getLocation().getDirection().multiply(1.5)); // 조절 가능한 속도
-            snowball.addScoreboardTag(AbilityTag.BONEATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
+            snowball.addScoreboardTag(AbilityTag.BONE_ATTACK.getTag()); // 뼈 공격을 식별하기 위한 태그 추가
         }
     }
 
@@ -83,7 +83,7 @@ public class Sans extends Ability {
             for (double distance = 0; distance < rareDistance; distance += 0.5) {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
-                world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 50);
+                world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 500);
                 playerModule.damageNearEntity(player, particleLocation, rareDamage,12,12,12);
             }
         }

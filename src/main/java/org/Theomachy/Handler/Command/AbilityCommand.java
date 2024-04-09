@@ -46,8 +46,8 @@ public class AbilityCommand  {
                     TheomachyMessage byMessage = TheomachyMessage.getByMessage(data[1]);
                     switch (byMessage) {
                         case COMMAND_HELP -> abilityList(sender);
-                        case COMMAND_RESET -> abilityModule.Reset();
-                        case COMMAND_RANDOM -> abilityModule.RandomAssignment(sender);
+                        case COMMAND_RESET -> abilityModule.resetAbility();
+                        case COMMAND_RANDOM -> abilityModule.randomAbilityAllPlayer(sender);
                         default -> abilityModule.errorMessage(sender);
                     }
                 }// ability ? or remove name

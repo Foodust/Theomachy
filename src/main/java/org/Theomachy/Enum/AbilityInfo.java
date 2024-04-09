@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum AbilityInfo {
+    Error(0,"에러"),
     Zeus(1, "제우스"),
     Poseidon(2, "포세이돈"),
     Hades(3, "하데스"),
@@ -70,10 +71,10 @@ public enum AbilityInfo {
     Tanjiro(403,"카마도 탄지로");
     private final int index;
     private final String name;
-    private static final Map<Integer, String> abilityInfoMap = new HashMap<>();
+    private static final Map<Integer, AbilityInfo> abilityInfoMap = new HashMap<>();
     static {
         for (AbilityInfo ability : AbilityInfo.values()) {
-            abilityInfoMap.put(ability.index, ability.name);
+            abilityInfoMap.put(ability.index, ability);
         }
     }
     AbilityInfo(int index, String name) {
@@ -86,8 +87,8 @@ public enum AbilityInfo {
     public int getIndex(){
         return this.index;
     }
-    public static String getNameByIndex(int index) {
-        return abilityInfoMap.getOrDefault(index, "");
+    public static AbilityInfo getAbilityByIndex(int index) {
+        return abilityInfoMap.getOrDefault(index, AbilityInfo.Error);
     }
 
 }

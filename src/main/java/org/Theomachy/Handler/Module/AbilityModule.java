@@ -213,7 +213,7 @@ public class AbilityModule  {
         sender.sendMessage(TheomachyMessage.ERROR_CHECK_T_A_COMMAND.getMessage());
     }
 
-    public void Reset() {
+    public void resetAbility() {
         GameData.playerAbility.clear();
         Bukkit.broadcastMessage(TheomachyMessage.INFO_REMOVE_ALL_PLAYER_ABILITY.getMessage());
     }
@@ -231,8 +231,7 @@ public class AbilityModule  {
         }
     }
 
-    public void RandomAssignment(CommandSender sender) {
-
+    public void randomAbilityAllPlayer(CommandSender sender) {
         if (!GameData.playerAbility.isEmpty()) {
             Bukkit.broadcastMessage(TheomachyMessage.INFO_RESET_AND_RANDOM_ABILITY.getMessage());
             GameData.playerAbility.clear();
@@ -241,13 +240,13 @@ public class AbilityModule  {
         Bukkit.broadcastMessage(TheomachyMessage.INFO_AVAILABLE_PLAYERS.getMessage());
         for (Player e : playerlist)
             Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
-        int[] rn = randomskillHandler.nonDuplicate();
+        List<Integer> rn = randomskillHandler.makeRandomAbilityList();
         int length;
         length = Math.min(playerlist.size(), BlacklistModule.availableList);
         int i = 0;
         for (Player player : playerlist) {
             String playerName = player.getName();
-            abilityAssignment(rn[i++], playerName, (Player) sender);
+            abilityAssignment(rn.get(i++), playerName, (Player) sender);
         }
 
         Bukkit.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
@@ -280,134 +279,8 @@ public class AbilityModule  {
                 sender.sendMessage(playerName + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
         }
     }
-
     public void abilityAssignment(int abilityNumber, String playerName, CommandSender p) {
-        // god
-        if (abilityNumber == AbilityInfo.Zeus.getIndex())
-            GameData.playerAbility.put(playerName, new Zeus(playerName));
-        else if (abilityNumber == AbilityInfo.Poseidon.getIndex())
-            GameData.playerAbility.put(playerName, new Poseidon(playerName));
-        else if (abilityNumber == AbilityInfo.Hades.getIndex())
-            GameData.playerAbility.put(playerName, new Hades(playerName));
-        else if (abilityNumber == AbilityInfo.Demeter.getIndex())
-            GameData.playerAbility.put(playerName, new Demeter(playerName));
-        else if (abilityNumber == AbilityInfo.Athena.getIndex())
-            GameData.playerAbility.put(playerName, new Athena(playerName));
-        else if (abilityNumber == AbilityInfo.Apollon.getIndex())
-            GameData.playerAbility.put(playerName, new Apollon(playerName));
-        else if (abilityNumber == AbilityInfo.Artemis.getIndex())
-            GameData.playerAbility.put(playerName, new Artemis(playerName));
-        else if (abilityNumber == AbilityInfo.Ares.getIndex())
-            GameData.playerAbility.put(playerName, new Ares(playerName));
-        else if (abilityNumber == AbilityInfo.Hephastus.getIndex())
-            GameData.playerAbility.put(playerName, new Hephaestus(playerName));
-        else if (abilityNumber == AbilityInfo.Asclepius.getIndex())
-            GameData.playerAbility.put(playerName, new Asclepius(playerName));
-        else if (abilityNumber == AbilityInfo.Hermes.getIndex())
-            GameData.playerAbility.put(playerName, new Hermes(playerName));
-        else if (abilityNumber == AbilityInfo.Dionysus.getIndex())
-            GameData.playerAbility.put(playerName, new Dionysus(playerName));
-        else if (abilityNumber == AbilityInfo.Aprodite.getIndex())
-            GameData.playerAbility.put(playerName, new Aprodite(playerName));
-        else if (abilityNumber == AbilityInfo.Eris.getIndex())
-            GameData.playerAbility.put(playerName, new Eris(playerName));
-        else if (abilityNumber == AbilityInfo.Morpious.getIndex())
-            GameData.playerAbility.put(playerName, new Morpious(playerName));
-        else if (abilityNumber == AbilityInfo.Aeolus.getIndex())
-            GameData.playerAbility.put(playerName, new Aeolus(playerName));
-        else if (abilityNumber == AbilityInfo.Akasha.getIndex())
-            GameData.playerAbility.put(playerName, new Akasha(playerName));
-        else if (abilityNumber == AbilityInfo.Horeundal.getIndex())
-            GameData.playerAbility.put(playerName, new Horeundal(playerName));
-        else if (abilityNumber == AbilityInfo.Sans.getIndex())
-            GameData.playerAbility.put(playerName, new Sans(playerName));
-
-            // human
-        else if (abilityNumber == AbilityInfo.Archer.getIndex())
-            GameData.playerAbility.put(playerName, new Archer(playerName));
-        else if (abilityNumber == AbilityInfo.Miner.getIndex())
-            GameData.playerAbility.put(playerName, new Miner(playerName));
-        else if (abilityNumber == AbilityInfo.Stance.getIndex())
-            GameData.playerAbility.put(playerName, new Stance(playerName));
-        else if (abilityNumber == AbilityInfo.Teleporter.getIndex())
-            GameData.playerAbility.put(playerName, new Teleporter(playerName));
-        else if (abilityNumber == AbilityInfo.Bomber.getIndex())
-            GameData.playerAbility.put(playerName, new Bomber(playerName));
-        else if (abilityNumber == AbilityInfo.Creeper.getIndex())
-            GameData.playerAbility.put(playerName, new Creeper(playerName));
-        else if (abilityNumber == AbilityInfo.Wizard.getIndex())
-            GameData.playerAbility.put(playerName, new Wizard(playerName));
-        else if (abilityNumber == AbilityInfo.Assasin.getIndex())
-            GameData.playerAbility.put(playerName, new Assasin(playerName));
-        else if (abilityNumber == AbilityInfo.Reflection.getIndex())
-            GameData.playerAbility.put(playerName, new Reflection(playerName));
-        else if (abilityNumber == AbilityInfo.Blinder.getIndex())
-            GameData.playerAbility.put(playerName, new Blinder(playerName));
-        else if (abilityNumber == AbilityInfo.Invincibility.getIndex())
-            GameData.playerAbility.put(playerName, new Invincibility(playerName));
-        else if (abilityNumber == AbilityInfo.Clocking.getIndex())
-            GameData.playerAbility.put(playerName, new Clocking(playerName));
-        else if (abilityNumber == AbilityInfo.BlackSmith.getIndex())
-            GameData.playerAbility.put(playerName, new Blacksmith(playerName));
-        else if (abilityNumber == AbilityInfo.Boxer.getIndex())
-            GameData.playerAbility.put(playerName, new Boxer(playerName));
-        else if (abilityNumber == AbilityInfo.Priest.getIndex())
-            GameData.playerAbility.put(playerName, new Priest(playerName));
-        else if (abilityNumber == AbilityInfo.Witch.getIndex())
-            GameData.playerAbility.put(playerName, new Witch(playerName));
-        else if (abilityNumber == AbilityInfo.Meteor.getIndex())
-            GameData.playerAbility.put(playerName, new Meteor(playerName));
-        else if (abilityNumber == AbilityInfo.Sniper.getIndex())
-            GameData.playerAbility.put(playerName, new Sniper(playerName));
-        else if (abilityNumber == AbilityInfo.Voodoo.getIndex())
-            GameData.playerAbility.put(playerName, new Voodoo(playerName));
-        else if (abilityNumber == AbilityInfo.Anorexia.getIndex())
-            GameData.playerAbility.put(playerName, new Anorexia(playerName));
-        else if (abilityNumber == AbilityInfo.Bulter.getIndex())
-            GameData.playerAbility.put(playerName, new Bulter(playerName));
-        else if (abilityNumber == AbilityInfo.Midoriya.getIndex())
-            GameData.playerAbility.put(playerName, new Midoriya(playerName));
-        else if (abilityNumber == AbilityInfo.Goldspoon.getIndex())
-            GameData.playerAbility.put(playerName, new Goldspoon(playerName));
-        else if (abilityNumber == AbilityInfo.Bee.getIndex())
-            GameData.playerAbility.put(playerName, new Bee(playerName));
-        else if (abilityNumber == AbilityInfo.Snow.getIndex())
-            GameData.playerAbility.put(playerName, new Snow(playerName));
-        else if (abilityNumber == AbilityInfo.Tajja.getIndex())
-            GameData.playerAbility.put(playerName, new Tajja(playerName));
-        else if (abilityNumber == AbilityInfo.AGirl.getIndex())
-            GameData.playerAbility.put(playerName, new AGirl(playerName));
-        else if (abilityNumber == AbilityInfo.PokeGo.getIndex())
-            GameData.playerAbility.put(playerName, new PokeGo(playerName));
-        else if (abilityNumber == AbilityInfo.Tanker.getIndex())
-            GameData.playerAbility.put(playerName, new Tanker(playerName));
-        else if (abilityNumber == AbilityInfo.Gasolin.getIndex())
-            GameData.playerAbility.put(playerName, new Gasolin(playerName));
-        else if (abilityNumber == AbilityInfo.Zet.getIndex())
-            GameData.playerAbility.put(playerName, new Zet(playerName));
-
-            // jujutsu kaisen
-        else if (abilityNumber == AbilityInfo.Itarodi.getIndex())
-            GameData.playerAbility.put(playerName, new Itadori(playerName));
-        else if (abilityNumber == AbilityInfo.Jogo.getIndex())
-            GameData.playerAbility.put(playerName, new Jogo(playerName));
-        else if (abilityNumber == AbilityInfo.Sukuna.getIndex())
-            GameData.playerAbility.put(playerName, new Sukuna(playerName));
-
-            // kimetsu no yaiba
-        else if (abilityNumber == AbilityInfo.Zenitsu.getIndex())
-            GameData.playerAbility.put(playerName, new Zenitsu(playerName));
-        else if (abilityNumber == AbilityInfo.Rengoku.getIndex())
-            GameData.playerAbility.put(playerName, new Rengoku(playerName));
-        else if (abilityNumber == AbilityInfo.Tanjiro.getIndex())
-            GameData.playerAbility.put(playerName, new Tanjiro(playerName));
-        else {
-            p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
-            p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());
-        }
-    }
-
-    public void abilityAssignment(AbilityInfo abilityInfo, String playerName, CommandSender p) {
+        AbilityInfo abilityInfo = AbilityInfo.getAbilityByIndex(abilityNumber);
         switch (abilityInfo) {
             case Zeus -> GameData.playerAbility.put(playerName, new Zeus(playerName));
             case Poseidon -> GameData.playerAbility.put(playerName, new Poseidon(playerName));
@@ -428,6 +301,7 @@ public class AbilityModule  {
             case Akasha -> GameData.playerAbility.put(playerName, new Akasha(playerName));
             case Horeundal -> GameData.playerAbility.put(playerName, new Horeundal(playerName));
             case Sans -> GameData.playerAbility.put(playerName, new Sans(playerName));
+
             case Archer -> GameData.playerAbility.put(playerName, new Archer(playerName));
             case Miner -> GameData.playerAbility.put(playerName, new Miner(playerName));
             case Stance -> GameData.playerAbility.put(playerName, new Stance(playerName));
@@ -459,11 +333,14 @@ public class AbilityModule  {
             case Tanker -> GameData.playerAbility.put(playerName, new Tanker(playerName));
             case Gasolin -> GameData.playerAbility.put(playerName, new Gasolin(playerName));
             case Zet -> GameData.playerAbility.put(playerName, new Zet(playerName));
+
             case Itarodi -> GameData.playerAbility.put(playerName, new Itadori(playerName));
             case Jogo -> GameData.playerAbility.put(playerName, new Jogo(playerName));
             case Sukuna -> GameData.playerAbility.put(playerName, new Sukuna(playerName));
+
             case Zenitsu -> GameData.playerAbility.put(playerName, new Zenitsu(playerName));
             case Rengoku -> GameData.playerAbility.put(playerName, new Rengoku(playerName));
+            case Tanjiro -> GameData.playerAbility.put(playerName, new Tanjiro(playerName));
             default -> {
                 p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
                 p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());

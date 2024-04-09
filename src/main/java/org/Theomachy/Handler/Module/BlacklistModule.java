@@ -67,7 +67,7 @@ public class BlacklistModule {
         for (int itemIndex = 0; itemIndex < length; itemIndex++) {
             ItemStack item = commonModule.setItem(!blacklist.contains(index) ? Material.WHITE_WOOL : Material.RED_WOOL,
                     1,
-                    ChatColor.WHITE + AbilityInfo.getNameByIndex(itemIndex + index) + " : " + (itemIndex + index));
+                    ChatColor.WHITE + AbilityInfo.getAbilityByIndex(itemIndex + index).getName() + " : " + (itemIndex + index));
             inventory.setItem(itemIndex, item);
         }
 

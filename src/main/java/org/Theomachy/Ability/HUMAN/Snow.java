@@ -32,7 +32,7 @@ public class Snow extends Ability {
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "공격 지수",
             "현재 눈덩이 데미지를 확인 합니다.",
             ChatColor.AQUA + "【고급】 " + ChatColor.WHITE + "눈덩이 변환",
-            "눈덩이를 3개 얻습니다.",};
+            "눈덩이를 1개 얻습니다.",};
 
     private int passiveDamage;
 	private final int rareCount;
@@ -43,7 +43,7 @@ public class Snow extends Ability {
         this.normalSkillStack = 0;
         this.rareSkillCoolTime = 50;
         this.rareSkillStack = 10;
-		this.rareCount = 3;
+		this.rareCount = 1;
         this.passiveDamage = 0;
         this.rank = AbilityRank.A;
     }
