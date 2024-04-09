@@ -24,9 +24,9 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Tanjiro extends Ability {
     private final static String[] des = {
             AbilityInfo.Tanjiro.getName(),
-            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제1형 「원무」 (円舞)",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "물의 호흡 | 제1형 「원무」 (円舞)",
             "해의 호흡으로 생긴 기운을 담아 종으로 베어내는 기술이다",
-            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제6형 「비틀린 소용돌이」(ねじれ渦)",
+            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "히노카미 카구라 | 제6형 「비틀린 소용돌이」(ねじれ渦)",
             "몸을 크게 비틀어서, 강력한 소용돌이처럼 회전하는 기술"};
 
     private final int normalDamage;

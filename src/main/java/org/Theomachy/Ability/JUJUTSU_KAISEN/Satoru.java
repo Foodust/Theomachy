@@ -85,8 +85,11 @@ public class Satoru extends Ability {
         AtomEffect atomEffect = new AtomEffect(effectManage);
         atomEffect.particleOrbital = Particle.REDSTONE;
         atomEffect.particleNucleus = Particle.REDSTONE;
+        atomEffect.particlesOrbital = 30;
+        atomEffect.particlesNucleus = 30;
         atomEffect.colorOrbital = Color.PURPLE;
         atomEffect.colorNucleus = Color.PURPLE;
+        atomEffect.rotation = 80;
         atomEffect.radius = 2;
         atomEffect.particleCount = 1;
         atomEffect.setLocation(center);
