@@ -86,7 +86,6 @@ public class Zenitsu extends Ability {
                             Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
                         }
                     }, 5L);
-
                 }
             }, rareTime * 20L);
         }

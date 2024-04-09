@@ -19,11 +19,11 @@ public class Tanjiro extends Ability {
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제1형 「수면 베기」 (水面切り)",
             "칼을 횡방향으로 베어내는 간단한 참격 기술",
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "오의・제10형 「생생유전」(生生流転)",
-            "물로 이루어진 용 형상의 검기를 휘두르며 움직일 때 마다 검격의 위력을 점점 증가시키는 기술."};
+            "물로 이루어진 용 형상의 검기를 휘두르며 움직일 때 마다 주변 검격의 위력을 점점 증가시키는 기술."};
 
     private final int normalDamage;
     private final int normalDistance;
-    private final int rareDistance;
+    private float rareDistance;
     private final Long rareDuration;
     private double rareDamage;
     private boolean rareCheck;
@@ -39,7 +39,7 @@ public class Tanjiro extends Ability {
 
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 50;
-        this.rareDistance = 40;
+        this.rareDistance = 2f;
         this.rareDamage = 0;
         this.rareDuration = 5 * 20L;
         this.rareCheck = false;
@@ -48,7 +48,7 @@ public class Tanjiro extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (playerModule.InHandItemCheck(player,skillMaterial)) {
+        if (playerModule.InHandItemCheck(player, skillMaterial)) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -66,7 +66,7 @@ public class Tanjiro extends Ability {
                 Vector horizontalOffset = direction.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
                 Location particleLocation = startLocation.clone().add(horizontalOffset);
                 world.spawnParticle(Particle.WATER_SPLASH, particleLocation, 100);
-                playerModule.damageNearEntity(player,particleLocation, normalDamage, 4, 4, 4);
+                playerModule.damageNearEntity(player, particleLocation, normalDamage, 4, 4, 4);
             }
         }
     }
@@ -78,24 +78,26 @@ public class Tanjiro extends Ability {
             int radius = 1;
             // 파티클을 생성하고 플레이어 주변에 회전하도록 설정
             BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                for (double t = 0; t < Math.PI * 2; t += Math.PI / 16) {
-                    double x = Math.cos(t) * radius;
-                    double z = Math.sin(t) * radius;
+                for (double t = 0; t < Math.PI * rareDistance; t += Math.PI / 16) {
+                    double x = Math.cos(t) * (radius + rareDistance);
+                    double z = Math.sin(t) * (radius + rareDistance);
                     Location playerLocation = player.getLocation();
-                    Location particleLocation = playerLocation.clone().add(x, 1, z);
+                    Location particleLocation = playerLocation.clone().add(x, 1 + rareDistance / 2, z);
                     World world = player.getWorld();
-
                     world.spawnParticle(Particle.WATER_WAKE, particleLocation, (int) rareDamage);
+                    world.playSound(particleLocation,Sound.ENTITY_BOAT_PADDLE_WATER,0.1f,1f);
                 }
             }, 0, 1L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
                 Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());
-            },rareDuration);
+            }, rareDuration);
         }
     }
+
     public void passiveSkill(PlayerMoveEvent event) {
-        if(rareCheck){
+        if (rareCheck) {
             rareDamage += 0.1f;
+            rareDistance += 0.04f;
         }
     }
 
