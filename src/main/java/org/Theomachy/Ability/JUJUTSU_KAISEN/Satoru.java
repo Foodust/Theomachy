@@ -3,11 +3,12 @@ package org.Theomachy.Ability.JUJUTSU_KAISEN;
 import com.google.common.util.concurrent.AtomicDouble;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.EffectType;
-import de.slikey.effectlib.effect.AtomEffect;
+import de.slikey.effectlib.effect.*;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
+import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 public class Satoru extends Ability {
     private final static String[] des = {
-            AbilityInfo.Sukuna.getName(),
+            AbilityInfo.Satoru.getName(),
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "허식 「자」",
             "전방에 구체를 보냅니다.",
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "영역 전개 | 무량공처 (無量空処)",
@@ -78,31 +79,23 @@ public class Satoru extends Ability {
     private void makeSphereParticle(Player player){
         Location playerLocation = player.getLocation();
         World world = player.getWorld();
-        double increment = Math.PI * (3 - Math.sqrt(5)); // 구의 표면을 균일하게 채우기 위한 각도 증가량
-        int particleCount = 100;
-        int radius = 1;
-
-        Location center = playerLocation.add(playerLocation.getDirection().multiply(2)).add(0,player.getEyeHeight(),0);
+        Location center = playerLocation.add(playerLocation.getDirection().multiply(1)).add(0,player.getEyeHeight(),0);
         AtomicDouble distance = new AtomicDouble();
-        EffectManager effectManage = Theomachy.getEffectManage();
+
         AtomEffect atomEffect = new AtomEffect(effectManage);
-        atomEffect.particle = Particle.REDSTONE;
-        atomEffect.toColor = Color.PURPLE;
+        atomEffect.particleOrbital = Particle.REDSTONE;
+        atomEffect.particleNucleus = Particle.REDSTONE;
+        atomEffect.colorOrbital = Color.PURPLE;
+        atomEffect.colorNucleus = Color.PURPLE;
+        atomEffect.radius = 2;
+        atomEffect.particleCount = 1;
         atomEffect.setLocation(center);
         atomEffect.start();
         BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-            for (int i = 0; i < particleCount; i++) {
-                double y = 1 - (i / (double) (particleCount - 1)) * 2; // y 좌표 계산 (-1 ~ 1 사이)
-                double r = Math.sqrt(1 - y * y) * radius; // 반지름 계산
-
-                double theta = i * increment; // 각도 계산
-                double x = Math.cos(theta) * r; // x 좌표 계산
-                double z = Math.sin(theta) * r; // z 좌표 계산
-
-                Location sphereMiddle = center.add(x, y * radius, z).multiply(distance.getAndAdd(normalDistance));
-                atomEffect.setLocation(sphereMiddle);
-                world.spawnParticle(Particle.REDSTONE, sphereMiddle, 2,new Particle.DustOptions(Color.PURPLE,1));
-            }
+            Location particleLocation = center.add(center.getDirection().multiply(distance.getAndAdd(0.015)));
+            atomEffect.setLocation(particleLocation);
+            world.playSound(particleLocation,Sound.ITEM_TOTEM_USE,0.2f,10f);
+            playerModule.damageNearEntity(player,particleLocation,normalDamage,5,5,5);
         }, 0L, 1L);
 
         Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{

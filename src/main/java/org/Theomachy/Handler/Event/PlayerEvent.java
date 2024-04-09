@@ -103,29 +103,28 @@ public class PlayerEvent implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         if (GameModule.Start) {
             Ability ability = GameData.playerAbility.get(event.getPlayer().getName());
-            assert ability != null;
-            if (ability.abilityCode == AbilityInfo.PokeGo.getIndex() || ability.abilityCode == AbilityInfo.Tanjiro.getIndex())
-                ability.passiveSkill(event);
+            if (ability != null) {
+                if (ability.abilityCode == AbilityInfo.PokeGo.getIndex() || ability.abilityCode == AbilityInfo.Tanjiro.getIndex())
+                    ability.passiveSkill(event);
+            }
         }
     }
 
     @EventHandler
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
-        Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-            if (event.getEntity() instanceof Arrow arrow) {
-                if (arrow.getShooter() instanceof Player player) {
-                    Ability ability = GameData.playerAbility.get(player.getName());
-                    if (ability != null && ability.abilityCode == AbilityInfo.Sniper.getIndex())
-                        ability.passiveSkill(event, player);
-                }
+        if (event.getEntity() instanceof Arrow arrow) {
+            if (arrow.getShooter() instanceof Player player) {
+                Ability ability = GameData.playerAbility.get(player.getName());
+                if (ability != null && ability.abilityCode == AbilityInfo.Sniper.getIndex())
+                    ability.passiveSkill(event, player);
             }
-        });
+        }
     }
 
 
     @EventHandler
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
-        if (GameModule.Start) {
+        if (GameModule.Start || Theomachy.DEBUG) {
             String playerName = event.getPlayer().getName();
             Ability ability = GameData.playerAbility.get(playerName);
             if (ability != null && ability.activeType) {
@@ -136,7 +135,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
-        if (GameModule.Start) {
+        if (GameModule.Start || Theomachy.DEBUG) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.playerAbility.containsKey(playerName))
@@ -147,7 +146,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onEntityRegainHealth(EntityRegainHealthEvent event) {
-        if (GameModule.Start) {
+        if (GameModule.Start || Theomachy.DEBUG) {
             if (event.getEntity() instanceof Player) {
                 String playerName = ((Player) event.getEntity()).getName();
                 if (GameData.playerAbility.containsKey(playerName))

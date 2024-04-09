@@ -71,6 +71,7 @@ public class Rengoku extends Ability {
 
             int particles = 300;
             int radius = 4;
+            World world = player.getWorld();
             BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
                 Location playerLocation = player.getLocation();
                 Vector direction = playerLocation.getDirection();
@@ -80,11 +81,11 @@ public class Rengoku extends Ability {
                     double y = playerLocation.getY() + radius * Math.cos(angle);
                     double z = playerLocation.getZ() + radius * Math.sin(angle) * direction.getZ();
                     Location circleLocation = new Location(playerLocation.getWorld(),x, y, z);
-                    Objects.requireNonNull(playerLocation.getWorld()).spawnParticle(Particle.FLAME, circleLocation, 1);
+                    world.spawnParticle(Particle.FLAME, circleLocation, 1);
 
                     // 파티클에 닿은 플레이어 찾기
 
-                    for (Entity enemy : Objects.requireNonNull(circleLocation.getWorld()).getNearbyEntities(circleLocation, 5, 5 ,5 )) {
+                    for (Entity enemy : world.getNearbyEntities(circleLocation, 5, 5 ,5 )) {
                         if (enemy instanceof LivingEntity && !enemy.equals(player)) {
                             ((LivingEntity) enemy).damage(normalDamage, player);
                             enemy.setVelocity(enemy.getVelocity().add(new Vector(0, 0.0001, 0)));

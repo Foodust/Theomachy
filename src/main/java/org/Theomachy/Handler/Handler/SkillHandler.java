@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.Handler;
 
+import org.Theomachy.Theomachy;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +14,8 @@ public class SkillHandler
 	private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
 	public void Use(Player player, Material material, AbilityCase abilityCase, int stack, int coolTime)
 	{
+        if(Theomachy.DEBUG)
+            return;
 		player.getInventory().removeItem(new ItemStack(material, stack));
 		if (coolTime>0)
             switch (abilityCase) {
@@ -25,7 +28,8 @@ public class SkillHandler
 	public boolean Check(Player player, AbilityCase abilityCase)
 	{
 		String key=player.getName();
-
+        if(Theomachy.DEBUG)
+            return true;
         switch (abilityCase) {
             case COMMON -> {
                 if (CoolTimeTimer.commonSkillCoolTime.containsKey(key)) {

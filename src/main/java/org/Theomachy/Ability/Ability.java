@@ -4,10 +4,12 @@ package org.Theomachy.Ability;
 
 
 
+import de.slikey.effectlib.EffectManager;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Handler.Handler.SkillHandler;
 import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Message.TheomachyMessage;
+import org.Theomachy.Theomachy;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,6 +52,7 @@ public class Ability
 	public Material skillMaterial =Material.BLAZE_ROD;
 	public final PlayerModule playerModule = new PlayerModule();
 	public final SkillHandler skillHandler = new SkillHandler();
+	public final EffectManager effectManage = Theomachy.getEffectManage();
 	public final PlayerHandler playerHandler = new PlayerHandler();
 	public Ability(String playerName, AbilityInfo abilityInfo, boolean activeType, boolean passiveType, boolean buffType, String[] des)
 	{
