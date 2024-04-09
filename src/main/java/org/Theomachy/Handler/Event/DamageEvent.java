@@ -42,7 +42,7 @@ public class DamageEvent implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         try {
-            if (GameModule.Start) {
+            if (GameModule.Start || Theomachy.DEBUG) {
                 if (event.getDamager() instanceof Player &&
                         (event.getEntity() instanceof Player || event.getEntity() instanceof LivingEntity)) {
 
@@ -62,8 +62,8 @@ public class DamageEvent implements Listener {
                         String key = player.getName();
                         Ability ability = GameData.playerAbility.get(key);
                         if (ability != null &&
-                                ability.abilityCode == AbilityInfo.Artemis.getIndex() ||
-                                Objects.requireNonNull(ability).abilityCode == AbilityInfo.Archer.getIndex()) {
+                                (ability.abilityCode == AbilityInfo.Artemis.getIndex() ||
+                                ability.abilityCode == AbilityInfo.Archer.getIndex())) {
                             ability.passiveSkill(event);
                         }
                     }

@@ -5,6 +5,9 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Chest;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -62,15 +65,14 @@ public class RyoikiTenkai extends Ability {
     public void goRyoikiTenkai(Player player, AbilityInfo abilityInfo, Material floor, Material wall) {
 
         Location centerLocation = player.getLocation().add(0, -1, 0); // 발밑 기준으로 블록을 생성할 위치
-        Map<Location, Block> originalBlocks = new HashMap<>();
-
-        // 벽 생성
+        Map<Location, BlockState> originalBlockMap = new HashMap<>();
         for (int x = -rareDistance; x <= rareDistance; x++) {
             for (int z = -rareDistance; z <= rareDistance; z++) {
                 for (int y = 1; y <= rareDistance; y++) {
                     Location blockLocation = centerLocation.clone().add(x, y, z);
                     Block block = blockLocation.getBlock();
-                    originalBlocks.put(blockLocation, block);
+                    originalBlockMap.put(blockLocation, block.getState());
+                    if(block.getState() instanceof Chest)continue;
                     if (Math.abs(x) == rareDistance || Math.abs(z) == rareDistance || y == rareDistance) {
                         block.setType(wall);
                     } else {
@@ -87,8 +89,9 @@ public class RyoikiTenkai extends Ability {
             for (int z = -rareDistance + 1; z <= rareDistance - 1; z++) {
                 Location blockLocation = centerLocation.clone().add(x, 0, z);
                 Block block = blockLocation.getBlock();
-                originalBlocks.put(blockLocation, block);
-                blockLocation.getBlock().setType(floor);
+                if(block.getState() instanceof Chest)continue;
+                originalBlockMap.put(blockLocation,block.getState());
+                block.setType(floor);
                 switch (abilityInfo) {
                     case Jogo -> {
                         JogoSetFire(centerLocation, x, 1, z);
@@ -100,17 +103,17 @@ public class RyoikiTenkai extends Ability {
             }
         }
         Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-            for (Map.Entry<Location, Block> entry : originalBlocks.entrySet()) {
-                Location loc = entry.getKey();
-                Block originalBlock = entry.getValue();
-                loc.getBlock().setBlockData(originalBlock.getBlockData()); // 원래의 블록 타입으로 되돌림
+            for (Map.Entry<Location, BlockState> entry : originalBlockMap.entrySet()) {
+                Location originalBlockLocation = entry.getKey();
+                BlockState originalBlock = entry.getValue();
+                originalBlockLocation.getBlock().setBlockData(originalBlock.getBlockData()); // 원래의 블록 타입으로 되돌림
             }
-            originalBlocks.clear();
+            originalBlockMap.clear();
         }, rareDuration * 20L); // 10초 후 (20틱 = 1초 * 10초 = 200틱)
     }
 
     private void JogoSetLava(Block block) {
-        if (Math.random() < 0.008) { // 0.05%의 확률로 용암 배치
+        if (Math.random() < 0.008) { // 0.08%의 확률로 용암 배치
             block.setType(Material.LAVA); // 용암 블록 배치
         } else {
             block.setType(Material.AIR); // 나머지는 공기로 설정
@@ -119,15 +122,20 @@ public class RyoikiTenkai extends Ability {
 
     private void JogoSetFire(Location centerLocation, double x, double y, double z) {
         Location blockLocationFire = centerLocation.clone().add(x, y, z);
-        blockLocationFire.getBlock().setType(Material.FIRE);
+        Block block= blockLocationFire.getBlock();
+        if(!(block.getState() instanceof Chest))
+            block.setType(Material.FIRE);
     }
 
     private void SukunaSetWater(Location centerLocation, double x, double y, double z) {
         Location blockLocationFire = centerLocation.clone().add(x, y, z);
-        blockLocationFire.getBlock().setType(Material.WATER);
+        Block block= blockLocationFire.getBlock();
+        if(!(block.getState() instanceof Chest))
+            block.setType(Material.WATER);
     }
 
     private void setAir(Block block) {
         block.setType(Material.AIR);
     }
+
 }
