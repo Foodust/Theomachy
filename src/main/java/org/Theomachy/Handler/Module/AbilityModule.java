@@ -5,6 +5,7 @@ import org.Theomachy.Ability.GOD.*;
 import org.Theomachy.Ability.HUMAN.*;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
+import org.Theomachy.Ability.JUJUTSU_KAISEN.Satoru;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Giyu;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
@@ -338,6 +339,7 @@ public class AbilityModule  {
             case Itarodi -> GameData.playerAbility.put(playerName, new Itadori(playerName));
             case Jogo -> GameData.playerAbility.put(playerName, new Jogo(playerName));
             case Sukuna -> GameData.playerAbility.put(playerName, new Sukuna(playerName));
+            case Satoru -> GameData.playerAbility.put(playerName, new Satoru(playerName));
 
             case Zenitsu -> GameData.playerAbility.put(playerName, new Zenitsu(playerName));
             case Rengoku -> GameData.playerAbility.put(playerName, new Rengoku(playerName));

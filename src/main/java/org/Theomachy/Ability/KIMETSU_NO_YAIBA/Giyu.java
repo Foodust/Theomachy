@@ -25,7 +25,7 @@ public class Giyu extends Ability {
     private final Long rareDuration;
 
     public Giyu(String playerName) {
-        super(playerName, AbilityInfo.Giyu, true, false, false, des);
+        super(playerName, AbilityInfo.Giyu, true, false, true, des);
 
         this.rareSkillCoolTime = 110;
         this.rareSkillStack = 50;

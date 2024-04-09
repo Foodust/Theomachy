@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import de.slikey.effectlib.EffectManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Handler.Module.CommonModule;
@@ -48,6 +49,8 @@ public class Theomachy extends JavaPlugin {
     private final CommonModule commonModule = new CommonModule();
     private final PlayerModule playerModule = new PlayerModule();
     private final UpdateChecker updateChecker = new UpdateChecker();
+    private static EffectManager effectManager;
+    public static EffectManager getEffectManage(){return effectManager;}
     public @NonNull BukkitAudiences adventure() {
         if (this.adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
@@ -56,6 +59,7 @@ public class Theomachy extends JavaPlugin {
     }
 
     public void onEnable() {
+        effectManager = new EffectManager(this);
         this.adventure = BukkitAudiences.create(this);
 
         plugin = this;

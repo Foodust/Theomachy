@@ -5,6 +5,7 @@ api-version: '1.20'
 libraries:
   - "net.kyori:adventure-platform-bukkit:4.3.2"
   - "net.kyori:adventure-api:4.15.0"
+  - "com.elmakers.mine.bukkit:EffectLib:10.2"
 commands:
   t:
     description: 'Your command description'
@@ -12,3 +13,5 @@ commands:
   x:
     description: 'Your command description'
     usage: '/x <subcommand>'
+
+# kyori 및 effectLib 라이브러리 사용
