@@ -6,6 +6,7 @@ import org.Theomachy.Ability.HUMAN.*;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Itadori;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Jogo;
 import org.Theomachy.Ability.JUJUTSU_KAISEN.Sukuna;
+import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Giyu;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Rengoku;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Tanjiro;
 import org.Theomachy.Ability.KIMETSU_NO_YAIBA.Zenitsu;
@@ -341,6 +342,7 @@ public class AbilityModule  {
             case Zenitsu -> GameData.playerAbility.put(playerName, new Zenitsu(playerName));
             case Rengoku -> GameData.playerAbility.put(playerName, new Rengoku(playerName));
             case Tanjiro -> GameData.playerAbility.put(playerName, new Tanjiro(playerName));
+            case Giyu -> GameData.playerAbility.put(playerName, new Giyu(playerName));
             default -> {
                 p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
                 p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());

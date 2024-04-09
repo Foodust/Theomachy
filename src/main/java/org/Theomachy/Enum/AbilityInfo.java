@@ -68,7 +68,9 @@ public enum AbilityInfo {
     //========================================================================================================
     Zenitsu(401,"아가츠마 젠이츠"),
     Rengoku(402,"렌고쿠 쿄주로"),
-    Tanjiro(403,"카마도 탄지로");
+    Tanjiro(403,"카마도 탄지로"),
+    Giyu(404,"토미오카 기유"),
+    ;
     private final int index;
     private final String name;
     private static final Map<Integer, AbilityInfo> abilityInfoMap = new HashMap<>();

@@ -61,7 +61,6 @@ public class DamageEvent implements Listener {
                     if (arrow.getShooter() instanceof Player player) {
                         String key = player.getName();
                         Ability ability = GameData.playerAbility.get(key);
-
                         if (ability != null &&
                                 ability.abilityCode == AbilityInfo.Artemis.getIndex() ||
                                 Objects.requireNonNull(ability).abilityCode == AbilityInfo.Archer.getIndex()) {
@@ -70,9 +69,7 @@ public class DamageEvent implements Listener {
                     }
                 } else if (event.getDamager() instanceof Snowball snow && event.getEntity() instanceof Player) {
                     if (snow.getShooter() instanceof Player player) {
-
                         Ability ability = GameData.playerAbility.get(player.getName());
-
                         if (ability != null && ability.abilityCode == AbilityInfo.Snow.getIndex())
                             ability.passiveSkillSnow(event);
                     }

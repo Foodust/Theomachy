@@ -23,9 +23,9 @@ import java.util.Objects;
 public class Rengoku extends Ability {
     private final static String[] des = {
             AbilityInfo.Rengoku.getName(),
-            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제2의 형 「상승염천」(昇り炎天)",
+            ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "제2형 「상승염천」(昇り炎天)",
             "칼을 밑에서 위로 휘둘러, 맹렬한 불꽃처럼 베는 기술.",
-            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "오의 • 제9의 형 「연옥」(煉獄)",
+            ChatColor.RED + "【고급】 " + ChatColor.AQUA + "오의 • 제9형 「연옥」(煉獄)",
             "작열하는 지옥불처럼 맹렬히 돌진해서, 굉음과 함께 상대방을 도려낸다. "};
 
     private final int normalDamage;
