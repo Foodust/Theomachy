@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Handler.Module.SpawnModule;
+import org.Theomachy.Handler.Module.source.SpawnModule;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -11,7 +11,7 @@ public class SpawnCommand  {
 	private final PermissionChecker permissionChecker = new PermissionChecker();
 	public void module(CommandSender sender, Command command, String label, String[] data)
 	{
-		if (permissionChecker.Sender(sender)) {
+		if (permissionChecker.Player(sender)) {
 			spawnModule.spawnSetting(sender, data);
 		}
 	}

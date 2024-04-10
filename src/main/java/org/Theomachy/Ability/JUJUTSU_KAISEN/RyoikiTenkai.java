@@ -1,6 +1,7 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
 import org.Theomachy.Ability.Ability;
+import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
@@ -102,14 +103,14 @@ public class RyoikiTenkai extends Ability {
                 }
             }
         }
-        Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+        taskModule.runBukkitTaskLater( () -> {
             for (Map.Entry<Location, BlockState> entry : originalBlockMap.entrySet()) {
                 Location originalBlockLocation = entry.getKey();
                 BlockState originalBlock = entry.getValue();
                 originalBlockLocation.getBlock().setBlockData(originalBlock.getBlockData()); // 원래의 블록 타입으로 되돌림
             }
             originalBlockMap.clear();
-        }, rareDuration * 20L); // 10초 후 (20틱 = 1초 * 10초 = 200틱)
+        }, rareDuration * TickData.longTick); // 10초 후 (20틱 = 1초 * 10초 = 200틱)
     }
 
     private void JogoSetLava(Block block) {

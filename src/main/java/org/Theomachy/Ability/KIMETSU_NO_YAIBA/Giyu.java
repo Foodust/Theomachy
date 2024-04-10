@@ -3,6 +3,7 @@ package org.Theomachy.Ability.KIMETSU_NO_YAIBA;
 import de.slikey.effectlib.EffectType;
 import de.slikey.effectlib.effect.SquareEffect;
 import org.Theomachy.Ability.Ability;
+import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
@@ -49,8 +50,6 @@ public class Giyu extends Ability {
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-            World world = player.getWorld();
-
             Location playerLocation = player.getLocation();
             SquareEffect squareEffect = new SquareEffect(effectManage);
             squareEffect.type = EffectType.REPEATING;
@@ -60,10 +59,10 @@ public class Giyu extends Ability {
             squareEffect.setLocation(playerLocation);
             squareEffect.start();
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, PotionEffect.INFINITE_DURATION, 255));
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
                 squareEffect.cancel();
-            }, rareDuration * 20L);
+            }, rareDuration * TickData.longTick);
         }
     }
 }

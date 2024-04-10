@@ -1,5 +1,6 @@
 package org.Theomachy.Message;
 
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,15 +12,16 @@ import org.Theomachy.Data.GameData;
 
 public class AbilityCoolTimeMessage
 {
+	private final MessageModule messageModule = new MessageModule();
 	public void CoolTimeTeller(Player player, AbilityCase abilityCase, int cool)
 	{
         switch (abilityCase) {
             case COMMON ->
-					player.sendMessage(TheomachyMessage.INFO_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
+					messageModule.sendPlayer(player,TheomachyMessage.INFO_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
             case NORMAL ->
-                    player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + ChatColor.WHITE + TheomachyMessage.INFO_ABILITY_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
+					messageModule.sendPlayer(player,TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + ChatColor.WHITE + TheomachyMessage.INFO_ABILITY_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
             case RARE ->
-                    player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + ChatColor.WHITE + TheomachyMessage.INFO_ABILITY_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
+					messageModule.sendPlayer(player,TheomachyMessage.INFO_RARE_ABILITY.getMessage() + ChatColor.WHITE + TheomachyMessage.INFO_ABILITY_COOL_TIME_IS.getMessage() + cool + TheomachyMessage.INFO_COOL_TIME_LEFT.getMessage());
         }
 	}
 
@@ -31,11 +33,11 @@ public class AbilityCoolTimeMessage
 		{
             switch (abilityCase) {
 				case COMMON ->
-						player.sendMessage(cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						messageModule.sendPlayer(player,cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case NORMAL ->
-						player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + ChatColor.WHITE + cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						messageModule.sendPlayer(player,TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + ChatColor.WHITE + cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case RARE ->
-						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + ChatColor.WHITE + cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						messageModule.sendPlayer(player,TheomachyMessage.INFO_RARE_ABILITY.getMessage() + ChatColor.WHITE + cool + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
             }
 		}
 	}
@@ -47,11 +49,11 @@ public class AbilityCoolTimeMessage
 		{
             switch (abilityCase) {
 				case COMMON ->
-						player.sendMessage("0" + TheomachyMessage.INFO_RARE_ABILITY.getMessage());
+						messageModule.sendPlayer(player,"0" + TheomachyMessage.INFO_RARE_ABILITY.getMessage());
 				case NORMAL ->
-						player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + "0" + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						messageModule.sendPlayer(player,TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + "0" + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
 				case RARE ->
-						player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + "0" + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
+						messageModule.sendPlayer(player,TheomachyMessage.INFO_RARE_ABILITY.getMessage() + "0" + TheomachyMessage.INFO_BEFORE_SECOND.getMessage());
             }
 		}
 	}
@@ -60,11 +62,11 @@ public class AbilityCoolTimeMessage
 	{
         switch (abilityCase) {
 			case COMMON ->
-					player.sendMessage(TheomachyMessage.INFO_USING_ABILITY.getMessage());
+					messageModule.sendPlayer(player,TheomachyMessage.INFO_USING_ABILITY.getMessage());
 			case NORMAL ->
-					player.sendMessage(TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + TheomachyMessage.INFO_USING_ABILITY.getMessage());
+					messageModule.sendPlayer(player,TheomachyMessage.INFO_NORMAL_ABILITY.getMessage() + TheomachyMessage.INFO_USING_ABILITY.getMessage());
 			case RARE ->
-					player.sendMessage(TheomachyMessage.INFO_RARE_ABILITY.getMessage() + TheomachyMessage.INFO_USING_ABILITY.getMessage());
+					messageModule.sendPlayer(player,TheomachyMessage.INFO_RARE_ABILITY.getMessage() + TheomachyMessage.INFO_USING_ABILITY.getMessage());
         }
 	}
 	
@@ -72,16 +74,16 @@ public class AbilityCoolTimeMessage
 	{
         switch (material) {
             case COBBLESTONE -> {
-                player.sendMessage(TheomachyMessage.ERROR_NOT_ENOUGH_COBBLESTONE.getMessage());
-                player.sendMessage(TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
+				messageModule.sendPlayer(player,TheomachyMessage.ERROR_NOT_ENOUGH_COBBLESTONE.getMessage());
+				messageModule.sendPlayer(player,TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
             }
             case OAK_PLANKS -> {
-                player.sendMessage(TheomachyMessage.ERROR_NOT_ENOUGH_OAK.getMessage());
-                player.sendMessage(TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
+				messageModule.sendPlayer(player,TheomachyMessage.ERROR_NOT_ENOUGH_OAK.getMessage());
+				messageModule.sendPlayer(player,TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
             }
             case IRON_INGOT -> {
-                player.sendMessage(TheomachyMessage.ERROR_NOT_ENOUGH_IRON.getMessage());
-                player.sendMessage(TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
+				messageModule.sendPlayer(player,TheomachyMessage.ERROR_NOT_ENOUGH_IRON.getMessage());
+				messageModule.sendPlayer(player,TheomachyMessage.INFO_NEED.getMessage() + ChatColor.RED + stack);
             }
         }
 	}
@@ -89,8 +91,8 @@ public class AbilityCoolTimeMessage
 	public void TooFarError(Player player, TargetType targetType)
 	{
         switch (targetType) {
-			case ENTITY_TOO_FAR -> player.sendMessage(TheomachyMessage.ERROR_TOO_FAR_ENTITY.getMessage());
-			case TARGET_TOO_FAR -> player.sendMessage(TheomachyMessage.ERROR_TOO_FAR_TARGET.getMessage());
+			case ENTITY_TOO_FAR -> messageModule.sendPlayer(player,TheomachyMessage.ERROR_TOO_FAR_ENTITY.getMessage());
+			case TARGET_TOO_FAR -> messageModule.sendPlayer(player,TheomachyMessage.ERROR_TOO_FAR_TARGET.getMessage());
         }
 		
 	}
@@ -99,9 +101,9 @@ public class AbilityCoolTimeMessage
 	public void PassiveEnable(Player player, int passiveCase)
 	{
         if (passiveCase == 0) {
-            player.sendMessage(TheomachyMessage.INFO_ACTIVATE_ABILITY.getMessage());
+			messageModule.sendPlayer(player,TheomachyMessage.INFO_ACTIVATE_ABILITY.getMessage());
         } else {
-            player.sendMessage(TheomachyMessage.ERROR_DEACTIVATE_ABILITY.getMessage());
+			messageModule.sendPlayer(player,TheomachyMessage.ERROR_DEACTIVATE_ABILITY.getMessage());
         }
 	}
 }

@@ -27,7 +27,7 @@ public class Meteor extends Ability {
 
     public Meteor(String playerName) {
         super(playerName, AbilityInfo.Meteor, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 100;
         this.normalSkillStack = 20;
         this.normalCount = 30;
@@ -47,7 +47,7 @@ public class Meteor extends Ability {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location location = player.getLocation();
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 World world = player.getWorld();
                 Vector vector = new Vector(0d, -20d, 0d);
                 Vector speed = new Vector(0d, -3d, 0d);

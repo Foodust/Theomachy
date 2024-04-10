@@ -36,7 +36,7 @@ public class Zeus extends Ability {
     private final BlockFilter blockFilter = new BlockFilter();
     public Zeus(String playerName) {
         super(playerName, AbilityInfo.Zeus, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 90;
         this.rareSkillCoolTime = 180;

@@ -3,8 +3,7 @@ package org.Theomachy.Handler.Event;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Handler.Command.StartStopCommand;
-import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.game.GameModule;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -22,8 +21,8 @@ public class ExplodeEvent implements Listener {
             event.blockList().clear();
 
         if (GameModule.Start) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                Ability ability = GameData.playerAbility.get(p.getName());
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Ability ability = GameData.playerAbility.get(player.getName());
                 if (ability != null && ability.abilityCode == AbilityInfo.Bulter.getIndex()) {
                     ability.passiveSkill(event);
                 }

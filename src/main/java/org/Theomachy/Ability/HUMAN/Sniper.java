@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.HUMAN;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -51,17 +52,17 @@ public class Sniper extends Ability {
             ready = true;
             for (int count = 4; count >= 0; count--) {
                 int finalCount = count;
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                taskModule.runBukkitTaskLater( () -> {
                     if(player.isSneaking()){
                         if (finalCount > 0)
-                            player.sendMessage(ChatColor.RED + "[스나이핑 모드] " + ChatColor.WHITE + finalCount + "초 전");
+                            messageModule.sendPlayer(player,ChatColor.RED + "[스나이핑 모드] " + ChatColor.WHITE + finalCount + "초 전");
                         else {
-                            player.sendMessage(ChatColor.RED + "[스나이핑 모드] " + ChatColor.AQUA + "ON");
+                            messageModule.sendPlayer(player,ChatColor.RED + "[스나이핑 모드] " + ChatColor.AQUA + "ON");
                             sniping = true;
                         }
                     }
 
-                }, (4 - count) * 20L);
+                }, (4 - count) * TickData.longTick);
             }
         } else {
             skillHandler.Check(player, AbilityCase.NORMAL);
@@ -69,7 +70,7 @@ public class Sniper extends Ability {
         if (!player.isSneaking()) {
             ready = false;
             sniping = false;
-            player.sendMessage(ChatColor.RED + "[스나이핑 모드] " + ChatColor.RED + "OFF");
+            messageModule.sendPlayer(player,ChatColor.RED + "[스나이핑 모드] " + ChatColor.RED + "OFF");
         }
     }
 

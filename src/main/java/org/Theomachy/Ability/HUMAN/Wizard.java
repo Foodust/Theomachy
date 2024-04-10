@@ -3,6 +3,7 @@ package org.Theomachy.Ability.HUMAN;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -30,7 +31,7 @@ public class Wizard extends Ability
 	public Wizard(String playerName)
 	{
 		super(playerName, AbilityInfo.Wizard, true, false, false, des);
-		Theomachy.log.info(playerName+abilityName);
+		messageModule.logInfo(playerName+abilityName);
 		
 		this.normalSkillCoolTime =180;
 		this.normalSkillStack =25;
@@ -59,9 +60,9 @@ public class Wizard extends Ability
 		{
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
-			for (Entity e : entityList)
-				if (e instanceof Player)
-					targetList.add((Player) e);
+			for (Entity entity : entityList)
+				if (entity instanceof Player)
+					targetList.add((Player) entity);
 			if (!targetList.isEmpty())
 			{
 				skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
@@ -75,7 +76,7 @@ public class Wizard extends Ability
 				}
 			}
 			else
-				player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");
+				messageModule.sendPlayer(player,"능력을 사용할 수 있는 대상이 없습니다.");
 		}
 	}
 	
@@ -84,30 +85,30 @@ public class Wizard extends Ability
 		if (skillHandler.Check(player, AbilityCase.RARE)&&playerModule.ItemCheck(player, material, rareSkillStack)) {
 			List<Entity> entityList = player.getNearbyEntities(10, 10, 10);
 			ArrayList<Player> targetList = new ArrayList<Player>(); 
-			for (Entity e : entityList)
-				if (e instanceof Player)
-					targetList.add((Player) e);
+			for (Entity entity : entityList)
+				if (entity instanceof Player)
+					targetList.add((Player) entity);
 			if (!targetList.isEmpty())
 			{
 				skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 				player.setHealth( player.getHealth() / 2 );
 				Vector v = new Vector(0,1.6,0);
-				for (Player e : targetList)
+				for (Player target : targetList)
 				{
-					e.setVelocity(v);
-					e.sendMessage(ChatColor.RED+"마법사의 고급능력에 당했습니다!");
+					target.setVelocity(v);
+					target.sendMessage(ChatColor.RED+"마법사의 고급능력에 당했습니다!");
 				}
-				Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+				taskModule.runBukkitTaskLater(()->{
 					World world = player.getWorld();
-					for (Player e : targetList)
+					for (Player enemy : targetList)
 					{
-						Location location = e.getLocation();
+						Location location = enemy.getLocation();
 						world.strikeLightning(location);
-						e.setFireTicks(100);
+						enemy.setFireTicks(100);
 					}
-				},rareDuration * 20L);
+				},rareDuration * TickData.longTick);
 			}
-			player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");
+			messageModule.sendPlayer(player,"능력을 사용할 수 있는 대상이 없습니다.");
 		}
 	}
 }

@@ -30,7 +30,7 @@ public class Hephaestus extends Ability {
 
     public Hephaestus(String playerName) {
         super(playerName, AbilityInfo.Hephastus, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 30;
         this.normalSkillStack = 15;
@@ -76,7 +76,7 @@ public class Hephaestus extends Ability {
 
     public void initialize() {
         Player player = GameData.onlinePlayer.get(playerName);
-        Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+        taskModule.runBukkitTask( () -> {
             player.setMaximumAir(0);
             player.setRemainingAir(0);
         });
@@ -85,7 +85,7 @@ public class Hephaestus extends Ability {
 
     public void initializeReset() {
         Player player = GameData.onlinePlayer.get(playerName);
-        Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+        taskModule.runBukkitTask( () -> {
             player.setMaximumAir(300);
             player.setRemainingAir(300);
         });
@@ -93,11 +93,9 @@ public class Hephaestus extends Ability {
 
     class LavaTimer extends TimerTask {
         Block block;
-
         LavaTimer(Block block) {
             this.block = block;
         }
-
         public void run() {
             block.setBlockData(Bukkit.createBlockData(Material.AIR));
         }

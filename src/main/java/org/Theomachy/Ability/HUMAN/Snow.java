@@ -52,7 +52,7 @@ public class Snow extends Ability {
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player,skillMaterial)) {
             switch (event.getAction()) {
-                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> player.sendMessage("공격 지수 : " + passiveDamage);
+                case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> messageModule.sendPlayer(player,"공격 지수 : " + passiveDamage);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
             }
         }
@@ -75,14 +75,14 @@ public class Snow extends Ability {
     }
 
     public void passiveSkillSnow(EntityDamageByEntityEvent event) {
-        Player p = (Player) event.getEntity();
+        Player player = (Player) event.getEntity();
         event.setCancelled(true);
-        p.damage(passiveDamage);
+        player.damage(passiveDamage);
     }
 
     public void passiveSkill(EntityDamageEvent event) {
-        DamageCause dc = event.getCause();
-        if (dc.equals(DamageCause.FIRE_TICK) || dc.equals(DamageCause.LAVA) || dc.equals(DamageCause.FIRE)) {
+        DamageCause damageCause = event.getCause();
+        if (damageCause.equals(DamageCause.FIRE_TICK) || damageCause.equals(DamageCause.LAVA) || damageCause.equals(DamageCause.FIRE)) {
             event.setDamage(event.getDamage() * 2);
         }
     }

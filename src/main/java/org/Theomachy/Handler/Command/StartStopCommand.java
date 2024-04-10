@@ -1,37 +1,39 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.game.GameModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.command.CommandSender;
 
 import org.Theomachy.Theomachy;
 import org.Theomachy.Checker.PermissionChecker;
 
-public class StartStopCommand  {
+public class StartStopCommand {
+    private final MessageModule messageModule = new MessageModule();
     private final GameModule gameModule = new GameModule();
     private final PermissionChecker permissionChecker = new PermissionChecker();
+
     public void GameReady(CommandSender sender) {
-        if (permissionChecker.Sender(sender)) {
+        if (permissionChecker.Player(sender)) {
             if (!GameModule.Ready) {
-                if(Theomachy.DEBUG) {
-                    sender.sendMessage(TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
-                }else{
+                if (Theomachy.DEBUG) {
+                    messageModule.sendPlayer(sender, TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
+                } else {
                     gameModule.startGame(sender);
                 }
             } else
-                sender.sendMessage(TheomachyMessage.ERROR_GAME_ALREADY_STARTED.getMessage());
+                messageModule.sendPlayer(sender,TheomachyMessage.ERROR_GAME_ALREADY_STARTED.getMessage());
         }
     }
 
     public void GameStop(CommandSender sender) {
-        if (permissionChecker.Sender(sender)) {
-            if(Theomachy.DEBUG){
-                sender.sendMessage(TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
-            }
-            else if (GameModule.Ready) {
+        if (permissionChecker.Player(sender)) {
+            if (Theomachy.DEBUG) {
+                messageModule.sendPlayer(sender,TheomachyMessage.ERROR_DEBUG_IS_ON.getMessage());
+            } else if (GameModule.Ready) {
                 gameModule.stopGame(sender);
             } else
-                sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_START_GAME.getMessage());
+                messageModule.sendPlayer(sender,TheomachyMessage.ERROR_DOES_NOT_START_GAME.getMessage());
         }
     }
 }

@@ -29,7 +29,7 @@ public class Sans extends Ability {
     private final int rareDamage;
     public Sans(String playerName) {
         super(playerName, AbilityInfo.Sans, true, false, true, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 1;
         this.normalSkillStack = 3;
 
@@ -55,10 +55,6 @@ public class Sans extends Ability {
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-            ImageEffect imageEffect = new ImageEffect(effectManage);
-            imageEffect.fileName = "image.png";
-            imageEffect.setLocation(player.getLocation());
-            imageEffect.start();
         }
     }
 

@@ -29,7 +29,7 @@ public class Invincibility extends Ability
 	public Invincibility(String playerName)
 	{
 		super(playerName, AbilityInfo.Invincibility, true, false, false, des);
-		Theomachy.log.info(playerName+abilityName);
+		messageModule.logInfo(playerName+abilityName);
 		
 		this.normalSkillCoolTime =50;
 		this.normalSkillStack =30;
@@ -57,7 +57,6 @@ public class Invincibility extends Ability
 		if (skillHandler.Check(player, AbilityCase.NORMAL)&&playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-
 			CoolTimeTimer.commonSkillCoolTime.put(playerName+"1", 7);
 		}
 	}
@@ -73,8 +72,7 @@ public class Invincibility extends Ability
 	
 	public void passiveSkill(EntityDamageEvent event)
 	{
-		if (CoolTimeTimer.commonSkillCoolTime.containsKey(playerName+"1"))
-		{
+		if (CoolTimeTimer.commonSkillCoolTime.containsKey(playerName+"1"))		{
 			event.setCancelled(true);
 			event.getEntity().setFireTicks(0);
 		}

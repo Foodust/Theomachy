@@ -1,11 +1,12 @@
 package org.Theomachy.Ability.KIMETSU_NO_YAIBA;
 
 import org.Theomachy.Ability.Ability;
+import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 
-import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Handler.Module.game.PlayerModule;
 import org.Theomachy.Theomachy;
 
 import org.bukkit.*;
@@ -17,8 +18,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-
-import java.util.Objects;
 
 public class Rengoku extends Ability {
     private final static String[] des = {
@@ -38,7 +37,7 @@ public class Rengoku extends Ability {
 
     public Rengoku(String playerName) {
         super(playerName, AbilityInfo.Rengoku, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 80;
         this.normalSkillStack = 16;
         this.normalDistance = 20;
@@ -94,7 +93,7 @@ public class Rengoku extends Ability {
                 }
                 player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 50.0f, 5.0f);
             }, 0, 0L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());},20L);
+            taskModule.runBukkitTaskLater( ()->{taskModule.cancelBukkitTask(bukkitTask);}, TickData.longTick);
         }
     }
 
@@ -103,7 +102,7 @@ public class Rengoku extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, PotionEffect.INFINITE_DURATION, 255));
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 player.removePotionEffect(PotionEffectType.SLOW);
                 for (float distance = 0; distance < rareDistance; distance += (float) rareDistance / 20) {
                     Location location = player.getLocation();
@@ -122,7 +121,7 @@ public class Rengoku extends Ability {
                     player.playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
                     player.playSound(player.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
                 }
-            }, rareDelay * 20L);
+            }, rareDelay * TickData.longTick);
         }
     }
 }

@@ -7,12 +7,12 @@ import java.util.TimerTask;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityCase;
-import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.game.GameModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.AbilityCoolTimeMessage;
-import org.checkerframework.checker.units.qual.A;
 
 public class CoolTimeTimer extends TimerTask {
     public static boolean init = false;
@@ -21,6 +21,7 @@ public class CoolTimeTimer extends TimerTask {
     public static HashMap<String, Integer> rareSkillCoolTime = new HashMap<String, Integer>();
     private int count = 1;
     private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
+    private  final MessageModule messageModule = new MessageModule();
 
     @Override
     public void run() {
@@ -89,8 +90,8 @@ public class CoolTimeTimer extends TimerTask {
                 }
             }
         } catch (Exception e) {
-            Theomachy.log.info(TheomachyMessage.ERROR_COOL_TIMER.getMessage());
-            Theomachy.log.info(e.getLocalizedMessage());
+            messageModule.logInfo(TheomachyMessage.ERROR_COOL_TIMER.getMessage());
+            messageModule.logInfo(e.getLocalizedMessage());
         }
         count++;
     }

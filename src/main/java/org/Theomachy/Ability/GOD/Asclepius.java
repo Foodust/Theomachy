@@ -24,7 +24,7 @@ public class Asclepius extends Ability {
 
     public Asclepius(String playerName) {
         super(playerName, AbilityInfo.Asclepius, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 60;
         this.rareSkillCoolTime = 120;
@@ -56,15 +56,15 @@ public class Asclepius extends Ability {
             List<Player> targetList = playerHandler.getNearByTeamMembers(player, 5, 5, 5);
             if (!targetList.isEmpty()) {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
-                player.sendMessage("자신을 제외한 모든 팀원의 체력을 회복합니다.");
-                player.sendMessage(ChatColor.GREEN + "체력을 회복한 플레이어 목록");
-                for (Player e : targetList) {
-                    e.setHealth(20);
-                    e.sendMessage(ChatColor.YELLOW + "의술의 신의 능력으로 모든 체력을 회복합니다.");
-                    player.sendMessage(ChatColor.GOLD + e.getName());
+                messageModule.sendPlayer(player,"자신을 제외한 모든 팀원의 체력을 회복합니다.");
+                messageModule.sendPlayer(player,ChatColor.GREEN + "체력을 회복한 플레이어 목록");
+                for (Player enemy : targetList) {
+                    enemy.setHealth(20);
+                    enemy.sendMessage(ChatColor.YELLOW + "의술의 신의 능력으로 모든 체력을 회복합니다.");
+                    messageModule.sendPlayer(player,ChatColor.GOLD + enemy.getName());
                 }
             } else
-                player.sendMessage("사용 가능한 대상이 없습니다.");
+                messageModule.sendPlayer(player,"사용 가능한 대상이 없습니다.");
         }
     }
 }

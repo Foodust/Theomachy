@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.Module;
+package org.Theomachy.Handler.Module.game;
 
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Message.AbilityCoolTimeMessage;
@@ -52,13 +52,11 @@ public class PlayerModule {
             armorStand.teleport(player.getLocation());
         }
     }
-    public boolean InHandItemCheck(Player player, Material material)
-    {
+    public boolean InHandItemCheck(Player player, Material material) {
         return player.getInventory().getItemInMainHand().getType() == material;
     }
 
-    public boolean ItemCheck(Player player, Material material, int stack)
-    {
+    public boolean ItemCheck(Player player, Material material, int stack) {
         Inventory inventory = player.getInventory();
         if (inventory.contains(material, stack))
             return true;
@@ -75,18 +73,15 @@ public class PlayerModule {
         inventory.removeItem(new ItemStack(material, stack));
     }
 
-    public void startingBasicItem(Player player)
+    public void giveStartingItem(Player player)
     {
         if (Theomachy.STARTING_INVENTORY_CLEAR) {
             gameModule.clearItem(player);
         }
         if (Theomachy.STARTING_GIVE_ITEM){
-            gameModule.giveItem(player,Material.CHEST, 1);
-            gameModule.giveItem(player,Material.LAVA_BUCKET, 1);
-            gameModule.giveItem(player,Material.ICE, 2);
-            gameModule.giveItem(player,Material.OAK_PLANKS, 3);
-            gameModule.giveItem(player,Material.WHEAT, 9);
-            gameModule.giveItem(player,Material.BONE_MEAL, 3);
+            GameData.startItems.forEach(itemStack -> {
+                gameModule.giveItem(player, itemStack.getType(), itemStack.getAmount());
+            });
         }
     }
     public void damageNearEntity(Player player,Location location, float damage, int x, int y, int z){

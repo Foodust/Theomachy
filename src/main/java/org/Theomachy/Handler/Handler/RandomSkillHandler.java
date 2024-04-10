@@ -3,7 +3,7 @@ package org.Theomachy.Handler.Handler;
 import java.util.*;
 
 import org.Theomachy.Data.AbilityData;
-import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Handler.Module.source.BlacklistModule;
 
 public class RandomSkillHandler  {
     public List<Integer> makeRandomAbilityList() {

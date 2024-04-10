@@ -7,14 +7,15 @@ package org.Theomachy.Ability;
 import de.slikey.effectlib.EffectManager;
 import org.Theomachy.Handler.Handler.PlayerHandler;
 import org.Theomachy.Handler.Handler.SkillHandler;
-import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Handler.Module.game.PlayerModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
+import org.Theomachy.Handler.Module.source.TaskModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -29,8 +30,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-
-import java.util.List;
 
 public class Ability
 {
@@ -54,6 +53,8 @@ public class Ability
 	public final SkillHandler skillHandler = new SkillHandler();
 	public final EffectManager effectManage = Theomachy.getEffectManage();
 	public final PlayerHandler playerHandler = new PlayerHandler();
+	public final MessageModule messageModule =new MessageModule();
+	public final TaskModule taskModule = new TaskModule();
 	public Ability(String playerName, AbilityInfo abilityInfo, boolean activeType, boolean passiveType, boolean buffType, String[] des)
 	{
 		this.playerName=playerName;
@@ -64,8 +65,6 @@ public class Ability
 		this.buffType=buffType;
 		this.description=des;
 	}
-	
-	public void description(){}
 	
 	public void activeSkill(PlayerInteractEvent event){}
 	

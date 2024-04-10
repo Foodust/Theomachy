@@ -2,29 +2,20 @@ package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import de.slikey.effectlib.Effect;
-import de.slikey.effectlib.EffectManager;
-import de.slikey.effectlib.EffectType;
 import de.slikey.effectlib.effect.*;
-import org.Theomachy.Ability.Ability;
+import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Handler.Module.PlayerModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Satoru extends RyoikiTenkai {
     private final static String[] des = {
@@ -41,7 +32,7 @@ public class Satoru extends RyoikiTenkai {
 
     public Satoru(String playerName) {
         super(playerName, AbilityInfo.Satoru, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 80;
         this.normalSkillStack = 16;
         this.normalDistance = 0.5;
@@ -82,7 +73,7 @@ public class Satoru extends RyoikiTenkai {
 
             List<BigBangEffect> bigBangEffects = new ArrayList<>();
             player.getNearbyEntities(rareDistance,rareDistance,rareDistance).forEach(nearEntity->{
-                BukkitTask bukkitTask = Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                BukkitTask bukkitTask = taskModule.runBukkitTaskLater(() -> {
                     BigBangEffect bigBangEffect = new BigBangEffect(effectManage);
                     bigBangEffect.setLocation(nearEntity.getLocation().add(new Vector(0, 1, 0)));
                     bigBangEffect.particle = Particle.WHITE_ASH;
@@ -92,11 +83,11 @@ public class Satoru extends RyoikiTenkai {
                     bigBangEffect.soundVolume = 0.1f;
                     bigBangEffect.start();
                     bigBangEffects.add(bigBangEffect);
-                }, 20L);
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-                    Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());
+                }, TickData.longTick);
+                taskModule.runBukkitTaskLater(()->{
+                    taskModule.cancelBukkitTask(bukkitTask);
                     bigBangEffects.forEach(Effect::cancel);
-                },rareDuration * 20L);
+                },rareDuration * TickData.longTick);
             });
         }
     }
@@ -114,7 +105,7 @@ public class Satoru extends RyoikiTenkai {
         atomEffect.particlesNucleus = 30;
         atomEffect.colorOrbital = Color.PURPLE;
         atomEffect.colorNucleus = Color.PURPLE;
-        atomEffect.rotation = 80;
+        atomEffect.rotation = 160;
         atomEffect.radius = 2;
         atomEffect.particleCount = 1;
         atomEffect.setLocation(center);
@@ -126,9 +117,9 @@ public class Satoru extends RyoikiTenkai {
             playerModule.damageNearEntity(player,particleLocation,normalDamage,5,5,5);
         }, 0L, 1L);
 
-        Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-            Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());
+        taskModule.runBukkitTaskLater(()->{
+            taskModule.cancelBukkitTask(bukkitTask);
             atomEffect.cancel();
-        },normalDuration * 20L);
+        },normalDuration * TickData.longTick);
     }
 }

@@ -19,7 +19,7 @@ public class Boxer extends Ability {
 
     public Boxer(String playerName) {
         super(playerName, AbilityInfo.Boxer, false, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.rank = AbilityRank.S;
     }

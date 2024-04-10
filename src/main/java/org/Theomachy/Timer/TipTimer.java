@@ -2,9 +2,8 @@ package org.Theomachy.Timer;
 
 import java.util.TimerTask;
 
-import org.Theomachy.Data.GameData;
-import org.Theomachy.Data.ServerSetting;
 import org.Theomachy.Data.VersionData;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +12,7 @@ import org.Theomachy.Theomachy;
 
 public class TipTimer extends TimerTask
 {
+	private final MessageModule messageModule = new MessageModule();
 	int count= 1;
 	int tipCount = 0;
 	@Override
@@ -26,20 +26,20 @@ public class TipTimer extends TimerTask
 			if (Theomachy.SERVER_AUTO_SAVE)
 			{
 				Bukkit.getServer().savePlayers();
-				Theomachy.log.info( VersionData.name + "오토세이브 완료");
+				messageModule.logInfo( VersionData.name + "오토세이브 완료");
 			}
 		}
 		if (count % 180 == 0)
 		{
 			tipCount++;
 			switch (tipCount){
-				case 1-> Bukkit.broadcastMessage(TheomachyMessage.TIP1.getMessage());
-				case 2-> Bukkit.broadcastMessage(TheomachyMessage.TIP2.getMessage());
-				case 3-> Bukkit.broadcastMessage(TheomachyMessage.TIP3.getMessage());
-				case 4-> Bukkit.broadcastMessage(TheomachyMessage.TIP4.getMessage());
-				case 5-> Bukkit.broadcastMessage(TheomachyMessage.TIP5.getMessage());
-				case 6-> Bukkit.broadcastMessage(TheomachyMessage.TIP6.getMessage());
-				case 7-> Bukkit.broadcastMessage(TheomachyMessage.HEY_DEVELOPER.getMessage());
+				case 1-> messageModule.broadcastMessage(TheomachyMessage.TIP1.getMessage());
+				case 2-> messageModule.broadcastMessage(TheomachyMessage.TIP2.getMessage());
+				case 3-> messageModule.broadcastMessage(TheomachyMessage.TIP3.getMessage());
+				case 4-> messageModule.broadcastMessage(TheomachyMessage.TIP4.getMessage());
+				case 5-> messageModule.broadcastMessage(TheomachyMessage.TIP5.getMessage());
+				case 6-> messageModule.broadcastMessage(TheomachyMessage.TIP6.getMessage());
+				case 7-> messageModule.broadcastMessage(TheomachyMessage.HEY_DEVELOPER.getMessage());
 				default -> tipCount = 0;
 			}
 		}
@@ -48,10 +48,10 @@ public class TipTimer extends TimerTask
 			long max = (int) (Runtime.getRuntime().maxMemory() / 1048576);
 			long free = (int) (Runtime.getRuntime().freeMemory() / 1048576);
 			long use = max - free;
-			Theomachy.log.info(ChatColor.WHITE+"메모리(MB)   "+ChatColor.AQUA+ use + ChatColor.WHITE+ " / " + ChatColor.YELLOW + max);
+			messageModule.logInfo(ChatColor.WHITE+"메모리(MB)   "+ChatColor.AQUA+ use + ChatColor.WHITE+ " / " + ChatColor.YELLOW + max);
 			if (free < 3750)
 			{
-				Theomachy.log.info("메모리 부족, 메모리 청소중...");
+				messageModule.logInfo("메모리 부족, 메모리 청소중...");
 				System.gc();
 			}
 		}

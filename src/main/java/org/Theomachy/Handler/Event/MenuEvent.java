@@ -1,8 +1,8 @@
 package org.Theomachy.Handler.Event;
 
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Handler.Module.GamblingModule;
-import org.Theomachy.Handler.Module.SettingModule;
+import org.Theomachy.Handler.Module.game.GamblingModule;
+import org.Theomachy.Handler.Module.source.SettingModule;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

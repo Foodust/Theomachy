@@ -8,10 +8,13 @@ import java.util.logging.Logger;
 import de.slikey.effectlib.EffectManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.Theomachy.Data.GameData;
-import org.Theomachy.Handler.Module.CommonModule;
-import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Data.TickData;
+import org.Theomachy.Handler.Module.source.CommonModule;
+import org.Theomachy.Handler.Module.game.PlayerModule;
+import org.Theomachy.Handler.Module.source.SettingModule;
+import org.Theomachy.Handler.Module.source.TaskModule;
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Handler.Module.source.BlacklistModule;
 import org.Theomachy.Timer.TipTimer;
 import org.bukkit.*;
 import org.bukkit.plugin.Plugin;
@@ -49,6 +52,8 @@ public class Theomachy extends JavaPlugin {
     private final CommonModule commonModule = new CommonModule();
     private final PlayerModule playerModule = new PlayerModule();
     private final UpdateChecker updateChecker = new UpdateChecker();
+    private final SettingModule settingModule = new SettingModule();
+    private final TaskModule taskModule = new TaskModule();
     private static EffectManager effectManager;
     public static EffectManager getEffectManage(){return effectManager;}
     public @NonNull BukkitAudiences adventure() {
@@ -85,18 +90,17 @@ public class Theomachy extends JavaPlugin {
         blacklistModule.settingBlackList(file);
 
         // 기본 정보
-        commonModule.defaultSettingAndLogMessage(this);
+        settingModule.defaultSettingAndLogMessage(this);
+        settingModule.settingStartItem();
 
         // tip timer
-        Theomachy.tasks.add(commonModule.startTimerTask(new TipTimer(), 0L, 20L));
+        Theomachy.tasks.add(taskModule.runBukkitTaskTimer(new TipTimer(), 0L, TickData.longTick));
 
         // 초기화
         GameData.initialize();
 
         // player 등록
         playerModule.setOnlinePlayer();
-
-
     }
 
     public void onDisable() {

@@ -1,5 +1,6 @@
 package org.Theomachy.Handler.Manager;
 
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,6 +15,7 @@ import java.util.Objects;
 
 public class CommandManager  implements CommandExecutor
 {
+	private final MessageModule messageModule = new MessageModule();
 	private final MainCommand mainCommand = new MainCommand();
 	public CommandManager(Theomachy t)
 	{
@@ -27,19 +29,19 @@ public class CommandManager  implements CommandExecutor
 		{
 			if (data.length==0) //설명 보기
 			{
-				sender.sendMessage(TheomachyMessage.EXPLAIN_THEOMACHY_COMMAND.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_GAME_START.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_GAME_STOP.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_LIST.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_SET.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_ABILITY_HELP.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_TEAM_SPAWN.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_TEAM_ADD.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_TEAM_LIST.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_CLEAR.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_BLACKLIST.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_SETTING.getMessage());
-				sender.sendMessage(TheomachyMessage.EXPLAIN_GAMBLING.getMessage());
+				messageModule.sendPlayer(sender, TheomachyMessage.EXPLAIN_THEOMACHY_COMMAND.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_GAME_START.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_GAME_STOP.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_ABILITY_LIST.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_ABILITY_SET.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_ABILITY_HELP.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_TEAM_SPAWN.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_TEAM_ADD.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_TEAM_LIST.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_CLEAR.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_BLACKLIST.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_SETTING.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_GAMBLING.getMessage());
 			}
 			else
 				mainCommand.tCommandHandler(sender, command, label, data);
@@ -47,7 +49,7 @@ public class CommandManager  implements CommandExecutor
 		else if (label.equalsIgnoreCase(TheomachyMessage.COMMAND_X.getMessage()))
 		{
 			if (data.length==0) //설명 보기
-				sender.sendMessage(TheomachyMessage.EXPLAIN_X_COMMAND.getMessage());
+				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_X_COMMAND.getMessage());
 			else
 				mainCommand.xCommandHandler(sender, command, label, data);
 		}

@@ -1,5 +1,7 @@
-package org.Theomachy.Handler.Module;
+package org.Theomachy.Handler.Module.game;
 
+import org.Theomachy.Handler.Module.source.ItemModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,12 +15,13 @@ import java.util.List;
 import java.util.Random;
 
 public class GamblingModule {
-    private final CommonModule commonModule = new CommonModule();
+    private final ItemModule itemModule = new ItemModule();
+    private final MessageModule messageModule =new MessageModule();
 
     public void openGamblingInventory(Player player) {
         int gamblingSize = 1 * 9;
         Inventory inventory = Bukkit.createInventory(null, gamblingSize, TheomachyMessage.SETTING_GAMBLING.getMessage());
-        ItemStack itemStack = commonModule.setItem(Material.GOLD_INGOT, 1, TheomachyMessage.SETTING_GAMBLING.getMessage());
+        ItemStack itemStack = itemModule.setItem(Material.GOLD_INGOT, TheomachyMessage.SETTING_GAMBLING.getMessage(),1);
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> loreList = new ArrayList<String>();
         loreList.add(TheomachyMessage.INFO_GAMBLING1.getMessage());
@@ -46,30 +49,30 @@ public class GamblingModule {
             player.getInventory().removeItem(new ItemStack(Material.COBBLESTONE, cobbleCount));
             int randomNumber = (int) random.nextInt(randomPercentage);
             if (randomNumber < cobblePercentage) {
-                player.sendMessage(cobblePercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_1.getMessage());
+                messageModule.sendPlayer(player, cobblePercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_1.getMessage());
                 int cobblestoneNumber = (int)random.nextInt(41) + 20;
                 player.getInventory().addItem(new ItemStack(Material.COBBLESTONE, cobblestoneNumber));
             }
             else if (randomNumber < cobblePercentage + oakPercentage) {
-                player.sendMessage(oakPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_2.getMessage());
+                messageModule.sendPlayer(player,oakPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_2.getMessage());
                 int oakCount = 3;
                 player.getInventory().addItem(new ItemStack(Material.OAK_LOG, oakCount));
             }
             else if (randomNumber < cobblePercentage + oakPercentage + nullPercentage) {
-                player.sendMessage(nullPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_3.getMessage());
+                messageModule.sendPlayer(player,nullPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_3.getMessage());
             }
             else if (randomNumber < cobbleStone + oakPercentage + nullPercentage + ironPercentage) {
-                player.sendMessage(ironPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_4.getMessage());
+                messageModule.sendPlayer(player,ironPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_4.getMessage());
                 int ironCount = 4;
                 player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, ironCount));
             }
             else {
-                Bukkit.broadcastMessage(player.getName() + "님이" + diamondPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_5.getMessage());
+                messageModule.broadcastMessage(player.getName() + "님이" + diamondPercentage + TheomachyMessage.INFO_GAMBLING_MESSAGE_5.getMessage());
                 int diamondCount = 10;
                 player.getInventory().addItem(new ItemStack(Material.DIAMOND, diamondCount));
             }
         } else {
-            player.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_COBBLE_STONE.getMessage());
+            messageModule.sendPlayer(player,TheomachyMessage.ERROR_DOES_NOT_HAVE_COBBLE_STONE.getMessage());
         }
     }
 }

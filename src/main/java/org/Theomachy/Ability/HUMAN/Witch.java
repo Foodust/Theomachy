@@ -31,7 +31,7 @@ public class Witch extends Ability {
 
     public Witch(String playerName) {
         super(playerName, AbilityInfo.Witch, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 15;
         this.passiveDuration = 5;
@@ -53,16 +53,16 @@ public class Witch extends Ability {
             List<Player> targetList = playerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
             if (!targetList.isEmpty()) {
                 skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-                for (Player e : targetList) {
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, normalDuration * 20, 0));
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 0));
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, normalDuration * 20, 0));
-                    e.sendMessage("마녀에 의해 저주에 걸렸습니다.");
+                for (Player enemy : targetList) {
+                    enemy.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
+                    enemy.addPotionEffect(new PotionEffect(PotionEffectType.POISON, normalDuration * 20, 0));
+                    enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 0));
+                    enemy.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
+                    enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, normalDuration * 20, 0));
+                    enemy.sendMessage("마녀에 의해 저주에 걸렸습니다.");
                 }
             } else
-                player.sendMessage("능력을 사용 할 대상이 없습니다.");
+                messageModule.sendPlayer(player,"능력을 사용 할 대상이 없습니다.");
         }
     }
 

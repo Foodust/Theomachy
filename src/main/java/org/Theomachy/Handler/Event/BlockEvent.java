@@ -3,19 +3,15 @@ package org.Theomachy.Handler.Event;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Handler.Module.CommonModule;
-import org.Theomachy.Handler.Module.GameModule;
-import org.Theomachy.Theomachy;
+import org.Theomachy.Handler.Module.source.CommonModule;
+import org.Theomachy.Handler.Module.game.GameModule;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class BlockEvent  implements Listener {
     private final CommonModule commonModule = new CommonModule();

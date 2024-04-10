@@ -23,7 +23,7 @@ public class Itadori extends Ability {
 
     public Itadori(String playerName) {
         super(playerName, AbilityInfo.Itarodi, false, true, true, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.rank = AbilityRank.A;
     }
 

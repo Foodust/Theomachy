@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Handler.Module.source.BlacklistModule;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -10,7 +10,7 @@ public class BlacklistCommand  {
     private final BlacklistModule blacklistModule = new BlacklistModule();
     private final PermissionChecker permissionChecker = new PermissionChecker();
     public void module(CommandSender sender) {
-        if (permissionChecker.Sender(sender)) {
+        if (permissionChecker.Player(sender)) {
             Player player = (Player) sender;
             blacklistModule.openBlackListInventory(player);
         }

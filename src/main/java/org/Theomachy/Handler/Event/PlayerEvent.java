@@ -3,8 +3,9 @@ package org.Theomachy.Handler.Event;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Handler.Module.GameModule;
-import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Handler.Module.game.GameModule;
+import org.Theomachy.Handler.Module.game.PlayerModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class PlayerEvent implements Listener {
 
     public static ArrayList<Ability> PlayerDeathEventList = new ArrayList<Ability>();
-    private final PlayerModule playerModule = new PlayerModule();
+    private final MessageModule messageModule = new MessageModule();
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
@@ -77,7 +78,7 @@ public class PlayerEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        Bukkit.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
+        messageModule.broadcastMessage(player.getName() + TheomachyMessage.INFO_GREETING.getMessage());
 
         GameData.onlinePlayer.put(player.getName(), player);
         if (GameModule.Start) {
@@ -96,7 +97,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent event) {
-        Theomachy.log.info(event.getReason());
+        messageModule.logInfo(event.getReason());
     }
 
     @EventHandler

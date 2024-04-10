@@ -3,25 +3,16 @@ package org.Theomachy.Handler.Event;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Enum.AbilityTag;
-import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.game.GameModule;
 import org.Theomachy.Theomachy;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-import java.util.Objects;
 
 public class DamageEvent implements Listener {
 
@@ -33,8 +24,8 @@ public class DamageEvent implements Listener {
                 if (GameData.playerAbility.containsKey(playerName))
                     GameData.playerAbility.get(playerName).passiveSkill(event);
             }
-            if (event.getCause() == EntityDamageEvent.DamageCause.LIGHTNING && event.getEntity() instanceof LivingEntity le) {
-                le.setNoDamageTicks(0);
+            if (event.getCause() == EntityDamageEvent.DamageCause.LIGHTNING && event.getEntity() instanceof LivingEntity livingEntity) {
+                livingEntity.setNoDamageTicks(0);
             }
         }
     }
@@ -76,7 +67,7 @@ public class DamageEvent implements Listener {
                 }
             }
         } catch (Exception e) {
-            Theomachy.log.info(e.getLocalizedMessage());
+            return;
         }
     }
 }

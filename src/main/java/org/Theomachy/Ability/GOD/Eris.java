@@ -38,10 +38,10 @@ public class Eris extends Ability {
                 Location playerLocation = player.getLocation();
                 playerLocation.setX(playerLocation.getX() + 5);
                 playerLocation.setZ(playerLocation.getZ() + 5);
-                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+                taskModule.runBukkitTask( () -> {
                     enemy.teleport(playerLocation);
                 });
-                player.sendMessage(ChatColor.RED + "상대를 밀쳤습니다!");
+                messageModule.sendPlayer(player,ChatColor.RED + "상대를 밀쳤습니다!");
                 enemy.sendMessage(ChatColor.RED + AbilityInfo.Eris.getName() +"에 의해 밀쳐졌습니다.");
             }
         }

@@ -26,7 +26,7 @@ public class Demeter extends Ability {
 
     public Demeter(String playerName) {
         super(playerName, AbilityInfo.Demeter, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 30;
         this.normalSkillStack = 10;

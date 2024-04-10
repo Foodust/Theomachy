@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
+import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
@@ -28,7 +29,7 @@ public class Sukuna extends RyoikiTenkai {
 
     public Sukuna(String playerName) {
         super(playerName, AbilityInfo.Sukuna, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 20;
         this.normalSkillStack = 10;
         this.normalDamage = 5;
@@ -76,11 +77,11 @@ public class Sukuna extends RyoikiTenkai {
             Location location = player.getLocation();
             location.add(0, 6, 0);
             AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
+            taskModule.runBukkitTaskLater(
                     () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
-                            () -> slash(player, location), 0, 2L)), 2 * 20L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
-                    () -> Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId()), rareDuration * 20L);
+                            () -> slash(player, location), 0, 2L)), 2 * TickData.longTick);
+            taskModule.runBukkitTaskLater(
+                    () -> taskModule.cancelBukkitTask(bukkitTask.get()), rareDuration * TickData.longTick);
         }
     }
 

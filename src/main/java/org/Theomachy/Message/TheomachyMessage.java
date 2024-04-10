@@ -129,6 +129,7 @@ public enum TheomachyMessage {
     SETTING_MONSTER_SPAWN(ChatColor.WHITE + "몬스터 스폰"),
     SETTING_GAMBLING_ACCEPT(ChatColor.WHITE + "뽑기 허용"),
     SETTING_DEBUG_MODE(ChatColor.WHITE + "디버그 모드"),
+    SETTING_STARING_ITEM("시작 아이템"),
 
     // game end
     END_WHO_BREAK_DIAMOND(ChatColor.WHITE + "가 다이아몬드 블럭을 부쉈습니다!"),
@@ -205,6 +206,7 @@ public enum TheomachyMessage {
     ERROR_DOES_NOT_START_GAME("게임이 시작되지 않았습니다."),
     ERROR_DOES_NOT_HAVE_PLAYER_IN_THERE_TEAM("해당 팀에 팀원이 없습니다."),
     ERROR_DOES_NOT_HAVE_TEAM("소속된 팀이 없습니다."),
+    ERROR_DOES_NOT_ALLOW_GAMBLING("뽑기가 허용되지 않았습니다."),
     ERROR_DOES_NOT_ACCESS_BLACKLIST_FILE("[신들의 전쟁] 블랙리스트가 파일로 저장되었습니다. 절대로 플러그인 폴더 내에 blacklist.yml을 건들지 마십시오."),
     ERROR_THIS_COMMAND_IS_NOT_ALLOWED(ChatColor.RED + "이 기능은 잠겨있습니다."),
     ERROR_WRONG_COMMAND(ChatColor.RED + "잘못된 명령입니다."),

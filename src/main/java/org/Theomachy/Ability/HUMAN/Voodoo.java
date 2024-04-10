@@ -2,6 +2,7 @@ package org.Theomachy.Ability.HUMAN;
 
 import java.util.Objects;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -74,28 +75,28 @@ public class Voodoo extends Ability {
             if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
                 Player player = event.getPlayer();
                 if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, material, normalSkillStack))
-                    player.sendMessage("스킬을 사용 할 수 있습니다.");
+                    messageModule.sendPlayer(player,"스킬을 사용 할 수 있습니다.");
             }
         }
     }
 
     public void passiveSkill(SignChangeEvent event) {
         Player player = event.getPlayer();
-        String targetName = Objects.requireNonNull(event.getLine(0)).toString();
+        String targetName = Objects.requireNonNull(event.getLine(0));
         Player target = GameData.onlinePlayer.get(targetName);
         if (target != null) {
             skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             this.targetName = targetName;
             this.postSign = event.getBlock();
-            player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");
+            messageModule.sendPlayer(player,ChatColor.RED + targetName + ChatColor.WHITE + " 를(을) 팻말과 연결시켰습니다.");
             target.sendMessage(ChatColor.RED + "부두술사가 당신을 위협합니다.");
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 this.targetName = null;
                 postSign.breakNaturally();
                 postSign = null;
-            }, normalDuration * 20L);
+            }, normalDuration * TickData.longTick);
         } else
-            player.sendMessage(ChatColor.RED + targetName + ChatColor.WHITE + "플레이어가 존재 하지 않습니다");
+            messageModule.sendPlayer(player,ChatColor.RED + targetName + ChatColor.WHITE + "플레이어가 존재 하지 않습니다");
     }
 
 }

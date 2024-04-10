@@ -31,7 +31,7 @@ public class Priest extends Ability {
 
     public Priest(String playerName) {
         super(playerName, AbilityInfo.Priest, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 35;
         this.normalSkillStack = 30;
@@ -61,23 +61,23 @@ public class Priest extends Ability {
             Random random = new Random();
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, normalDuration * 20, 0));
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "데미지 저항 효과가 적용되었습니다.");
+                messageModule.sendPlayer(player,ChatColor.LIGHT_PURPLE + "데미지 저항 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, normalDuration * 20, 0));
-                player.sendMessage(ChatColor.RED + "데미지 증가 효과가 적용되었습니다.");
+                messageModule.sendPlayer(player,ChatColor.RED + "데미지 증가 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, normalDuration * 20, 0));
-                player.sendMessage(ChatColor.GOLD + "체력회복속도 증가 효과가 적용되었습니다.");
+                messageModule.sendPlayer(player,ChatColor.GOLD + "체력회복속도 증가 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, normalDuration * 20, 0));
-                player.sendMessage(ChatColor.AQUA + "이동속도 증가 효과가 적용되었습니다.");
+                messageModule.sendPlayer(player,ChatColor.AQUA + "이동속도 증가 효과가 적용되었습니다.");
             }
             if (random.nextInt(2) == 0) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, normalDuration * 20, 0));
-                player.sendMessage(ChatColor.GREEN + "빠른 채광 효과가 적용되었습니다.");
+                messageModule.sendPlayer(player,ChatColor.GREEN + "빠른 채광 효과가 적용되었습니다.");
             }
         }
     }

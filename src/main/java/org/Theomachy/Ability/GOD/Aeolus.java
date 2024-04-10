@@ -3,9 +3,8 @@ package org.Theomachy.Ability.GOD;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Handler.Module.game.PlayerModule;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
@@ -33,7 +32,7 @@ public class Aeolus extends Ability {
 
     public Aeolus(String playerName) {
         super(playerName, AbilityInfo.Aeolus, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 10;
         this.rareSkillCoolTime = 180;
@@ -58,7 +57,7 @@ public class Aeolus extends Ability {
             skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             List<Player> nearPlayers = playerHandler.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
-                nearPlayer.sendMessage(ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
+                messageModule.sendPlayer(player,ChatColor.AQUA + "상쾌한 바람" + ChatColor.WHITE + "이 당신을 감싸돕니다!");
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, normalDuration * 20, 0));
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, normalDuration * 20, 0));
             }
@@ -69,9 +68,9 @@ public class Aeolus extends Ability {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, material, rareSkillStack)) {
             List<Player> entityList = playerHandler.getNearByNotTeamMembers(player, 10, 10, 10);
             ArrayList<Player> targetList = new ArrayList<Player>();
-            for (Player e : entityList)
-                if (e != null)
-                    targetList.add(e);
+            for (Player enemy : entityList)
+                if (enemy != null)
+                    targetList.add(enemy);
             if (!targetList.isEmpty()) {
                 skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                 Vector vector = new Vector(0, 0.5, 0);
@@ -79,7 +78,7 @@ public class Aeolus extends Ability {
                 double diagonal = vertical * 1.4d;
                 for (Player enemy : targetList) {
                     enemy.setVelocity(vector);
-                    enemy.sendMessage(ChatColor.DARK_AQUA + "강력한 바람 때문에 밀려납니다!");
+                    messageModule.sendPlayer(enemy,ChatColor.DARK_AQUA + "강력한 바람 때문에 밀려납니다!");
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, rareDuration * 20, 0));
                     enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, rareDuration * 20, 0));
                     Vector pushDirection = player.getLocation().toVector().subtract(enemy.getLocation().toVector()).normalize().multiply(diagonal);
@@ -87,6 +86,6 @@ public class Aeolus extends Ability {
                 }
             }
         } else
-            player.sendMessage("능력을 사용할 수 있는 대상이 없습니다.");
+            messageModule.sendPlayer(player,"능력을 사용할 수 있는 대상이 없습니다.");
     }
 }

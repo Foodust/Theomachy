@@ -1,25 +1,18 @@
 package org.Theomachy.Ability.KIMETSU_NO_YAIBA;
 
-import com.google.common.util.concurrent.AtomicDouble;
-import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.*;
 import org.Theomachy.Ability.Ability;
+import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Handler.Module.PlayerModule;
+import org.Theomachy.Handler.Module.game.PlayerModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Tanjiro extends Ability {
     private final static String[] des = {
@@ -39,7 +32,7 @@ public class Tanjiro extends Ability {
 
     public Tanjiro(String playerName) {
         super(playerName, AbilityInfo.Tanjiro, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 40;
         this.normalSkillStack = 10;
         this.normalDistance = 2;
@@ -49,7 +42,7 @@ public class Tanjiro extends Ability {
         this.rareSkillStack = 50;
         this.rareDistance = 2f;
         this.rareDamage = 10;
-        this.rareDuration = 5 * 20L;
+        this.rareDuration = 5 * TickData.longTick;
         this.rareCheck = false;
         this.rank = AbilityRank.A;
     }
@@ -84,7 +77,7 @@ public class Tanjiro extends Ability {
                 }
                 player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 5.0f, 5.0f);
             }, 0, 0L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), ()->{Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());},5L);
+            taskModule.runBukkitTaskLater( ()->{taskModule.cancelBukkitTask(bukkitTask);},5L);
         }
     }
 
@@ -102,9 +95,7 @@ public class Tanjiro extends Ability {
             tornadoEffect.tornadoHeight = 7f;
             tornadoEffect.start();
             playerModule.damageNearEntity(player,location,rareDamage,5,10,5);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-                tornadoEffect.cancel();
-            },20L);
+            taskModule.runBukkitTaskLater(tornadoEffect::cancel,TickData.longTick);
        }
     }
 }

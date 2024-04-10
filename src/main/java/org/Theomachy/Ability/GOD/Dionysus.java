@@ -23,7 +23,7 @@ public class Dionysus extends Ability {
 
     public Dionysus(String playerName) {
         super(playerName, AbilityInfo.Dionysus, false, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.passiveDuration = 5;
         this.rank = AbilityRank.A;
     }
@@ -40,7 +40,7 @@ public class Dionysus extends Ability {
                 target.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, passiveDuration * 20, 0));
                 target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, passiveDuration * 20, 0));
                 target.sendMessage("술에 취해서 정신이 없습니다!");
-                player.sendMessage("상대방에게 술을 먹였습니다.");
+                messageModule.sendPlayer(player,"상대방에게 술을 먹였습니다.");
             }
         }
     }

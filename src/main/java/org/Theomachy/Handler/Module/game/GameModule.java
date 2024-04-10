@@ -1,8 +1,12 @@
-package org.Theomachy.Handler.Module;
+package org.Theomachy.Handler.Module.game;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.GameData;
 import org.Theomachy.Data.ServerSetting;
+import org.Theomachy.Data.TickData;
+import org.Theomachy.Handler.Module.source.CommonModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
+import org.Theomachy.Handler.Module.source.TaskModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
@@ -21,14 +25,14 @@ import java.util.Map;
 public class GameModule {
     public static boolean Ready = false;
     public static boolean Start = false;
-    private final CommonModule commonModule = new CommonModule();
-
+    private final MessageModule messageModule =new MessageModule();
+    private final TaskModule taskModule = new TaskModule();
 
     public void startGame(CommandSender sender) {
         Ready = true;
         Bukkit.broadcastMessage(ChatColor.GOLD + "관리자(" + sender.getName() + TheomachyMessage.INFO_ADMIN_START_GAME.getMessage());
-        Theomachy.tasks.add(commonModule.startTimerTask(new GameReadyTimer(), 0L, Theomachy.FAST_START ? 1L : 20L));
-        Theomachy.tasks.add(commonModule.startTimerTask(new CoolTimeTimer(), 0L, 20L));
+        Theomachy.tasks.add(taskModule.runBukkitTaskTimer(new GameReadyTimer(), 0L, Theomachy.FAST_START ? 1L : TickData.longTick));
+        Theomachy.tasks.add(taskModule.runBukkitTaskTimer(new CoolTimeTimer(), 0L, TickData.longTick));
     }
 
     public void stopGame(CommandSender sender) {
@@ -45,7 +49,7 @@ public class GameModule {
             world.setAutoSave(ServerSetting.AUTO_SAVE);
             world.setDifficulty(ServerSetting.DIFFICULTY);
         }
-        Bukkit.broadcastMessage(ChatColor.RED + "관리자(" + sender.getName() + TheomachyMessage.INFO_ADMIN_STOP_GAME.getMessage());
+        messageModule.broadcastMessage(ChatColor.RED + "관리자(" + sender.getName() + TheomachyMessage.INFO_ADMIN_STOP_GAME.getMessage());
     }
     public void stopGame() {
         Collection<Ability> playerAbilityList = GameData.playerAbility.values();
@@ -61,12 +65,12 @@ public class GameModule {
             world.setAutoSave(ServerSetting.AUTO_SAVE);
             world.setDifficulty(ServerSetting.DIFFICULTY);
         }
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_STOP_GAME.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_STOP_GAME.getMessage());
     }
 
     public void saveWorld(Location location) {
         GameData.allWorld.clear();
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_SAVE_THE_WORLD.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_SAVE_THE_WORLD.getMessage());
         for (int x = (int) -location.getX() - 200; x <= (int) location.getX() + 200; x++) {
             for (int z = (int) -location.getZ() - 200; z <= (int) location.getZ() + 200; z++) {
                 for (int y = (int) -location.getY() - 200; y <= (int) location.getY() + 200; y++) {
@@ -76,17 +80,17 @@ public class GameModule {
                 }
             }
         }
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_DONE.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_DONE.getMessage());
     }
 
     public void reloadWorld() {
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_RELOAD_THE_WORLD.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_RELOAD_THE_WORLD.getMessage());
         for (Map.Entry<Location, Material> entry : GameData.allWorld.entrySet()) {
             Location loc = entry.getKey();
             Material originalType = entry.getValue();
             loc.getBlock().setType(originalType); // 원래의 블록 타입으로 되돌림
         }
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_DONE.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_DONE.getMessage());
     }
 
     public void giveItem(Player player, Material material, int amount) {

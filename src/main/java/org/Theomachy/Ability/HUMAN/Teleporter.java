@@ -35,7 +35,7 @@ public class Teleporter extends Ability
 	public Teleporter(String playerName)
 	{
 		super(playerName, AbilityInfo.Teleporter, true, false, false, des);
-		Theomachy.log.info(playerName+abilityName);
+		messageModule.logInfo(playerName+abilityName);
 		
 		this.normalSkillCoolTime =25;
 		this.normalSkillStack =15;
@@ -83,10 +83,10 @@ public class Teleporter extends Ability
 					tlocation.setY(tlocation.getY()+1);
 					tlocation.setX(tlocation.getX()+0.5);
 					tlocation.setZ(tlocation.getZ()+0.5);
-					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(tlocation);});
+					taskModule.runBukkitTask(()->{player.teleport(tlocation);});
 				}
 				else
-					player.sendMessage("텔레포트 할 수 있는 공간이 없어 텔레포트에 실패 했습니다.");
+					messageModule.sendPlayer(player,"텔레포트 할 수 있는 공간이 없어 텔레포트에 실패 했습니다.");
 			}
 		}
 	}
@@ -105,15 +105,15 @@ public class Teleporter extends Ability
 					skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 					Location targetLocation = target.getLocation();
 					Location playerLocation = player.getLocation();
-					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(playerLocation);});
-					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{player.teleport(targetLocation);});
+					taskModule.runBukkitTask(()->{target.teleport(playerLocation);});
+					taskModule.runBukkitTask(()->{player.teleport(targetLocation);});
 					target.sendMessage("텔레포터의 능력에 의해 위치가 텔레포터의 위치로 변경되었습니다.");
 				}
 				else
-					player.sendMessage("플레이어가 온라인이 아닙니다.");
+					messageModule.sendPlayer(player,"플레이어가 온라인이 아닙니다.");
 			}
 			else
-				player.sendMessage("타겟이 지정되지 않았습니다. (타겟 등록법 : /x <Player>)");
+				messageModule.sendPlayer(player,"타겟이 지정되지 않았습니다. (타겟 등록법 : /x <Player>)");
 		}
 	}
 	

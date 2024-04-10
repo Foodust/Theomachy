@@ -1,8 +1,9 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Checker.PermissionChecker;
-import org.Theomachy.Handler.Module.AbilityModule;
-import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.game.AbilityModule;
+import org.Theomachy.Handler.Module.game.GameModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -25,6 +26,7 @@ public class MainCommand {
 	private final GamblingCommand gamblingCommand = new GamblingCommand();
 	private final GameModule gameModule = new GameModule();
 	private final PermissionChecker permissionChecker = new PermissionChecker();
+	private final MessageModule messageModule =new MessageModule();
 	public void tCommandHandler(CommandSender sender, Command command, String label, String[] data)
 	{
 		TheomachyMessage message = TheomachyMessage.getByMessage(data[0]);
@@ -43,9 +45,7 @@ public class MainCommand {
 			case COMMAND_GAMBLE, COMMAND_GAMBLING_G -> gamblingCommand.module(sender);
 			case COMMAND_GIVE -> giveTestItemCommand(sender);
 			case COMMAND_RELOAD -> settingCommand.resetTimer(sender);
-//			case COMMAND_SAVE -> saveWorldCommand(sender);
-//			case COMMAND_RELOAD -> reloadWorldCommand();
-            default -> sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
+            default -> messageModule.sendPlayer(sender,TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
         }
 	}
 	
@@ -59,23 +59,17 @@ public class MainCommand {
 			if (GameData.onlinePlayer.containsKey(targetName))
 				ability.targetSet(sender, targetName);
 			else
-				sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);
+				messageModule.sendPlayer(sender,TheomachyMessage.ERROR_DOES_NOT_ONLINE_PLAYER.getMessage() + targetName);
 		}
 		else
-			sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
+			messageModule.sendPlayer(sender,TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
 	}
 	public void giveTestItemCommand(CommandSender sender){
-		if (permissionChecker.Sender(sender)) {
+		if (permissionChecker.Player(sender)) {
 			gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())),Material.BLAZE_ROD, 1);
 			for (int i = 0; i < 8; i++) {
 				gameModule.giveItem(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())), Material.COBBLESTONE, 64);
 			}
 		}
-	}
-	public void saveWorldCommand(CommandSender sender){
-		gameModule.saveWorld(Objects.requireNonNull(Bukkit.getPlayer(sender.getName())).getLocation());
-	}
-	public void reloadWorldCommand(){
-		gameModule.reloadWorld();
 	}
 }

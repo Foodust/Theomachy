@@ -38,7 +38,7 @@ public class Tajja extends Ability {
                 if (swordDamage == -1)
                     return;
                 event.setDamage(swordDamage);
-                player.sendMessage("동작그만, 밑장 빼기냐.");
+                messageModule.sendPlayer(player,"동작그만, 밑장 빼기냐.");
             }
         }
     }

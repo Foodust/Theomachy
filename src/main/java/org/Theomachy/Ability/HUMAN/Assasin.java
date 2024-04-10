@@ -31,7 +31,7 @@ public class Assasin extends Ability {
 
     public Assasin(String playerName) {
         super(playerName, AbilityInfo.Assasin, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 10;
         this.normalSkillStack = 1;
         this.rareSkillCoolTime = 15;
@@ -103,7 +103,7 @@ public class Assasin extends Ability {
                 }
             }
             if (flag)
-                player.sendMessage("스킬을 사용 할 수 있는 상대가 없습니다.");
+                messageModule.sendPlayer(player,"스킬을 사용 할 수 있는 상대가 없습니다.");
         }
     }
 }

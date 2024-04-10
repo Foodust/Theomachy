@@ -2,6 +2,7 @@ package org.Theomachy.Ability.GOD;
 
 import java.util.List;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -31,7 +32,7 @@ public class Apollon extends Ability {
     int delay;
     public Apollon(String playerName) {
         super(playerName, AbilityInfo.Apollon, true, false, false, description);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.sunTime = 15;
         this.delay = 3;
@@ -69,23 +70,23 @@ public class Apollon extends Ability {
             world.setTime(6000);
             world.setStorm(false);
             Bukkit.broadcastMessage(ChatColor.RED + "태양이 매우 뜨거워집니다.");
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 for (int count = sunTime; count >= 0; count--) {
                     List<Player> playerList = GameData.onlinePlayer.get(playerName).getWorld().getPlayers();
                     int finalCount = count;
-                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                    taskModule.runBukkitTaskLater( () -> {
                         for (Player players : playerList) {
                             if (!players.getName().equals(playerName) && players.getLocation().getBlock().getLightLevel() == 15)
                                 players.setFireTicks(100);
                         }
-                        player.sendMessage(ChatColor.WHITE + "지속시간이 " + finalCount + "초 남았습니다");
-                    }, (sunTime - count) * 20L);
+                        messageModule.sendPlayer(player,ChatColor.WHITE + "지속시간이 " + finalCount + "초 남았습니다");
+                    }, (sunTime - count) * TickData.longTick);
                 }
-            }, delay * 20L);
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            }, delay * TickData.longTick);
+            taskModule.runBukkitTaskLater( () -> {
                 Bukkit.broadcastMessage("태양이 힘을 잃었습니다.");
                 world.setTime(18000);
-            }, (sunTime + delay + 1) * 20L);
+            }, (sunTime + delay + 1) * TickData.longTick);
         }
     }
 }

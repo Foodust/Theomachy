@@ -32,7 +32,7 @@ public class Artemis extends Ability {
 
     public Artemis(String playerName) {
         super(playerName, AbilityInfo.Artemis, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 20;
         this.rareSkillCoolTime = 180;
@@ -81,7 +81,7 @@ public class Artemis extends Ability {
 
                 event.setDamage(100);
                 assert player != null;
-                player.sendMessage("화살이 상대방의 심장을 꿰뚫었습니다!");
+                messageModule.sendPlayer(player,"화살이 상대방의 심장을 꿰뚫었습니다!");
                 target.sendMessage(AbilityInfo.Artemis.getName() +"의 화살에 즉사하였습니다.");
             }
         }

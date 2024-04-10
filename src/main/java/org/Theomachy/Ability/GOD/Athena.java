@@ -32,7 +32,7 @@ public class Athena extends Ability {
     private int abilityLimitCounter;
     public Athena(String playerName) {
         super(playerName, AbilityInfo.Athena, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 10;
         this.rareSkillCoolTime = 3;
@@ -65,15 +65,15 @@ public class Athena extends Ability {
                 if (abilityLimitCounter > 1) {
                     skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 1));
-                    player.sendMessage("남은 교환 횟수 : " + --abilityLimitCounter);
+                    messageModule.sendPlayer(player,"남은 교환 횟수 : " + --abilityLimitCounter);
                 } else {
                     skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, 0);
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 1));
-                    player.sendMessage("남은 교환 횟수 : " + --abilityLimitCounter);
+                    messageModule.sendPlayer(player,"남은 교환 횟수 : " + --abilityLimitCounter);
                 }
             }
         } else
-            player.sendMessage("이 능력은 더이상 사용할 수 없습니다.");
+            messageModule.sendPlayer(player,"이 능력은 더이상 사용할 수 없습니다.");
     }
 
     public void passiveSkill(PlayerDeathEvent event) {

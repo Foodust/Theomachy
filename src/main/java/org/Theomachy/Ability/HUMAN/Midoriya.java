@@ -46,26 +46,26 @@ public class Midoriya extends Ability {
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack) && !skillReady) {
             skillReady = true;
-            player.sendMessage(ChatColor.YELLOW + "원" + ChatColor.BLUE + " 포 " + ChatColor.DARK_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
-            player.sendMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
-            player.sendMessage(ChatColor.AQUA + "원" + ChatColor.GOLD + " 포 " + ChatColor.DARK_GRAY + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
-            player.sendMessage(ChatColor.WHITE + "원" + ChatColor.BLACK + " 포 " + ChatColor.GREEN + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
+            messageModule.sendPlayer(player,ChatColor.YELLOW + "원" + ChatColor.BLUE + " 포 " + ChatColor.DARK_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
+            messageModule.sendPlayer(player,ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
+            messageModule.sendPlayer(player,ChatColor.AQUA + "원" + ChatColor.GOLD + " 포 " + ChatColor.DARK_GRAY + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
+            messageModule.sendPlayer(player,ChatColor.WHITE + "원" + ChatColor.BLACK + " 포 " + ChatColor.GREEN + "올" + ChatColor.WHITE + "이 준비되었습니다아!!!!!!!!!");
         }
     }
 
     public void passiveSkill(EntityDamageByEntityEvent event) {
         Player player = (Player) event.getDamager();
-        Player d = (Player) event.getEntity();
+        Player enemy = (Player) event.getEntity();
 
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR && player.getName().equals(this.playerName)) {
             if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
                 if (skillReady) {
-                    player.sendMessage(ChatColor.YELLOW + "원" + ChatColor.GREEN + " 포 " + ChatColor.AQUA + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
-                    player.sendMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
-                    player.sendMessage(ChatColor.AQUA + "원" + ChatColor.GOLD + " 포 " + ChatColor.DARK_GRAY + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
-                    player.sendMessage(ChatColor.WHITE + "원" + ChatColor.BLACK + " 포 " + ChatColor.DARK_BLUE + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
-                    d.damage(200);
-                    player.getWorld().strikeLightningEffect(d.getLocation());
+                    messageModule.broadcastMessage(ChatColor.YELLOW + "원" + ChatColor.GREEN + " 포 " + ChatColor.AQUA + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
+                    messageModule.broadcastMessage(ChatColor.RED + "원" + ChatColor.GRAY + " 포 " + ChatColor.LIGHT_PURPLE + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
+                    messageModule.broadcastMessage(ChatColor.AQUA + "원" + ChatColor.GOLD + " 포 " + ChatColor.DARK_GRAY + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
+                    messageModule.broadcastMessage(ChatColor.WHITE + "원" + ChatColor.BLACK + " 포 " + ChatColor.DARK_BLUE + "올" + ChatColor.WHITE + "이 가동되었습니다아!!!!!!!!!");
+                    enemy.damage(200);
+                    player.getWorld().strikeLightningEffect(enemy.getLocation());
 
                     player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, duration * 20, 0));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, duration * 20, 0));
@@ -75,7 +75,7 @@ public class Midoriya extends Ability {
                     skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                     skillReady = false;
                 } else {
-                    player.sendMessage("아직 원 포 올의 준비가 되어있지 않군요.");
+                    messageModule.sendPlayer(player,"아직 원 포 올의 준비가 되어있지 않군요.");
                 }
             }
         }

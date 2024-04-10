@@ -24,7 +24,7 @@ public class Ares extends Ability
 	public Ares(String playerName)
 	{
 		super(playerName, AbilityInfo.Ares, false, true, false, des);
-		Theomachy.log.info(playerName+abilityName);
+		messageModule.logInfo(playerName+abilityName);
 		
 		this.rank= AbilityRank.A;
 		
@@ -41,7 +41,7 @@ public class Ares extends Ability
 			if (random.nextInt(10) == 0) 	//1/2 확률
 			{
 				event.setCancelled(true);
-				player.sendMessage("회피했습니다!");
+				messageModule.sendPlayer(player,"회피했습니다!");
 			}
 		}
 	}

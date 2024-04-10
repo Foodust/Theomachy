@@ -27,7 +27,7 @@ public class Miner extends Ability {
 
     public Miner(String playerName) {
         super(playerName, AbilityInfo.Miner, false, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.rank = AbilityRank.A;
     }
 
@@ -39,16 +39,16 @@ public class Miner extends Ability {
             Random random = new Random();
             if (random.nextInt(33) == 0) {
                 Player player = event.getPlayer();
-                player.sendMessage("손맛이 느껴집니다!");
+                messageModule.sendPlayer(player,"손맛이 느껴집니다!");
                 world.dropItemNaturally(location, new ItemStack(Material.COBBLESTONE, 9));
             }
         }
     }
 
     public void passiveSkill(EntityDamageByEntityEvent event) {
-        Player p = (Player) event.getDamager();
-        if (p.getName().equals(playerName)) {
-            Material m = p.getInventory().getItemInMainHand().getType();
+        Player player = (Player) event.getDamager();
+        if (player.getName().equals(playerName)) {
+            Material m = player.getInventory().getItemInMainHand().getType();
             if (m.equals(Material.WOODEN_PICKAXE) || m.equals(Material.STONE_PICKAXE) || m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE)) {
                 event.setDamage(4);
             }

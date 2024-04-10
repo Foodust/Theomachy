@@ -29,7 +29,7 @@ public class Akasha extends Ability {
 
     public Akasha(String playerName) {
         super(playerName, AbilityInfo.Akasha, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 10;
         this.rareSkillCoolTime = 100;
@@ -54,7 +54,7 @@ public class Akasha extends Ability {
             skillHandler.Use(player, material, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             List<Player> nearPlayers = playerHandler.getNearByTeamMembers(player, 20, 20, 20);
             for (Player nearPlayer : nearPlayers) {
-                nearPlayer.sendMessage(ChatColor.DARK_PURPLE + "향락" + ChatColor.WHITE + "이 당신을 즐겁게합니다!");
+                messageModule.sendPlayer(player,ChatColor.DARK_PURPLE + "향락" + ChatColor.WHITE + "이 당신을 즐겁게합니다!");
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, normalDuration * 20, 0));
                 nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, normalDuration * 20, 0));
             }
@@ -67,7 +67,7 @@ public class Akasha extends Ability {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, material, rareSkillStack)) {
             List<Player> entityList = playerHandler.getNearByNotTeamMembers(player, 15, 15, 15);
             if (entityList.isEmpty()) {
-                player.sendMessage(ChatColor.RED + "주변에 상대팀이 없습니다");
+                messageModule.sendPlayer(player,ChatColor.RED + "주변에 상대팀이 없습니다");
                 return;
             }
             skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);

@@ -26,7 +26,7 @@ public class Blacksmith extends Ability {
 	private final int rareCount;
     public Blacksmith(String playerName) {
         super(playerName, AbilityInfo.BlackSmith, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 300;
 		this.normalSkillStack = 70;

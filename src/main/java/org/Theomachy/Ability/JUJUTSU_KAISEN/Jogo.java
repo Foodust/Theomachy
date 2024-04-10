@@ -22,7 +22,7 @@ public class Jogo extends RyoikiTenkai {
 
     public Jogo(String playerName) {
         super(playerName, AbilityInfo.Jogo, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 30;
         this.normalSkillStack = 15;
         this.normalDamage = 3;

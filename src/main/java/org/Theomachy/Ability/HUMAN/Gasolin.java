@@ -27,10 +27,10 @@ public class Gasolin extends Ability {
     }
 
     public void passiveSkill(EntityDamageEvent event) {
-        Player p = (Player) event.getEntity();
+        Player player = (Player) event.getEntity();
         boolean has = false;
 
-        for (PotionEffect e : p.getActivePotionEffects()) {
+        for (PotionEffect e : player.getActivePotionEffects()) {
             if (e.getType().equals(PotionEffectType.SPEED)) {
                 has = true;
             }
@@ -38,13 +38,9 @@ public class Gasolin extends Ability {
 
         if (!has) {
             if (event.getCause().equals(DamageCause.FIRE) || event.getCause().equals(DamageCause.FIRE_TICK) || event.getCause().equals(DamageCause.LAVA)) {
-
-                p.sendMessage("동력이 생겨 빨라집니다!");
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
-
+                player.sendMessage("동력이 생겨 빨라집니다!");
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
             }
         }
-
     }
-
 }

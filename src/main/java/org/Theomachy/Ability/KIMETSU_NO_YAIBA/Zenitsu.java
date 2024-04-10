@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.KIMETSU_NO_YAIBA;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -28,7 +29,7 @@ public class Zenitsu extends Ability {
 
     public Zenitsu(String playerName) {
         super(playerName, AbilityInfo.Zenitsu, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 80;
         this.normalSkillStack = 16;
         this.normalDistance = 20;
@@ -72,12 +73,12 @@ public class Zenitsu extends Ability {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 for (int i = rareDistance; i > 0; i--) {
                     Vector direction = player.getLocation().getDirection().multiply(rareDashDistance);
                     player.setVelocity(direction);
                     int finalI = i;
-                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                    taskModule.runBukkitTaskLater( () -> {
                         Vector lightningDirection = player.getEyeLocation().getDirection().clone();
                         Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(-1));
                         for (int distance = -finalI; distance < finalI; distance++) {
@@ -87,7 +88,7 @@ public class Zenitsu extends Ability {
                         }
                     }, 5L);
                 }
-            }, rareTime * 20L);
+            }, rareTime * TickData.longTick);
         }
     }
 }

@@ -12,6 +12,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import org.Theomachy.Ability.Ability;
+import org.bukkit.inventory.ItemStack;
 
 public class GameData
 {
@@ -23,6 +24,7 @@ public class GameData
 	public static HashMap<String,Location> spawnArea = new HashMap<String,Location>(); //팀 스폰 지역
 	public static HashMap<String, ArmorStand> playerHealthBar = new HashMap<>(); // 플레이어 이름, 체력바
 	public static HashMap<Location, Material> allWorld = new HashMap<>();
+	public static List<ItemStack> startItems =  new ArrayList<>();
 
 	public static void initialize(){
 		onlinePlayer.clear();

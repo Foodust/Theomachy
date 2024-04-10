@@ -35,7 +35,7 @@ public class Creeper extends Ability {
 
     public Creeper(String playerName) {
         super(playerName, AbilityInfo.Creeper, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 20;

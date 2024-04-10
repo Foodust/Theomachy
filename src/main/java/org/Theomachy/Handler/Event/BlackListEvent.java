@@ -1,7 +1,7 @@
 package org.Theomachy.Handler.Event;
 
 import org.Theomachy.Message.TheomachyMessage;
-import org.Theomachy.Handler.Module.BlacklistModule;
+import org.Theomachy.Handler.Module.source.BlacklistModule;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

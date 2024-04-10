@@ -35,7 +35,7 @@ public class Hades extends Ability {
 
     public Hades(String playerName) {
         super(playerName, AbilityInfo.Hades, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 100;
         this.rareSkillCoolTime = 300;
@@ -61,17 +61,16 @@ public class Hades extends Ability {
             Location location = player.getLocation();
             location.setY(-2.0d);
             List<Entity> entitylist = player.getNearbyEntities(2, 2, 2);
-            for (Entity e : entitylist) {
-
-                if (e instanceof LivingEntity) {
-                    Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                        e.teleport(location);
+            for (Entity entity : entitylist) {
+                if (entity instanceof LivingEntity) {
+                    taskModule.runBukkitTask(() -> {
+                        entity.teleport(location);
                     });
-                    if (e.getType() == EntityType.PLAYER)
-                        ((Player) e).sendMessage("죽음의 신의 능력에 의해 나락으로 떨어집니다.");
+                    if (entity.getType() == EntityType.PLAYER)
+                        ((Player) entity).sendMessage("죽음의 신의 능력에 의해 나락으로 떨어집니다.");
                 }
             }
-            Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTask( () -> {
                 player.teleport(location);
             });
         }
@@ -83,13 +82,13 @@ public class Hades extends Ability {
             Location location = player.getLocation();
             location.setY(-2.0d);
             List<Entity> entitylist = player.getNearbyEntities(4, 4, 4);
-            for (Entity e : entitylist) {
-                if (e instanceof LivingEntity) {
-                    Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                        e.teleport(location);
+            for (Entity entity : entitylist) {
+                if (entity instanceof LivingEntity) {
+                    taskModule.runBukkitTask( () -> {
+                        entity.teleport(location);
                     });
-                    if (e.getType() == EntityType.PLAYER)
-                        ((Player) e).sendMessage(ChatColor.RED + "죽음의 신의 능력에 의해 나락으로 떨어집니다.");
+                    if (entity.getType() == EntityType.PLAYER)
+                        ((Player) entity).sendMessage(ChatColor.RED + "죽음의 신의 능력에 의해 나락으로 떨어집니다.");
                 }
             }
         }

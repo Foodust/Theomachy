@@ -54,33 +54,31 @@ public class Bee extends Ability {
 
 	private void leftAction(Player player)
 	{
-		Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{
+		taskModule.runBukkitTask(()->{
 			if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
 			if(abilityTarget !=null){
 				if(player.getName().equals(abilityTarget)){
-					player.sendMessage(ChatColor.RED+"목표는 본인이 아니어야 합니다.");
+					messageModule.sendPlayer(player,ChatColor.RED+"목표는 본인이 아니어야 합니다.");
 				}
 				else{
 					Player target = GameData.onlinePlayer.get(abilityTarget);
 					skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
-					player.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
+					messageModule.sendPlayer(player,ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"을 이용하여 목표를 유혹했습니다!");
 					target.sendMessage(ChatColor.YELLOW+" 페로몬 "+ChatColor.WHITE+"에 유혹당했습니다!");
 
-					Bukkit.getScheduler().runTask(Theomachy.getPlugin(),()->{target.teleport(player);});
+					taskModule.runBukkitTask(()->{target.teleport(player);});
 				}
 			}
 			else{
-				player.sendMessage("목표를 설정해주십시오. (목표 설정법: /x <목표>)");
+				messageModule.sendPlayer(player,"목표를 설정해주십시오. (목표 설정법: /x <목표>)");
 			}
 		}});
 	}
 	
-	public void targetSet(CommandSender sender, String targetName)
-	{
-			if (!playerName.equals(targetName))
-			{
+	public void targetSet(CommandSender sender, String targetName) {
+			if (!playerName.equals(targetName)){
 				this.abilityTarget = targetName;
 				sender.sendMessage("타겟을 등록했습니다.   "+ChatColor.GREEN+targetName);
 			}
@@ -89,15 +87,14 @@ public class Bee extends Ability {
 	}
 	
 	public void passiveSkill(EntityDamageByEntityEvent event) {
-		Player p=(Player) event.getEntity();
-		Player e=(Player) event.getDamager();
+		Player player=(Player) event.getEntity();
+		Player enemy=(Player) event.getDamager();
 		
-		if(p.getName().equals(this.playerName)) {
-			Random r=new Random();
-			
-			if(r.nextInt(4)<=2) {
-				e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, passiveDuration * 20, 0));
-				e.sendMessage(ChatColor.GOLD+"벌에게 쏘였습니다! 자나깨나 벌조심.");
+		if(player.getName().equals(this.playerName)) {
+			Random random=new Random();
+			if(random.nextInt(4)<=2) {
+				enemy.addPotionEffect(new PotionEffect(PotionEffectType.POISON, passiveDuration * 20, 0));
+				messageModule.sendPlayer(enemy,ChatColor.GOLD+"벌에게 쏘였습니다! 자나깨나 벌조심.");
 			}
 			
 		}

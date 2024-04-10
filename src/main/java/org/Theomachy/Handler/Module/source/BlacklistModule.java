@@ -1,8 +1,7 @@
-package org.Theomachy.Handler.Module;
+package org.Theomachy.Handler.Module.source;
 
 import org.Theomachy.Data.AbilityData;
 import org.Theomachy.Enum.AbilityInfo;
-import org.Theomachy.Message.Message;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.bukkit.Bukkit;
@@ -20,9 +19,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class BlacklistModule {
-    private final CommonModule commonModule = new CommonModule();
+    private final ItemModule itemModule = new ItemModule();
     private final HangulModule hangulModule = new HangulModule();
-    private final Message message = new Message();
+    private final MessageModule messageModule =new MessageModule();
     public static List<Integer> godCanlist = new ArrayList<>();
     public static List<Integer> humanCanlist = new ArrayList<>();
     public static List<Integer> jujutsuCanList = new ArrayList<>();
@@ -65,19 +64,18 @@ public class BlacklistModule {
             }
         }
         for (int itemIndex = 0; itemIndex < length; itemIndex++) {
-            ItemStack item = commonModule.setItem(!blacklist.contains(index) ? Material.WHITE_WOOL : Material.RED_WOOL,
-                    1,
-                    ChatColor.WHITE + AbilityInfo.getAbilityByIndex(itemIndex + index).getName() + " : " + (itemIndex + index));
+            ItemStack item = itemModule.setItem(!blacklist.contains(index) ? Material.WHITE_WOOL : Material.RED_WOOL,
+                    ChatColor.WHITE + AbilityInfo.getAbilityByIndex(itemIndex + index).getName() + " : " + (itemIndex + index),1);
             inventory.setItem(itemIndex, item);
         }
 
-        ItemStack nextItem = commonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.SETTING_NEXT_PAGE.getMessage());
+        ItemStack nextItem = itemModule.setItem(Material.ITEM_FRAME,  TheomachyMessage.SETTING_NEXT_PAGE.getMessage(),1);
         inventory.setItem(itemsPerPage - 4, nextItem);
 
-        ItemStack currentItem = commonModule.setItem(Material.STICK, page, TheomachyMessage.SETTING_CURRENT_PAGE.getMessage());
+        ItemStack currentItem = itemModule.setItem(Material.STICK, TheomachyMessage.SETTING_CURRENT_PAGE.getMessage(),page);
         inventory.setItem(itemsPerPage - 5, currentItem);
 
-        ItemStack prevItem = commonModule.setItem(Material.ITEM_FRAME, 1, TheomachyMessage.SETTING_PREV_PAGE.getMessage());
+        ItemStack prevItem = itemModule.setItem(Material.ITEM_FRAME, TheomachyMessage.SETTING_PREV_PAGE.getMessage(),1);
         inventory.setItem(itemsPerPage - 6, prevItem);
 
         return inventory;
@@ -89,8 +87,8 @@ public class BlacklistModule {
         String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
         Object abilityNumObject = Integer.parseInt(abilityInfo[1].replaceAll(" ", ""));
         BlacklistModule.blacklist.remove(abilityNumObject);
-        String josa = hangulModule.getJosa(abilityInfo[0].trim());
-        message.broadcastAlam(ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
+        String josa = hangulModule.getJosa(abilityInfo[0], HangulModule.Josa.EI_GA);
+        messageModule.broadcastMessage(ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에서 제거되었습니다.");
     }
 
     public void setAbilityExcept(ItemStack item, ItemMeta meta) {
@@ -99,8 +97,8 @@ public class BlacklistModule {
         String[] abilityInfo = Objects.requireNonNull(meta.getDisplayName()).split(":");
         int abilityNum = Integer.parseInt(abilityInfo[1].replaceAll(" ", ""));
         BlacklistModule.blacklist.add(abilityNum);
-        String josa = hangulModule.getJosa(abilityInfo[0].trim());
-        message.broadcastAlam(ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
+        String josa = hangulModule.getJosa(abilityInfo[0], HangulModule.Josa.EI_GA);
+        messageModule.broadcastMessage(ChatColor.WHITE + abilityInfo[0].trim() + josa + " " + ChatColor.RED + "블랙리스트" + ChatColor.WHITE + "에 등록되었습니다.");
     }
 
     public void movePage(Player player, Inventory inventory, int slot) {
@@ -131,7 +129,7 @@ public class BlacklistModule {
                 BlacklistModule.blacklist.add(Integer.parseInt(line));
             }
         } catch (IOException e) {
-            Theomachy.log.info(e.toString());
+            messageModule.logInfo(e.toString());
         }
         for (int i = 1; i <= AbilityData.GOD_ABILITY_NUMBER; i++) {
             if (!BlacklistModule.blacklist.contains(i)) BlacklistModule.godCanlist.add(i);
@@ -164,6 +162,6 @@ public class BlacklistModule {
             bufferedWriter.close();
         } catch (IOException ignored) {
         }
-        Theomachy.log.info(TheomachyMessage.ERROR_DOES_NOT_ACCESS_BLACKLIST_FILE.getMessage());
+        messageModule.logInfo(TheomachyMessage.ERROR_DOES_NOT_ACCESS_BLACKLIST_FILE.getMessage());
     }
 }

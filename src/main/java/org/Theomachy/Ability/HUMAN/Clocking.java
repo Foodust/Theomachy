@@ -3,6 +3,7 @@ package org.Theomachy.Ability.HUMAN;
 import java.util.List;
 import java.util.Random;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -30,7 +31,7 @@ public class Clocking extends Ability {
 	private final int normalDuration;
     public Clocking(String playerName) {
         super(playerName, AbilityInfo.Clocking, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 25;
@@ -57,14 +58,14 @@ public class Clocking extends Ability {
             for (int count = normalDuration; count >= 0; count--) {
                 int finalCount = count;
                 if (flag) {
-                    Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                        player.sendMessage(ChatColor.WHITE + "은신 시간이" + String.valueOf(finalCount) + "초 남았습니다.");
-                    }, (normalDuration - count) * 20L);
+                    taskModule.runBukkitTaskLater( () -> {
+                        messageModule.sendPlayer(player,ChatColor.WHITE + "은신 시간이" + String.valueOf(finalCount) + "초 남았습니다.");
+                    }, (normalDuration - count) * TickData.longTick);
                 }
             }
             super.flag = true;
 
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskLater( () -> {
                 GameData.playerAbility.get(player.getName()).flag = false;
                 for (Player enemy : targetList)
                     enemy.showPlayer(Theomachy.getPlugin(), player);
@@ -84,7 +85,7 @@ public class Clocking extends Ability {
                     Player target = (Player) event.getEntity();
                     event.setDamage(100);
                     target.sendMessage("알 수 없는 이유로 인해 즉사 하였습니다.");
-                    player.sendMessage("상대가 즉사 하였습니다.");
+                    messageModule.sendPlayer(player,"상대가 즉사 하였습니다.");
                 }
             }
             super.flag = false;

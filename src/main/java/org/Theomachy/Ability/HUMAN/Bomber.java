@@ -27,7 +27,7 @@ public class Bomber extends Ability {
     private final float normalDamage;
     public Bomber(String playerName) {
         super(playerName, AbilityInfo.Bomber, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 30;
         this.normalSkillStack = 25;
@@ -51,7 +51,7 @@ public class Bomber extends Ability {
             Location location = block.getLocation();
             location.setY(location.getY() + 1);
             this.tntLocation = location;
-            player.sendMessage("해당 블럭에 폭탄이 설치되었습니다.");
+            messageModule.sendPlayer(player,"해당 블럭에 폭탄이 설치되었습니다.");
         }
     }
 
@@ -62,10 +62,10 @@ public class Bomber extends Ability {
                 World world = player.getWorld();
                 world.createExplosion(tntLocation, normalDamage, true);
                 tntLocation = null;
-                player.sendMessage("TNT가 폭발했습니다!");
+                messageModule.sendPlayer(player,"TNT가 폭발했습니다!");
 
             } else
-                player.sendMessage("TNT가 설치되지 않았습니다.");
+                messageModule.sendPlayer(player,"TNT가 설치되지 않았습니다.");
         }
     }
 }

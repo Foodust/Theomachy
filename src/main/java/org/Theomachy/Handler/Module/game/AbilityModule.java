@@ -1,4 +1,4 @@
-package org.Theomachy.Handler.Module;
+package org.Theomachy.Handler.Module.game;
 
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Ability.GOD.*;
@@ -18,7 +18,8 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
-import org.Theomachy.Message.Message;
+import org.Theomachy.Handler.Module.source.BlacklistModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,19 +34,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AbilityModule  {
-    private final BlacklistModule blacklistModule = new BlacklistModule();
     private final RandomSkillHandler randomskillHandler = new RandomSkillHandler();
     private final PermissionChecker permissionChecker = new PermissionChecker();
-    private final Message message = new Message();
+    private final MessageModule messageModule = new MessageModule();
     public AbilityModule(){};
     public void listOfAbilityPlayer(CommandSender sender) {
-        if (permissionChecker.Sender(sender)) {
+        if (permissionChecker.Player(sender)) {
             if (!GameData.playerAbility.isEmpty()) {
                 Collection<Ability> ability = GameData.playerAbility.values();
                 for (Ability e : ability)
-                    sender.sendMessage(ChatColor.WHITE + e.playerName + "  :  " + ChatColor.YELLOW + e.abilityName);
+                    messageModule.sendPlayer(sender,ChatColor.WHITE + e.playerName + "  :  " + ChatColor.YELLOW + e.abilityName);
             } else {
-                sender.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY_ALL_PLAYER.getMessage());
+                messageModule.sendPlayer(sender,TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY_ALL_PLAYER.getMessage());
             }
         }
     }
@@ -106,7 +106,7 @@ public class AbilityModule  {
             }
             player.openInventory(inventory);
         } else
-            player.sendMessage(TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
+            messageModule.sendPlayer(player,TheomachyMessage.ERROR_DOES_NOT_HAVE_ABILITY.getMessage());
 
     }
 
@@ -192,32 +192,32 @@ public class AbilityModule  {
 
     public void showCode(CommandSender sender) {
 
-        sender.sendMessage(TheomachyMessage.INFO_GOD.getMessage());
+        messageModule.sendPlayer(sender,TheomachyMessage.INFO_GOD.getMessage());
         for (AbilityInfo abilityInfo : AbilityData.godEnum) {
-            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+            messageModule.sendPlayer(sender,ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
-        sender.sendMessage(TheomachyMessage.INFO_HUMAN.getMessage());
+        messageModule.sendPlayer(sender,TheomachyMessage.INFO_HUMAN.getMessage());
         for (AbilityInfo abilityInfo : AbilityData.humanEnum) {
-            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+            messageModule.sendPlayer(sender,ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
-        sender.sendMessage(TheomachyMessage.INFO_JUJUTSU_KAISEN.getMessage());
+        messageModule.sendPlayer(sender,TheomachyMessage.INFO_JUJUTSU_KAISEN.getMessage());
         for (AbilityInfo abilityInfo : AbilityData.jujutsuKaisenEnum) {
-            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+            messageModule.sendPlayer(sender,ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
-        sender.sendMessage(TheomachyMessage.INFO_KIMETSU_NO_YAIBA.getMessage());
+        messageModule.sendPlayer(sender,TheomachyMessage.INFO_KIMETSU_NO_YAIBA.getMessage());
         for (AbilityInfo abilityInfo : AbilityData.kimetsuNoYaibaEnum) {
-            sender.sendMessage(ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
+            messageModule.sendPlayer(sender,ChatColor.YELLOW + "【 " + abilityInfo.getIndex() + " 】" + ChatColor.WHITE + abilityInfo.getName());
         }
     }
 
     public void errorMessage(CommandSender sender) {
-        sender.sendMessage(TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
-        sender.sendMessage(TheomachyMessage.ERROR_CHECK_T_A_COMMAND.getMessage());
+        messageModule.sendPlayer(sender,TheomachyMessage.ERROR_WRONG_COMMAND.getMessage());
+        messageModule.sendPlayer(sender,TheomachyMessage.ERROR_CHECK_T_A_COMMAND.getMessage());
     }
 
     public void resetAbility() {
         GameData.playerAbility.clear();
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_REMOVE_ALL_PLAYER_ABILITY.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_REMOVE_ALL_PLAYER_ABILITY.getMessage());
     }
 
     public void remove(CommandSender sender, String playerName) {
@@ -225,23 +225,23 @@ public class AbilityModule  {
             Ability ability = GameData.playerAbility.get(playerName);
             if (ability != null) {
                 GameData.playerAbility.remove(playerName);
-                sender.sendMessage(playerName + TheomachyMessage.INFO_REMOVE_PLAYER_ABILITY.getMessage());
+                messageModule.sendPlayer(sender,playerName + TheomachyMessage.INFO_REMOVE_PLAYER_ABILITY.getMessage());
             } else
-                sender.sendMessage(playerName + TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
+                messageModule.sendPlayer(sender,playerName + TheomachyMessage.ERROR_DOES_NOT_WHO_HAVE_ABILITY.getMessage());
         } else {
-            sender.sendMessage(TheomachyMessage.ERROR_SET_REMOVE_PLAYER_NAME.getMessage());
+            messageModule.sendPlayer(sender,TheomachyMessage.ERROR_SET_REMOVE_PLAYER_NAME.getMessage());
         }
     }
 
     public void randomAbilityAllPlayer(CommandSender sender) {
         if (!GameData.playerAbility.isEmpty()) {
-            Bukkit.broadcastMessage(TheomachyMessage.INFO_RESET_AND_RANDOM_ABILITY.getMessage());
+            messageModule.broadcastMessage(TheomachyMessage.INFO_RESET_AND_RANDOM_ABILITY.getMessage());
             GameData.playerAbility.clear();
         }
         List<Player> playerlist = new ArrayList<>(Bukkit.getOnlinePlayers());
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_AVAILABLE_PLAYERS.getMessage());
-        for (Player e : playerlist)
-            Bukkit.broadcastMessage(ChatColor.GOLD + "  " + e.getName());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_AVAILABLE_PLAYERS.getMessage());
+        for (Player enemy : playerlist)
+            messageModule.broadcastMessage(ChatColor.GOLD + "  " + enemy.getName());
         List<Integer> rn = randomskillHandler.makeRandomAbilityList();
         int length;
         length = Math.min(playerlist.size(), BlacklistModule.availableList);
@@ -251,37 +251,34 @@ public class AbilityModule  {
             abilityAssignment(rn.get(i++), playerName, (Player) sender);
         }
 
-        Bukkit.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
-        Bukkit.broadcastMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.INFO_SET_ALL_PLAYER_ABILITY.getMessage());
+        messageModule.broadcastMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY.getMessage());
         if (length != playerlist.size())
-            Bukkit.broadcastMessage(TheomachyMessage.ERROR_TOO_MANY_PLAYER.getMessage());
+            messageModule.broadcastMessage(TheomachyMessage.ERROR_TOO_MANY_PLAYER.getMessage());
     }
 
     public void forceAssignment(CommandSender sender, String[] data) {
-
-        Player p = (Player) sender;
-
         for (int i = 2; i < data.length; i++) {
             String abilityName = data[1];
             String playerName = data[i];
             if (GameData.onlinePlayer.containsKey(playerName)) {
                 try {
                     int abilityCode = Integer.parseInt(abilityName);
-                    abilityAssignment(abilityCode, playerName, p);
+                    abilityAssignment(abilityCode, playerName, sender);
                     Player player = GameData.onlinePlayer.get(playerName);
-                    Bukkit.broadcastMessage("관리자가 " + ChatColor.RED + playerName + ChatColor.WHITE + " 에게 능력을 할당하였습니다.");
+                    messageModule.broadcastMessage("관리자가 " + ChatColor.RED + playerName + ChatColor.WHITE + " 에게 능력을 할당하였습니다.");
 
-                    player.sendMessage(TheomachyMessage.INFO_SET_PLAYER_ABILITY.getMessage());
-                    player.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY.getMessage());
+                    messageModule.sendPlayer(player,TheomachyMessage.INFO_SET_PLAYER_ABILITY.getMessage());
+                    messageModule.sendPlayer(player, TheomachyMessage.EXPLAIN_CHECK_ABILITY.getMessage());
 
                 } catch (NumberFormatException e) {
-                    sender.sendMessage(TheomachyMessage.ERROR_ABILITY_CODE_IS_INTEGER.getMessage());
+                    messageModule.sendPlayer(sender,TheomachyMessage.ERROR_ABILITY_CODE_IS_INTEGER.getMessage());
                 }
             } else
-                sender.sendMessage(playerName + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
+                messageModule.sendPlayer(sender, playerName + TheomachyMessage.ERROR_DOES_NOT_EXIST_PLAYER_NAME.getMessage());
         }
     }
-    public void abilityAssignment(int abilityNumber, String playerName, CommandSender p) {
+    public void abilityAssignment(int abilityNumber, String playerName, CommandSender sender) {
         AbilityInfo abilityInfo = AbilityInfo.getAbilityByIndex(abilityNumber);
         switch (abilityInfo) {
             case Zeus -> GameData.playerAbility.put(playerName, new Zeus(playerName));
@@ -346,8 +343,8 @@ public class AbilityModule  {
             case Tanjiro -> GameData.playerAbility.put(playerName, new Tanjiro(playerName));
             case Giyu -> GameData.playerAbility.put(playerName, new Giyu(playerName));
             default -> {
-                p.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
-                p.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());
+                sender.sendMessage(TheomachyMessage.ERROR_WRONG_ABILITY_NUMBER_OR_NAME.getMessage());
+                sender.sendMessage(TheomachyMessage.EXPLAIN_CHECK_ABILITY_CODE.getMessage());
             }
         }
     }

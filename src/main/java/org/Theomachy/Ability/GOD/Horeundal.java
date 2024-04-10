@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.GOD;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class Horeundal extends Ability {
 
     public Horeundal(String playerName) {
         super(playerName, AbilityInfo.Horeundal, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.normalSkillCoolTime = 120;
         this.normalSkillStack = 32;
         this.rank = AbilityRank.A;
@@ -44,19 +45,19 @@ public class Horeundal extends Ability {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             Location loc = player.getLocation();
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-            player.sendMessage("위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
+            messageModule.sendPlayer(player,"위치를 기억했습니다! 10초 뒤에 여기로 올 것입니다.");
 
             for (int count = 10; count >= 0; count--) {
                 int finalCount = count;
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                taskModule.runBukkitTaskLater( () -> {
                     if (finalCount == 0) {
-                        player.sendMessage("10초 전의 위치로 되돌아갑니다!");
+                        messageModule.sendPlayer(player,"10초 전의 위치로 되돌아갑니다!");
                         player.teleport(loc);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5 * 20, 1));
                     } else {
-                        player.sendMessage(ChatColor.AQUA + String.valueOf(finalCount) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
+                        messageModule.sendPlayer(player,ChatColor.AQUA + String.valueOf(finalCount) + ChatColor.WHITE + "초 뒤 되돌아갑니다.");
                     }
-                }, (10 - count) * 20L);
+                }, (10 - count) * TickData.longTick);
             }
         }
     }

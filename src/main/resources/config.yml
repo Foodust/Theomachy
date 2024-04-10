@@ -8,4 +8,9 @@
 난이도 : 1
 빠른 시작 : true
 뽑기 허용 : true
-디버그 모드: true
+디버그 모드: false
+시작 아이템:
+  CHEST: 1
+  LAVA_BUCKET: 1
+  ICE: 2
+  OAK_PLANKS: 2

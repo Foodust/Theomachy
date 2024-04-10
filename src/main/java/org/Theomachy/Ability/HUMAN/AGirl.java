@@ -49,13 +49,13 @@ public class AGirl extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
 
 
-            for (Player e : playerHandler.getNearByNotTeamMembers(player, 5, 0, 5)) {
-                Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                    e.teleport(player);
+            for (Player enemy : playerHandler.getNearByNotTeamMembers(player, 5, 0, 5)) {
+                taskModule.runBukkitTask( () -> {
+                    enemy.teleport(player);
                 });
-                e.setFoodLevel(0);
-                e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 200));
-                e.sendMessage(ChatColor.GREEN + AbilityInfo.AGirl.getName() + ChatColor.WHITE + "에게 이끌려 갑니다!");
+                enemy.setFoodLevel(0);
+                enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 200));
+                enemy.sendMessage(ChatColor.GREEN + AbilityInfo.AGirl.getName() + ChatColor.WHITE + "에게 이끌려 갑니다!");
             }
         }
     }

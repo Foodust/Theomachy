@@ -1,9 +1,10 @@
 package org.Theomachy.Handler.Command;
 
 import org.Theomachy.Checker.PermissionChecker;
-import org.Theomachy.Handler.Module.AbilityModule;
-import org.Theomachy.Handler.Module.CommonModule;
-import org.Theomachy.Handler.Module.GameModule;
+import org.Theomachy.Handler.Module.game.AbilityModule;
+import org.Theomachy.Handler.Module.source.CommonModule;
+import org.Theomachy.Handler.Module.game.GameModule;
+import org.Theomachy.Handler.Module.source.MessageModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.Theomachy.Theomachy;
 import org.Theomachy.Timer.CoolTimeTimer;
@@ -17,9 +18,10 @@ public class AbilityCommand  {
     private  final AbilityModule abilityModule = new AbilityModule();
     private final CommonModule commonModule = new CommonModule();
     private final PermissionChecker permissionChecker = new PermissionChecker();
+    private final MessageModule messageModule =new MessageModule();
     public void abilityCollTimeClear(CommandSender sender)
     {
-        if (permissionChecker.Sender(sender))
+        if (permissionChecker.Player(sender))
         {
             CoolTimeTimer.init =true;
             Bukkit.broadcastMessage(TheomachyMessage.INFO_COOL_TIME_CLEAR.getMessage());
@@ -32,11 +34,11 @@ public class AbilityCommand  {
         if (sender instanceof Player)
             abilityModule.showCode(sender);
         else
-            Theomachy.log.info(TheomachyMessage.ERROR_THIS_COMMAND_EXECUTE_IN_GAME.getMessage());
+            messageModule.logInfo(TheomachyMessage.ERROR_THIS_COMMAND_EXECUTE_IN_GAME.getMessage());
     }
 
     public void abilitySet(CommandSender sender, String[] data) {
-        if (permissionChecker.Sender(sender)) {
+        if (permissionChecker.Player(sender)) {
             if (!GameModule.Ready) {
                 // ability
                 if (data.length <= 1) {

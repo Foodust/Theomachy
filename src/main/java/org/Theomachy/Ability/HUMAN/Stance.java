@@ -21,7 +21,7 @@ public class Stance extends Ability {
 
     public Stance(String playerName) {
         super(playerName, AbilityInfo.Stance, false, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.rank = AbilityRank.B;
     }
 

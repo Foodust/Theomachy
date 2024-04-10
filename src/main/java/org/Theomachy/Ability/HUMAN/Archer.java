@@ -32,7 +32,7 @@ public class Archer extends Ability {
 
     public Archer(String playerName) {
         super(playerName, AbilityInfo.Archer, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 		this.passiveDamage = 1.4f;
 
         this.normalSkillCoolTime = 10;

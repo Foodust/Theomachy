@@ -19,7 +19,7 @@ public class Reflection extends Ability {
 
     public Reflection(String playerName) {
         super(playerName, AbilityInfo.Reflection, false, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.rank = AbilityRank.A;
     }
 

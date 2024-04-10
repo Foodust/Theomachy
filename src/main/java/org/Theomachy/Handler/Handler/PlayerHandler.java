@@ -37,19 +37,15 @@ public class PlayerHandler
 		String playerTeamName = GameData.playerTeam.get(playerName);
 
 		ArrayList<Player> nearByTeamMembers = new ArrayList<Player>();
-		if (playerTeamName != null)
-		{
+		if (playerTeamName != null) {
 			List<Entity> nearByEntityList = player.getNearbyEntities(x, y, z);
-			if (!nearByEntityList.isEmpty())
-			{
-				for (Entity e : nearByEntityList)
-				{
-					if (e instanceof Player)
-					{
-						String memberName = ((Player)e).getName();
+			if (!nearByEntityList.isEmpty()) {
+				for (Entity entity : nearByEntityList) {
+					if (entity instanceof Player) {
+						String memberName = ((Player)entity).getName();
 						String memberTeamName = GameData.playerTeam.get(memberName);
 						if (memberTeamName.equals(playerTeamName))
-							nearByTeamMembers.add((Player)e);
+							nearByTeamMembers.add((Player)entity);
 					}
 				}
 			}
@@ -64,30 +60,23 @@ public class PlayerHandler
 
 		ArrayList<Player> nearByNotTeamMembers = new ArrayList<Player>();
 		List<Entity> nearByEntityList = player.getNearbyEntities(x, y, z);
-		if (playerTeamName != null)
-		{
-			if (!nearByEntityList.isEmpty())
-			{
-				for (Entity e : nearByEntityList)
-				{
-					if (e instanceof Player)
-					{
-						String memberName = ((Player)e).getName();
+		if (playerTeamName != null) {
+			if (!nearByEntityList.isEmpty()) {
+				for (Entity entity : nearByEntityList) {
+					if (entity instanceof Player) {
+						String memberName = ((Player)entity).getName();
 						String memberTeamName = GameData.playerTeam.get(memberName);
 						if (!memberTeamName.equals(playerTeamName))
-							nearByNotTeamMembers.add((Player)e);
+							nearByNotTeamMembers.add((Player)entity);
 					}
 				}
 			}
 		}
-		else
-		{
-			if (!nearByEntityList.isEmpty())
-			{
-				for (Entity e : nearByEntityList)
-				{
-					if (e instanceof Player)
-						nearByNotTeamMembers.add((Player)e);
+		else {
+			if (!nearByEntityList.isEmpty()) {
+				for (Entity entity : nearByEntityList) {
+					if (entity instanceof Player)
+						nearByNotTeamMembers.add((Player)entity);
 				}
 			}
 		}

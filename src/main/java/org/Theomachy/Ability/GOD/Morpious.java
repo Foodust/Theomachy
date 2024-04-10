@@ -52,21 +52,21 @@ public class Morpious extends Ability {
             if (!Objects.equals(team[0], team[1])) {
                 if (abilityTarget != null) {
                     if (player.getName().equals(abilityTarget)) {
-                        player.sendMessage(ChatColor.RED + "목표는 본인이 아니어야 합니다.");
+                        messageModule.sendPlayer(player,ChatColor.RED + "목표는 본인이 아니어야 합니다.");
                     } else {
                         Player target = GameData.onlinePlayer.get(abilityTarget);
                         skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-                        player.sendMessage(ChatColor.GRAY + "목표를 잠재웠습니다!");
+                        messageModule.sendPlayer(player,ChatColor.GRAY + "목표를 잠재웠습니다!");
                         target.sendMessage(ChatColor.GRAY + "착한 어른이는 일찍 자고 일찍 일어나야 해요~");
                         target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1200, 0));
                         target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1200, 3));
                     }
 
                 } else {
-                    player.sendMessage("목표를 설정해주십시오. (목표 설정법: /x <목표>)");
+                    messageModule.sendPlayer(player,"목표를 설정해주십시오. (목표 설정법: /x <목표>)");
                 }
             } else {
-                player.sendMessage(ChatColor.GRAY + "본인의 팀이므로 잠을 재울 수 없습니다!");
+                messageModule.sendPlayer(player,ChatColor.GRAY + "본인의 팀이므로 잠을 재울 수 없습니다!");
             }
         }
     }

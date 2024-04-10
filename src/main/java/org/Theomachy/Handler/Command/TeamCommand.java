@@ -1,6 +1,6 @@
 package org.Theomachy.Handler.Command;
 
-import org.Theomachy.Handler.Module.TeamModule;
+import org.Theomachy.Handler.Module.source.TeamModule;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -10,7 +10,7 @@ public class TeamCommand  {
     private final TeamModule teamModule = new TeamModule();
     private final PermissionChecker permissionChecker = new PermissionChecker();
     public void setTeam(CommandSender sender, Command command, String label, String[] data) {
-        if (permissionChecker.Sender(sender)) {
+        if (permissionChecker.Player(sender)) {
             teamModule.setTeam(sender, data);
         }
     }

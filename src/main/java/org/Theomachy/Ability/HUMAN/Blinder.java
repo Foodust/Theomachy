@@ -30,7 +30,7 @@ public class Blinder extends Ability {
     private final int normalDuration;
     public Blinder(String playerName) {
         super(playerName, AbilityInfo.Blinder, true, true, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.passiveDuration = 2;
 
@@ -55,13 +55,13 @@ public class Blinder extends Ability {
             List<Player> targetList = playerHandler.getNearByNotTeamMembers(player, 5, 5, 5);
             if (!targetList.isEmpty()) {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
-                player.sendMessage("주변의 적의 시야를 가립니다.");
-                for (Player e : targetList) {
-                    e.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, normalDuration * 20, 0));
-                    e.sendMessage("블라인더에 의해 시야가 어두워집니다.");
+                messageModule.sendPlayer(player,"주변의 적의 시야를 가립니다.");
+                for (Player enemy : targetList) {
+                    enemy.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, normalDuration * 20, 0));
+                    enemy.sendMessage("블라인더에 의해 시야가 어두워집니다.");
                 }
             } else
-                player.sendMessage("사용 가능한 대상이 없습니다.");
+                messageModule.sendPlayer(player,"사용 가능한 대상이 없습니다.");
         }
     }
 

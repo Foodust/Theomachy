@@ -25,7 +25,7 @@ public class Aprodite extends Ability {
 
     public Aprodite(String playerName) {
         super(playerName, AbilityInfo.Aprodite, true, false, false, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 120;
         this.normalSkillStack = 20;
@@ -48,17 +48,17 @@ public class Aprodite extends Ability {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 try {
                     List<Player> list = playerHandler.getNearByNotTeamMembers(player, 20, 20, 20);
-                    for (Player e : list) {
-                        Bukkit.getScheduler().runTask(Theomachy.getPlugin(), () -> {
-                            e.teleport(player);
+                    for (Player enemy : list) {
+                        taskModule.runBukkitTask( () -> {
+                            enemy.teleport(player);
                         });
-                        e.sendMessage(ChatColor.YELLOW + "미의 여신 " + AbilityInfo.Aprodite.getName() + "에게 이끌려갑니다!");
+                        enemy.sendMessage(ChatColor.YELLOW + "미의 여신 " + AbilityInfo.Aprodite.getName() + "에게 이끌려갑니다!");
                     }
                 } catch (Exception ignored) {
                 }
-                player.sendMessage("미(美)로 다른 사람들을 홀렸습니다.");
+                messageModule.sendPlayer(player,"미(美)로 다른 사람들을 홀렸습니다.");
             } else {
-                player.sendMessage(ChatColor.RED + "웅크리고 있거나 발 밑의 블록이 없어 능력이 발동되지 않았습니다.");
+                messageModule.sendPlayer(player,ChatColor.RED + "웅크리고 있거나 발 밑의 블록이 없어 능력이 발동되지 않았습니다.");
             }
         }
 

@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.GOD;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -30,7 +31,7 @@ public class Hermes extends Ability {
     private final int passiveDuration;
     public Hermes(String playerName) {
         super(playerName, AbilityInfo.Hermes, true, true, true, des);
-        Theomachy.log.info(playerName + abilityName);
+        messageModule.logInfo(playerName + abilityName);
         this.flyTime = 5;
         this.delay = 6;
         this.normalSkillCoolTime = 60;
@@ -55,15 +56,15 @@ public class Hermes extends Ability {
             player.setFlying(true);
             for (int count = flyTime; count > 0; count--) {
                 int finalCount = count;
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                    player.sendMessage("비행시간이 " + ChatColor.AQUA + finalCount + ChatColor.WHITE + "초 남았습니다.");
-                }, (flyTime - count) * 20L);
+                taskModule.runBukkitTaskLater( () -> {
+                    messageModule.sendPlayer(player,"비행시간이 " + ChatColor.AQUA + finalCount + ChatColor.WHITE + "초 남았습니다.");
+                }, (flyTime - count) * TickData.longTick);
             }
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
-                player.sendMessage(ChatColor.RED + "비행시간이 종료되었습니다.");
+            taskModule.runBukkitTaskLater( () -> {
+                messageModule.sendPlayer(player,ChatColor.RED + "비행시간이 종료되었습니다.");
                 player.setAllowFlight(false);
                 player.setFallDistance(0);
-            }, delay * 20L);
+            }, delay * TickData.longTick);
 
         }
     }
@@ -71,9 +72,9 @@ public class Hermes extends Ability {
     public void buff() {
         Player player = GameData.onlinePlayer.get(playerName);
         if (player != null) {
-            Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
+            taskModule.runBukkitTaskTimer( ()   -> {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, passiveDuration * 20, 0));
-            }, 1 * 20, 6 * 20);
+            }, TickData.longTick , 6 * TickData.longTick);
         }
     }
 }

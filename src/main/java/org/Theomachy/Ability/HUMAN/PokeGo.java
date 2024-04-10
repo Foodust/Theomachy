@@ -1,10 +1,7 @@
 package org.Theomachy.Ability.HUMAN;
 
-import java.util.List;
-import java.util.Random;
-
 import org.Theomachy.Handler.Handler.RandomSkillHandler;
-import org.Theomachy.Handler.Module.AbilityModule;
+import org.Theomachy.Handler.Module.game.AbilityModule;
 import org.Theomachy.Message.TheomachyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,7 +11,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
-import org.Theomachy.Data.AbilityData;
 
 
 public class PokeGo extends Ability {
@@ -42,7 +38,7 @@ public class PokeGo extends Ability {
         if (playerModule.InHandItemCheck(player,skillMaterial)) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK ->
-                        player.sendMessage(ChatColor.WHITE + String.valueOf(walking) + ChatColor.YELLOW + " 걸음 걸었습니다.");
+                        messageModule.sendPlayer(player,ChatColor.WHITE + String.valueOf(walking) + ChatColor.YELLOW + " 걸음 걸었습니다.");
             }
         }
     }
