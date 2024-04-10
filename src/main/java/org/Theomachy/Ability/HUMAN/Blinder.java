@@ -26,8 +26,6 @@ public class Blinder extends Ability {
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "블라인딩 Ⅱ",
             "주변의 적의 시야를 5초간 가립니다."};
 
-    private final int passiveDuration;
-    private final int normalDuration;
     public Blinder(String playerName) {
         super(playerName, AbilityInfo.Blinder, true, true, false, des);
         messageModule.logInfo(playerName + abilityName);

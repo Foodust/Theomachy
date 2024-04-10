@@ -28,7 +28,6 @@ public class Clocking extends Ability {
             "감춘 상태에서 상대방을 공격할 시 다시 모습이 나타나게 되며,",
             "공격 당한 상대는 20% 확률로 사망합니다."};
 
-	private final int normalDuration;
     public Clocking(String playerName) {
         super(playerName, AbilityInfo.Clocking, true, true, false, des);
         messageModule.logInfo(playerName + abilityName);

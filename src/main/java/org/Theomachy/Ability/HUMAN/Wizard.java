@@ -27,7 +27,6 @@ public class Wizard extends Ability
 			   "주변의 사람들을 공중으로 띄운 후 번개를 떨어뜨립니다.",
 			   "고급능력 발동 시 패널티로 자신의 체력이 반으로 줄어듭니다."};
 
-	private final int rareDuration;
 	public Wizard(String playerName)
 	{
 		super(playerName, AbilityInfo.Wizard, true, false, false, des);

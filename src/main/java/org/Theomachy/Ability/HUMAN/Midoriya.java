@@ -23,7 +23,6 @@ public class Midoriya extends Ability {
             "원 포 올을 쓰고 난 뒤에는 각종 디버프에 시달립니다."};
 
     private boolean skillReady;
-    private final int duration;
 
     public Midoriya(String playerName) {
         super(playerName, AbilityInfo.Midoriya, true, false, false, des);
@@ -31,7 +30,7 @@ public class Midoriya extends Ability {
         this.normalSkillCoolTime = 350;
         this.normalSkillStack = 64;
         this.skillReady = false;
-        this.duration = 10;
+        this.normalDuration = 10;
     }
 
     public void activeSkill(PlayerInteractEvent event) {
@@ -67,10 +66,10 @@ public class Midoriya extends Ability {
                     enemy.damage(200);
                     player.getWorld().strikeLightningEffect(enemy.getLocation());
 
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, duration * 20, 0));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, duration * 20, 0));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, duration * 20, 0));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, normalDuration * 20, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, normalDuration * 20, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, normalDuration * 20, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 0));
 
                     skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                     skillReady = false;

@@ -25,7 +25,6 @@ public class Invincibility extends Ability
 			   ChatColor.RED+"【고급】 "+ChatColor.WHITE+"숨 돌리기",
 			   "자신에게 체력 회복 버프를 5초 동안 시전합니다."};
 
-	private final int rareDuration;
 	public Invincibility(String playerName)
 	{
 		super(playerName, AbilityInfo.Invincibility, true, false, false, des);

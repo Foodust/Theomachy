@@ -24,9 +24,6 @@ public class Akasha extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "고통",
             "주변에 있는 적군에게 고통을 주어 6초간 혼란하게 합니다."};
 
-    private final int rareDuration;
-    private final int normalDuration;
-
     public Akasha(String playerName) {
         super(playerName, AbilityInfo.Akasha, true, false, false, des);
         messageModule.logInfo(playerName + abilityName);
@@ -72,7 +69,7 @@ public class Akasha extends Ability {
             }
             skillHandler.Use(player, material, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             for (Player enemy : entityList) {
-                enemy.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * rareDuration, 0));
+                enemy.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, rareDuration * 20, 0));
                 enemy.setHealth(enemy.getHealth() - 4);
             }
 

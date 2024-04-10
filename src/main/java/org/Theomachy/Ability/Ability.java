@@ -42,10 +42,17 @@ public class Ability
 	public boolean flag = false;
 	public final String[] description;
 	public AbilityRank rank;
+	public int passiveDuration;
 	public int normalSkillCoolTime =-1;
 	public int rareSkillCoolTime =-1;
 	public int normalSkillStack =-1;
-	public int rareSkillStack =-1;
+	public int rareSkillStack = -1;
+	public int normalDamage = -1;
+	public int rareDamage = -1;
+	public double normalDistance = -1;
+	public double rareDistance = -1;
+	public int normalDuration = -1;
+	public int rareDuration = -1;
 
 	public Material material = Material.COBBLESTONE;
 	public Material skillMaterial =Material.BLAZE_ROD;

@@ -31,15 +31,13 @@ public class Creeper extends Ability {
             "자신에게 번개를 발동합니다.",
             "번개 카운팅에 포함됩니다."};
 
-    private final float normalDamage;
-
     public Creeper(String playerName) {
         super(playerName, AbilityInfo.Creeper, true, false, false, des);
         messageModule.logInfo(playerName + abilityName);
 
         this.normalSkillCoolTime = 60;
         this.normalSkillStack = 20;
-        this.normalDamage  = 5.0f;
+        this.normalDamage  = 5;
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 50;
 

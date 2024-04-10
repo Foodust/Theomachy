@@ -19,7 +19,7 @@ public class Dionysus extends Ability {
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "알코올 중독",
             "10% 확률로 자신을 공격한 10초간 상대의 시야를 5초간 어지럽히는 동시에",
             "상대의 이동 속도, 공격력을 낮춥니다."};
-    private final int passiveDuration;
+
 
     public Dionysus(String playerName) {
         super(playerName, AbilityInfo.Dionysus, false, true, false, des);

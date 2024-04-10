@@ -25,8 +25,6 @@ public class Sukuna extends RyoikiTenkai {
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "영역 전개 | 복마어주자 (伏魔御廚子)",
             "영역에 상대방을 가두고 무수한 참격을 날립니다. 자신은 면역입니다."};
 
-    private final int rareDamage;
-
     public Sukuna(String playerName) {
         super(playerName, AbilityInfo.Sukuna, true, false, false, des);
         messageModule.logInfo(playerName + abilityName);

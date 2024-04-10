@@ -27,12 +27,8 @@ public class Rengoku extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "오의 • 제9형 「연옥」(煉獄)",
             "작열하는 지옥불처럼 맹렬히 돌진해서, 굉음과 함께 상대방을 도려낸다. "};
 
-    private final int normalDamage;
-    private final int normalDistance;
-    private final int rareDistance;
     private final int rareTime;
     private final int rareDelay;
-    private final int rareDamage;
     private final PlayerModule playerModule = new PlayerModule();
 
     public Rengoku(String playerName) {
@@ -91,7 +87,7 @@ public class Rengoku extends Ability {
                         }
                     }
                 }
-                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 50.0f, 5.0f);
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 5.0f);
             }, 0, 0L);
             taskModule.runBukkitTaskLater( ()->{taskModule.cancelBukkitTask(bukkitTask);}, TickData.longTick);
         }

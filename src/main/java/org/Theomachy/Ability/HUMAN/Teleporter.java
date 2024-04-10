@@ -30,7 +30,6 @@ public class Teleporter extends Ability
 			"목표 지정: /x <대상>"};
 
 	private String rareTarget;
-	private final int normalDistance;
 	private final BlockFilter blockFilter = new BlockFilter();
 	public Teleporter(String playerName)
 	{
@@ -63,7 +62,7 @@ public class Teleporter extends Ability
 	{
 		if (skillHandler.Check(player, AbilityCase.NORMAL)&&playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack))
 		{
-			Block block = player.getTargetBlock(null, normalDistance);
+			Block block = player.getTargetBlock(null, (int)normalDistance);
 			if (blockFilter.AirToFar(player, block))
 			{
 				Location location0 = block.getLocation();

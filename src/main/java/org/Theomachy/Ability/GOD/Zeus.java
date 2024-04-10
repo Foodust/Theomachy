@@ -30,8 +30,6 @@ public class Zeus extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "태풍 Ⅱ",
             "목표 지역에 대량의 번개를 떨어뜨립니다."};
 
-    private final int normalDistance;
-    private final int rareDistance;
     private final int rareCount;
     private final BlockFilter blockFilter = new BlockFilter();
     public Zeus(String playerName) {
@@ -60,7 +58,7 @@ public class Zeus extends Ability {
 
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
-            Block block = player.getTargetBlock(null, normalDistance);
+            Block block = player.getTargetBlock(null, (int)normalDistance);
             if (blockFilter.AirToFar(player, block)) {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
                 World world = player.getWorld();
@@ -72,7 +70,7 @@ public class Zeus extends Ability {
 
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
-            Block block = player.getTargetBlock(null, rareDistance);
+            Block block = player.getTargetBlock(null, (int)rareDistance);
             if (blockFilter.AirToFar(player, block)) {
                 skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
                 World world = player.getWorld();

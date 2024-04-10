@@ -21,9 +21,7 @@ public class Zenitsu extends Ability {
             "전광석화의 기세로 접근해서 일직선의 일격에 목을 벤다.",
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제7의 형 「화뢰신」(火 雷 神)",
             "온 신경을 다리에 집중시켜서 뛰어 오른 후 돌진하며 번개를 남긴다."};
-    private final int normalDistance;
     private final double rareJumpDistance;
-    private final int rareDistance;
     private final int rareTime;
     private final double rareDashDistance;
 
@@ -59,7 +57,7 @@ public class Zenitsu extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             Location location = player.getLocation();
             location.setPitch(0f);
-            for (int distance = 0; distance < normalDistance; distance += normalDistance / 10) {
+            for (int distance = 0; distance < normalDistance; distance += (int) (normalDistance / 10)) {
                 Vector direction = location.getDirection().normalize();
                 Location to = location.clone().add(direction.multiply(distance));
                 Objects.requireNonNull(to.getWorld()).strikeLightning(to);
@@ -74,7 +72,7 @@ public class Zenitsu extends Ability {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
             taskModule.runBukkitTaskLater( () -> {
-                for (int i = rareDistance; i > 0; i--) {
+                for (int i = (int) rareDistance; i > 0; i--) {
                     Vector direction = player.getLocation().getDirection().multiply(rareDashDistance);
                     player.setVelocity(direction);
                     int finalI = i;

@@ -24,9 +24,6 @@ public class Giyu extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "제11형 「잔잔한 물결」 (拾壱ノ型凪) ",
             "3초간 자신에게 날아오는 어떤 형태의 공격이든 받아넘겨 흘려내 방어하는 기술 "};
 
-    private final double rareDistance;
-    private final Long rareDuration;
-
     public Giyu(String playerName) {
         super(playerName, AbilityInfo.Giyu, true, false, true, des);
 
@@ -34,7 +31,7 @@ public class Giyu extends Ability {
         this.rareSkillStack = 50;
 
         this.rareDistance = 15;
-        this.rareDuration = 3L;
+        this.rareDuration = 3;
         this.rank = AbilityRank.B;
     }
 

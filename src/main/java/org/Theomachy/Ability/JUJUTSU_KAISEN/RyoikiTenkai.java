@@ -20,12 +20,6 @@ public class RyoikiTenkai extends Ability {
     public RyoikiTenkai(String playerName, AbilityInfo abilityInfo, boolean activeType, boolean passiveType, boolean buffType, String[] des) {
         super(playerName, abilityInfo, activeType, passiveType, buffType, des);
     }
-
-    public int normalDamage;
-    public int normalDistance;
-    public int rareDistance;
-    public int rareDuration;
-
     public void sendRyoikiTenkai(AbilityInfo abilityInfo, Player player) {
 
         int titleFadeIn = 1 * 20;
@@ -71,8 +65,8 @@ public class RyoikiTenkai extends Ability {
 
         Location centerLocation = player.getLocation().add(0, -1, 0); // 발밑 기준으로 블록을 생성할 위치
         Map<Location, BlockState> originalBlockMap = new HashMap<>();
-        for (int x = -rareDistance; x <= rareDistance; x++) {
-            for (int z = -rareDistance; z <= rareDistance; z++) {
+        for (int x = (int) -rareDistance; x <= rareDistance; x++) {
+            for (int z = (int) -rareDistance; z <= rareDistance; z++) {
                 for (int y = 1; y <= rareDistance; y++) {
                     Location blockLocation = centerLocation.clone().add(x, y, z);
                     Block block = blockLocation.getBlock();
@@ -90,8 +84,8 @@ public class RyoikiTenkai extends Ability {
             }
         }
         // 바닥 생성
-        for (int x = -rareDistance + 1; x <= rareDistance - 1; x++) {
-            for (int z = -rareDistance + 1; z <= rareDistance - 1; z++) {
+        for (int x = (int) (-rareDistance + 1); x <= rareDistance - 1; x++) {
+            for (int z = (int) (-rareDistance + 1); z <= rareDistance - 1; z++) {
                 Location blockLocation = centerLocation.clone().add(x, 0, z);
                 Block block = blockLocation.getBlock();
                 if(block.getState() instanceof Chest)continue;

@@ -21,7 +21,6 @@ public class Zet extends Ability {
             "가솔린 기관보다 가속력이 좋습니다."
     };
 
-    private final int passiveDuration;
     private final int passiveAmplifier;
 
     public Zet(String playerName) {

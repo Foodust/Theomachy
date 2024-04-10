@@ -22,11 +22,6 @@ public class Tanjiro extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "히노카미 카구라 | 제6형 「비틀린 소용돌이」(ねじれ渦)",
             "몸을 크게 비틀어서, 강력한 소용돌이처럼 회전하는 기술"};
 
-    private final int normalDamage;
-    private final int normalDistance;
-    private float rareDistance;
-    private final Long rareDuration;
-    private float rareDamage;
     private boolean rareCheck;
     private final PlayerModule playerModule = new PlayerModule();
 
@@ -42,7 +37,7 @@ public class Tanjiro extends Ability {
         this.rareSkillStack = 50;
         this.rareDistance = 2f;
         this.rareDamage = 10;
-        this.rareDuration = 5 * TickData.longTick;
+        this.rareDuration = 5 * TickData.intTick;
         this.rareCheck = false;
         this.rank = AbilityRank.A;
     }
@@ -63,21 +58,20 @@ public class Tanjiro extends Ability {
             int particles = 300;
             int radius = 2;
             World world = player.getWorld();
-            BukkitTask bukkitTask = Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(), () -> {
-                Location playerLocation = player.getLocation().add(new Vector(0,0.5,0));
+            for (int total = 0; total < 3; total++) {
+                Location playerLocation = player.getLocation().add(new Vector(0, 0.5, 0));
                 Vector direction = playerLocation.getDirection();
                 for (double i = 0; i < particles; i++) {
                     double angle = 2 * Math.PI * i / particles;
                     double x = playerLocation.getX() + radius * Math.sin(angle) * direction.getX();
                     double y = playerLocation.getY() + radius * Math.cos(angle);
                     double z = playerLocation.getZ() + radius * Math.sin(angle) * direction.getZ();
-                    Location circleLocation = new Location(playerLocation.getWorld(),x, y, z);
-                    world.spawnParticle(Particle.FLAME, circleLocation, 1,0,0,0,0);
-                    playerModule.damageNearEntity(player,circleLocation,normalDamage,3,3,3);
+                    Location circleLocation = new Location(playerLocation.getWorld(), x, y, z);
+                    world.spawnParticle(Particle.FLAME, circleLocation, 1, 0, 0, 0, 0);
+                    playerModule.damageNearEntity(player, circleLocation, normalDamage, 3, 3, 3);
                 }
-                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 5.0f, 5.0f);
-            }, 0, 0L);
-            taskModule.runBukkitTaskLater( ()->{taskModule.cancelBukkitTask(bukkitTask);},5L);
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 10.0f);
+            }
         }
     }
 
@@ -88,14 +82,17 @@ public class Tanjiro extends Ability {
             Location location = player.getLocation();
 
             TornadoEffect tornadoEffect = new TornadoEffect(effectManage);
-            tornadoEffect.setLocation(location.add(new Vector(0,-2,0)));
+            tornadoEffect.setLocation(location.add(new Vector(0, -2, 0)));
             tornadoEffect.tornadoParticle = Particle.WATER_SPLASH;
             tornadoEffect.showCloud = false;
             tornadoEffect.maxTornadoRadius = 4f;
             tornadoEffect.tornadoHeight = 7f;
             tornadoEffect.start();
-            playerModule.damageNearEntity(player,location,rareDamage,5,10,5);
-            taskModule.runBukkitTaskLater(tornadoEffect::cancel,TickData.longTick);
-       }
+            for (int i = 0; i < 10; i++) {
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_SWIM, 2.0f, 1f);
+            }
+            playerModule.damageNearEntity(player, location, rareDamage, 5, 10, 5);
+            taskModule.runBukkitTaskLater(tornadoEffect::cancel, TickData.longTick);
+        }
     }
 }

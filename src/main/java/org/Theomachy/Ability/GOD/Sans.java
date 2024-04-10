@@ -23,10 +23,6 @@ public class Sans extends Ability {
             "와 " + AbilityInfo.Sans.getName(),
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "가스트 블래스터 Ⅱ",
             "가스트 블래스터를 발사합니다"};
-
-    private final int passiveDuration;
-    private final int rareDistance;
-    private final int rareDamage;
     public Sans(String playerName) {
         super(playerName, AbilityInfo.Sans, true, false, true, des);
         messageModule.logInfo(playerName + abilityName);

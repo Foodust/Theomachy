@@ -28,7 +28,6 @@ public class Hermes extends Ability {
 
     private final int flyTime;
     private final int delay;
-    private final int passiveDuration;
     public Hermes(String playerName) {
         super(playerName, AbilityInfo.Hermes, true, true, true, des);
         messageModule.logInfo(playerName + abilityName);

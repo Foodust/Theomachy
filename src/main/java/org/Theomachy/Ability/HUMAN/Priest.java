@@ -26,8 +26,6 @@ public class Priest extends Ability {
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "신의 은총 Ⅱ",
 
             "자신의 팀원 모두에게 랜덤으로 버프를 5초간 적용합니다."};
-    private final int normalDuration;
-    private final int rareDuration;
 
     public Priest(String playerName) {
         super(playerName, AbilityInfo.Priest, true, false, false, des);

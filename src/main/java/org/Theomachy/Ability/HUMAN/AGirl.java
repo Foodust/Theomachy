@@ -23,7 +23,6 @@ public class AGirl extends Ability {
             "주변의 적을 자신의 앞으로 끌어옵니다.",
             "끌려 온 플레이어들의 배고픔 지수는 0이 되고",
             "1초간 강력한 슬로우에 걸립니다."};
-    private final int normalDuration;
 
     public AGirl(String playerName) {
         super(playerName, AbilityInfo.AGirl, true, false, false, des);
@@ -54,7 +53,7 @@ public class AGirl extends Ability {
                     enemy.teleport(player);
                 });
                 enemy.setFoodLevel(0);
-                enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, normalDuration * 20, 200));
+                enemy.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (normalDuration * 20), 200));
                 enemy.sendMessage(ChatColor.GREEN + AbilityInfo.AGirl.getName() + ChatColor.WHITE + "에게 이끌려 갑니다!");
             }
         }

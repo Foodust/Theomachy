@@ -26,9 +26,6 @@ public class Witch extends Ability {
             ChatColor.YELLOW + "【패시브】 " + ChatColor.WHITE + "저주 Ⅱ",
             "자신을 공격한 상대는 10% 확률로 5초간 각종 디버프에 걸리게 됩니다."};
 
-    int normalDuration;
-    int passiveDuration;
-
     public Witch(String playerName) {
         super(playerName, AbilityInfo.Witch, true, false, false, des);
         messageModule.logInfo(playerName + abilityName);
