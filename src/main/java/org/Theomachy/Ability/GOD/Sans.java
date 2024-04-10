@@ -1,7 +1,7 @@
 package org.Theomachy.Ability.GOD;
 
 
-
+import de.slikey.effectlib.effect.ColoredImageEffect;
 import de.slikey.effectlib.effect.ImageEffect;
 import org.bukkit.ChatColor;
 import org.bukkit.*;
@@ -18,11 +18,14 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
+import java.io.File;
+
 public class Sans extends Ability {
     private final static String[] des = {
             "와 " + AbilityInfo.Sans.getName(),
             ChatColor.RED + "【고급】 " + ChatColor.AQUA + "가스트 블래스터 Ⅱ",
             "가스트 블래스터를 발사합니다"};
+
     public Sans(String playerName) {
         super(playerName, AbilityInfo.Sans, true, false, true, des);
         messageModule.logInfo(playerName + abilityName);
@@ -40,7 +43,7 @@ public class Sans extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (playerModule.InHandItemCheck(player,skillMaterial)) {
+        if (playerModule.InHandItemCheck(player, skillMaterial)) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -51,6 +54,12 @@ public class Sans extends Ability {
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            ColoredImageEffect imageEffect = new ColoredImageEffect(effectManage);
+            imageEffect.loadFile(new File("image2.png"));
+            imageEffect.size = 0.013f;
+            imageEffect.setLocation(player.getLocation().add(player.getLocation().getDirection().multiply(3).add(new Vector(0, 5, 0))));
+            imageEffect.enableRotation = false;
+            imageEffect.start();
         }
     }
 
@@ -63,7 +72,7 @@ public class Sans extends Ability {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.DRAGON_BREATH, particleLocation, 500);
-                playerModule.damageNearEntity(player, particleLocation, rareDamage,12,12,12);
+                playerModule.damageNearEntity(player, particleLocation, rareDamage, 12, 12, 12);
             }
         }
     }
