@@ -89,7 +89,7 @@ public class Satoru extends RyoikiTenkai {
                     bigBangEffect.color = Color.WHITE;
                     bigBangEffect.color2 = Color.GRAY;
                     bigBangEffect.color3 = Color.BLACK;
-                    bigBangEffect.soundVolume = 1;
+                    bigBangEffect.soundVolume = 0.1f;
                     bigBangEffect.start();
                     bigBangEffects.add(bigBangEffect);
                 }, 20L);

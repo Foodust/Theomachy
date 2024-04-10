@@ -32,9 +32,9 @@ public class Giyu extends Ability {
         this.rareSkillCoolTime = 110;
         this.rareSkillStack = 50;
 
-        this.rareDistance = 5;
+        this.rareDistance = 15;
         this.rareDuration = 3L;
-        this.rank = AbilityRank.A;
+        this.rank = AbilityRank.B;
     }
 
     public void activeSkill(PlayerInteractEvent event) {
@@ -56,7 +56,7 @@ public class Giyu extends Ability {
             squareEffect.type = EffectType.REPEATING;
             squareEffect.particle = Particle.WATER_DROP;
             squareEffect.radius = 5;
-            squareEffect.particles = 300;
+            squareEffect.particles = 500;
             squareEffect.setLocation(playerLocation);
             squareEffect.start();
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, PotionEffect.INFINITE_DURATION, 255));
