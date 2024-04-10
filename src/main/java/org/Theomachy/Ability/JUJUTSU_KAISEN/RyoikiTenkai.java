@@ -49,6 +49,10 @@ public class RyoikiTenkai extends Ability {
                 area = ChatColor.RED + "영 역 전 개";
                 areaName = ChatColor.DARK_RED + "복마어주자 (伏魔御廚子)";
             }
+            case Satoru -> {
+                area = ChatColor.WHITE + "영 역 전 개";
+                areaName = ChatColor.AQUA + "무량공처 (無量空処)";
+            }
         }
         Bukkit.broadcastMessage(area);
         Bukkit.broadcastMessage(areaName);
@@ -93,12 +97,8 @@ public class RyoikiTenkai extends Ability {
                 originalBlockMap.put(blockLocation,block.getState());
                 block.setType(floor);
                 switch (abilityInfo) {
-                    case Jogo -> {
-                        JogoSetFire(centerLocation, x, 1, z);
-                    }
-                    case Sukuna -> {
-                        SukunaSetWater(centerLocation, x, 1, z);
-                    }
+                    case Jogo -> JogoSetFire(centerLocation, x, 1, z);
+                    case Sukuna -> SukunaSetWater(centerLocation, x, 1, z);
                 }
             }
         }

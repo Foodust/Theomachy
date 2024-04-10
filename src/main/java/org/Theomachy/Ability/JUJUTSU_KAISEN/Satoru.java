@@ -1,6 +1,7 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import de.slikey.effectlib.Effect;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.EffectType;
 import de.slikey.effectlib.effect.*;
@@ -19,11 +20,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
+import org.checkerframework.checker.units.qual.A;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Satoru extends Ability {
+public class Satoru extends RyoikiTenkai {
     private final static String[] des = {
             AbilityInfo.Satoru.getName(),
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "허식 「자」",
@@ -34,7 +37,6 @@ public class Satoru extends Ability {
     private final int normalDamage;
     private final double normalDistance;
     private final long normalDuration;
-    private final int rareDistance;
     private final int rareDamage;
 
     public Satoru(String playerName) {
@@ -48,7 +50,8 @@ public class Satoru extends Ability {
 
         this.rareSkillCoolTime = 120;
         this.rareSkillStack = 50;
-        this.rareDistance = 40;
+        this.rareDistance = 15;
+        this.rareDuration = 10;
         this.rareDamage = 20;
         this.rank = AbilityRank.S;
     }
@@ -73,6 +76,28 @@ public class Satoru extends Ability {
     private void rightAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
+
+            sendRyoikiTenkai(AbilityInfo.Satoru, player);
+            goRyoikiTenkai(player,AbilityInfo.Satoru,Material.SEA_LANTERN,Material.IRON_BLOCK);
+
+            List<BigBangEffect> bigBangEffects = new ArrayList<>();
+            player.getNearbyEntities(rareDistance,rareDistance,rareDistance).forEach(nearEntity->{
+                BukkitTask bukkitTask = Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(), () -> {
+                    BigBangEffect bigBangEffect = new BigBangEffect(effectManage);
+                    bigBangEffect.setLocation(nearEntity.getLocation().add(new Vector(0, 1, 0)));
+                    bigBangEffect.particle = Particle.WHITE_ASH;
+                    bigBangEffect.color = Color.WHITE;
+                    bigBangEffect.color2 = Color.GRAY;
+                    bigBangEffect.color3 = Color.BLACK;
+                    bigBangEffect.soundVolume = 1;
+                    bigBangEffect.start();
+                    bigBangEffects.add(bigBangEffect);
+                }, 20L);
+                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
+                    Bukkit.getScheduler().cancelTask(bukkitTask.getTaskId());
+                    bigBangEffects.forEach(Effect::cancel);
+                },rareDuration * 20L);
+            });
         }
     }
 

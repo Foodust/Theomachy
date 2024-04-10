@@ -44,7 +44,7 @@ public class Sukuna extends RyoikiTenkai {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (playerModule.InHandItemCheck(player,skillMaterial)) {
+        if (playerModule.InHandItemCheck(player, skillMaterial)) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -61,7 +61,7 @@ public class Sukuna extends RyoikiTenkai {
                 Vector direction = startLocation.getDirection().multiply(distance);
                 Location particleLocation = startLocation.clone().add(direction);
                 world.spawnParticle(Particle.SWEEP_ATTACK, particleLocation, 50);
-                playerModule.damageNearEntity(player,particleLocation,normalDamage,4,4,4);
+                playerModule.damageNearEntity(player, particleLocation, normalDamage, 4, 4, 4);
             }
         }
     }
@@ -72,28 +72,25 @@ public class Sukuna extends RyoikiTenkai {
 
             sendRyoikiTenkai(AbilityInfo.Sukuna, player);
 
-            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),()->{
-                goRyoikiTenkai(player, AbilityInfo.Sukuna, Material.CRYING_OBSIDIAN, Material.OBSIDIAN);
-                Location location = player.getLocation();
-                location.add(0, 6, 0);
-                AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
-                        () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
-                                () -> slash(player,location), 0, 2L)), 2 * 20L);
-                Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
-                        () -> Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId()), rareDuration * 20L);
-            },20L);
-
+            goRyoikiTenkai(player, AbilityInfo.Sukuna, Material.CRYING_OBSIDIAN, Material.OBSIDIAN);
+            Location location = player.getLocation();
+            location.add(0, 6, 0);
+            AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
+                    () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
+                            () -> slash(player, location), 0, 2L)), 2 * 20L);
+            Bukkit.getScheduler().runTaskLater(Theomachy.getPlugin(),
+                    () -> Bukkit.getScheduler().cancelTask(bukkitTask.get().getTaskId()), rareDuration * 20L);
         }
     }
-    private void slash(Player player, Location location ){
-        World world = location.getWorld();
-        assert world != null;
+
+    private void slash(Player player, Location location) {
+        World world = player.getWorld();
         world.spawnParticle(Particle.SWEEP_ATTACK, location, 3000, 10, 5, 10);
-        for (Entity entity : world.getNearbyEntities(location, 15, 15, 15)) {
+        for (Entity entity : world.getNearbyEntities(location, rareDistance, rareDistance, rareDistance)) {
             if (entity instanceof LivingEntity && !entity.equals(player)) {
                 ((LivingEntity) entity).damage(rareDamage, player);
-                entity.getWorld().playSound(entity.getLocation(),  Sound.ENTITY_PLAYER_ATTACK_CRIT,1 ,1);
+                entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1, 1);
             }
         }
     }
