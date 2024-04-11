@@ -99,7 +99,7 @@ public class Satoru extends RyoikiTenkai {
         vortexEffect.radius = 2;
         vortexEffect.radials = 1.6;
         vortexEffect.helixes = 1;
-        vortexEffect.particleCount = 3;
+        vortexEffect.particleCount = 6;
         vortexEffect.circles = 3;
         AtomEffect atomEffect = new AtomEffect(effectManage);
         atomEffect.particleOrbital = Particle.REDSTONE;
