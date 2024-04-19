@@ -96,8 +96,8 @@ public class Poseidon extends Ability {
             WaveEffect waveEffect = new WaveEffect(effectManage);
             waveEffect.setLocation(player.getLocation());
             waveEffect.height = 7f;
-            waveEffect.particlesFront = 200;
-            waveEffect.particlesBack = 100;
+            waveEffect.particlesFront = 150;
+            waveEffect.particlesBack = 50;
             waveEffect.period = 1;
             waveEffect.iterations = 3000;
             waveEffect.rows = 50;
