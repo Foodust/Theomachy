@@ -1,6 +1,7 @@
 package org.Theomachy.Ability.GOD;
 
 
+import com.ticxo.modelengine.api.ModelEngineAPI;
 import de.slikey.effectlib.effect.ColoredImageEffect;
 import de.slikey.effectlib.effect.ImageEffect;
 import org.bukkit.ChatColor;
@@ -8,6 +9,12 @@ import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.MapMeta;
+import org.bukkit.map.MapCanvas;
+import org.bukkit.map.MapRenderer;
+import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -18,7 +25,11 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 
 public class Sans extends Ability {
     private final static String[] des = {
@@ -55,11 +66,42 @@ public class Sans extends Ability {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
             ColoredImageEffect imageEffect = new ColoredImageEffect(effectManage);
-            imageEffect.loadFile(new File("image2.png"));
-            imageEffect.size = 0.013f;
+            imageEffect.loadFile(new File("image3.png"));
+            imageEffect.frameDelay = 5 * 20;
+//            imageEffect.stepX = 15;
+//            imageEffect.stepY = 15;
+            imageEffect.visibleRange = 100f;
             imageEffect.setLocation(player.getLocation().add(player.getLocation().getDirection().multiply(3).add(new Vector(0, 5, 0))));
             imageEffect.enableRotation = false;
             imageEffect.start();
+
+            // 이미지 지도 그리기
+//            ItemStack item = new ItemStack(Material.FILLED_MAP, 1);
+//            MapView map = Bukkit.getServer().createMap(Bukkit.getServer().getWorlds().get(0));
+//            for (MapRenderer render : map.getRenderers()) {
+//                map.removeRenderer(render);
+//            }
+//            map.addRenderer(new MapRenderer() {
+//                @Override
+//                public void render(MapView map, MapCanvas canvas, Player player) {
+//                    try {
+//                        File file = new File("C:\\Users\\Admin\\Desktop\\게임\\server1.20.2\\plugins\\Theomachy\\image2.png");
+//                        Image image = ImageIO.read(file);
+////                        BufferedImage photo = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+//                        BufferedImage photo = new BufferedImage(1920,1080, BufferedImage.TYPE_INT_ARGB);
+//                        photo.getGraphics().drawImage(image, 0, 0, null);
+//                        canvas.drawImage(0, 0, image);
+//                    } catch (Exception ex) {
+//                        ex.printStackTrace();
+//                    }
+//                }
+//            });
+//
+//            MapMeta meta = ((MapMeta) item.getItemMeta());
+//            assert meta != null;
+//            meta.setMapView(map);
+//            item.setItemMeta(meta);
+//            player.getInventory().addItem(item);
         }
     }
 

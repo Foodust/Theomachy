@@ -15,12 +15,18 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        name = 'mythic-mob'
+        url = 'https://mvn.lumine.io/repository/maven-public/'
+    }
+
 }
 
 dependencies {
     implementation "net.kyori:adventure-platform-bukkit:4.3.2"
     implementation "net.kyori:adventure-api:4.15.0"
     implementation 'com.elmakers.mine.bukkit:EffectLib:10.2'
+    compileOnly 'com.ticxo.modelengine:ModelEngine:R4.0.4'
     compileOnly "org.spigotmc:spigot-api:1.20.2-R0.1-SNAPSHOT"
 }
 
@@ -49,7 +55,7 @@ processResources {
     }
 }
 
-jar{
+jar {
     archiveFileName = 'Theomachy.jar'
     destinationDirectory = file("C:\\Users\\Admin\\Desktop\\게임\\server1.20.2\\plugins")
     manifest {
