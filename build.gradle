@@ -19,7 +19,6 @@ repositories {
         name = 'mythic-mob'
         url = 'https://mvn.lumine.io/repository/maven-public/'
     }
-
 }
 
 dependencies {
