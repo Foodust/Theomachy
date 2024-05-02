@@ -27,6 +27,7 @@ import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Enum.AbilityTag;
@@ -75,6 +76,7 @@ public class Sans extends Ability {
     private void leftAction(Player player) {
         if (skillHandler.Check(player, AbilityCase.NORMAL) && playerModule.ItemCheck(player, Material.COBBLESTONE, normalSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.NORMAL, normalSkillStack, normalSkillCoolTime);
+            // effect lib
 //            ColoredImageEffect imageEffect = new ColoredImageEffect(effectManage);
 //            imageEffect.loadFile(new File("image.png"));
 //            imageEffect.frameDelay = 5 * 20;
@@ -83,12 +85,21 @@ public class Sans extends Ability {
 //            imageEffect.enableRotation = false;
 //            imageEffect.start();
 
+            // model engine
             Pig pig = player.getWorld().spawn(player.getLocation(), Pig.class);
             ModeledEntity modeledEntity = ModelEngineAPI.createModeledEntity(pig);
             ActiveModel activeModel = ModelEngineAPI.createActiveModel("test_model");
             modeledEntity.addModel(activeModel, true);
             AnimationHandler animationHandler = activeModel.getAnimationHandler();
             animationHandler.playAnimation("attack", 0.3, 0.3, 1, true);
+
+            //https://www.youtube.com/watch?v=8fKEG2Pj1vQ
+            //display entity
+            ItemDisplay item = player.getWorld().spawn(player.getLocation(), ItemDisplay.class);
+            Transformation transformation = item.getTransformation();
+            transformation.getScale().set(1);
+            item.setItemStack(new ItemStack(Material.DIAMOND));
+            item.setTransformation(transformation);
         }
     }
 
