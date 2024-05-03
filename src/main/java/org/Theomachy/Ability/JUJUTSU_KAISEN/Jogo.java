@@ -68,7 +68,7 @@ public class Jogo extends RyoikiTenkai {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             sendRyoikiTenkai(AbilityInfo.Jogo,player);
-            goRyoikiTenkai(player, AbilityInfo.Jogo,Material.NETHERRACK,Material.MAGMA_BLOCK);
+            goRyoikiTenkai(player, Material.NETHERRACK,Material.MAGMA_BLOCK);
         }
     }
 }

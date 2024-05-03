@@ -70,27 +70,20 @@ public class Sukuna extends RyoikiTenkai {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
             sendRyoikiTenkai(AbilityInfo.Sukuna, player);
+            goRyoikiTenkai(player, Material.CRYING_OBSIDIAN, null);
 
-            goRyoikiTenkai(player, AbilityInfo.Sukuna, Material.CRYING_OBSIDIAN, Material.OBSIDIAN);
-            Location location = player.getLocation();
-            location.add(0, 6, 0);
-            AtomicReference<BukkitTask> bukkitTask = new AtomicReference<>();
-            taskModule.runBukkitTaskLater(
-                    () -> bukkitTask.set(Bukkit.getScheduler().runTaskTimer(Theomachy.getPlugin(),
-                            () -> slash(player, location), 0, 2L)), 2 * TickData.longTick);
-            taskModule.runBukkitTaskLater(
-                    () -> taskModule.cancelBukkitTask(bukkitTask.get()), rareDuration * TickData.longTick);
-        }
-    }
-
-    private void slash(Player player, Location location) {
-        World world = player.getWorld();
-        world.spawnParticle(Particle.SWEEP_ATTACK, location, 3000, 10, 5, 10);
-        for (Entity entity : world.getNearbyEntities(location, rareDistance, rareDistance, rareDistance)) {
-            if (entity instanceof LivingEntity && !entity.equals(player)) {
-                ((LivingEntity) entity).damage(rareDamage, player);
-                entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1, 1);
-            }
+            World world = player.getWorld();
+            BukkitTask bukkitTask = taskModule.runBukkitTaskTimer(() -> {
+                player.getNearbyEntities(10, 5, 10).forEach(nearEntity -> {
+                    LivingEntity livingEntity = (LivingEntity) nearEntity;
+                    world.spawnParticle(Particle.SWEEP_ATTACK, livingEntity.getLocation(), 20, 0.5, 0.5, 0.5);
+                    livingEntity.getWorld().playSound(livingEntity.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1f, 1f);
+                    livingEntity.damage(rareDamage, player);
+                });
+            }, 0L, 1L);
+            taskModule.runBukkitTaskLater(() -> {
+                taskModule.cancelBukkitTask(bukkitTask);
+            }, rareDuration * TickData.longTick);
         }
     }
 }

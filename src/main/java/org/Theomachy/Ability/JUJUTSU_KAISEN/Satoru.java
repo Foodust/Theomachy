@@ -1,7 +1,6 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
 import com.google.common.util.concurrent.AtomicDouble;
-import de.slikey.effectlib.Effect;
 import de.slikey.effectlib.effect.*;
 import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityCase;
@@ -9,15 +8,21 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
+import org.bukkit.entity.Display;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
+import org.bukkit.util.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Satoru extends RyoikiTenkai {
+    private final List<TextDisplay> textDisplayList = new ArrayList<>();
     private final static String[] des = {
             AbilityInfo.Satoru.getName(),
             ChatColor.AQUA + "【일반】 " + ChatColor.WHITE + "허식 「자」",
@@ -25,6 +30,7 @@ public class Satoru extends RyoikiTenkai {
             ChatColor.RED + "【고급】 " + ChatColor.WHITE + "영역 전개 | 무량공처 (無量空処)",
             "영역에 상대방을 가두고 무수한 정보를 보냅니다. 자신은 면역입니다."
     };
+
     public Satoru(String playerName) {
         super(playerName, AbilityInfo.Satoru, true, true, false, des);
         messageModule.logInfo(playerName + abilityName);
@@ -38,7 +44,7 @@ public class Satoru extends RyoikiTenkai {
         this.rareSkillStack = 50;
         this.rareDistance = 15;
         this.rareDuration = 10;
-        this.rareDamage = 20;
+        this.rareDamage = 5;
         this.rank = AbilityRank.S;
     }
 
@@ -64,33 +70,34 @@ public class Satoru extends RyoikiTenkai {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
             sendRyoikiTenkai(AbilityInfo.Satoru, player);
-            goRyoikiTenkai(player,AbilityInfo.Satoru,Material.SEA_LANTERN,Material.IRON_BLOCK);
+            goRyoikiTenkai(player,  Material.BLACK_CONCRETE, Material.BLACK_CONCRETE_POWDER);
 
-            List<BigBangEffect> bigBangEffects = new ArrayList<>();
-            player.getNearbyEntities(rareDistance,rareDistance,rareDistance).forEach(nearEntity->{
-                BukkitTask bukkitTask = taskModule.runBukkitTaskLater(() -> {
-                    BigBangEffect bigBangEffect = new BigBangEffect(effectManage);
-                    bigBangEffect.setLocation(nearEntity.getLocation().add(new Vector(0, 1, 0)));
-                    bigBangEffect.particle = Particle.WHITE_ASH;
-                    bigBangEffect.color = Color.WHITE;
-                    bigBangEffect.color2 = Color.GRAY;
-                    bigBangEffect.color3 = Color.BLACK;
-                    bigBangEffect.soundVolume = 0.1f;
-                    bigBangEffect.start();
-                    bigBangEffects.add(bigBangEffect);
-                }, TickData.longTick);
-                taskModule.runBukkitTaskLater(()->{
-                    taskModule.cancelBukkitTask(bukkitTask);
-                    bigBangEffects.forEach(Effect::cancel);
-                },rareDuration * TickData.longTick);
-            });
+            BukkitTask bukkitTask = taskModule.runBukkitTaskTimer(() -> {
+                player.getNearbyEntities(rareDistance, rareDistance, rareDistance).forEach(nearEntity -> {
+                    for (int i = 0; i < 10; i++) {
+                        taskModule.runBukkitTaskLater(() -> {
+                            TextDisplay textDisplay = displayModule.makeTextDisplay(player, nearEntity.getLocation(), "§kkkkkkkkkkkkkkkkkkkk", 1.0);
+                            textDisplay.setRotation(nearEntity.getLocation().getYaw(), nearEntity.getLocation().getPitch());
+                            textDisplayList.add(textDisplay);
+                            LivingEntity livingEntity = (LivingEntity) nearEntity;
+                            livingEntity.damage(rareDamage,player);
+                            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING,2 * TickData.intTick,2));
+                        }, (float) (TickData.longTick * i) / 5);
+                    }
+                });
+            }, TickData.longTick, TickData.longTick);
+            taskModule.runBukkitTaskLater(() -> {
+                textDisplayList.forEach(Display::remove);
+                textDisplayList.clear();
+                taskModule.cancelBukkitTask(bukkitTask);
+            }, rareDuration * TickData.longTick);
         }
     }
 
-    private void makeSphereParticle(Player player){
+    private void makeSphereParticle(Player player) {
         Location playerLocation = player.getLocation();
         World world = player.getWorld();
-        Location center = playerLocation.add(playerLocation.getDirection().multiply(1)).add(0,player.getEyeHeight(),0);
+        Location center = playerLocation.add(playerLocation.getDirection().multiply(1)).add(0, player.getEyeHeight(), 0);
         AtomicDouble distance = new AtomicDouble();
         VortexEffect vortexEffect = new VortexEffect(effectManage);
         vortexEffect.setLocation(center);
@@ -117,13 +124,13 @@ public class Satoru extends RyoikiTenkai {
             Location particleLocation2 = center.add(center.getDirection().multiply(distance.getAndAdd(0.005)));
             atomEffect.setLocation(particleLocation);
             vortexEffect.setLocation(particleLocation2);
-            world.playSound(particleLocation,Sound.ITEM_TOTEM_USE,0.2f,10f);
-            playerModule.damageNearEntity(player,particleLocation,normalDamage,5,5,5);
+            world.playSound(particleLocation, Sound.ITEM_TOTEM_USE, 0.2f, 10f);
+            playerModule.damageNearEntity(player, particleLocation, normalDamage, 5, 5, 5);
         }, 0L, 1L);
 
-        taskModule.runBukkitTaskLater(()->{
+        taskModule.runBukkitTaskLater(() -> {
             taskModule.cancelBukkitTask(bukkitTask);
             atomEffect.cancel();
-        },normalDuration * TickData.longTick);
+        }, normalDuration * TickData.longTick);
     }
 }

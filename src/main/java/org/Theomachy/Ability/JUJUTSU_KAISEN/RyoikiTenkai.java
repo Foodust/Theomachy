@@ -3,6 +3,7 @@ package org.Theomachy.Ability.JUJUTSU_KAISEN;
 import org.Theomachy.Ability.Ability;
 import org.Theomachy.Data.TickData;
 import org.Theomachy.Enum.AbilityInfo;
+import org.Theomachy.Handler.Module.game.DisplayModule;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -17,9 +18,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RyoikiTenkai extends Ability {
+    public final DisplayModule displayModule = new DisplayModule();
+
     public RyoikiTenkai(String playerName, AbilityInfo abilityInfo, boolean activeType, boolean passiveType, boolean buffType, String[] des) {
         super(playerName, abilityInfo, activeType, passiveType, buffType, des);
     }
+
     public void sendRyoikiTenkai(AbilityInfo abilityInfo, Player player) {
 
         int titleFadeIn = 1 * 20;
@@ -61,43 +65,42 @@ public class RyoikiTenkai extends Ability {
         }
     }
 
-    public void goRyoikiTenkai(Player player, AbilityInfo abilityInfo, Material floor, Material wall) {
+    public void goRyoikiTenkai(Player player, Material floor, Material wall) {
 
         Location centerLocation = player.getLocation().add(0, -1, 0); // 발밑 기준으로 블록을 생성할 위치
         Map<Location, BlockState> originalBlockMap = new HashMap<>();
-        for (int x = (int) -rareDistance; x <= rareDistance; x++) {
-            for (int z = (int) -rareDistance; z <= rareDistance; z++) {
-                for (int y = 1; y <= rareDistance; y++) {
-                    Location blockLocation = centerLocation.clone().add(x, y, z);
-                    Block block = blockLocation.getBlock();
-                    originalBlockMap.put(blockLocation, block.getState());
-                    if(block.getState() instanceof Chest)continue;
-                    if (Math.abs(x) == rareDistance || Math.abs(z) == rareDistance || y == rareDistance) {
-                        block.setType(wall);
-                    } else {
-                        switch (abilityInfo) {
-                            case Jogo -> JogoSetLava(block);
-                            case Sukuna -> setAir(block);
-                        }
-                    }
-                }
-            }
-        }
+        long delay = 0;
         // 바닥 생성
         for (int x = (int) (-rareDistance + 1); x <= rareDistance - 1; x++) {
             for (int z = (int) (-rareDistance + 1); z <= rareDistance - 1; z++) {
                 Location blockLocation = centerLocation.clone().add(x, 0, z);
                 Block block = blockLocation.getBlock();
-                if(block.getState() instanceof Chest)continue;
-                originalBlockMap.put(blockLocation,block.getState());
-                block.setType(floor);
-                switch (abilityInfo) {
-                    case Jogo -> JogoSetFire(centerLocation, x, 1, z);
-                    case Sukuna -> SukunaSetWater(centerLocation, x, 1, z);
+                if (block.getState() instanceof Chest) continue;
+                originalBlockMap.put(blockLocation, block.getState());
+                taskModule.runBukkitTaskLater(() -> {
+                    block.setType(floor);
+                }, delay++);
+            }
+        }
+        delay = 0;
+        if (wall != null) {
+            for (int x = (int) -rareDistance; x <= rareDistance; x++) {
+                for (int z = (int) -rareDistance; z <= rareDistance; z++) {
+                    for (int y = 1; y <= rareDistance; y++) {
+                        Location blockLocation = centerLocation.clone().add(x, y, z);
+                        Block block = blockLocation.getBlock();
+                        if (block.getState() instanceof Chest) continue;
+                        originalBlockMap.put(blockLocation, block.getState());
+                        if (Math.abs(x) == rareDistance || Math.abs(z) == rareDistance || y == rareDistance) {
+                            taskModule.runBukkitTaskLater(() -> {
+                                block.setType(wall);
+                            }, delay++);
+                        }
+                    }
                 }
             }
         }
-        taskModule.runBukkitTaskLater( () -> {
+        taskModule.runBukkitTaskLater(() -> {
             for (Map.Entry<Location, BlockState> entry : originalBlockMap.entrySet()) {
                 Location originalBlockLocation = entry.getKey();
                 BlockState originalBlock = entry.getValue();
@@ -106,31 +109,4 @@ public class RyoikiTenkai extends Ability {
             originalBlockMap.clear();
         }, rareDuration * TickData.longTick); // 10초 후 (20틱 = 1초 * 10초 = 200틱)
     }
-
-    private void JogoSetLava(Block block) {
-        if (Math.random() < 0.008) { // 0.08%의 확률로 용암 배치
-            block.setType(Material.LAVA); // 용암 블록 배치
-        } else {
-            block.setType(Material.AIR); // 나머지는 공기로 설정
-        }
-    }
-
-    private void JogoSetFire(Location centerLocation, double x, double y, double z) {
-        Location blockLocationFire = centerLocation.clone().add(x, y, z);
-        Block block= blockLocationFire.getBlock();
-        if(!(block.getState() instanceof Chest))
-            block.setType(Material.FIRE);
-    }
-
-    private void SukunaSetWater(Location centerLocation, double x, double y, double z) {
-        Location blockLocationFire = centerLocation.clone().add(x, y, z);
-        Block block= blockLocationFire.getBlock();
-        if(!(block.getState() instanceof Chest))
-            block.setType(Material.WATER);
-    }
-
-    private void setAir(Block block) {
-        block.setType(Material.AIR);
-    }
-
 }
