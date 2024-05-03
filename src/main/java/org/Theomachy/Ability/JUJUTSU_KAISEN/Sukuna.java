@@ -70,7 +70,7 @@ public class Sukuna extends RyoikiTenkai {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
 
             sendRyoikiTenkai(AbilityInfo.Sukuna, player);
-            goRyoikiTenkai(player, Material.CRYING_OBSIDIAN, null);
+            goRyoikiTenkai(player, Material.OBSIDIAN, null);
 
             World world = player.getWorld();
             BukkitTask bukkitTask = taskModule.runBukkitTaskTimer(() -> {

@@ -1,5 +1,6 @@
 package org.Theomachy.Ability.JUJUTSU_KAISEN;
 
+import org.Theomachy.Data.TickData;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -8,6 +9,7 @@ import org.Theomachy.Enum.AbilityCase;
 import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
+import org.bukkit.scheduler.BukkitTask;
 
 
 public class Jogo extends RyoikiTenkai {
@@ -31,6 +33,7 @@ public class Jogo extends RyoikiTenkai {
         this.rareSkillStack = 60;
         this.rareDistance = 15;
         this.rareDuration = 10;
+        this.rareDamage = 5;
         this.rank = AbilityRank.A;
     }
 
@@ -68,7 +71,22 @@ public class Jogo extends RyoikiTenkai {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             sendRyoikiTenkai(AbilityInfo.Jogo,player);
-            goRyoikiTenkai(player, Material.NETHERRACK,Material.MAGMA_BLOCK);
+            goRyoikiTenkai(player, Material.MAGMA_BLOCK,Material.MAGMA_BLOCK);
+
+            World world = player.getWorld();
+            BukkitTask bukkitTask = taskModule.runBukkitTaskTimer(() -> {
+                player.getNearbyEntities(10, 5, 10).forEach(nearEntity -> {
+                    LivingEntity livingEntity = (LivingEntity) nearEntity;
+                    world.spawnParticle(Particle.FLAME, livingEntity.getLocation(), 20, 1, 1, 1);
+                    world.spawnParticle(Particle.EXPLOSION_NORMAL, livingEntity.getLocation(), 1, 0.5, 0.5, 0.5);
+                    livingEntity.getWorld().playSound(livingEntity.getLocation(), Sound.ENTITY_PLAYER_HURT_ON_FIRE, 1f, 1f);
+                    livingEntity.getWorld().playSound(livingEntity.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1f, 1f);
+                    livingEntity.damage(rareDamage, player);
+                });
+            }, 0L, 1L);
+            taskModule.runBukkitTaskLater(() -> {
+                taskModule.cancelBukkitTask(bukkitTask);
+            }, rareDuration * TickData.longTick);
         }
     }
 }
