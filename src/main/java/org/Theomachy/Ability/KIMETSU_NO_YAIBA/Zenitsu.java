@@ -44,7 +44,7 @@ public class Zenitsu extends Ability {
 
     public void activeSkill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (playerModule.InHandItemCheck(player,skillMaterial)) {
+        if (playerModule.InHandItemCheck(player, skillMaterial)) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR, LEFT_CLICK_BLOCK -> leftAction(player);
                 case RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK -> rightAction(player);
@@ -71,18 +71,22 @@ public class Zenitsu extends Ability {
         if (skillHandler.Check(player, AbilityCase.RARE) && playerModule.ItemCheck(player, Material.COBBLESTONE, rareSkillStack)) {
             skillHandler.Use(player, Material.COBBLESTONE, AbilityCase.RARE, rareSkillStack, rareSkillCoolTime);
             player.setVelocity(player.getVelocity().add(new Vector(0, rareJumpDistance, 0)));
-            taskModule.runBukkitTaskLater( () -> {
+            taskModule.runBukkitTaskLater(() -> {
                 for (int i = (int) rareDistance; i > 0; i--) {
                     Vector direction = player.getLocation().getDirection().multiply(rareDashDistance);
                     player.setVelocity(direction);
                     int finalI = i;
-                    taskModule.runBukkitTaskLater( () -> {
+                    taskModule.runBukkitTaskLater(() -> {
                         Vector lightningDirection = player.getEyeLocation().getDirection().clone();
                         Location startLocation = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(-1));
+                        long delay = 0;
                         for (int distance = -finalI; distance < finalI; distance++) {
-                            Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(distance);
-                            Location lightningLocation = startLocation.clone().add(horizontalOffset);
-                            Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
+                            int finalDistance = distance;
+                            taskModule.runBukkitTaskLater(() -> {
+                                Vector horizontalOffset = lightningDirection.clone().crossProduct(new Vector(0, 1, 0)).normalize().multiply(finalDistance);
+                                Location lightningLocation = startLocation.clone().add(horizontalOffset);
+                                Objects.requireNonNull(lightningLocation.getWorld()).strikeLightning(lightningLocation);
+                            }, delay);
                         }
                     }, 5L);
                 }

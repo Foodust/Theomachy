@@ -93,6 +93,7 @@ public class Tanjiro extends Ability {
             }
             playerModule.damageNearEntity(player, location, rareDamage, 5, 10, 5);
             taskModule.runBukkitTaskLater(tornadoEffect::cancel, TickData.longTick);
+            player.setVelocity(new Vector(0,2,1));
         }
     }
 }
