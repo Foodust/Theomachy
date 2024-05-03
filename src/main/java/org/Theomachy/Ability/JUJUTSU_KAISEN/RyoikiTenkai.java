@@ -55,12 +55,12 @@ public class RyoikiTenkai extends Ability {
         }
         Bukkit.broadcastMessage(area);
         Bukkit.broadcastMessage(areaName);
-        player.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
-        player.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
+        messageModule.sendTitle(player, area, titleFadeIn, titleStay, titleFadeOut);
+        messageModule.sendTitle(player, null, areaName, subFadeIn, subStay, subFadeOut);
         for (Entity entity : locationWorld.getNearbyEntities(playerLocation, 15, 15, 15)) {
             if (entity instanceof Player enemy) {
-                enemy.sendTitle(area, null, titleFadeIn, titleStay, titleFadeOut);
-                enemy.sendTitle(null, areaName, subFadeIn, subStay, subFadeOut);
+                messageModule.sendTitle(enemy, area, titleFadeIn, titleStay, titleFadeOut);
+                messageModule.sendTitle(enemy, null, areaName, subFadeIn, subStay, subFadeOut);
             }
         }
     }
