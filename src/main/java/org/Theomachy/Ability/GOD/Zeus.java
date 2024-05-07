@@ -47,7 +47,7 @@ public class Zeus extends Ability {
     }
 
     public void activeSkill(PlayerInteractEvent event) {
-        
+
         Player player = event.getPlayer();
         if (playerModule.InHandItemCheck(player,skillMaterial)) {
             switch (event.getAction()) {
