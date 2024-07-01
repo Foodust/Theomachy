@@ -8,10 +8,7 @@ import org.Theomachy.Enum.AbilityInfo;
 import org.Theomachy.Enum.AbilityRank;
 import org.Theomachy.Theomachy;
 import org.bukkit.*;
-import org.bukkit.entity.Display;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.TextDisplay;
+import org.bukkit.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -87,7 +84,7 @@ public class Satoru extends RyoikiTenkai {
                 });
             }, TickData.longTick, TickData.longTick);
             taskModule.runBukkitTaskLater(() -> {
-                textDisplayList.forEach(Display::remove);
+                textDisplayList.forEach(Entity::remove);
                 textDisplayList.clear();
                 taskModule.cancelBukkitTask(bukkitTask);
             }, rareDuration * TickData.longTick);

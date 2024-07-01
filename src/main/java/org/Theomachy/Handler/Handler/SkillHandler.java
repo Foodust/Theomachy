@@ -12,8 +12,7 @@ import org.Theomachy.Message.AbilityCoolTimeMessage;
 public class SkillHandler
 {
 	private final AbilityCoolTimeMessage abilityCoolTimeMessage = new AbilityCoolTimeMessage();
-	public void Use(Player player, Material material, AbilityCase abilityCase, int stack, int coolTime)
-	{
+	public void Use(Player player, Material material, AbilityCase abilityCase, int stack, int coolTime) {
         if(Theomachy.DEBUG)
             return;
 		player.getInventory().removeItem(new ItemStack(material, stack));
@@ -25,8 +24,7 @@ public class SkillHandler
             }
 		abilityCoolTimeMessage.SkillUsed(player, abilityCase);
 	}
-	public boolean Check(Player player, AbilityCase abilityCase)
-	{
+	public boolean Check(Player player, AbilityCase abilityCase) {
 		String key=player.getName();
         if(Theomachy.DEBUG)
             return true;

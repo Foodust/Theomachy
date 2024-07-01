@@ -11,8 +11,7 @@ import org.Theomachy.Data.GameData;
 
 public class PlayerHandler
 {
-	public List<Player> getTeamMember(Player player)
-	{
+	public List<Player> getTeamMember(Player player) {
 		String teamName = GameData.playerTeam.get(player.getName());
 		ArrayList<String> memberName  = new ArrayList<String>();
 		if (GameData.playerTeam.containsValue(teamName))
@@ -31,8 +30,7 @@ public class PlayerHandler
 		return memberPlayer;
 	}
 	
-	public List<Player> getNearByTeamMembers(Player player, double x, double y, double z)
-	{
+	public List<Player> getNearByTeamMembers(Player player, double x, double y, double z) {
 		String playerName = player.getName();
 		String playerTeamName = GameData.playerTeam.get(playerName);
 
@@ -53,8 +51,7 @@ public class PlayerHandler
 		return nearByTeamMembers;
 	}
 	
-	public List<Player> getNearByNotTeamMembers(Player player, double x, double y, double z)
-	{
+	public List<Player> getNearByNotTeamMembers(Player player, double x, double y, double z) {
 		String playerName = player.getName();
 		String playerTeamName = GameData.playerTeam.get(playerName);
 

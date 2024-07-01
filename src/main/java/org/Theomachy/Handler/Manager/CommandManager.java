@@ -17,16 +17,14 @@ public class CommandManager  implements CommandExecutor
 {
 	private final MessageModule messageModule = new MessageModule();
 	private final MainCommand mainCommand = new MainCommand();
-	public CommandManager(Theomachy t)
-	{
+	public CommandManager(Theomachy t) {
 		Objects.requireNonNull(t.getCommand("t")).setExecutor(this);
 		Objects.requireNonNull(t.getCommand("x")).setExecutor(this);
 	}
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] data) {
-		if (label.equals(TheomachyMessage.COMMAND_T.getMessage()))
-		{
+		if (label.equals(TheomachyMessage.COMMAND_T.getMessage())) {
 			if (data.length==0) //설명 보기
 			{
 				messageModule.sendPlayer(sender, TheomachyMessage.EXPLAIN_THEOMACHY_COMMAND.getMessage());
@@ -46,8 +44,7 @@ public class CommandManager  implements CommandExecutor
 			else
 				mainCommand.tCommandHandler(sender, command, label, data);
 		}
-		else if (label.equalsIgnoreCase(TheomachyMessage.COMMAND_X.getMessage()))
-		{
+		else if (label.equalsIgnoreCase(TheomachyMessage.COMMAND_X.getMessage())) {
 			if (data.length==0) //설명 보기
 				messageModule.sendPlayer(sender,TheomachyMessage.EXPLAIN_X_COMMAND.getMessage());
 			else
